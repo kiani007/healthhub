@@ -1,0 +1,2 @@
+export const NEXT_PUBLIC_MAPBOX_GL_ACCESS_TOKEN =
+  'pk.eyJ1IjoiYXItcmVobWFuMTM1IiwiYSI6ImNsZTJmYjl5djAwdnAzd28yczFnemNtZGEifQ.riw8y9JzuIU59NDfoe0NcA'

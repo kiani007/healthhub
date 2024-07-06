@@ -1,0 +1,153 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap');
+
+@layer base {
+  html {
+    /* @apply h-full bg-black bg-[url('/img/backgroundImage.png')] bg-center bg-cover bg-no-repeat text-white; */
+  }
+
+  body {
+    @apply h-full;
+  }
+}
+
+input[type='email']:disabled {
+  @apply bg-transparent;
+}
+
+*:focus {
+  outline: none;
+}
+.full-width-container {
+  width: calc(100vw - 150px);
+}
+
+* {
+  font-family: 'Jost', sans-serif;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.text-theme-blue {
+  color: #2b72ee;
+}
+
+.text-theme-white {
+  color: white;
+}
+
+.text-theme-black {
+  color: #000;
+}
+.text-theme-blue-hover:hover {
+  color: #2b72ee;
+}
+
+.text-theme-white-hover:hover {
+  color: white;
+}
+
+.bg-theme-blue {
+  background-color: #2b72ee;
+}
+.bg-theme-blue-hover:hover {
+  background-color: #2b72ee;
+}
+
+.bg-theme-blue-hover:hover path {
+  fill: white;
+}
+.bg-theme-white-hover:hover path {
+  fill: #2b72ee;
+}
+.bg-theme-blue-hover:hover .heading-hover {
+  color: white;
+}
+
+.bg-theme-white {
+  background-color: white;
+}
+.bg-theme-gray {
+  background-color: #f8fbff;
+}
+.bg-theme-white-hover:hover {
+  background-color: white;
+}
+.border-color {
+  border-color: #2b72ee;
+}
+.border-color-hover:hover {
+  border-color: #2b72ee;
+}
+
+.border-color-white-hover:hover {
+  border-color: #fff;
+}
+.text-theme-black-hover:hover {
+  color: black;
+}
+
+.progress-bar {
+  width: 0%;
+  height: 100%;
+  background-color: #2b72ee;
+  animation: progress-bar-animation 2s linear forwards;
+}
+
+@keyframes progress-bar-animation {
+  to {
+    width: 90%;
+  }
+}
+.progress-bar-2 {
+  width: 0%;
+  height: 100%;
+  background-color: #2b72ee;
+  animation: progress-bar-animation-2 2s linear forwards;
+}
+
+@keyframes progress-bar-animation-2 {
+  to {
+    width: 70%;
+  }
+}
+.progress-bar-3 {
+  width: 0%;
+  height: 100%;
+  background-color: #2b72ee;
+  animation: progress-bar-animation-3 2s linear forwards;
+}
+
+@keyframes progress-bar-animation-3 {
+  to {
+    width: 85%;
+  }
+}
+.progress-bar-4 {
+  width: 0%;
+  height: 100%;
+  background-color: #2b72ee;
+  animation: progress-bar-animation-4 2s linear forwards;
+}
+
+@keyframes progress-bar-animation-4 {
+  to {
+    width: 95%;
+  }
+}
+.ho:hover {
+  -ms-transform: scale(1.1); /* IE 9 */
+  -webkit-transform: scale(1.1); /* Safari 3-8 */
+  transform: scale(1.1);
+}
