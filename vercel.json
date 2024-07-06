@@ -1,10 +1,11 @@
 {
-  "build": {
-    "env": {
-      "NODE_ENV": "production"
-    },
-    "npm": {
-      "args": ["--legacy-peer-deps"]
+  "buildCommand": "next build",
+  "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/home",
+      "permanent": true
     }
-  }
+  ]
 }
