@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Tasting Board</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='3' y='2' width='26' height='4' rx='1' fill='%238D979F'/%3E%3Cpath d='M7 6h18v20l-3-2-3 2-3-2-3 2-3-2-3 2z' fill='%2315181B'/%3E%3Cpath d='M11 12h10M11 16h10M11 20h6' stroke='%23FCFCFA' stroke-width='2'/%3E%3C/svg%3E">
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Ten food-business website mockups for cafés, restaurants and bakeries, with a viewer to preview each on desktop, tablet and phone.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -330,7 +331,7 @@ footer code { font: 500 12px/1 var(--f-mono); }
 <footer>
   <div class="wrap">
     <p>All businesses, prices and phone numbers are fictional. Aurelia's hero uses HeyGen footage; the other sites use illustrated art in the same slots until more footage is generated. Maps are live OpenStreetMap / CARTO maps of each neighbourhood.</p>
-    <p>Source: <code>public/food-mockups/</code></p>
+    <p>Source: <code>public/</code></p>
   </div>
 </footer>
 
@@ -910,9 +911,6 @@ var MOCKUPS = [
  }
 ];
 
-/* On the Next.js deploy the board is also served at /food-mockups (no trailing slash), where
-   relative links would resolve one level too high; prefix them there. */
-var BASE = /\/food-mockups$/.test(location.pathname) ? 'food-mockups/' : '';
 var CAT_LABEL = { cafe: 'Café', rest: 'Restaurant', bake: 'Bakery' };
 var DEVICES = { desktop: { w: 1440, h: 900 }, tablet: { w: 834, h: 1112 }, phone: { w: 390, h: 844 } };
 
@@ -928,8 +926,8 @@ function ticketHTML(m, i) {
     '<div class="t-top"><span class="tno">No. ' + m.n + '</span><span class="tcat">' + CAT_LABEL[m.cat] + '</span><span>' + esc(m.city) + '</span></div>' +
     '<button class="shot" type="button" data-open="' + m.slug + '" aria-label="Preview ' + esc(m.name) + '">' +
       '<span class="poster" aria-hidden="true">' + esc(m.name) + '</span>' +
-      '<img class="desk" src="' + BASE + 'thumbs/' + m.slug + '-desktop.jpg" alt="" loading="lazy" onerror="this.remove()">' +
-      '<img class="phone" src="' + BASE + 'thumbs/' + m.slug + '-phone.jpg" alt="" loading="lazy" onerror="this.remove()">' +
+      '<img class="desk" src="thumbs/' + m.slug + '-desktop.jpg" alt="" loading="lazy" onerror="this.remove()">' +
+      '<img class="phone" src="thumbs/' + m.slug + '-phone.jpg" alt="" loading="lazy" onerror="this.remove()">' +
       '<span class="play">Preview</span>' +
     '</button>' +
     '<h3>' + esc(m.name) + '</h3>' +
@@ -942,7 +940,7 @@ function ticketHTML(m, i) {
       '<div><dt>Palette</dt><dd><span class="swatches">' + sw + '</span></dd></div>' +
     '</dl>' +
     '<div class="t-actions"><button class="btn primary" type="button" data-open="' + m.slug + '">Preview</button>' +
-    '<a class="btn" href="' + BASE + 'mockups/' + m.slug + '.html">Open page &nearr;</a></div>' +
+    '<a class="btn" href="mockups/' + m.slug + '.html">Open page &nearr;</a></div>' +
   '</article>';
 }
 
@@ -1015,7 +1013,7 @@ function openViewer(slug, fromHash) {
   viewer.style.setProperty('--name-font', m.nameFont);
   document.getElementById('v-no').textContent = 'No. ' + m.n + ' / ' + MOCKUPS.length + ' · ' + CAT_LABEL[m.cat];
   document.getElementById('v-title').textContent = m.name;
-  document.getElementById('v-open').href = BASE + 'mockups/' + m.slug + '.html';
+  document.getElementById('v-open').href = 'mockups/' + m.slug + '.html';
   document.getElementById('v-concept').textContent = m.concept;
   document.getElementById('v-converts').textContent = m.converts;
   document.getElementById('v-signature').textContent = m.signature;
@@ -1023,7 +1021,7 @@ function openViewer(slug, fromHash) {
   document.getElementById('v-media').textContent = m.media + ' Live map: ' + m.mapNote;
   document.getElementById('v-story').innerHTML = m.story.map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('');
   document.getElementById('v-pal').innerHTML = m.palette.map(function (c) { return '<div><span style="--c:' + c.hex + '"></span><div>' + esc(c.name) + '<small>' + c.hex + '</small></div></div>'; }).join('');
-  frame.src = BASE + 'mockups/' + m.slug + '.html';
+  frame.src = 'mockups/' + m.slug + '.html';
   setDevice(dev);
   if (!fromHash && location.hash !== '#' + slug) { try { history.replaceState(null, '', '#' + slug); } catch (e) { location.hash = slug; } }
   document.getElementById('v-close').focus({ preventScroll: true });
