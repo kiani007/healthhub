@@ -1,11 +1,14 @@
 {
-  "buildCommand": "next build",
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "outputDirectory": "public",
   "cleanUrls": true,
+  "rewrites": [
+    { "source": "/home", "destination": "/index.html" }
+  ],
   "redirects": [
-    {
-      "source": "/",
-      "destination": "/home",
-      "permanent": true
-    }
+    { "source": "/food-mockups", "destination": "/", "permanent": false },
+    { "source": "/food-mockups/:path*", "destination": "/:path*", "permanent": false },
+    { "source": "/(aboutus|service|contactus|getintouch)", "destination": "/", "permanent": false }
   ]
 }
