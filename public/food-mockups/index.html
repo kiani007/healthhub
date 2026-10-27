@@ -1,0 +1,1080 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Tasting Board</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Ten food-business website mockups for cafés, restaurants and bakeries, with a viewer to preview each on desktop, tablet and phone.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Martian+Mono:wght@400;600&family=Schibsted+Grotesk:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Crimson+Pro&family=Rozha+One&family=Cormorant+Garamond&family=Teko&family=Dela+Gothic+One&family=Libre+Caslon+Display&family=Bodoni+Moda&family=Yeseva+One&family=Shrikhand&text=%20%26.ABCDEHJKLMPQRSabcdeghiklmnorstuvwy&display=swap">
+<style>
+/* Layout: a kitchen pass. Three ticket rails (cafés, restaurants, bakeries) hang mockups as order tickets;
+   firing a ticket opens it in a full-screen viewer with desktop / tablet / phone frames. */
+:root {
+  --steel: #E1E5E8;
+  --steel-deep: #CBD2D7;
+  --paper: #FCFCFA;
+  --ink: #15181B;
+  --muted: #59636B;
+  --rule: #C3CAD0;
+  --accent: #1E5C86;
+  --accent-ink: #FFFFFF;
+  --cafe: #7A4A2E;
+  --rest: #8C2436;
+  --bake: #8E6400;
+  --lamp: rgba(255, 168, 64, .16);
+  --veil: rgba(16, 20, 24, .72);
+  --shadow: 0 1px 0 rgba(0, 0, 0, .05), 0 14px 26px -18px rgba(20, 30, 40, .55);
+  --f-display: "Big Shoulders Display", "Arial Narrow", "Roboto Condensed", Impact, sans-serif;
+  --f-body: "Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --f-mono: "Martian Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --ease: cubic-bezier(.22, 1, .36, 1);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --steel: #101317; --steel-deep: #181D22; --paper: #1C2127; --ink: #ECEFF1; --muted: #9BA6AF; --rule: #2D343C;
+    --accent: #8CC2EA; --accent-ink: #0B1822; --cafe: #DDA683; --rest: #EE93A3; --bake: #E6C162;
+    --lamp: rgba(255, 168, 64, .08); --veil: rgba(4, 6, 8, .82);
+    --shadow: 0 1px 0 rgba(255, 255, 255, .03), 0 16px 30px -18px rgba(0, 0, 0, .9);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --steel: #101317; --steel-deep: #181D22; --paper: #1C2127; --ink: #ECEFF1; --muted: #9BA6AF; --rule: #2D343C;
+  --accent: #8CC2EA; --accent-ink: #0B1822; --cafe: #DDA683; --rest: #EE93A3; --bake: #E6C162;
+  --lamp: rgba(255, 168, 64, .08); --veil: rgba(4, 6, 8, .82);
+  --shadow: 0 1px 0 rgba(255, 255, 255, .03), 0 16px 30px -18px rgba(0, 0, 0, .9);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background:
+    radial-gradient(1200px 380px at 50% -120px, var(--lamp), transparent 70%),
+    repeating-linear-gradient(90deg, transparent 0 3px, rgba(127, 140, 150, .045) 3px 4px),
+    var(--steel);
+  color: var(--ink);
+  font: 400 15px/1.55 var(--f-body);
+  -webkit-font-smoothing: antialiased;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--steel); }
+.wrap {
+  max-width: 1320px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+h1, h2, h3 { text-wrap: balance; margin: 0; }
+.mono { font-family: var(--f-mono); }
+
+/* ---------- Header ---------- */
+.pass { padding-block: 40px 22px; }
+.pass-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 28px 48px; align-items: end; }
+.eyebrow { font: 600 11px/1.4 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+h1 { font: 900 clamp(56px, 9vw, 120px)/.86 var(--f-display); letter-spacing: -.01em; text-transform: uppercase; }
+.lede { max-width: 60ch; margin: 0; color: var(--muted); font-size: 16px; }
+.counts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0; border-top: 2px solid var(--ink); }
+.counts div { padding: 12px 10px 0 0; }
+.counts dt { font: 600 10px/1.3 var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.counts dd { margin: 4px 0 0; font: 900 44px/1 var(--f-display); font-variant-numeric: tabular-nums; }
+.counts .k-cafe dd { color: var(--cafe); } .counts .k-rest dd { color: var(--rest); } .counts .k-bake dd { color: var(--bake); }
+
+/* ---------- Filters ---------- */
+.filters { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: color-mix(in srgb, var(--steel) 92%, transparent); backdrop-filter: blur(6px); border-block: 1px solid var(--rule); }
+.filters .wrap { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding-block: 10px; }
+.filters .label { font: 600 10px/1 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-right: 4px; }
+.chip {
+  appearance: none; border: 1px solid var(--rule); background: var(--paper); color: var(--ink);
+  font: 500 13px/1 var(--f-body); padding: 10px 13px; border-radius: 3px; cursor: pointer; min-height: 40px;
+  display: inline-flex; align-items: center; gap: 8px; transition: background .2s, border-color .2s;
+}
+.chip .n { font: 600 10px/1 var(--f-mono); color: var(--muted); }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.chip[aria-pressed="true"] .n { color: inherit; opacity: .7; }
+.chip .dot { width: 9px; height: 9px; border-radius: 1px; background: var(--c, var(--muted)); }
+.filters .spacer { flex: 1; }
+.filters a.chip { text-decoration: none; }
+
+/* ---------- Rails & tickets ---------- */
+main { padding-block: 26px 40px; }
+.rail { margin-bottom: 44px; }
+.rail[hidden] { display: none !important; }
+.rail-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: 4px; }
+.rail-head h2 { font: 900 clamp(32px, 4.2vw, 46px)/1 var(--f-display); text-transform: uppercase; color: var(--c); }
+.rail-head p { margin: 0; color: var(--muted); max-width: 70ch; min-width: 0; }
+.rail-head .tally { font: 600 11px/1 var(--f-mono); letter-spacing: .08em; color: var(--muted); }
+.bar {
+  height: 12px; border-radius: 6px; margin: 14px 0 0;
+  background: linear-gradient(180deg, #F4F6F7 0, #AEB7BE 45%, #7E8890 55%, #C9D0D5 100%);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, .18), inset 0 -1px 0 rgba(0, 0, 0, .15);
+}
+.tickets { display: grid; grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr)); gap: 22px; align-items: start; }
+.rail[data-cat="bake"] .tickets { --cols: 4; }
+
+.ticket {
+  position: relative; background: var(--paper); color: var(--ink); min-width: 0;
+  box-shadow: var(--shadow);
+  padding: 22px 16px 18px; margin-top: -2px;
+  transform-origin: 50% 0; animation: hang .9s var(--ease) backwards; animation-delay: calc(var(--i, 0) * 70ms);
+  /* torn bottom edge */
+  -webkit-mask: linear-gradient(#000 0 0) top / 100% calc(100% - 8px) no-repeat, conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / 12px 8px repeat-x;
+          mask: linear-gradient(#000 0 0) top / 100% calc(100% - 8px) no-repeat, conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / 12px 8px repeat-x;
+  padding-bottom: 26px;
+}
+.ticket::before { /* the clip that holds the ticket on the rail */
+  content: ""; position: absolute; top: 0; left: 50%; width: 46px; height: 11px; translate: -50% 0;
+  border-radius: 3px; background: linear-gradient(180deg, #D7DCE0, #8D979F); box-shadow: 0 1px 2px rgba(0, 0, 0, .25);
+}
+@keyframes hang { from { transform: rotate(-1.4deg) translateY(-6px); } 60% { transform: rotate(.6deg); } to { transform: none; } }
+.ticket:hover { transform: rotate(-.4deg); transition: transform .4s var(--ease); }
+
+.t-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; font: 600 10.5px/1.2 var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); padding-bottom: 10px; border-bottom: 1px dashed var(--rule); }
+.t-top .tno { color: var(--ink); }
+.t-top .tcat { color: var(--c); }
+
+.shot {
+  all: unset; box-sizing: border-box; cursor: zoom-in; display: block; position: relative; width: 100%; aspect-ratio: 16 / 10; max-width: 100%;
+  margin: 12px 0 14px; border-radius: 4px; overflow: hidden; isolation: isolate;
+  background: var(--p0, #333);
+}
+.shot:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.shot .poster {
+  position: absolute; inset: 0; display: grid; place-items: center; padding: 16px; text-align: center;
+  background: linear-gradient(135deg, var(--p0), var(--p1) 70%, var(--p2));
+  color: var(--p3); font: 400 clamp(20px, 2.2vw, 28px)/1.05 var(--name-font, var(--f-display)); z-index: -1;
+}
+.shot img.desk { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform .8s var(--ease); }
+.shot img.phone {
+  position: absolute; right: 8px; bottom: -18%; width: 23%; aspect-ratio: 390 / 844; object-fit: cover; object-position: top;
+  border-radius: 10px; border: 3px solid #0E0F11; box-shadow: 0 8px 18px rgba(0, 0, 0, .45); transition: transform .8s var(--ease);
+}
+.shot:hover img.desk { transform: scale(1.03); }
+.shot:hover img.phone { transform: translateY(-10%); }
+.shot .play {
+  position: absolute; left: 10px; bottom: 10px; font: 600 10px/1 var(--f-mono); letter-spacing: .08em; text-transform: uppercase;
+  background: rgba(10, 12, 14, .78); color: #fff; padding: 7px 9px; border-radius: 3px; opacity: 0; translate: 0 4px; transition: .3s var(--ease);
+}
+.shot:hover .play, .shot:focus-visible .play { opacity: 1; translate: 0 0; }
+
+.ticket h3 { font: 400 25px/1.05 var(--name-font, var(--f-display)); letter-spacing: 0; }
+.niche { margin: 6px 0 12px; color: var(--muted); font-size: 13.5px; }
+.facts { margin: 0; display: grid; gap: 0; border-top: 1px dashed var(--rule); }
+.facts > div { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 10px; padding: 8px 0; border-bottom: 1px dashed var(--rule); }
+.facts dt { font: 600 9.5px/1.5 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding-top: 2px; }
+.facts dd { margin: 0; font-size: 13px; line-height: 1.45; min-width: 0; }
+.swatches { display: flex; flex-wrap: wrap; gap: 4px; padding-top: 2px; }
+.sw { width: 18px; height: 18px; border-radius: 3px; background: var(--c); box-shadow: inset 0 0 0 1px rgba(127, 127, 127, .35); }
+.t-actions { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+.btn {
+  appearance: none; display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  font: 600 13px/1 var(--f-body); padding: 11px 14px; border-radius: 4px; cursor: pointer; text-decoration: none;
+  border: 1px solid var(--ink); background: transparent; color: var(--ink);
+}
+.btn.primary { background: var(--ink); color: var(--paper); }
+.btn:hover { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.t-actions .btn { flex: 1 1 auto; }
+
+/* ---------- Spec sheet ---------- */
+.spec { margin-top: 10px; }
+.spec h2 { font: 900 clamp(30px, 4vw, 42px)/1 var(--f-display); text-transform: uppercase; }
+.spec > p { color: var(--muted); max-width: 70ch; margin: 6px 0 16px; }
+.table-scroll { overflow-x: auto; background: var(--paper); box-shadow: var(--shadow); border-radius: 4px; }
+table { border-collapse: collapse; width: 100%; min-width: 1100px; font-size: 13px; }
+th, td { text-align: left; padding: 11px 12px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font: 600 9.5px/1.3 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); background: var(--steel-deep); position: sticky; top: 0; }
+td.no { font: 600 12px/1.3 var(--f-mono); font-variant-numeric: tabular-nums; }
+td .cat { font: 600 10px/1 var(--f-mono); text-transform: uppercase; letter-spacing: .06em; color: var(--c); }
+td button.link { all: unset; cursor: pointer; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--rule); }
+td button.link:hover { text-decoration-color: var(--accent); }
+td button.link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+tbody tr:hover { background: color-mix(in srgb, var(--accent) 7%, transparent); }
+
+footer { padding-block: 26px 48px; border-top: 1px solid var(--rule); color: var(--muted); font-size: 13px; }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 10px 28px; justify-content: space-between; }
+footer p { margin: 0; max-width: 70ch; }
+footer code { font: 500 12px/1 var(--f-mono); }
+
+/* ---------- Viewer ---------- */
+.viewer {
+  position: fixed; inset: 0; z-index: 50; background: var(--veil); backdrop-filter: blur(4px);
+  display: flex; flex-direction: column;
+  padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px);
+  animation: fade .25s var(--ease);
+}
+@keyframes fade { from { opacity: 0; } }
+.v-bar {
+  display: flex; align-items: center; gap: 10px 14px; flex-wrap: wrap; background: var(--paper); color: var(--ink);
+  padding-block: 10px; border-bottom: 1px solid var(--rule);
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.v-id { display: flex; align-items: baseline; gap: 10px; min-width: 0; flex: 1 1 220px; }
+.v-id .tno { font: 600 11px/1 var(--f-mono); color: var(--muted); white-space: nowrap; }
+.v-id strong { font: 400 22px/1.1 var(--name-font, var(--f-display)); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.seg { display: inline-flex; border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; }
+.seg button { appearance: none; border: 0; background: transparent; color: var(--ink); font: 500 12.5px/1 var(--f-body); padding: 9px 11px; cursor: pointer; }
+.seg button + button { border-left: 1px solid var(--rule); }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.v-bar .btn { padding: 9px 12px; }
+.v-body { flex: 1; min-height: 0; display: grid; grid-template-columns: minmax(0, 1fr) 340px; }
+.v-stage { position: relative; min-height: 0; overflow: hidden; display: grid; place-items: center; padding: 20px; }
+.v-device { position: relative; background: #000; border-radius: 6px; overflow: hidden; box-shadow: 0 30px 60px -20px rgba(0, 0, 0, .7); transition: width .35s var(--ease), height .35s var(--ease); }
+.v-device.framed { border-radius: 28px; outline: 8px solid #0C0D0F; }
+.v-device.framed.tablet { border-radius: 18px; }
+.v-device iframe { position: absolute; top: 0; left: 0; border: 0; transform-origin: 0 0; background: #fff; }
+.v-scale { position: absolute; right: 12px; bottom: 10px; font: 600 10px/1 var(--f-mono); color: #fff; background: rgba(0, 0, 0, .55); padding: 6px 8px; border-radius: 3px; letter-spacing: .06em; }
+.v-notes { background: var(--paper); color: var(--ink); overflow-y: auto; padding: 18px 18px 28px; border-left: 1px solid var(--rule); }
+.v-notes h4 { font: 600 10px/1.3 var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin: 18px 0 6px; }
+.v-notes h4:first-child { margin-top: 0; }
+.v-notes p { margin: 0; font-size: 14px; }
+.v-notes ol { margin: 0; padding-left: 0; list-style: none; counter-reset: s; display: grid; gap: 2px; }
+.v-notes ol li { counter-increment: s; display: grid; grid-template-columns: 34px minmax(0, 1fr); font-size: 13.5px; padding: 5px 0; border-bottom: 1px dashed var(--rule); }
+.v-notes ol li::before { content: "(" counter(s, decimal-leading-zero) ")"; font: 600 10.5px/1.9 var(--f-mono); color: var(--muted); }
+.v-notes ol li:first-child { counter-increment: none; }
+.v-notes ol li:first-child::before { content: "hero"; }
+.v-pal { display: grid; grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: 6px; }
+.v-pal div { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 7px; align-items: center; font: 500 10.5px/1.25 var(--f-mono); }
+.v-pal span { width: 22px; height: 22px; border-radius: 3px; background: var(--c); box-shadow: inset 0 0 0 1px rgba(127, 127, 127, .35); }
+.v-pal small { display: block; color: var(--muted); font-size: 9.5px; }
+.v-close { font-weight: 700; }
+.v-hint { font: 500 11px/1.4 var(--f-mono); color: var(--muted); }
+
+@media (max-width: 1180px) {
+  .tickets, .rail[data-cat="bake"] .tickets { --cols: 2; }
+}
+@media (max-width: 980px) {
+  .pass-grid { grid-template-columns: minmax(0, 1fr); }
+  .v-body { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) auto; }
+  .v-notes { border-left: 0; border-top: 1px solid var(--rule); max-height: 36vh; }
+}
+@media (max-width: 640px) {
+  .tickets, .rail[data-cat="bake"] .tickets { --cols: 1; }
+  .counts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .counts dd { font-size: 36px; }
+  .v-nav-label { display: none; }
+  .v-bar .seg button { padding: 9px 9px; }
+  .v-id strong { font-size: 18px; }
+  .v-stage { padding: 12px; }
+  .v-notes { max-height: 30vh; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+
+</head>
+<body>
+<header class="pass">
+  <div class="wrap pass-grid">
+    <div>
+      <p class="eyebrow">Food-business web concepts &middot; Pakistan &middot; Oct 2026</p>
+      <h1>Tasting Board</h1>
+    </div>
+    <div>
+      <p class="lede">Ten website mockups for cafés, restaurants and bakeries. Each one is built around how that business actually makes money, with its own palette, type and signature scroll animation. Click a ticket to preview it on desktop, tablet or phone, or open the full page.</p>
+    </div>
+    <dl class="counts" aria-label="Mockup counts">
+      <div><dt>Mockups</dt><dd id="c-all">10</dd></div>
+      <div class="k-cafe"><dt>Cafés</dt><dd id="c-cafe">3</dd></div>
+      <div class="k-rest"><dt>Restaurants</dt><dd id="c-rest">3</dd></div>
+      <div class="k-bake"><dt>Bakeries</dt><dd id="c-bake">4</dd></div>
+    </dl>
+  </div>
+</header>
+
+<nav class="filters" aria-label="Filter mockups">
+  <div class="wrap">
+    <span class="label">Show</span>
+    <button class="chip" type="button" data-filter="all" aria-pressed="true">All <span class="n">10</span></button>
+    <button class="chip" type="button" data-filter="cafe" aria-pressed="false" style="--c: var(--cafe)"><span class="dot"></span>Cafés <span class="n">3</span></button>
+    <button class="chip" type="button" data-filter="rest" aria-pressed="false" style="--c: var(--rest)"><span class="dot"></span>Restaurants <span class="n">3</span></button>
+    <button class="chip" type="button" data-filter="bake" aria-pressed="false" style="--c: var(--bake)"><span class="dot"></span>Bakeries <span class="n">4</span></button>
+    <span class="spacer"></span>
+    <a class="chip" href="#spec-sheet">Spec sheet</a>
+  </div>
+</nav>
+
+<main class="wrap" id="main">
+  <section class="rail" data-cat="cafe" style="--c: var(--cafe)" aria-labelledby="h-cafe">
+    <div class="rail-head"><h2 id="h-cafe">Cafés</h2><span class="tally">3 tickets</span><p>Three cafés that earn money in different ways: whole beans, desk time, and late-night delivery.</p></div>
+    <div class="bar" aria-hidden="true"></div>
+    <div class="tickets" id="r-cafe"></div>
+  </section>
+  <section class="rail" data-cat="rest" style="--c: var(--rest)" aria-labelledby="h-rest">
+    <div class="rail-head"><h2 id="h-rest">Restaurants</h2><span class="tally">3 tickets</span><p>A deposit-backed tasting menu, a family grill that sells platters, and a walk-in ramen counter with a live queue.</p></div>
+    <div class="bar" aria-hidden="true"></div>
+    <div class="tickets" id="r-rest"></div>
+  </section>
+  <section class="rail" data-cat="bake" style="--c: var(--bake)" aria-labelledby="h-bake">
+    <div class="rail-head"><h2 id="h-bake">Bakeries</h2><span class="tally">4 tickets</span><p>Bread pre-orders, custom cake inquiries, festive mithai boxes, and daily donut drops. Promotions are part of the main page on all four.</p></div>
+    <div class="bar" aria-hidden="true"></div>
+    <div class="tickets" id="r-bake"></div>
+  </section>
+
+  <section class="spec" id="spec-sheet" aria-labelledby="h-spec">
+    <h2 id="h-spec">Spec sheet</h2>
+    <p>All ten side by side: what each site converts on, the signature motion, and the type and colour system it uses.</p>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>No.</th><th>Business</th><th>City</th><th>Converts on</th><th>Signature motion</th><th>Type</th><th>Media</th><th>Palette</th></tr></thead>
+        <tbody id="spec-body"></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>All businesses, prices and phone numbers are fictional. Aurelia's hero uses HeyGen footage; the other sites use illustrated art in the same slots until more footage is generated. Maps are live OpenStreetMap / CARTO maps of each neighbourhood.</p>
+    <p>Source: <code>public/food-mockups/</code></p>
+  </div>
+</footer>
+
+<div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-labelledby="v-title" hidden>
+  <div class="v-bar">
+    <button class="btn v-close" type="button" id="v-close" aria-label="Close preview">&larr; Board</button>
+    <div class="v-id"><span class="tno" id="v-no">No. 01</span><strong id="v-title">Mockup</strong></div>
+    <div class="seg" role="group" aria-label="Preview size">
+      <button type="button" data-dev="desktop" aria-pressed="true">Desktop</button>
+      <button type="button" data-dev="tablet" aria-pressed="false">Tablet</button>
+      <button type="button" data-dev="phone" aria-pressed="false">Phone</button>
+    </div>
+    <div class="seg" role="group" aria-label="Browse mockups">
+      <button type="button" id="v-prev" aria-label="Previous mockup">&larr;<span class="v-nav-label"> Prev</span></button>
+      <button type="button" id="v-next" aria-label="Next mockup"><span class="v-nav-label">Next </span>&rarr;</button>
+    </div>
+    <a class="btn primary" id="v-open" href="#">Open full page</a>
+  </div>
+  <div class="v-body">
+    <div class="v-stage" id="v-stage">
+      <div class="v-device" id="v-device"><iframe id="v-frame" title="Mockup preview" loading="eager"></iframe></div>
+      <span class="v-scale" id="v-scale">100%</span>
+    </div>
+    <aside class="v-notes" aria-label="Concept notes">
+      <h4>Concept</h4>
+      <p id="v-concept"></p>
+      <h4>Converts on</h4>
+      <p id="v-converts"></p>
+      <h4>Signature motion</h4>
+      <p id="v-signature"></p>
+      <h4>Scroll story</h4>
+      <ol id="v-story"></ol>
+      <h4>Type</h4>
+      <p id="v-type"></p>
+      <h4>Media &amp; map</h4>
+      <p id="v-media"></p>
+      <h4>Palette</h4>
+      <div class="v-pal" id="v-pal"></div>
+      <h4>Keys</h4>
+      <p class="v-hint">Esc closes &middot; &larr; &rarr; switch mockup &middot; 1 2 3 switch device</p>
+    </aside>
+  </div>
+</div>
+
+<script>
+window.__TASTING_BOARD__ = true;
+
+/* Mockup data. Mirrors what each page actually ships (palette, fonts, sections). */
+var MOCKUPS = [
+ {
+  "n": "01",
+  "slug": "cafe-ember-bean",
+  "cat": "cafe",
+  "name": "Ember & Bean Roasters",
+  "city": "Islamabad",
+  "area": "F-7 Markaz",
+  "niche": "Specialty roastery café",
+  "converts": "Whole-bean subscriptions and café visits; order-ahead pickup",
+  "signature": "A V60 drips into a glass on a brew scale; the glass fills and the scale counts as you scroll",
+  "story": [
+   "The pour",
+   "Origins",
+   "Menu",
+   "Pairings",
+   "The roastery",
+   "Bean subscription",
+   "Visit & order"
+  ],
+  "fonts": [
+   "Instrument Serif",
+   "Geist",
+   "Geist Mono"
+  ],
+  "nameFontFamily": "Instrument Serif",
+  "nameFont": "\"Instrument Serif\", Georgia, serif",
+  "media": "Illustrated hero and menu art; HeyGen footage slots ready.",
+  "mapNote": "dark green-tinted map of F-7 Markaz with directions.",
+  "palette": [
+   {
+    "name": "Pine",
+    "hex": "#13291F"
+   },
+   {
+    "name": "Sage bean",
+    "hex": "#A9B79A"
+   },
+   {
+    "name": "Coffee cherry",
+    "hex": "#B8323F"
+   },
+   {
+    "name": "Brass",
+    "hex": "#C9A25A"
+   },
+   {
+    "name": "Limestone",
+    "hex": "#E5E6DE"
+   }
+  ],
+  "concept": "Cherry to cup, set against the green of the Margalla Hills. Pine green and coffee-cherry red replace the usual browns, with brass for the brewing gear. The hero brews a V60 on a scale that counts grams and seconds as you scroll. Below it: four single origins on a pinned bean shelf, menu cards that flip to show sizes, pairings with a saving badge, and a bean subscription priced live. Instrument Serif headlines sit over Geist, with Geist Mono for roast data."
+ },
+ {
+  "n": "02",
+  "slug": "cafe-margin-study",
+  "cat": "cafe",
+  "name": "Margin",
+  "city": "Lahore",
+  "area": "Main Boulevard, Gulberg III",
+  "niche": "Study & work café",
+  "converts": "Desk bookings and day passes; coffee pre-orders",
+  "signature": "A top-down mug whose rim is a pomodoro timer that runs 25:00 down to zero as you scroll",
+  "story": [
+   "Focus timer",
+   "Live seats",
+   "Passes",
+   "Fuel menu",
+   "House rules",
+   "Book a desk",
+   "Hours & map"
+  ],
+  "fonts": [
+   "Crimson Pro",
+   "Atkinson Hyperlegible",
+   "IBM Plex Mono"
+  ],
+  "nameFontFamily": "Crimson Pro",
+  "nameFont": "\"Crimson Pro\", Georgia, serif",
+  "media": "Illustrated; HeyGen footage slots ready.",
+  "mapNote": "light map of Main Boulevard, Gulberg III.",
+  "palette": [
+   {
+    "name": "Graph paper",
+    "hex": "#E7EFE8"
+   },
+   {
+    "name": "Ink navy",
+    "hex": "#1D2A3A"
+   },
+   {
+    "name": "Highlighter",
+    "hex": "#F4E04D"
+   },
+   {
+    "name": "Margin pink",
+    "hex": "#D9767A"
+   },
+   {
+    "name": "Free seat",
+    "hex": "#2F7D5B"
+   }
+  ],
+  "concept": "Margin sells quiet hours, so the site reads like a well-kept study sheet: graph-paper green, ink navy, a highlighter and a pink margin line. The hero mug doubles as a pomodoro timer. A live floor plan shows free seats by zone with noise levels, the fuel menu totals caffeine in mg, and the desk booking form prices the slot as you pick it. Body text is set in Atkinson Hyperlegible, a face designed for legibility, under Crimson Pro headings."
+ },
+ {
+  "n": "03",
+  "slug": "cafe-doodh-patti",
+  "cat": "cafe",
+  "name": "Doodh Patti & Co.",
+  "city": "Karachi",
+  "area": "Khayaban-e-Ittehad & Boat Basin",
+  "niche": "Late-night chai café",
+  "converts": "WhatsApp orders and Foodpanda delivery; walk-ins till 3 AM",
+  "signature": "Chai is pulled from height into a fluted glass; the pour lengthens as you scroll",
+  "story": [
+   "The pull",
+   "Chai menu",
+   "Saath mein",
+   "Midnight deals",
+   "Truck-art strip",
+   "Order on WhatsApp",
+   "Two branches"
+  ],
+  "fonts": [
+   "Rozha One",
+   "Mukta",
+   "Gulzar"
+  ],
+  "nameFontFamily": "Rozha One",
+  "nameFont": "\"Rozha One\", Georgia, serif",
+  "media": "Illustrated; HeyGen footage slots ready.",
+  "mapNote": "one map with both Karachi branches and a branch switcher.",
+  "palette": [
+   {
+    "name": "Night",
+    "hex": "#0B1622"
+   },
+   {
+    "name": "Deep teal",
+    "hex": "#0E4D4F"
+   },
+   {
+    "name": "Karak",
+    "hex": "#B5651D"
+   },
+   {
+    "name": "Truck red",
+    "hex": "#D7263D"
+   },
+   {
+    "name": "Saffron",
+    "hex": "#F2B33D"
+   },
+   {
+    "name": "Milk",
+    "hex": "#FFF4E0"
+   }
+  ],
+  "concept": "A Karachi chai stop after midnight, painted like a truck. A night-blue base carries teal, karak, truck red and saffron, framed with hand-painted borders, with Urdu headlines set in Gulzar, a Nastaliq display face. The hero pulls chai from height into a glass. Every chai has a strength meter and a per-kettle price, the midnight bundles count down, and the order section writes a ready-to-send WhatsApp message with a running total."
+ },
+ {
+  "n": "04",
+  "slug": "rest-aurelia",
+  "cat": "rest",
+  "name": "Aurelia",
+  "city": "Islamabad",
+  "area": "Margalla Road, E-7",
+  "niche": "Tasting-menu fine dining",
+  "converts": "Reservations with a per-guest deposit; Chef's Counter and private salon",
+  "signature": "HeyGen candlelit plate footage as a full-bleed hero, with type that parallaxes over it",
+  "story": [
+   "Candlelight",
+   "Seven courses",
+   "Experiences",
+   "Reserve",
+   "Guest notes",
+   "Visit"
+  ],
+  "fonts": [
+   "Cormorant Garamond",
+   "Jost"
+  ],
+  "nameFontFamily": "Cormorant Garamond",
+  "nameFont": "\"Cormorant Garamond\", Garamond, serif",
+  "media": "HeyGen hero video (candlelit plated course); other photo slots ready.",
+  "mapNote": "dark, desaturated map of Margalla Road, E-7.",
+  "palette": [
+   {
+    "name": "Ink",
+    "hex": "#0E1113"
+   },
+   {
+    "name": "Porcelain",
+    "hex": "#F2F0EB"
+   },
+   {
+    "name": "Pomegranate",
+    "hex": "#7D1D2C"
+   },
+   {
+    "name": "Champagne",
+    "hex": "#CDB58A"
+   },
+   {
+    "name": "Olive smoke",
+    "hex": "#5D655E"
+   }
+  ],
+  "concept": "An evening at a seven-course counter. The hero is HeyGen footage of a candlelit plate with a pomegranate reduction, with the name set large in light Cormorant above it. The courses reveal one at a time with their tea or mocktail pairing. The experiences sit in sticky tabs, and the reservation widget shows seatings and the deposit per guest before anyone commits. Ink, porcelain and pomegranate, with champagne for detail and Jost capitals in the style of a printed menu."
+ },
+ {
+  "n": "05",
+  "slug": "rest-koyla-karahi",
+  "cat": "rest",
+  "name": "Koyla Karahi House",
+  "city": "Lahore",
+  "area": "MM Alam Road, Gulberg III",
+  "niche": "Family desi BBQ & karahi",
+  "converts": "Family platter and bucket deals for delivery; group bookings and catering",
+  "signature": "Spark streaks rise off a charcoal grill; scrolling fans the coals",
+  "story": [
+   "The grill",
+   "Signature dishes",
+   "Family deals",
+   "Services",
+   "Menu",
+   "Group booking",
+   "Reviews",
+   "Find us"
+  ],
+  "fonts": [
+   "Teko",
+   "Barlow",
+   "Noto Nastaliq Urdu"
+  ],
+  "nameFontFamily": "Teko",
+  "nameFont": "\"Teko\", Impact, \"Arial Narrow\", sans-serif",
+  "media": "Illustrated grill; HeyGen footage slots ready.",
+  "mapNote": "warm-tinted dark map of MM Alam Road.",
+  "palette": [
+   {
+    "name": "Charcoal",
+    "hex": "#141210"
+   },
+   {
+    "name": "Ember",
+    "hex": "#FF6B1A"
+   },
+   {
+    "name": "Chilli",
+    "hex": "#C1121F"
+   },
+   {
+    "name": "Turmeric",
+    "hex": "#FFC93C"
+   },
+   {
+    "name": "Bone",
+    "hex": "#F3ECE2"
+   }
+  ],
+  "concept": "Loud, smoky and built for big tables. Spark streaks rise off the grill in the hero and speed up as you scroll. The money is in platters, so family deals list their contents, the saving per head and one price, with a Friday countdown. Services sit in sticky tabs, the menu filters by category with half and full kg prices and chilli levels, and group booking takes parties of up to 40. Set in Teko, a condensed face from the Indian Type Foundry."
+ },
+ {
+  "n": "06",
+  "slug": "rest-kumo-ramen",
+  "cat": "rest",
+  "name": "Kumo Ramen Bar",
+  "city": "Karachi",
+  "area": "Zamzama, Clifton",
+  "niche": "14-seat halal ramen counter",
+  "converts": "Walk-in waitlist with a live wait estimate; pickup and delivery",
+  "signature": "Noodle-lift hero, then a pinned build-the-bowl sequence layer by layer",
+  "story": [
+   "Noodle lift",
+   "Build the bowl",
+   "Ticket machine",
+   "How to visit",
+   "The queue",
+   "Reviews",
+   "Hours & map"
+  ],
+  "fonts": [
+   "Dela Gothic One",
+   "Zen Kaku Gothic New",
+   "Space Mono"
+  ],
+  "nameFontFamily": "Dela Gothic One",
+  "nameFont": "\"Dela Gothic One\", Impact, sans-serif",
+  "media": "Illustrated; HeyGen footage slots ready.",
+  "mapNote": "indigo-tinted night map of Zamzama.",
+  "palette": [
+   {
+    "name": "Night ink",
+    "hex": "#0B0B12"
+   },
+   {
+    "name": "Noren indigo",
+    "hex": "#1F2A5A"
+   },
+   {
+    "name": "Broth gold",
+    "hex": "#E8B04A"
+   },
+   {
+    "name": "Noren paper",
+    "hex": "#EDE3CF"
+   },
+   {
+    "name": "Neon red",
+    "hex": "#FF3B47"
+   },
+   {
+    "name": "Neon cyan",
+    "hex": "#4FE3E0"
+   }
+  ],
+  "concept": "A late-night counter under a flickering neon sign. Chopsticks lift noodles in the hero, then a pinned section builds the bowl as you scroll: 18-hour beef-bone broth, noodles, chashu, egg, nori, scallion, chilli oil. Bowls are ordered from a ticket machine. There are no reservations, so the main action is joining the queue: pick a party size and watch your ticket join the line with an estimated wait."
+ },
+ {
+  "n": "07",
+  "slug": "bakery-levain",
+  "cat": "bake",
+  "name": "Levain & Co.",
+  "city": "Lahore",
+  "area": "Y Block Commercial, DHA Phase 3",
+  "niche": "Sourdough boulangerie",
+  "converts": "Pickup pre-orders before the bread sells out; weekend bread box",
+  "signature": "A loaf proofs, scores and bakes as you scroll, then a pinned display counter",
+  "story": [
+   "The rise",
+   "The counter",
+   "Oven times",
+   "Bundles",
+   "Pre-order",
+   "48-hour ferment",
+   "Hours & map"
+  ],
+  "fonts": [
+   "Libre Caslon Display",
+   "Libre Franklin",
+   "Courier Prime"
+  ],
+  "nameFontFamily": "Libre Caslon Display",
+  "nameFont": "\"Libre Caslon Display\", Georgia, serif",
+  "media": "Illustrated; HeyGen footage slots ready.",
+  "mapNote": "blue-tinted map of Y Block, DHA Phase 3.",
+  "palette": [
+   {
+    "name": "Workwear blue",
+    "hex": "#26446B"
+   },
+   {
+    "name": "Flour",
+    "hex": "#F5F4EF"
+   },
+   {
+    "name": "Crust",
+    "hex": "#8B4A21"
+   },
+   {
+    "name": "Wheat",
+    "hex": "#E0AE48"
+   },
+   {
+    "name": "Rye",
+    "hex": "#1B1A18"
+   }
+  ],
+  "concept": "Bread that sells out by noon needs a pre-order habit. The brand colour is the blue of a baker's work jacket, set against flour white and crust, with Caslon signage type and Courier tickets. The hero loaf rises, its score opens and the crust darkens as you scroll, then the shelves slide past with a fresh-at time on every tag. Oven times count down to the next batch, and the pre-order form enforces the 8 pm cut-off."
+ },
+ {
+  "n": "08",
+  "slug": "bakery-layer-lace",
+  "cat": "bake",
+  "name": "Layer & Lace",
+  "city": "Islamabad",
+  "area": "F-6 Supermarket, by appointment",
+  "niche": "Custom celebration cake studio",
+  "converts": "Custom cake inquiries with deposit; tasting box",
+  "signature": "Cake tiers stack and buttercream drapes as you scroll",
+  "story": [
+   "The stack",
+   "Occasions",
+   "Build your cake",
+   "Lookbook",
+   "Tasting box",
+   "Process",
+   "FAQ & inquiry"
+  ],
+  "fonts": [
+   "Bodoni Moda",
+   "Figtree",
+   "Great Vibes"
+  ],
+  "nameFontFamily": "Bodoni Moda",
+  "nameFont": "\"Bodoni Moda\", Didot, serif",
+  "media": "Illustrated; HeyGen footage slots ready.",
+  "mapNote": "blush-tinted light map of F-6 Supermarket.",
+  "palette": [
+   {
+    "name": "Porcelain",
+    "hex": "#FBF8F4"
+   },
+   {
+    "name": "Blush",
+    "hex": "#F2C4C0"
+   },
+   {
+    "name": "Pistachio",
+    "hex": "#B9D3B0"
+   },
+   {
+    "name": "Chocolate",
+    "hex": "#3B2420"
+   },
+   {
+    "name": "Gold leaf",
+    "hex": "#C6A15B"
+   }
+  ],
+  "concept": "Every sale here starts with a conversation, so the site is built to start one. Couture Bodoni over porcelain, with blush and pistachio as the cake colours and Great Vibes kept for a few script words. The hero stacks a three-tier cake as you scroll. The configurator prices servings, sponge, finish and topper on a live preview with lead times, and the inquiry form enforces each occasion's minimum notice."
+ },
+ {
+  "n": "09",
+  "slug": "bakery-qandeel-mithai",
+  "cat": "bake",
+  "name": "Qandeel Sweets & Bakers",
+  "city": "Rawalpindi",
+  "area": "Bank Road, Saddar",
+  "niche": "Traditional mithai & bakery",
+  "converts": "Eid and shaadi box pre-orders; corporate bulk orders",
+  "signature": "A mithai box lid swings open and each compartment fills as you scroll",
+  "story": [
+   "The box",
+   "Counter by weight",
+   "Festive boxes",
+   "Build a box",
+   "Bakery corner",
+   "Bulk orders",
+   "Since 1978",
+   "Branches"
+  ],
+  "fonts": [
+   "Yeseva One",
+   "Hind",
+   "Noto Nastaliq Urdu"
+  ],
+  "nameFontFamily": "Yeseva One",
+  "nameFont": "\"Yeseva One\", Georgia, serif",
+  "media": "Illustrated; HeyGen footage slots ready.",
+  "mapNote": "warm-tinted map of Bank Road, Saddar.",
+  "palette": [
+   {
+    "name": "Maroon",
+    "hex": "#5A0F2E"
+   },
+   {
+    "name": "Marigold",
+    "hex": "#F2A007"
+   },
+   {
+    "name": "Pistachio",
+    "hex": "#93C572"
+   },
+   {
+    "name": "Ivory",
+    "hex": "#FFF8EC"
+   },
+   {
+    "name": "Gold foil",
+    "hex": "#D4AF37"
+   }
+  ],
+  "concept": "A 1978 sweet shop that does most of its business at Eid and wedding season. The hero box opens and fills piece by piece under a silver varq shimmer. The counter prices by weight with a live 250 g to 1 kg selector, festive and shaadi boxes count down to Eid, and build-a-box fills compartments by hand. Corporate buyers get a bulk form with logo sleeves. Maroon, marigold and pistachio with gold foil, Yeseva One headlines and Urdu accents."
+ },
+ {
+  "n": "10",
+  "slug": "bakery-dough-joy",
+  "cat": "bake",
+  "name": "Dough Joy",
+  "city": "Karachi",
+  "area": "Tariq Road, PECHS",
+  "niche": "Donut & cookie drop bakery",
+  "converts": "Boxes of 6 or 12 for delivery; daily drop pre-orders; party walls",
+  "signature": "Donuts ride a pinned conveyor through fryer, glaze waterfall and sprinkle shower",
+  "story": [
+   "Hero donut",
+   "The line",
+   "Today's drop",
+   "Build a box",
+   "Deals",
+   "Cookies & shakes",
+   "Find us"
+  ],
+  "fonts": [
+   "Shrikhand",
+   "Lexend",
+   "JetBrains Mono"
+  ],
+  "nameFontFamily": "Shrikhand",
+  "nameFont": "\"Shrikhand\", \"Cooper Black\", serif",
+  "media": "Illustrated; HeyGen footage slots ready.",
+  "mapNote": "bright map of Tariq Road, PECHS.",
+  "palette": [
+   {
+    "name": "Hot pink",
+    "hex": "#FF4F8B"
+   },
+   {
+    "name": "Cobalt",
+    "hex": "#2741D6"
+   },
+   {
+    "name": "Lemon",
+    "hex": "#FFE14D"
+   },
+   {
+    "name": "Cocoa",
+    "hex": "#3A221C"
+   },
+   {
+    "name": "Sugar",
+    "hex": "#FFF9F2"
+   }
+  ],
+  "concept": "Loud, graphic and run on scarcity, with no soft blobs: hard edges, cocoa outlines and flat offset shadows in hot pink, cobalt and lemon. A pinned conveyor carries plain rings through the fryer, a glaze waterfall and a sprinkle shower as you scroll. Today's drop shows stock left and counts down to the 5 pm release. Build-a-box fills a 6 or 12 grid and shows the saving against buying singles."
+ }
+];
+
+/* On the Next.js deploy the board is also served at /food-mockups (no trailing slash), where
+   relative links would resolve one level too high; prefix them there. */
+var BASE = /\/food-mockups$/.test(location.pathname) ? 'food-mockups/' : '';
+var CAT_LABEL = { cafe: 'Café', rest: 'Restaurant', bake: 'Bakery' };
+var DEVICES = { desktop: { w: 1440, h: 900 }, tablet: { w: 834, h: 1112 }, phone: { w: 390, h: 844 } };
+
+function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
+
+function ticketHTML(m, i) {
+  var p = m.palette;
+  var vars = '--c: var(--' + m.cat + '); --i:' + i + '; --name-font:' + m.nameFont + ';' +
+    ' --p0:' + p[0].hex + '; --p1:' + p[1 % p.length].hex + '; --p2:' + p[2 % p.length].hex + '; --p3:' + p[p.length - 1].hex + ';';
+  var sw = p.map(function (c) { return '<span class="sw" style="--c:' + c.hex + '" title="' + esc(c.name + ' ' + c.hex) + '"></span>'; }).join('');
+  return '<article class="ticket" style="' + esc(vars) + '" id="t-' + m.slug + '">' +
+    '<div class="t-top"><span class="tno">No. ' + m.n + '</span><span class="tcat">' + CAT_LABEL[m.cat] + '</span><span>' + esc(m.city) + '</span></div>' +
+    '<button class="shot" type="button" data-open="' + m.slug + '" aria-label="Preview ' + esc(m.name) + '">' +
+      '<span class="poster" aria-hidden="true">' + esc(m.name) + '</span>' +
+      '<img class="desk" src="' + BASE + 'thumbs/' + m.slug + '-desktop.jpg" alt="" loading="lazy" onerror="this.remove()">' +
+      '<img class="phone" src="' + BASE + 'thumbs/' + m.slug + '-phone.jpg" alt="" loading="lazy" onerror="this.remove()">' +
+      '<span class="play">Preview</span>' +
+    '</button>' +
+    '<h3>' + esc(m.name) + '</h3>' +
+    '<p class="niche">' + esc(m.niche) + ' &middot; ' + esc(m.area) + '</p>' +
+    '<dl class="facts">' +
+      '<div><dt>Converts on</dt><dd>' + esc(m.converts) + '</dd></div>' +
+      '<div><dt>Signature</dt><dd>' + esc(m.signature) + '</dd></div>' +
+      '<div><dt>Type</dt><dd>' + esc(m.fonts.join(' / ')) + '</dd></div>' +
+      '<div><dt>Media</dt><dd>' + esc(m.media) + '</dd></div>' +
+      '<div><dt>Palette</dt><dd><span class="swatches">' + sw + '</span></dd></div>' +
+    '</dl>' +
+    '<div class="t-actions"><button class="btn primary" type="button" data-open="' + m.slug + '">Preview</button>' +
+    '<a class="btn" href="' + BASE + 'mockups/' + m.slug + '.html">Open page &nearr;</a></div>' +
+  '</article>';
+}
+
+function renderBoard() {
+  ['cafe', 'rest', 'bake'].forEach(function (cat) {
+    var list = MOCKUPS.filter(function (m) { return m.cat === cat; });
+    document.getElementById('r-' + cat).innerHTML = list.map(ticketHTML).join('');
+  });
+  document.getElementById('spec-body').innerHTML = MOCKUPS.map(function (m) {
+    var sw = m.palette.map(function (c) { return '<span class="sw" style="--c:' + c.hex + '" title="' + esc(c.name + ' ' + c.hex) + '"></span>'; }).join('');
+    return '<tr style="--c: var(--' + m.cat + ')"><td class="no">' + m.n + '</td>' +
+      '<td><button class="link" type="button" data-open="' + m.slug + '">' + esc(m.name) + '</button><br><span class="cat">' + CAT_LABEL[m.cat] + '</span> &middot; ' + esc(m.niche) + '</td>' +
+      '<td>' + esc(m.city) + '<br><span style="color:var(--muted)">' + esc(m.area) + '</span></td>' +
+      '<td>' + esc(m.converts) + '</td><td>' + esc(m.signature) + '</td>' +
+      '<td>' + esc(m.fonts.join(' / ')) + '</td><td>' + esc(m.media) + '</td><td><span class="swatches">' + sw + '</span></td></tr>';
+  }).join('');
+}
+
+/* ---------- Filters ---------- */
+function applyFilter(f) {
+  document.querySelectorAll('[data-filter]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.filter === f)); });
+  document.querySelectorAll('.rail').forEach(function (r) { r.hidden = !(f === 'all' || r.dataset.cat === f); });
+  store('tb-filter', f);
+}
+document.querySelectorAll('[data-filter]').forEach(function (b) { b.addEventListener('click', function () { applyFilter(b.dataset.filter); }); });
+
+/* ---------- Viewer ---------- */
+var viewer = document.getElementById('viewer');
+var stage = document.getElementById('v-stage');
+var device = document.getElementById('v-device');
+var frame = document.getElementById('v-frame');
+var current = -1;
+var dev = store('tb-device') || (window.innerWidth < 700 ? 'phone' : 'desktop');
+var lastFocus = null;
+
+function fit() {
+  if (viewer.hidden) return;
+  var d = DEVICES[dev];
+  var cs = getComputedStyle(stage);
+  var aw = stage.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+  var ah = stage.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+  var framed = dev !== 'desktop';
+  if (framed) { aw -= 16; ah -= 16; }
+  var s, w = d.w, h;
+  if (dev === 'desktop') { s = Math.min(1, aw / d.w); h = Math.max(320, ah / s); }
+  else { s = Math.min(1, aw / d.w, ah / d.h); h = d.h; }
+  device.style.width = (w * s) + 'px';
+  device.style.height = (Math.min(h * s, ah)) + 'px';
+  frame.style.width = w + 'px';
+  frame.style.height = (Math.min(h * s, ah) / s) + 'px';
+  frame.style.transform = 'scale(' + s + ')';
+  device.className = 'v-device' + (framed ? ' framed ' + dev : '');
+  document.getElementById('v-scale').textContent = d.w + 'px · ' + Math.round(s * 100) + '%';
+}
+
+function setDevice(d) {
+  dev = d; store('tb-device', d);
+  document.querySelectorAll('[data-dev]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.dev === d)); });
+  fit();
+}
+
+function openViewer(slug, fromHash) {
+  var i = MOCKUPS.findIndex(function (m) { return m.slug === slug; });
+  if (i < 0) return;
+  if (viewer.hidden) lastFocus = document.activeElement;
+  current = i;
+  var m = MOCKUPS[i];
+  viewer.hidden = false;
+  document.documentElement.style.overflow = 'hidden';
+  viewer.style.setProperty('--name-font', m.nameFont);
+  document.getElementById('v-no').textContent = 'No. ' + m.n + ' / ' + MOCKUPS.length + ' · ' + CAT_LABEL[m.cat];
+  document.getElementById('v-title').textContent = m.name;
+  document.getElementById('v-open').href = BASE + 'mockups/' + m.slug + '.html';
+  document.getElementById('v-concept').textContent = m.concept;
+  document.getElementById('v-converts').textContent = m.converts;
+  document.getElementById('v-signature').textContent = m.signature;
+  document.getElementById('v-type').textContent = m.fonts.join(' / ');
+  document.getElementById('v-media').textContent = m.media + ' Live map: ' + m.mapNote;
+  document.getElementById('v-story').innerHTML = m.story.map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('');
+  document.getElementById('v-pal').innerHTML = m.palette.map(function (c) { return '<div><span style="--c:' + c.hex + '"></span><div>' + esc(c.name) + '<small>' + c.hex + '</small></div></div>'; }).join('');
+  frame.src = BASE + 'mockups/' + m.slug + '.html';
+  setDevice(dev);
+  if (!fromHash && location.hash !== '#' + slug) { try { history.replaceState(null, '', '#' + slug); } catch (e) { location.hash = slug; } }
+  document.getElementById('v-close').focus({ preventScroll: true });
+}
+
+function closeViewer() {
+  viewer.hidden = true;
+  frame.src = 'about:blank';
+  document.documentElement.style.overflow = '';
+  try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {}
+  if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
+}
+
+function step(dir) { openViewer(MOCKUPS[(current + dir + MOCKUPS.length) % MOCKUPS.length].slug); }
+
+document.addEventListener('click', function (e) {
+  var t = e.target.closest('[data-open]');
+  if (t) { e.preventDefault(); openViewer(t.dataset.open); }
+});
+document.getElementById('v-close').addEventListener('click', closeViewer);
+document.getElementById('v-prev').addEventListener('click', function () { step(-1); });
+document.getElementById('v-next').addEventListener('click', function () { step(1); });
+document.querySelectorAll('[data-dev]').forEach(function (b) { b.addEventListener('click', function () { setDevice(b.dataset.dev); }); });
+document.addEventListener('keydown', function (e) {
+  if (viewer.hidden) return;
+  if (e.key === 'Escape') closeViewer();
+  else if (e.key === 'ArrowLeft') step(-1);
+  else if (e.key === 'ArrowRight') step(1);
+  else if (e.key === '1') setDevice('desktop');
+  else if (e.key === '2') setDevice('tablet');
+  else if (e.key === '3') setDevice('phone');
+  else if (e.key === 'Tab') { /* keep focus inside the dialog */
+    var f = viewer.querySelectorAll('button, a[href], iframe');
+    var first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  }
+});
+if (window.ResizeObserver) new ResizeObserver(fit).observe(stage); else window.addEventListener('resize', fit);
+
+function fromHash() {
+  var h = location.hash.slice(1);
+  if (h && MOCKUPS.some(function (m) { return m.slug === h; })) openViewer(h, true);
+  else if (!viewer.hidden && h !== 'spec-sheet') closeViewer();
+}
+window.addEventListener('hashchange', fromHash);
+
+renderBoard();
+applyFilter(store('tb-filter') || 'all');
+fromHash();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1323 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Koyla Karahi House</title>
+<meta name="description" content="Family karahi and charcoal BBQ on MM Alam Road, Gulberg, Lahore. Family feast deals for delivery, group tables up to 40, and live BBQ catering for shaadi and office events.">
+<meta name="theme-color" content="#141210">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Teko:wght@300;400;500;600;700&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@700&display=swap&text=%D8%A6%D8%A7%D8%A8%D8%AA%D8%AE%D8%B3%D9%84%D9%85%D9%86%D9%88%D9%B9%DA%86%DA%91%DA%A9%DB%81%DB%8C%20">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "Koyla Karahi House",
+  "servesCuisine": ["Pakistani", "Barbecue", "Karahi"],
+  "priceRange": "Rs 1,000 – Rs 3,000 per person",
+  "telephone": "+92 300 555 0188",
+  "acceptsReservations": "True",
+  "menu": "#menu",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Plot 22-C, MM Alam Road, Gulberg III",
+    "addressLocality": "Lahore",
+    "addressRegion": "Punjab",
+    "addressCountry": "PK"
+  },
+  "geo": {"@type": "GeoCoordinates", "latitude": 31.5161, "longitude": 74.3505},
+  "openingHoursSpecification": [
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday"], "opens": "18:00", "closes": "02:00"},
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Friday","Saturday"], "opens": "18:00", "closes": "03:00"},
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Sunday"], "opens": "13:00", "closes": "02:00"}
+  ]
+}
+</script>
+<style>
+/* Layout: smoke and coals. Full-bleed fire hero with a 22vw Teko wordmark, editorial numbered dish rows,
+   receipt-style family deals, one pinned services panel, real map on charcoal. Sparks are streaks, never dots. */
+:root{
+  --char:#141210;
+  --char-2:#1C1916;
+  --char-3:#26201C;
+  --line:#3A322C;
+  --ember:#FF6B1A;
+  --ember-hi:#FF8A3D;
+  --chilli:#C1121F;
+  --turmeric:#FFC93C;
+  --bone:#F3ECE2;
+  --ash:#ABA095;
+  --display:"Teko", "Barlow Condensed", "Arial Narrow", Impact, sans-serif;
+  --body:"Barlow", "Helvetica Neue", Arial, sans-serif;
+  --cond:"Barlow Condensed", "Arial Narrow", sans-serif;
+  --urdu:"Noto Nastaliq Urdu", "Jameel Noori Nastaleeq", "Urdu Typesetting", serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --hdr-h:78px;
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--char);color:var(--bone);font:400 17.5px/1.62 var(--body);overflow-x:clip}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:70;background:var(--char)}
+.grain{position:fixed;inset:0;z-index:95;pointer-events:none;background:var(--grain);opacity:.08;mix-blend-mode:overlay}
+img,svg,video,canvas{display:block;max-width:100%}
+a{color:inherit}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--turmeric);outline-offset:3px}
+h1,h2,h3{font-family:var(--display);font-weight:500;line-height:.9;margin:0;text-wrap:balance;letter-spacing:.005em;text-transform:uppercase}
+p{margin:0}
+.ur{font-family:var(--urdu);font-weight:700;direction:rtl;unicode-bidi:isolate;line-height:2}
+.wrap{width:100%;max-width:1320px;margin-inline:auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.num{font-variant-numeric:tabular-nums}
+.skip{position:absolute;left:12px;top:-60px;z-index:200;background:var(--turmeric);color:var(--char);padding:10px 16px;font-weight:700;text-decoration:none}
+.skip:focus{top:12px}
+
+/* shared Tasting Board strip */
+.tb-strip{display:flex;justify-content:space-between;gap:12px;padding:7px max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));background:#111;color:#cfcfcf;font:500 12px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.02em}
+.tb-strip a{color:#fff;text-decoration:none}.tb-strip a:hover{text-decoration:underline}
+.in-board .tb-strip{display:none}
+@media (max-width:480px){.tb-strip span{display:none}}
+
+/* buttons: hard-edged */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:12px 26px;border:0;border-radius:0;
+  font:700 15px/1 var(--cond);letter-spacing:.16em;text-transform:uppercase;text-decoration:none;cursor:pointer;
+  transition:background-color .25s var(--ease),color .25s var(--ease),box-shadow .25s var(--ease)}
+.btn-ember{background:var(--ember);color:var(--char)}
+.btn-ember:hover{background:var(--turmeric)}
+.btn-line{background:transparent;color:var(--bone);box-shadow:inset 0 0 0 1.5px rgba(243,236,226,.55)}
+.btn-line:hover{box-shadow:inset 0 0 0 1.5px var(--ember);color:var(--ember)}
+.btn svg{width:18px;height:18px}
+
+/* header */
+.hdr{position:sticky;top:env(safe-area-inset-top,0px);z-index:60;height:var(--hdr-h);margin-bottom:calc(-1 * var(--hdr-h));transition:transform .45s var(--ease),background-color .35s var(--ease),box-shadow .35s}
+.hdr.is-solid{background:rgba(20,18,16,.92);backdrop-filter:blur(10px);box-shadow:0 1px 0 rgba(255,107,26,.35)}
+.hdr.is-hidden{transform:translateY(-110%)}
+.hdr .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;height:100%}
+.logo{display:flex;align-items:baseline;gap:10px;text-decoration:none;white-space:nowrap}
+.logo b{font:600 36px/1 var(--display);letter-spacing:.04em;color:var(--bone)}
+.logo b i{font-style:normal;color:var(--ember)}
+.logo span{font:600 12.5px/1 var(--cond);letter-spacing:.24em;text-transform:uppercase;color:var(--ash)}
+.nav{display:flex;gap:28px}
+.nav a{position:relative;text-decoration:none;font:600 14px/1 var(--cond);letter-spacing:.18em;text-transform:uppercase;color:#d8cec3;padding-block:8px}
+.nav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--ember);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease)}
+.nav a:hover{color:var(--bone)}
+.nav a:hover::after{transform:scaleX(1)}
+.hdr-ctas{display:flex;gap:10px}
+.hdr .btn{min-height:44px;padding:8px 18px;font-size:13.5px}
+@media (max-width:1100px){.nav{display:none}}
+@media (max-width:767.98px){.hdr-ctas{display:none}:root{--hdr-h:64px}.logo b{font-size:32px}}
+
+/* hero */
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding-block:calc(var(--hdr-h) + 40px) 190px;overflow:clip;isolation:isolate;
+  background:radial-gradient(120% 60% at 50% 110%,rgba(193,18,31,.4),transparent 60%),linear-gradient(180deg,#0e0c0b 0%,#18120e 60%,#1f130c 100%)}
+.hero-media{position:absolute;inset:0;z-index:-2;opacity:0;transition:opacity 1s var(--ease)}
+.hero-media video{width:100%;height:100%;object-fit:cover}
+.hero-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,12,11,.75),rgba(14,12,11,.3) 45%,rgba(14,12,11,.85))}
+.hero.has-video .hero-media{opacity:1}
+.hero.has-video .grill{opacity:0}
+.haze{position:absolute;left:0;right:0;bottom:0;height:46%;z-index:-1;background:linear-gradient(0deg,rgba(255,107,26,.2),transparent);filter:blur(30px);animation:haze 5s ease-in-out infinite alternate}
+@keyframes haze{to{transform:scaleY(1.08) translateY(-10px);opacity:.75}}
+#embers{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+.grill{position:absolute;left:0;right:0;bottom:0;width:100%;height:150px;z-index:-1;transition:opacity 1s}
+.hero-inner{position:relative;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px;align-items:end}
+.hero-copy{grid-column:1 / span 8;min-width:0}
+.hero-kicker{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;font:600 14px/1 var(--cond);letter-spacing:.28em;text-transform:uppercase;color:var(--turmeric)}
+.hero-kicker i{width:22px;height:1px;background:var(--turmeric);opacity:.6}
+.hero-title{margin-top:18px;line-height:.78}
+.ht-ur{display:block;font-size:clamp(34px,4.2vw,64px);color:var(--ember);line-height:1.7;margin-bottom:-.4em;text-transform:none}
+.ht-stack{position:relative;display:block;font-size:clamp(130px,24vw,370px);font-weight:600;letter-spacing:.01em;color:var(--bone)}
+.ht-glow{position:absolute;inset:0;color:var(--ember);filter:blur(22px);opacity:.38;pointer-events:none}
+.ht-main{position:relative;display:block;background:linear-gradient(180deg,#FFF4E6 0%,#F3ECE2 45%,#FFB36B 82%,#FF6B1A 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ht-sub{display:block;font-size:clamp(30px,3.2vw,52px);font-weight:400;letter-spacing:.32em;color:var(--bone);margin-top:4px}
+.lede{max-width:46ch;margin-top:22px;font-size:clamp(17.5px,1.35vw,20px);color:#ddd3c8}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.fireboard{grid-column:9 / span 4;justify-self:end;width:min(100%,340px);background:rgba(20,18,16,.72);backdrop-filter:blur(6px);border-top:3px solid var(--ember);padding:22px 22px 18px}
+.fb-head{display:flex;align-items:center;gap:10px;font:700 13px/1 var(--cond);letter-spacing:.22em;text-transform:uppercase;color:var(--turmeric)}
+.fb-head i{width:9px;height:9px;background:var(--ember);transform:rotate(45deg);animation:flick 1.6s ease-in-out infinite}
+@keyframes flick{50%{opacity:.35}}
+.fireboard ul{list-style:none;margin:14px 0 0;padding:0}
+.fireboard li{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-size:16px}
+.fireboard li b{font:500 24px/1 var(--display);color:var(--bone)}
+.fb-foot{margin-top:12px;font-size:13px;color:var(--ash)}
+.cue{position:absolute;right:max(20px,env(safe-area-inset-right,0px));bottom:168px;display:flex;align-items:center;gap:12px;color:var(--ash);text-decoration:none;font:600 12px/1 var(--cond);letter-spacing:.24em;text-transform:uppercase;writing-mode:vertical-rl}
+.cue i{display:block;width:1px;height:54px;background:linear-gradient(var(--ember),transparent);animation:cue 2s var(--ease) infinite;transform-origin:top}
+@keyframes cue{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
+@media (max-width:980px){
+  .hero{min-height:0;padding-block:calc(var(--hdr-h) + 36px) 170px}
+  .hero-copy,.fireboard{grid-column:1 / -1}
+  .fireboard{justify-self:start;margin-top:30px}
+  .cue{display:none}
+}
+
+/* section scaffolding */
+.sec{position:relative;padding-block:clamp(90px,11vw,160px)}
+.sec-head{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:18px 24px;align-items:end;margin-bottom:clamp(48px,6vw,84px)}
+.label{grid-column:1 / -1;display:flex;align-items:center;gap:14px;font:700 14px/1 var(--cond);letter-spacing:.26em;text-transform:uppercase;color:var(--ash)}
+.label b{color:var(--ember);font-weight:700}
+.label i{flex:none;width:56px;height:2px;background:linear-gradient(90deg,var(--ember),var(--chilli))}
+.sec-title{grid-column:1 / span 8;font-size:clamp(64px,9.6vw,156px);color:var(--bone);min-width:0}
+.sec-title em{font-style:normal;color:var(--ember)}
+.sec-intro{grid-column:9 / span 4;max-width:42ch;color:var(--ash);font-size:18px}
+@media (max-width:900px){.sec-title,.sec-intro{grid-column:1 / -1}}
+
+/* (01) signature dishes */
+.dishes{display:grid;gap:clamp(70px,10vw,140px)}
+.dish{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px;align-items:center}
+.dish-art-wrap{grid-column:1 / span 6;position:relative}
+.dish:nth-child(2n) .dish-art-wrap{grid-column:7 / span 6;order:2}
+.dish-copy{grid-column:8 / span 5;min-width:0}
+.dish:nth-child(2n) .dish-copy{grid-column:1 / span 5;order:1}
+.dish-num{position:absolute;top:-.36em;left:-.04em;z-index:2;font:600 clamp(110px,14vw,220px)/1 var(--display);color:transparent;-webkit-text-stroke:1.5px var(--ember);pointer-events:none}
+.dish:nth-child(2n) .dish-num{left:auto;right:-.04em}
+.dish-frame{position:relative;aspect-ratio:1/1;overflow:hidden;background:radial-gradient(70% 70% at 50% 45%,#2b201a,#161210 75%)}
+.dish-frame .reveal-inner{position:absolute;inset:0;display:grid;place-items:center;transition:transform .9s var(--ease)}
+.dish-frame svg{width:84%}
+.dish-frame:hover .reveal-inner{transform:scale(1.05)}
+.dish-frame img.slot-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .8s var(--ease),transform .9s var(--ease)}
+.dish-frame.has-photo img.slot-photo{opacity:1}
+.dish-frame.has-photo:hover img.slot-photo{transform:scale(1.05)}
+.dish-frame::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 1px rgba(255,107,26,.25);pointer-events:none}
+.dish-copy h3{font-size:clamp(56px,6.2vw,96px);color:var(--bone)}
+.dish-copy .ur{font-size:26px;color:var(--ember);margin-top:4px;width:max-content;max-width:100%}
+.dish-copy > p:not(.ur):not(.dish-price){margin-top:12px;color:#d6ccc1;max-width:48ch}
+.specs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:28px 0 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.specs div{padding:14px 0}
+.specs div + div{border-left:1px solid var(--line);padding-left:16px}
+.specs dt{font:600 12px/1 var(--cond);letter-spacing:.2em;text-transform:uppercase;color:var(--ash)}
+.specs dd{margin:8px 0 0;font:500 26px/1 var(--display);color:var(--bone)}
+.dish-price{display:flex;flex-wrap:wrap;gap:12px 40px;margin-top:22px}
+.dish-price span{display:grid;gap:4px}
+.dish-price small{font:600 12px/1 var(--cond);letter-spacing:.2em;text-transform:uppercase;color:var(--ash)}
+.dish-price b{font:500 44px/1 var(--display);color:var(--turmeric)}
+@media (max-width:900px){
+  .dish-art-wrap,.dish-copy,.dish:nth-child(2n) .dish-art-wrap,.dish:nth-child(2n) .dish-copy{grid-column:1 / -1;order:0}
+  .dish-art-wrap{max-width:520px}
+  .dish:nth-child(2n) .dish-num{left:-.04em;right:auto}
+}
+
+/* (02) family deals: receipts */
+.deals{background:var(--char-2)}
+.deals::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:linear-gradient(90deg,transparent,var(--ember),transparent)}
+.deal-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:start}
+.deal{position:relative;display:flex;flex-direction:column;gap:14px;background:var(--bone);color:var(--char);padding:30px 26px 34px;min-width:0;
+  -webkit-mask:linear-gradient(#000 0 0) top / 100% calc(100% - 10px) no-repeat,conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom / 16px 10px repeat-x;
+          mask:linear-gradient(#000 0 0) top / 100% calc(100% - 10px) no-repeat,conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom / 16px 10px repeat-x}
+.deal.hot{background:#FFF6EA;box-shadow:inset 0 6px 0 var(--ember)}
+.deal-tag{font:700 13px/1 var(--cond);letter-spacing:.22em;text-transform:uppercase;color:var(--chilli)}
+.deal h3{font-size:clamp(44px,3.8vw,60px);padding-right:96px;color:var(--char)}
+.serves{font:600 14px/1.3 var(--cond);letter-spacing:.1em;text-transform:uppercase;color:#6c6057}
+.contents{list-style:none;margin:0;padding:12px 0 0;border-top:1px dashed #c9bcae;display:grid;gap:8px;font-size:15px}
+.contents li{display:flex;justify-content:space-between;gap:12px}
+.contents .each{display:block;font-size:12.5px;color:#7c7067}
+.deal-price{display:flex;align-items:baseline;gap:14px;border-top:1px dashed #c9bcae;padding-top:14px}
+.deal-price strong{font:600 58px/1 var(--display);color:var(--chilli)}
+.deal-price s{color:#7c7067;font-size:17px}
+.per-head{font-size:14px;font-weight:600;color:#3d332d}
+.stamp{position:absolute;top:24px;right:20px;width:92px;padding:12px 8px 10px;text-align:center;background:var(--char);color:var(--turmeric);transform:rotate(5deg);
+  clip-path:polygon(0 0,100% 0,100% calc(100% - 12px),50% 100%,0 calc(100% - 12px))}
+.stamp span{display:grid;gap:4px;font:700 11px/1 var(--cond);letter-spacing:.2em;text-transform:uppercase;color:var(--ash);padding-bottom:10px}
+.stamp b{font:500 25px/1 var(--display);letter-spacing:0;color:var(--turmeric)}
+.cd-label{font:700 12.5px/1 var(--cond);letter-spacing:.2em;text-transform:uppercase;color:var(--chilli)}
+.countdown{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.countdown div{display:grid;place-items:center;background:var(--char);color:var(--bone);padding:8px 0 6px}
+.countdown b{font:500 30px/1 var(--display)}
+.countdown small{font:600 10.5px/1 var(--cond);letter-spacing:.18em;text-transform:uppercase;color:var(--ash)}
+.deal-ctas{display:grid;gap:10px;margin-top:auto;padding-top:8px}
+.deal-ctas small{font-size:13px;color:#6c6057}
+.deal-ctas .btn-ember:hover{background:var(--char);color:var(--turmeric)}
+@media (max-width:1060px){.deal-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:700px){.deal-grid{grid-template-columns:1fr}}
+
+/* (03) services */
+.svc{background:var(--char)}
+.svc-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px;align-items:start}
+.svc-side{grid-column:1 / span 5;min-width:0}
+.svc-side .sec-title{font-size:clamp(60px,7vw,118px)}
+.svc-tabs{display:grid;margin-top:36px;border-top:1px solid var(--line)}
+.svc-tab{display:flex;align-items:baseline;gap:18px;width:100%;padding:16px 0;border:0;border-bottom:1px solid var(--line);background:none;text-align:left;cursor:pointer;color:var(--ash);transition:color .25s}
+.svc-tab b{font:500 22px/1 var(--display);color:inherit;min-width:36px}
+.svc-tab span{font:500 clamp(34px,3.2vw,48px)/1 var(--display);text-transform:uppercase;letter-spacing:.02em}
+.svc-tab:hover{color:var(--bone)}
+.svc-tab[aria-selected="true"]{color:var(--bone)}
+.svc-tab[aria-selected="true"] b{color:var(--ember)}
+.svc-progress{height:2px;background:var(--line);margin-top:18px}
+.svc-progress i{display:block;height:100%;background:var(--ember);transform:scaleX(.25);transform-origin:left;transition:transform .5s var(--ease)}
+.svc-panels{grid-column:7 / span 6;position:relative;min-width:0}
+.svc-panel{position:relative;background:var(--char-2);padding:40px 38px;overflow:hidden}
+.svc-panel::before{content:attr(data-word);position:absolute;right:-.06em;bottom:-.22em;font:600 clamp(120px,14vw,220px)/1 var(--display);text-transform:uppercase;color:rgba(255,107,26,.07);pointer-events:none}
+.js-tabs .svc-panel{display:none}
+.js-tabs .svc-panel.is-active{display:block}
+.svc-stat{display:flex;align-items:baseline;gap:14px;border-bottom:1px solid var(--line);padding-bottom:18px}
+.svc-stat b{font:600 clamp(72px,7vw,110px)/.85 var(--display);color:var(--ember)}
+.svc-stat span{font:600 14px/1.3 var(--cond);letter-spacing:.16em;text-transform:uppercase;color:var(--ash);max-width:18ch}
+.svc-panel h3{font-size:54px;margin-top:22px}
+.svc-panel p{margin-top:12px;color:#d6ccc1;max-width:52ch}
+.svc-panel ul{list-style:none;margin:20px 0 26px;padding:0;display:grid;gap:8px}
+.svc-panel li{position:relative;padding-left:22px;color:var(--bone)}
+.svc-panel li::before{content:"";position:absolute;left:0;top:.62em;width:10px;height:2px;background:var(--ember)}
+@media (max-width:900px){.svc-side,.svc-panels{grid-column:1 / -1}.svc-panel{padding:30px 22px}}
+
+/* (04) menu */
+.menu{background:var(--char-2)}
+.chips{display:flex;flex-wrap:wrap;gap:0;border:1px solid var(--line);width:max-content;max-width:100%}
+.chip{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 18px;border:0;border-right:1px solid var(--line);background:none;color:var(--ash);font:600 15px/1 var(--cond);letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:background-color .2s,color .2s}
+.chip:last-child{border-right:0}
+.chip .n{font-size:12px;color:inherit;opacity:.7}
+.chip:hover{color:var(--bone)}
+.chip[aria-pressed="true"]{background:var(--ember);color:var(--char)}
+.menu-list{list-style:none;margin:40px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:64px}
+.mi{display:grid;gap:4px;padding:22px 0;border-bottom:1px solid var(--line);min-width:0}
+.mi-top{display:flex;align-items:baseline;gap:14px}
+.mi-top h3{font-size:34px;letter-spacing:.02em;flex:1;min-width:0}
+.mi-top .out{display:inline-block;margin-left:12px;vertical-align:middle;font:700 11px/1 var(--cond);letter-spacing:.18em;color:var(--char);background:var(--ash);padding:5px 8px}
+.chillies{display:flex;gap:3px}
+.chillies svg{width:16px;height:16px}
+.mi-cat{font:600 11.5px/1 var(--cond);letter-spacing:.2em;text-transform:uppercase;color:var(--ember)}
+.mi p{color:var(--ash);font-size:15.5px}
+.mi-price{display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:4px;font:500 26px/1 var(--display);color:var(--turmeric)}
+.mi-price em{font:600 11.5px/1 var(--cond);letter-spacing:.18em;text-transform:uppercase;font-style:normal;color:var(--ash);margin-right:8px}
+.mi.is-out{opacity:.45}
+@media (max-width:820px){.menu-list{grid-template-columns:1fr}.chip{padding:0 12px;font-size:13.5px}}
+
+/* (05) reserve */
+.res-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px;align-items:start}
+.res-form{grid-column:1 / span 7;display:grid;gap:22px;min-width:0}
+.res-summary{grid-column:9 / span 4;position:sticky;top:calc(var(--hdr-h) + 20px);background:var(--bone);color:var(--char);padding:30px 28px;min-width:0}
+.field{display:grid;gap:8px;border:0;margin:0;padding:0;min-width:0}
+.field > span,.field legend{font:600 13px/1 var(--cond);letter-spacing:.2em;text-transform:uppercase;color:var(--ash);padding:0}
+.field input,.field select{width:100%;min-height:52px;border:0;border-bottom:1.5px solid var(--line);background:transparent;color:var(--bone);font:500 18px var(--body);padding:8px 2px;border-radius:0}
+.field select option{background:var(--char);color:var(--bone)}
+.field input:focus,.field select:focus{outline:none;border-bottom-color:var(--ember)}
+.field input[aria-invalid="true"]{border-bottom-color:#FF6B6B}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.party{display:flex;flex-wrap:wrap;align-items:center;gap:14px}
+.party button{width:52px;height:52px;border:1px solid var(--line);background:var(--char-2);color:var(--bone);font-size:24px;cursor:pointer;transition:background-color .2s}
+.party button:hover:not(:disabled){background:var(--ember);color:var(--char);border-color:var(--ember)}
+.party button:disabled{opacity:.35;cursor:not-allowed}
+.party output{font:500 56px/1 var(--display);min-width:64px;text-align:center}
+.party small{color:var(--ash);font-size:14px}
+.slots{display:flex;flex-wrap:wrap;gap:0;border:1px solid var(--line);width:max-content;max-width:100%}
+.slots input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+.slots label{display:grid;place-items:center;min-height:50px;padding:0 16px;border-right:1px solid var(--line);font:500 22px/1 var(--display);color:var(--ash);cursor:pointer;transition:background-color .2s,color .2s}
+.slots label:last-of-type{border-right:0}
+.slots input:checked + label{background:var(--ember);color:var(--char)}
+.slots input:focus-visible + label{outline:3px solid var(--turmeric);outline-offset:-3px}
+.err{color:#FF8F8F;font-size:14px;min-height:1.2em}
+.confirm{background:rgba(255,107,26,.1);border-left:3px solid var(--ember);padding:14px 16px;font-size:15px}
+.res-summary .label{color:#6c6057;margin-bottom:12px}
+.res-summary h3{font-size:64px;color:var(--char)}
+.res-summary dl{display:grid;margin:18px 0 0;border-top:1px solid #d8ccbf}
+.res-summary dl div{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid #d8ccbf}
+.res-summary dt{font:600 12.5px/1.3 var(--cond);letter-spacing:.16em;text-transform:uppercase;color:#6c6057}
+.res-summary dd{margin:0;font-weight:600;text-align:right}
+.res-note{margin-top:16px;font-size:14.5px;color:#3d332d}
+@media (max-width:980px){.res-form,.res-summary{grid-column:1 / -1}.res-summary{position:relative;top:0}}
+@media (max-width:520px){.two{grid-template-columns:1fr}.slots label{padding:0 10px;font-size:19px}}
+
+/* (06) reviews */
+.reviews{background:var(--char-2);padding-block:clamp(80px,9vw,130px);overflow:hidden}
+.rv-head{margin-bottom:44px}
+.rv-head .sec-title{font-size:clamp(56px,7vw,110px)}
+.rv-row{display:flex;gap:20px;width:max-content;animation:mq 60s linear infinite}
+.rv-row + .rv-row{margin-top:20px;animation-direction:reverse;animation-duration:70s}
+.reviews:hover .rv-row{animation-play-state:paused}
+@keyframes mq{to{transform:translateX(calc(-50% - 10px))}}
+.rv{flex:none;width:min(420px,82vw);margin:0;background:var(--char);padding:26px 26px 22px;border-top:2px solid var(--ember)}
+.rv q{display:block;font:400 24px/1.15 var(--display);text-transform:none;color:var(--bone);quotes:"\201C" "\201D"}
+.rv footer{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:18px;font-size:14px;color:var(--ash)}
+.rv footer b{color:var(--bone)}
+.flames{display:flex;gap:2px}
+.flames svg{width:15px;height:15px}
+
+/* (07) visit + real map */
+.visit-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px;align-items:stretch}
+.mapbox{grid-column:1 / span 7;position:relative;min-height:520px;background:var(--char-2);overflow:hidden;box-shadow:inset 0 0 0 1px rgba(255,107,26,.3)}
+.map{position:absolute;inset:0;z-index:1;background:var(--char-2)}
+.map .leaflet-tile-pane{filter:sepia(.6) saturate(1.6) hue-rotate(-12deg) brightness(.85) contrast(1.08)}
+.leaflet-container{font:500 13px/1.4 var(--body);background:var(--char-2)}
+.leaflet-control-attribution{background:rgba(20,18,16,.85)!important;color:#b9ada2!important}
+.leaflet-control-attribution a{color:var(--ember)!important}
+.leaflet-bar{border-radius:0!important;border:1px solid var(--line)!important}
+.leaflet-bar a{background:var(--char)!important;color:var(--bone)!important;border-color:var(--line)!important;border-radius:0!important}
+.brand-pin{background:none;border:0}
+.brand-pin .pin{position:relative;width:52px;height:62px}
+.brand-pin .pin b{position:absolute;left:0;top:0;width:52px;height:46px;display:grid;place-items:center;background:var(--ember);color:var(--char);font:600 30px/1 var(--display);padding-top:4px;box-shadow:0 10px 24px rgba(0,0,0,.5)}
+.brand-pin .pin::after{content:"";position:absolute;left:18px;top:46px;border:8px solid transparent;border-top:12px solid var(--ember)}
+.map-fallback{position:absolute;inset:0;z-index:2;display:grid;align-content:end;gap:18px;padding:clamp(24px,4vw,44px);overflow:hidden;
+  background:radial-gradient(90% 60% at 70% 30%,rgba(255,107,26,.16),transparent 60%),var(--char-2);transition:opacity .5s var(--ease)}
+.map-fallback svg.streets{position:absolute;inset:0;width:100%;height:100%;opacity:.55}
+.map-fallback > :not(svg){position:relative}
+.mf-kicker{font:700 13px/1 var(--cond);letter-spacing:.24em;text-transform:uppercase;color:var(--turmeric)}
+.mf-title{font:500 clamp(46px,5vw,72px)/.9 var(--display);text-transform:uppercase;color:var(--bone)}
+.mf-meta{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:15px;color:var(--ash)}
+.mf-meta b{color:var(--bone);font-weight:600}
+.mf-actions{display:flex;flex-wrap:wrap;gap:12px}
+.mapbox.map-ready .map-fallback{opacity:0;pointer-events:none}
+.info{grid-column:8 / span 5;display:flex;flex-direction:column;gap:22px;min-width:0}
+.open-now{display:inline-flex;align-items:center;gap:10px;font:700 13.5px/1 var(--cond);letter-spacing:.2em;text-transform:uppercase;color:var(--ash)}
+.open-now i{width:10px;height:10px;background:var(--ash);transform:rotate(45deg)}
+.open-now.on{color:#8BE3A7}.open-now.on i{background:#3CCB72}
+.info address{font:500 clamp(36px,3.2vw,50px)/.95 var(--display);font-style:normal;text-transform:uppercase}
+.hours{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.hours li{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.hours li.today{color:var(--turmeric);font-weight:600}
+.big{font:500 40px/1 var(--display)}
+.info .row{display:flex;flex-wrap:wrap;gap:12px}
+@media (max-width:980px){.mapbox,.info{grid-column:1 / -1}.mapbox{min-height:400px}}
+
+/* footer */
+.foot{position:relative;background:#0d0b0a;padding-block:90px 36px;overflow:hidden}
+.foot::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:linear-gradient(90deg,var(--chilli),var(--ember),var(--turmeric))}
+.foot-word{font:600 clamp(120px,27vw,430px)/.74 var(--display);letter-spacing:.01em;text-transform:uppercase;white-space:nowrap;background:linear-gradient(180deg,rgba(255,138,61,.55),rgba(193,18,31,.12) 85%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.foot-sub{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:10px 24px;margin-top:20px}
+.foot-sub p{font:500 28px/1 var(--display);text-transform:uppercase;letter-spacing:.2em;color:var(--bone)}
+.foot-sub .ur{font-size:34px;color:var(--ember)}
+.foot-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px;margin-top:60px;padding-top:34px;border-top:1px solid var(--line)}
+.foot-grid h4{margin:0 0 12px;font:700 13px/1 var(--cond);letter-spacing:.22em;text-transform:uppercase;color:var(--ember)}
+.foot-grid ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.foot-grid li,.foot-grid p{font-size:15px;color:#cfc4b8}
+.foot-grid a{text-decoration:none;border-bottom:1px solid rgba(243,236,226,.25)}
+.foot-grid a:hover{color:var(--ember);border-color:var(--ember)}
+.news{display:grid;gap:10px}
+.news label{font:700 13px/1 var(--cond);letter-spacing:.2em;text-transform:uppercase;color:var(--ember)}
+.news-row{display:grid;grid-template-columns:minmax(0,1fr) auto}
+.news input{min-height:50px;border:1px solid var(--line);border-right:0;background:var(--char-2);color:var(--bone);padding:8px 12px;border-radius:0}
+.news input:focus{outline:none;border-color:var(--ember)}
+.news button{min-height:50px;border:0;background:var(--ember);color:var(--char);font:700 14px/1 var(--cond);letter-spacing:.16em;text-transform:uppercase;padding:0 18px;cursor:pointer}
+.news .note{font-size:13px;color:var(--ash);min-height:1.4em}
+.news .note.bad{color:#FF8F8F}
+.legal{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:54px;font-size:13px;color:#8c8178}
+@media (max-width:900px){.foot-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.foot-grid{grid-template-columns:1fr}}
+
+/* mobile action bar */
+.bar{display:none}
+@media (max-width:767.98px){
+  body{padding-bottom:calc(74px + env(safe-area-inset-bottom,0px))}
+  .bar{position:fixed;left:0;right:0;bottom:0;z-index:80;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:8px;padding:10px max(12px,env(safe-area-inset-left,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-right,0px));background:var(--char);border-top:2px solid var(--ember)}
+  .bar a{display:flex;align-items:center;justify-content:center;gap:8px;min-height:50px;text-decoration:none;font:700 14px/1 var(--cond);letter-spacing:.14em;text-transform:uppercase;background:var(--char-3);color:var(--bone)}
+  .bar a.main{background:var(--ember);color:var(--char)}
+  .bar svg{width:18px;height:18px}
+}
+@media (prefers-reduced-motion:reduce){
+  .haze,.fb-head i,.cue i{animation:none}
+  .rv-row{animation:none;flex-wrap:wrap;width:auto;padding-inline:20px}
+  .rv-row [aria-hidden]{display:none}
+  .btn,.hdr,.dish-frame .reveal-inner{transition:none}
+}
+</style>
+</head>
+<body>
+<div class="tb-strip"><a href="../index.html">&larr; Tasting Board</a><span>Mockup 05 / 10 &middot; concept, not a live site</span></div>
+<script>try{if(window.parent!==window&&window.parent.__TASTING_BOARD__)document.documentElement.classList.add('in-board')}catch(e){}</script>
+<a class="skip" href="#main">Skip to content</a>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="hdr" id="hdr">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Koyla Karahi House home"><b>KOY<i>L</i>A</b><span>Karahi House</span></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#signature">Signature</a><a href="#deals">Family deals</a><a href="#services">Services</a><a href="#menu">Menu</a><a href="#visit">Visit</a>
+    </nav>
+    <div class="hdr-ctas">
+      <a class="btn btn-line" href="#reserve">Book a table</a>
+      <a class="btn btn-ember magnetic" href="#deals">Order a deal</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<!-- HERO -->
+<!-- HEYGEN: 10s seamless loop, 16:9 (and a 9:16 crop for phones). Seekh kebabs and chicken tikka skewers over glowing kikar charcoal, flames and sparks rising, smoke, slow camera slide along the grill, dark background, ember-orange light, no people, no text. Poster = first frame. -->
+<section class="hero" id="top" aria-labelledby="hero-title">
+  <div class="hero-media" id="heroMedia"></div>
+  <div class="haze" aria-hidden="true"></div>
+  <canvas id="embers" aria-hidden="true"></canvas>
+  <svg class="grill" viewBox="0 0 1440 150" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <defs>
+      <linearGradient id="seekhG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#A55A27"/><stop offset=".55" stop-color="#7A3A17"/><stop offset="1" stop-color="#4A200C"/></linearGradient>
+      <linearGradient id="tikkaG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F0703A"/><stop offset=".6" stop-color="#C2401A"/><stop offset="1" stop-color="#7C220C"/></linearGradient>
+      <linearGradient id="railG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8A4A22"/><stop offset=".3" stop-color="#2E2621"/><stop offset="1" stop-color="#15110F"/></linearGradient>
+    </defs>
+    <g stroke="#1B1613" stroke-width="5">
+      <path d="M18 34V150M54 34V150M90 34V150M126 34V150M162 34V150M198 34V150M234 34V150M270 34V150M306 34V150M342 34V150M378 34V150M414 34V150M450 34V150M486 34V150M522 34V150M558 34V150M594 34V150M630 34V150M666 34V150M702 34V150M738 34V150M774 34V150M810 34V150M846 34V150M882 34V150M918 34V150M954 34V150M990 34V150M1026 34V150M1062 34V150M1098 34V150M1134 34V150M1170 34V150M1206 34V150M1242 34V150M1278 34V150M1314 34V150M1350 34V150M1386 34V150M1422 34V150"/>
+    </g>
+    <rect x="0" y="30" width="1440" height="9" fill="url(#railG)"/>
+    <rect x="0" y="30" width="1440" height="2" fill="#FF8A3D" opacity=".55"/>
+    <g>
+      <path d="M60 58H600" stroke="#B9B4AE" stroke-width="4"/><rect x="40" y="49" width="18" height="18" fill="none" stroke="#B9B4AE" stroke-width="4"/>
+      <rect x="120" y="46" width="420" height="24" rx="11" fill="url(#seekhG)"/>
+      <path d="M150 48v20M182 48v20M214 48v20M246 48v20M278 48v20M310 48v20M342 48v20M374 48v20M406 48v20M438 48v20M470 48v20M502 48v20" stroke="#2A1206" stroke-width="3" opacity=".55"/>
+      <path d="M140 52H520" stroke="#D88C4E" stroke-width="2" opacity=".5"/>
+      <path d="M90 92H560" stroke="#B9B4AE" stroke-width="4"/><rect x="70" y="83" width="18" height="18" fill="none" stroke="#B9B4AE" stroke-width="4"/>
+      <rect x="150" y="80" width="380" height="24" rx="11" fill="url(#seekhG)"/>
+      <path d="M176 82v20M206 82v20M236 82v20M266 82v20M296 82v20M326 82v20M356 82v20M386 82v20M416 82v20M446 82v20M476 82v20M506 82v20" stroke="#2A1206" stroke-width="3" opacity=".55"/>
+    </g>
+    <g>
+      <path d="M700 72H1080" stroke="#B9B4AE" stroke-width="4"/><rect x="680" y="63" width="18" height="18" fill="none" stroke="#B9B4AE" stroke-width="4"/>
+      <rect x="740" y="54" width="54" height="38" rx="8" fill="url(#tikkaG)" transform="rotate(-6 767 73)"/>
+      <rect x="810" y="52" width="58" height="40" rx="8" fill="url(#tikkaG)" transform="rotate(5 839 72)"/>
+      <rect x="884" y="54" width="54" height="38" rx="8" fill="url(#tikkaG)" transform="rotate(-4 911 73)"/>
+      <rect x="954" y="53" width="58" height="40" rx="8" fill="url(#tikkaG)" transform="rotate(7 983 73)"/>
+      <path d="M752 62l10 4M774 82l12-3M822 64l12 2M844 84l10-4M896 60l12 3M918 80l12-2M966 64l12 4M990 84l10-3" stroke="#2A1206" stroke-width="3.5" stroke-linecap="square" opacity=".7"/>
+    </g>
+    <g>
+      <path d="M1130 64H1440" stroke="#B9B4AE" stroke-width="4"/>
+      <rect x="1170" y="52" width="290" height="24" rx="11" fill="url(#seekhG)"/>
+      <path d="M1196 54v20M1226 54v20M1256 54v20M1286 54v20M1316 54v20M1346 54v20M1376 54v20M1406 54v20" stroke="#2A1206" stroke-width="3" opacity=".55"/>
+    </g>
+  </svg>
+
+  <div class="wrap hero-inner">
+    <div class="hero-copy">
+      <p class="hero-kicker">MM Alam Road <i></i> Gulberg III <i></i> Lahore</p>
+      <h1 class="hero-title" id="hero-title">
+        <span class="ht-ur ur" lang="ur">کوئلہ</span>
+        <span class="ht-stack"><span class="ht-glow" id="htGlow" aria-hidden="true">Koyla</span><span class="ht-main">Koyla</span></span>
+        <span class="ht-sub">Karahi House</span>
+      </h1>
+      <p class="lede">Karahi cooked to order in iron over open flame, BBQ off kikar-wood charcoal, and family platters sized for tables of six to sixty.</p>
+      <div class="ctas">
+        <a class="btn btn-ember magnetic" href="#deals">Order a family deal</a>
+        <a class="btn btn-line" href="#reserve">Book a group table</a>
+      </div>
+    </div>
+    <aside class="fireboard" aria-label="Cook times tonight">
+      <p class="fb-head"><i aria-hidden="true"></i>On the coals tonight</p>
+      <ul>
+        <li><span>Mutton Karahi</span><b class="num">25 min</b></li>
+        <li><span>Chicken Tikka</span><b class="num">14 min</b></li>
+        <li><span>Seekh Kebab</span><b class="num">8 min</b></li>
+        <li><span>Roghni Naan</span><b class="num">90 sec</b></li>
+      </ul>
+      <p class="fb-foot">Kikar charcoal, about 600&deg;C at the grate.</p>
+    </aside>
+  </div>
+  <a class="cue" href="#signature"><i aria-hidden="true"></i>Scroll to fan the coals</a>
+</section>
+
+<!-- (01) SIGNATURE -->
+<section class="sec" id="signature" aria-labelledby="sig-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label"><b>01</b><i></i>Signature</p>
+      <h2 class="sec-title" id="sig-title" data-split>Three things we'd <em>bet the grill</em> on</h2>
+      <p class="sec-intro">Every karahi is cooked only when you order it. Every skewer is turned by hand. These three are why people drive across Lahore.</p>
+    </div>
+    <div class="dishes">
+      <article class="dish">
+        <div class="dish-art-wrap">
+          <span class="dish-num" aria-hidden="true">01</span>
+          <!-- HEYGEN: 1:1 still, top-down mutton karahi in a black iron karahi, green chillies and ginger julienne, oil sheen, dark wood table, ember side light, no people, no text. -->
+          <figure class="dish-frame reveal-media" data-slot="muttonKarahi" style="margin:0">
+            <div class="reveal-inner">
+              <svg viewBox="0 0 400 400" role="img" aria-label="Illustration: mutton karahi in an iron wok, seen from above">
+                <defs>
+                  <radialGradient id="kCurry" cx="42%" cy="38%" r="65%"><stop offset="0" stop-color="#E8702E"/><stop offset=".55" stop-color="#B83A17"/><stop offset="1" stop-color="#6E1C0B"/></radialGradient>
+                  <radialGradient id="kIron" cx="50%" cy="46%" r="52%"><stop offset=".8" stop-color="#2A2420"/><stop offset=".92" stop-color="#4B403A"/><stop offset="1" stop-color="#181412"/></radialGradient>
+                </defs>
+                <g fill="none" stroke="#3B332E" stroke-width="13" stroke-linecap="round"><path d="M44 168q-26 32 0 64"/><path d="M356 168q26 32 0 64"/></g>
+                <circle cx="200" cy="200" r="152" fill="url(#kIron)"/>
+                <circle cx="200" cy="200" r="124" fill="url(#kCurry)"/>
+                <path d="M120 150q30-34 80-38" stroke="#FFB35C" stroke-width="10" stroke-linecap="round" fill="none" opacity=".22"/>
+                <g fill="#5B2614" stroke="#8C4220" stroke-width="3">
+                  <path d="M128 182c8-22 40-26 52-8 10 14-2 34-24 36-20 2-36-10-28-28z"/>
+                  <path d="M210 140c14-14 44-8 48 12 4 18-14 30-32 28-18-2-28-26-16-40z"/>
+                  <path d="M222 220c16-8 42 2 42 22s-22 30-40 24-20-38-2-46z"/>
+                  <path d="M150 246c12-12 36-8 40 8 4 18-12 28-28 26s-24-22-12-34z"/>
+                  <path d="M268 182c8-6 24-2 26 10 2 12-8 20-18 18s-16-20-8-28z"/>
+                </g>
+                <g fill="none" stroke-linecap="round">
+                  <path d="M110 268c30-6 62 4 84 22" stroke="#3E8E2F" stroke-width="10"/>
+                  <path d="M196 112c24 14 40 40 42 66" stroke="#4FA23A" stroke-width="9"/>
+                  <path d="M292 248c-10 20-30 32-52 34" stroke="#3E8E2F" stroke-width="9"/>
+                </g>
+                <g stroke="#F3D58C" stroke-width="3.5" stroke-linecap="round">
+                  <path d="M188 188l22 8M196 204l20-2M176 214l18 10M206 176l14 16M240 196l16 6M130 222l16-6M262 214l10 14M176 160l18-4M226 260l18 2M150 206l12 12"/>
+                </g>
+                <g stroke="#5DB54F" stroke-width="5" stroke-linecap="round"><path d="M182 190l8-4M248 204l8 6M138 240l6 4M210 268l8-4"/></g>
+              </svg>
+            </div>
+          </figure>
+        </div>
+        <div class="dish-copy">
+          <h3>Mutton Karahi</h3>
+          <p class="ur" lang="ur">مٹن کڑاہی</p>
+          <p>Cooked only when you order it, in a 14-inch iron karahi over open flame. Tomatoes cooked down until the oil separates, then green chilli, black pepper and a fistful of ginger julienne.</p>
+          <dl class="specs"><div><dt>Cook</dt><dd class="num">25&ndash;30 min</dd></div><div><dt>Heat</dt><dd>Medium</dd></div><div><dt>Feeds</dt><dd class="num">2&ndash;3 / &frac12; kg</dd></div></dl>
+          <p class="dish-price"><span><small>Half kg</small><b class="num">Rs 2,600</b></span><span><small>Full kg</small><b class="num">Rs 4,900</b></span></p>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-art-wrap">
+          <span class="dish-num" aria-hidden="true">02</span>
+          <!-- HEYGEN: 1:1 still, chicken tikka quarters charred on a skewer on a dark slate, lemon wedge, onion rings, mint chutney, ember side light, no people, no text. -->
+          <figure class="dish-frame reveal-media" data-slot="chickenTikka" style="margin:0">
+            <div class="reveal-inner">
+              <svg viewBox="0 0 400 400" role="img" aria-label="Illustration: chicken tikka on a skewer with lemon, onion rings and mint chutney">
+                <defs><linearGradient id="tk" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F27A3E"/><stop offset=".6" stop-color="#C7421A"/><stop offset="1" stop-color="#7C220C"/></linearGradient></defs>
+                <rect x="50" y="50" width="300" height="300" fill="#221B17" stroke="#3A322C" stroke-width="4"/>
+                <rect x="68" y="68" width="264" height="264" fill="#2B231E"/>
+                <path d="M98 96h60v60H98z" fill="#9A9A9A"/><path d="M104 102h48v48h-48z" fill="#3F9B4F"/>
+                <path d="M72 330L336 70" stroke="#C9C4BE" stroke-width="6" stroke-linecap="round"/>
+                <g transform="rotate(-45 200 200)">
+                  <rect x="108" y="172" width="54" height="56" rx="10" fill="url(#tk)"/>
+                  <rect x="170" y="170" width="58" height="60" rx="10" fill="url(#tk)"/>
+                  <rect x="236" y="172" width="54" height="56" rx="10" fill="url(#tk)"/>
+                  <path d="M118 184l12 4M140 212l14-2M184 182l12 4M204 214l16-3M244 188l14 3M266 212l12-2" stroke="#2A1206" stroke-width="4" stroke-linecap="square" opacity=".75"/>
+                  <path d="M118 180h24M184 178h28M248 180h24" stroke="#FFC6A0" stroke-width="4" stroke-linecap="round" opacity=".35"/>
+                </g>
+                <path d="M262 300a44 44 0 0 1 76-30z" fill="#F5D33F"/><path d="M268 296a36 36 0 0 1 62-26" fill="none" stroke="#FFF2A8" stroke-width="3"/>
+                <g fill="none" stroke="#C77DA0" stroke-width="5"><ellipse cx="128" cy="276" rx="30" ry="22"/><ellipse cx="150" cy="300" rx="24" ry="18"/></g>
+                <g fill="#3E8E2F"><path d="M292 136q10-10 20 4q-10 8-20-4z"/><path d="M304 156q12-6 18 8q-12 4-18-8z"/></g>
+              </svg>
+            </div>
+          </figure>
+        </div>
+        <div class="dish-copy">
+          <h3>Chicken Tikka</h3>
+          <p class="ur" lang="ur">چکن تکہ</p>
+          <p>Leg or breast quarters marinated overnight in yogurt, red chilli and mustard oil, then charred on the coals until the edges blacken. Served with mint chutney and raw onion.</p>
+          <dl class="specs"><div><dt>Cook</dt><dd class="num">14 min</dd></div><div><dt>Heat</dt><dd>Hot</dd></div><div><dt>Marinade</dt><dd class="num">12 hrs</dd></div></dl>
+          <p class="dish-price"><span><small>Quarter</small><b class="num">Rs 650</b></span><span><small>Boti, 10 pc</small><b class="num">Rs 1,150</b></span></p>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-art-wrap">
+          <span class="dish-num" aria-hidden="true">03</span>
+          <!-- HEYGEN: 1:1 still, three beef seekh kebabs on a long wooden board with raw onion rings, green chilli and lemon, dark background, ember rim light, no people, no text. -->
+          <figure class="dish-frame reveal-media" data-slot="seekhKebab" style="margin:0">
+            <div class="reveal-inner">
+              <svg viewBox="0 0 400 400" role="img" aria-label="Illustration: three seekh kebabs on a wooden board with onions and green chilli">
+                <defs><linearGradient id="sk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#AE6230"/><stop offset=".55" stop-color="#7A3A17"/><stop offset="1" stop-color="#46200C"/></linearGradient></defs>
+                <g transform="rotate(-12 200 200)">
+                  <rect x="40" y="110" width="320" height="190" rx="10" fill="#7A4D2A"/>
+                  <path d="M56 140h290M56 176h270M56 214h290M56 252h280M56 284h250" stroke="#6A4022" stroke-width="3" opacity=".7"/>
+                  <g><path d="M26 150H354" stroke="#C9C4BE" stroke-width="5"/><rect x="8" y="141" width="18" height="18" fill="none" stroke="#C9C4BE" stroke-width="4"/>
+                    <rect x="70" y="136" width="250" height="28" rx="13" fill="url(#sk)"/>
+                    <path d="M96 138v24M122 138v24M148 138v24M174 138v24M200 138v24M226 138v24M252 138v24M278 138v24M304 138v24" stroke="#2A1206" stroke-width="3" opacity=".55"/></g>
+                  <g><path d="M26 202H354" stroke="#C9C4BE" stroke-width="5"/><rect x="8" y="193" width="18" height="18" fill="none" stroke="#C9C4BE" stroke-width="4"/>
+                    <rect x="80" y="188" width="240" height="28" rx="13" fill="url(#sk)"/>
+                    <path d="M104 190v24M130 190v24M156 190v24M182 190v24M208 190v24M234 190v24M260 190v24M286 190v24" stroke="#2A1206" stroke-width="3" opacity=".55"/></g>
+                  <g><path d="M26 254H354" stroke="#C9C4BE" stroke-width="5"/><rect x="8" y="245" width="18" height="18" fill="none" stroke="#C9C4BE" stroke-width="4"/>
+                    <rect x="66" y="240" width="256" height="28" rx="13" fill="url(#sk)"/>
+                    <path d="M92 242v24M118 242v24M144 242v24M170 242v24M196 242v24M222 242v24M248 242v24M274 242v24M300 242v24" stroke="#2A1206" stroke-width="3" opacity=".55"/></g>
+                </g>
+                <g fill="none" stroke="#E9E0F0" stroke-width="4"><ellipse cx="96" cy="318" rx="24" ry="16"/><ellipse cx="124" cy="334" rx="20" ry="13"/></g>
+                <path d="M260 324c26-10 56-8 78 6" stroke="#3E8E2F" stroke-width="10" stroke-linecap="round" fill="none"/>
+                <path d="M330 92c10 6 16 16 16 28" stroke="#4FA23A" stroke-width="8" stroke-linecap="round" fill="none"/>
+              </svg>
+            </div>
+          </figure>
+        </div>
+        <div class="dish-copy">
+          <h3>Seekh Kebab</h3>
+          <p class="ur" lang="ur">سیخ کباب</p>
+          <p>Beef mince with fat, green chilli and roasted cumin, hand-pressed onto three-foot skewers and turned every forty seconds so it stays juicy inside.</p>
+          <dl class="specs"><div><dt>Cook</dt><dd class="num">8 min</dd></div><div><dt>Heat</dt><dd>Medium</dd></div><div><dt>Skewer</dt><dd class="num">3 ft</dd></div></dl>
+          <p class="dish-price"><span><small>4 pieces</small><b class="num">Rs 1,100</b></span><span><small>Dozen</small><b class="num">Rs 3,150</b></span></p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- (02) FAMILY DEALS -->
+<section class="sec deals" id="deals" aria-labelledby="deals-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label"><b>02</b><i></i>Family deals</p>
+      <h2 class="sec-title" id="deals-title" data-split>Platters for the <em>whole khandaan</em></h2>
+      <p class="sec-intro">Delivered hot by our own riders inside 6 km of Gulberg, or on Foodpanda across Lahore. Every deal lists exactly what's in the box and what you save.</p>
+    </div>
+    <div class="deal-grid" id="dealGrid"></div>
+  </div>
+</section>
+
+<!-- (03) SERVICES -->
+<section class="sec svc" id="services" aria-labelledby="svc-title">
+  <div class="wrap svc-grid">
+    <div class="svc-side">
+      <p class="label"><b>03</b><i></i>Services</p>
+      <h2 class="sec-title" id="svc-title" style="margin-top:18px">Four ways to feed a crowd</h2>
+      <div class="svc-tabs" role="tablist" aria-label="Services">
+        <button class="svc-tab" role="tab" id="tab-dine" aria-controls="panel-dine" aria-selected="true"><b>01</b><span>Dine-in</span></button>
+        <button class="svc-tab" role="tab" id="tab-delivery" aria-controls="panel-delivery" aria-selected="false" tabindex="-1"><b>02</b><span>Delivery</span></button>
+        <button class="svc-tab" role="tab" id="tab-catering" aria-controls="panel-catering" aria-selected="false" tabindex="-1"><b>03</b><span>Catering</span></button>
+        <button class="svc-tab" role="tab" id="tab-rooftop" aria-controls="panel-rooftop" aria-selected="false" tabindex="-1"><b>04</b><span>Rooftop</span></button>
+      </div>
+      <div class="svc-progress" aria-hidden="true"><i id="svcBar"></i></div>
+    </div>
+    <div class="svc-panels">
+      <article class="svc-panel is-active" role="tabpanel" id="panel-dine" aria-labelledby="tab-dine" data-word="Dine">
+        <div class="svc-stat"><b class="num">120</b><span>seats in the family hall</span></div>
+        <h3>Dine-in</h3>
+        <p>A family hall with partitioned booths, a kids' corner with a carrom table, and high chairs on request. The karahi comes to your table still on its stand.</p>
+        <ul><li>Booths for 4, 6, 8 and 12</li><li>Separate family seating, no smoking indoors</li><li>Valet parking after 8 PM</li></ul>
+        <a class="btn btn-ember" href="#reserve">Book a table</a>
+      </article>
+      <article class="svc-panel" role="tabpanel" id="panel-delivery" aria-labelledby="tab-delivery" data-word="Ride">
+        <div class="svc-stat"><b class="num">6 km</b><span>own-rider radius, about 40 min</span></div>
+        <h3>Delivery</h3>
+        <p>Karahi travels in sealed steel handis so it arrives the way it left the flame. Naan is packed separately in cloth to stay soft.</p>
+        <ul><li>Own riders: Gulberg, Model Town, Garden Town, Cantt</li><li>Rest of Lahore on Foodpanda</li><li>Free delivery on any family deal</li></ul>
+        <a class="btn btn-ember" href="https://www.foodpanda.pk/" target="_blank" rel="noopener">Order on Foodpanda</a>
+      </article>
+      <article class="svc-panel" role="tabpanel" id="panel-catering" aria-labelledby="tab-catering" data-word="Shaadi">
+        <div class="svc-stat"><b class="num">800</b><span>guests, our largest mehndi so far</span></div>
+        <h3>Catering</h3>
+        <p>Shaadi, mehndi, office iftar or a cricket-final party. We bring the grill, two cooks and a live seekh station, and serve from 50 to 800 guests.</p>
+        <ul><li>Per head from Rs 2,400 (karahi, BBQ, naan, raita, drink)</li><li>Live BBQ station with two cooks</li><li>Book at least 7 days ahead</li></ul>
+        <a class="btn btn-ember" href="#reserve">Ask for a quote</a>
+      </article>
+      <article class="svc-panel" role="tabpanel" id="panel-rooftop" aria-labelledby="tab-rooftop" data-word="Roof">
+        <div class="svc-stat"><b class="num">60</b><span>guests on the private rooftop</span></div>
+        <h3>Rooftop events</h3>
+        <p>Birthdays, dholki nights and team dinners under string lights, with your own grill and a view down MM Alam Road.</p>
+        <ul><li>Private hire from Rs 25,000 plus food</li><li>Sound system and projector included</li><li>Book 48 hours ahead</li></ul>
+        <a class="btn btn-ember" href="#reserve">Reserve the roof</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- (04) MENU -->
+<section class="sec menu" id="menu" aria-labelledby="menu-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label"><b>04</b><i></i>Menu</p>
+      <h2 class="sec-title" id="menu-title" data-split>The full <em>fire list</em></h2>
+      <p class="sec-intro">Karahi and handi are priced by the half or full kilo. Chillies show the heat, one to three.</p>
+    </div>
+    <div class="chips" id="chips" role="toolbar" aria-label="Filter the menu by category"></div>
+    <ul class="menu-list" id="menuList" aria-live="polite"></ul>
+    <noscript><p style="margin-top:24px">Chicken Karahi Rs 1,650 half / Rs 3,100 full &middot; Mutton Karahi Rs 2,600 / Rs 4,900 &middot; Chicken Tikka Rs 650 &middot; Seekh Kebab (4) Rs 1,100 &middot; Roghni Naan Rs 120</p></noscript>
+  </div>
+</section>
+
+<!-- (05) RESERVE -->
+<section class="sec reserve" id="reserve" aria-labelledby="res-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label"><b>05</b><i></i>Reserve</p>
+      <h2 class="sec-title" id="res-title" data-split>Book for the <em>whole group</em></h2>
+      <p class="sec-intro">Tables for 2 to 40. Tell us the occasion and we'll set the hall, the roof or a private room.</p>
+    </div>
+    <div class="res-grid">
+      <form class="res-form" id="resForm" novalidate>
+        <div class="field">
+          <span id="partyLabel">Party size</span>
+          <div class="party">
+            <button type="button" id="partyMinus" aria-label="One fewer guest">&minus;</button>
+            <output id="partyOut" class="num" aria-labelledby="partyLabel">8</output>
+            <button type="button" id="partyPlus" aria-label="One more guest">+</button>
+            <small id="partyHint">Booth for 8 in the family hall</small>
+          </div>
+        </div>
+        <div class="two">
+          <label class="field" for="resDate"><span>Date</span><input type="date" id="resDate" required></label>
+          <label class="field" for="resOccasion"><span>Occasion</span>
+            <select id="resOccasion">
+              <option>Family dinner</option><option>Birthday</option><option>Office dinner</option><option>Mehndi / dholki</option><option>Iftar group</option><option>Other</option>
+            </select>
+          </label>
+        </div>
+        <fieldset class="field">
+          <legend>Time</legend>
+          <div class="slots" id="slots"></div>
+        </fieldset>
+        <label class="field" for="resSeat"><span>Seating</span>
+          <select id="resSeat"><option value="hall">Family hall</option><option value="roof">Rooftop</option><option value="private">Private room (up to 24)</option></select>
+        </label>
+        <div class="two">
+          <label class="field" for="resName"><span>Name *</span><input id="resName" autocomplete="name" placeholder="e.g. Ayesha Rana" required aria-describedby="resNameErr"><small class="err" id="resNameErr"></small></label>
+          <label class="field" for="resPhone"><span>Mobile *</span><input id="resPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="03xx xxxxxxx" required aria-describedby="resPhoneErr"><small class="err" id="resPhoneErr"></small></label>
+        </div>
+        <div><button class="btn btn-ember magnetic" type="submit">Request this table</button></div>
+        <div id="resConfirm" class="confirm" role="status" aria-live="polite" hidden></div>
+      </form>
+      <aside class="res-summary" aria-live="polite">
+        <p class="label"><b>&rarr;</b>Your table</p>
+        <h3 id="sumTitle" class="num">Table for 8</h3>
+        <dl>
+          <div><dt>Date</dt><dd id="sumDate">&mdash;</dd></div>
+          <div><dt>Time</dt><dd id="sumTime">8:00 PM</dd></div>
+          <div><dt>Seating</dt><dd id="sumSeat">Family hall</dd></div>
+          <div><dt>Occasion</dt><dd id="sumOcc">Family dinner</dd></div>
+        </dl>
+        <p class="res-note" id="sumNote">No advance needed for groups up to 20.</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- (06) REVIEWS -->
+<section class="reviews" aria-labelledby="rv-title">
+  <div class="wrap rv-head">
+    <p class="label"><b>06</b><i></i>Guests</p>
+    <h2 class="sec-title" id="rv-title" style="margin-top:18px">Said with a full mouth</h2>
+  </div>
+  <div class="rv-row" id="rv1"></div>
+  <div class="rv-row" id="rv2"></div>
+</section>
+
+<!-- (07) VISIT -->
+<section class="sec" id="visit" aria-labelledby="visit-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label"><b>07</b><i></i>Visit</p>
+      <h2 class="sec-title" id="visit-title" data-split>Follow the smoke on <em>MM Alam</em></h2>
+      <p class="sec-intro">Two minutes from Hussain Chowk. Parking for 40 cars, valet after 8 PM.</p>
+    </div>
+    <div class="visit-grid">
+      <div class="mapbox" id="mapbox">
+        <div class="map" id="map" data-lat="31.5161" data-lng="74.3505" data-zoom="16" data-tiles="dark_all" role="region" aria-label="Map showing Koyla Karahi House, Plot 22-C, MM Alam Road, Gulberg III, Lahore"></div>
+        <div class="map-fallback">
+          <svg class="streets" viewBox="0 0 700 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <g stroke="#2A231F" stroke-width="14"><path d="M0 90h700M0 230h700M0 380h700M110 0v520M290 0v520M470 0v520M630 0v520"/></g>
+            <path d="M-30 470L730 60" stroke="#FF6B1A" stroke-width="18" opacity=".55"/>
+            <path d="M-30 470L730 60" stroke="#FFC93C" stroke-width="2" stroke-dasharray="14 14" opacity=".8"/>
+            <g transform="translate(384 244)"><rect x="-22" y="-44" width="44" height="38" fill="#FF6B1A"/><path d="M-8 -6h16l-8 12z" fill="#FF6B1A"/><text x="0" y="-16" text-anchor="middle" font-family="Teko, sans-serif" font-size="28" fill="#141210">K</text></g>
+          </svg>
+          <p class="mf-kicker">Plot 22-C &middot; Gulberg III &middot; Lahore</p>
+          <p class="mf-title">MM Alam Road</p>
+          <p class="mf-meta"><span><b>Open</b> 6 PM &ndash; 2 AM, weekends till 3</span><span><b>Sunday</b> lunch from 1 PM</span></p>
+          <div class="mf-actions">
+            <a class="btn btn-ember" href="https://www.google.com/maps/dir/?api=1&amp;destination=31.5161,74.3505" target="_blank" rel="noopener">Get directions</a>
+            <a class="btn btn-line" href="tel:+923005550188">Call the hall</a>
+          </div>
+        </div>
+      </div>
+      <div class="info">
+        <span class="open-now" id="openNow"><i></i><span>Checking hours&hellip;</span></span>
+        <address>Plot 22-C, MM Alam Road<br>Gulberg III, Lahore</address>
+        <ul class="hours" id="hours">
+          <li data-days="Mon Tue Wed Thu"><span>Mon &ndash; Thu</span><span class="num">6 PM &ndash; 2 AM</span></li>
+          <li data-days="Fri Sat"><span>Fri &ndash; Sat</span><span class="num">6 PM &ndash; 3 AM</span></li>
+          <li data-days="Sun"><span>Sunday (lunch too)</span><span class="num">1 PM &ndash; 2 AM</span></li>
+        </ul>
+        <div><p class="big num">+92 300 555 0188</p><p style="color:var(--ash)">WhatsApp the same number for catering quotes.</p></div>
+        <div class="row">
+          <a class="btn btn-ember" href="https://www.google.com/maps/dir/?api=1&amp;destination=31.5161,74.3505" target="_blank" rel="noopener">Get directions</a>
+          <a class="btn btn-line" href="https://wa.me/923005550188" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p class="foot-word" aria-hidden="true">Koyla</p>
+    <div class="foot-sub"><p>Karahi House &middot; Lahore</p><p class="ur" lang="ur">کوئلہ کڑاہی</p></div>
+    <div class="foot-grid">
+      <div><h4>Hours</h4><ul><li>Mon&ndash;Thu 6 PM &ndash; 2 AM</li><li>Fri&ndash;Sat 6 PM &ndash; 3 AM</li><li>Sun 1 PM &ndash; 2 AM</li></ul></div>
+      <div><h4>Contact</h4><ul><li class="num">+92 300 555 0188</li><li>Plot 22-C, MM Alam Road</li><li>events@koyla.example</li></ul></div>
+      <div><h4>Follow</h4><ul><li><a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook</a></li><li><a href="https://www.foodpanda.pk/" target="_blank" rel="noopener">Foodpanda</a></li></ul></div>
+      <form class="news" id="newsForm" novalidate>
+        <label for="newsPhone">Friday Bucket alerts</label>
+        <div class="news-row"><input id="newsPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="03xx xxxxxxx" aria-describedby="newsNote"><button type="submit">Notify me</button></div>
+        <p class="note" id="newsNote" aria-live="polite">One WhatsApp message on Friday at 5 PM.</p>
+      </form>
+    </div>
+    <div class="legal"><span>&copy; 2026 Koyla Karahi House</span><span>Concept mockup &mdash; fictional business. Prices, numbers and addresses are placeholders.</span></div>
+  </div>
+</footer>
+
+<nav class="bar" aria-label="Quick actions">
+  <a class="main" href="#deals"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2c1 4-3 5-3 9a3 3 0 0 0 6 0c0-1-.3-2-1-3 3 1 5 4 5 7a7 7 0 0 1-14 0c0-6 7-8 7-13z"/></svg>Order deal</a>
+  <a href="#reserve"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 2v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2V2h-2v2H9V2zM5 9h14v11H5z"/></svg>Book</a>
+  <a href="tel:+923005550188"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.2 11.4 11.4 0 0 0 3.6.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.2.2 2.4.6 3.6a1 1 0 0 1-.3 1z"/></svg>Call</a>
+</nav>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
+<script>
+/* ---------- media manifest: drop HeyGen files in ../assets/rest-koyla-karahi/ and set the paths ---------- */
+const MEDIA = {
+  hero:   { mp4: null, poster: null, alt: 'Seekh kebabs and chicken tikka over glowing charcoal, sparks rising' }, // '../assets/rest-koyla-karahi/hero.mp4'
+  photos: { muttonKarahi: null, chickenTikka: null, seekhKebab: null } // '../assets/rest-koyla-karahi/<key>.webp'
+};
+
+/* ---------- data (mirrors future Supabase tables: categories, items, deals) ---------- */
+const MENU = [
+  {cat:'Karahi', name:'Chicken Karahi', desc:'Tomato, green chilli, ginger. The everyday hero.', heat:2, half:1650, full:3100},
+  {cat:'Karahi', name:'Mutton Karahi', desc:'Bone-in mutton, cooked to order over open flame.', heat:2, half:2600, full:4900},
+  {cat:'Karahi', name:'Namak Mandi Karahi', desc:'Peshawari style: salt, black pepper, lamb fat. No tomato.', heat:1, half:2750, full:5200},
+  {cat:'Karahi', name:'White Karahi', desc:'Yogurt, cream and crushed black pepper.', heat:1, half:1850, full:3500},
+  {cat:'Karahi', name:'Shinwari Lamb Karahi', desc:'Whole lamb pieces, salt and tomato only.', heat:1, half:2900, full:5500, sold_out:true},
+  {cat:'BBQ', name:'Chicken Tikka', desc:'Leg or breast quarter, overnight marinade.', heat:2, price:650, unit:'Quarter'},
+  {cat:'BBQ', name:'Malai Boti', desc:'Cream and cheese marinade, 8 pieces.', heat:1, price:1050, unit:'8 pc'},
+  {cat:'BBQ', name:'Beef Seekh Kebab', desc:'Hand-pressed on 3 ft skewers.', heat:2, price:1100, unit:'4 pc'},
+  {cat:'BBQ', name:'Reshmi Kebab', desc:'Silky chicken mince with cream.', heat:1, price:980, unit:'4 pc'},
+  {cat:'BBQ', name:'Mutton Champ', desc:'Lamb chops, raw papaya marinade.', heat:2, price:2400, unit:'4 pc', sold_out:true},
+  {cat:'BBQ', name:'Fish Tikka', desc:'Rahu chunks, ajwain and red chilli.', heat:3, price:1450, unit:'8 pc'},
+  {cat:'Handi', name:'Chicken Makhni Handi', desc:'Boneless chicken, butter and tomato.', heat:1, half:1700, full:3200},
+  {cat:'Handi', name:'Achari Handi', desc:'Pickling spices, mustard oil and lemon.', heat:3, half:1750, full:3300},
+  {cat:'Handi', name:'Daal Mash Handi', desc:'White lentils with a garlic tarka.', heat:2, half:850, full:1550},
+  {cat:'Breads', name:'Roghni Naan', desc:'Brushed with milk and sesame.', price:120},
+  {cat:'Breads', name:'Garlic Naan', desc:'Garlic butter and coriander.', price:160},
+  {cat:'Breads', name:'Kalonji Naan', desc:'Nigella seeds, soft middle.', price:140},
+  {cat:'Breads', name:'Tandoori Roti', desc:'Whole wheat, straight from the tandoor.', price:40},
+  {cat:'Drinks', name:'Mint Margarita', desc:'Mint, lemon and soda, blended.', price:380},
+  {cat:'Drinks', name:'Lassi', desc:'Sweet or salted, served in a steel glass.', price:320},
+  {cat:'Drinks', name:'Doodh Soda', desc:'Milk and lemon-lime soda. Lahore classic.', price:280},
+  {cat:'Drinks', name:'Kashmiri Chai', desc:'Pink tea with pistachio, after dinner.', price:300}
+];
+const DEALS = [
+  {id:'family-feast', name:'Family Feast', serves:6, tag:'Most ordered', hot:true,
+   items:[['Chicken Karahi, full kg',1,3100],['Chicken Tikka, quarter',6,650],['Beef Seekh Kebab, 4 pc',3,1100],['Roghni Naan',12,120],['Raita + salad',2,250],['Soft drink, 1.5 L',2,350]], price:10490, ends_at:'2027-03-31T23:59:00+05:00'},
+  {id:'karahi-bbq', name:'Karahi + BBQ Combo', serves:4, tag:'For four',
+   items:[['Mutton Karahi, half kg',1,2600],['Malai Boti, 8 pc',1,1050],['Reshmi Kebab, 4 pc',1,980],['Garlic Naan',6,160],['Mint Margarita',4,380]], price:5990, ends_at:'2027-03-31T23:59:00+05:00'},
+  {id:'friday-bucket', name:'Friday Bucket', serves:5, tag:'Fridays only', friday:true,
+   items:[['Chicken Tikka, quarter',4,650],['Beef Seekh Kebab, 4 pc',2,1100],['Malai Boti, 8 pc',1,1050],['Tandoori Roti',12,40],['Raita + salad',2,250]], price:4999, ends_at:'2027-03-31T23:59:00+05:00'},
+  {id:'basant-bucket', name:'Basant Bucket', serves:8, tag:'Seasonal', items:[['Chicken Karahi, full kg',2,3100]], price:5500, ends_at:'2026-02-28T23:59:00+05:00'} // expired: filtered out
+];
+const REVIEWS = [
+  {q:'Fourteen of us, one Family Feast and a second karahi. It came out still sizzling and we left nothing.', n:'Ayesha R.', a:'Johar Town', f:5},
+  {q:'The namak mandi karahi is the real thing. Salt, pepper, fat, done.', n:'Bilal K.', a:'Model Town', f:5},
+  {q:'The kids’ corner kept the little ones busy while we finished our chai. Rare in Gulberg.', n:'Sana M.', a:'DHA Phase 5', f:4},
+  {q:'Booked the rooftop for my brother’s mehndi. 55 guests, and the live seekh station was the hit of the night.', n:'Usman T.', a:'Cantt', f:5},
+  {q:'Delivery reached in 38 minutes and the naan was still soft.', n:'Hira A.', a:'Faisal Town', f:4},
+  {q:'Order two plates of malai boti. You will fight over one otherwise.', n:'Omar F.', a:'Wapda Town', f:5}
+];
+
+/* ---------- helpers ---------- */
+const $ = (s, c = document) => c.querySelector(s);
+const $$ = (s, c = document) => [...c.querySelectorAll(s)];
+const rs = n => 'Rs ' + Math.round(n).toLocaleString('en-US');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const fine = matchMedia('(pointer: fine)').matches;
+function lahoreNow(){
+  const parts = new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Karachi',hour:'2-digit',minute:'2-digit',second:'2-digit',weekday:'short',year:'numeric',month:'2-digit',day:'2-digit',hourCycle:'h23'}).formatToParts(new Date());
+  const g = t => (parts.find(p => p.type === t) || {}).value;
+  return {h: +g('hour') % 24, m: +g('minute'), s: +g('second'), wd: g('weekday'), ymd: `${g('year')}-${g('month')}-${g('day')}`};
+}
+const DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const chilli = on => `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M11.5 2.5c-.6 1-.4 1.6.4 2.1C14 6 13 11 7.5 13.6 4.4 15 1.6 14.2 1 13c3.2.4 6.5-2.4 7.6-5.6.5-1.4 1.3-2.2 2.4-2.4-.3-.8-.2-1.7.5-2.5z" fill="${on ? '#E2231A' : 'none'}" stroke="${on ? '#E2231A' : '#5A4F47'}" stroke-width="1.2"/></svg>`;
+const flame = on => `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1c.7 2.8-2 3.6-2 6.4a2 2 0 0 0 4 0c0-.6-.2-1.3-.6-2 2 .7 3.4 2.6 3.4 4.8A4.8 4.8 0 0 1 3.2 10C3.2 6 8 4.6 8 1z" fill="${on ? '#FF6B1A' : '#3A322C'}"/></svg>`;
+
+/* ---------- media slots ---------- */
+(function mountMedia(){
+  if (MEDIA.hero.mp4){
+    const v = document.createElement('video');
+    Object.assign(v, {muted: true, loop: true, playsInline: true, autoplay: !reduce, preload: 'metadata'});
+    v.setAttribute('aria-hidden', 'true');
+    if (MEDIA.hero.poster) v.poster = MEDIA.hero.poster;
+    v.src = MEDIA.hero.mp4;
+    v.addEventListener('loadeddata', () => $('.hero').classList.add('has-video'));
+    $('#heroMedia').appendChild(v);
+  }
+  $$('[data-slot]').forEach(box => {
+    const src = MEDIA.photos[box.dataset.slot]; if (!src) return;
+    const img = new Image();
+    img.className = 'slot-photo';
+    img.alt = (box.querySelector('[aria-label]')?.getAttribute('aria-label') || '').replace('Illustration: ', '');
+    img.loading = 'lazy'; img.decoding = 'async';
+    img.onload = () => box.classList.add('has-photo');
+    img.onerror = () => img.remove();
+    img.src = src; box.appendChild(img);
+  });
+})();
+
+/* ---------- (02) deals ---------- */
+const activeDeals = DEALS.filter(d => !d.ends_at || new Date(d.ends_at) > new Date());
+$('#dealGrid').innerHTML = activeDeals.map(d => {
+  const full = d.items.reduce((t, [, q, p]) => t + q * p, 0);
+  const save = full - d.price;
+  const units = d.items.reduce((t, [, q]) => t + q, 0);
+  return `
+  <article class="deal${d.hot ? ' hot' : ''}">
+    <div class="stamp" aria-hidden="true"><span>Save<b class="num" data-save="${save}">${rs(save)}</b></span></div>
+    <span class="deal-tag">${d.tag}</span>
+    <h3>${d.name}</h3>
+    <p class="serves">Feeds ${d.serves} &middot; ${units} items in the box</p>
+    <ul class="contents">${d.items.map(([n, q, p]) => `<li><span>${q} &times; ${n}<span class="each num">${rs(p)} each</span></span><span class="num">${rs(q * p)}</span></li>`).join('')}</ul>
+    <div class="deal-price"><strong class="num">${rs(d.price)}</strong><s class="num">${rs(full)}</s></div>
+    <p class="per-head num">You save ${rs(save)}, about ${rs(save / d.serves)} a head (${rs(save / units)} per item)</p>
+    ${d.friday ? `<p class="cd-label" id="fridayLabel">Next Friday starts in</p><div class="countdown" id="fridayCd" aria-live="off"><div><b class="num" data-u="d">0</b><small>days</small></div><div><b class="num" data-u="h">00</b><small>hrs</small></div><div><b class="num" data-u="m">00</b><small>min</small></div><div><b class="num" data-u="s">00</b><small>sec</small></div></div>` : ''}
+    <div class="deal-ctas">
+      <a class="btn btn-ember" href="https://www.foodpanda.pk/" target="_blank" rel="noopener">Order this deal</a>
+      <small>Or call <span class="num">+92 300 555 0188</span> for our own riders</small>
+    </div>
+  </article>`;
+}).join('');
+
+function tickFriday(){
+  const cd = $('#fridayCd'); if (!cd) return;
+  const now = lahoreNow();
+  const dow = DAYS.indexOf(now.wd);
+  const secOfDay = now.h * 3600 + now.m * 60 + now.s;
+  let left, label;
+  if (dow === 5){ left = 86400 - secOfDay; label = 'Live today, ends in'; }
+  else { left = ((5 - dow + 7) % 7) * 86400 - secOfDay; label = 'Next Friday starts in'; }
+  $('#fridayLabel').textContent = label;
+  const v = {d: Math.floor(left / 86400), h: Math.floor(left % 86400 / 3600), m: Math.floor(left % 3600 / 60), s: left % 60};
+  $$('[data-u]', cd).forEach(b => { b.textContent = b.dataset.u === 'd' ? v.d : String(v[b.dataset.u]).padStart(2, '0'); });
+}
+tickFriday(); setInterval(tickFriday, 1000);
+
+/* ---------- smooth scroll + anchors (needed by the tabs below) ---------- */
+let lenis = null;
+const hdr = $('#hdr');
+function scrollToY(y){
+  if (lenis) lenis.scrollTo(y);
+  else window.scrollTo({top: y, behavior: reduce ? 'auto' : 'smooth'});
+}
+function goTo(target){
+  if (!target) return;
+  const off = -(hdr.offsetHeight + 16);
+  if (lenis) lenis.scrollTo(target, {offset: off});
+  else window.scrollTo({top: target.getBoundingClientRect().top + scrollY + off, behavior: reduce ? 'auto' : 'smooth'});
+}
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[href^="#"]'); if (!a) return;
+  const id = a.getAttribute('href'); if (id.length < 2) return;
+  const t = document.querySelector(id); if (!t) return;
+  e.preventDefault(); goTo(t);
+  if (id === '#main') t.setAttribute('tabindex', '-1'), t.focus({preventScroll: true});
+});
+
+/* ---------- (03) services tabs ---------- */
+const tabs = $$('.svc-tab'), panels = $$('.svc-panel');
+let svcIndex = 0;
+$('#services').classList.add('js-tabs');
+function setService(i, fromScroll){
+  if (i === svcIndex && fromScroll) return;
+  const prev = panels[svcIndex];
+  svcIndex = i;
+  tabs.forEach((t, j) => { t.setAttribute('aria-selected', j === i ? 'true' : 'false'); t.tabIndex = j === i ? 0 : -1; });
+  panels.forEach((p, j) => p.classList.toggle('is-active', j === i));
+  $('#svcBar').style.transform = `scaleX(${(i + 1) / panels.length})`;
+  if (window.gsap && !reduce && prev !== panels[i]){
+    gsap.fromTo(panels[i], {autoAlpha: 0, y: 30}, {autoAlpha: 1, y: 0, duration: .6, ease: 'expo.out', clearProps: 'transform'});
+    gsap.fromTo($$('.svc-stat b, h3, p, li, .btn', panels[i]), {y: 18, opacity: 0}, {y: 0, opacity: 1, stagger: .04, duration: .5, ease: 'expo.out'});
+  }
+}
+let svcTrigger = null;
+tabs.forEach((t, i) => {
+  t.addEventListener('click', () => {
+    if (svcTrigger){
+      const st = svcTrigger;
+      scrollToY(st.start + (st.end - st.start) * ((i + .5) / tabs.length));
+    } else setService(i);
+  });
+  t.addEventListener('keydown', e => {
+    if (!['ArrowRight','ArrowLeft','ArrowDown','ArrowUp'].includes(e.key)) return;
+    e.preventDefault();
+    const n = (i + (e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : -1) + tabs.length) % tabs.length;
+    tabs[n].focus(); tabs[n].click();
+  });
+});
+
+/* ---------- (04) menu with filters ---------- */
+const CATS = ['All', 'Karahi', 'BBQ', 'Handi', 'Breads', 'Drinks'];
+let activeCat = 'All';
+$('#chips').innerHTML = CATS.map(c => `<button type="button" class="chip" data-cat="${c}" aria-pressed="${c === 'All'}">${c}<span class="n num">${c === 'All' ? MENU.length : MENU.filter(m => m.cat === c).length}</span></button>`).join('');
+function renderMenu(animate){
+  const list = MENU.filter(m => activeCat === 'All' || m.cat === activeCat);
+  $('#menuList').innerHTML = list.map(m => `
+    <li class="mi${m.sold_out ? ' is-out' : ''}">
+      <div class="mi-top"><h3>${m.name}${m.sold_out ? '<span class="out">Sold out today</span>' : ''}</h3>${m.heat ? `<span class="chillies" role="img" aria-label="Heat ${m.heat} of 3">${[1,2,3].map(k => chilli(k <= m.heat)).join('')}</span>` : ''}</div>
+      <span class="mi-cat">${m.cat}</span>
+      <p>${m.desc}</p>
+      <p class="mi-price num">${m.half ? `<span><em>Half kg</em>${rs(m.half)}</span><span><em>Full kg</em>${rs(m.full)}</span>` : `<span>${m.unit ? `<em>${m.unit}</em>` : ''}${rs(m.price)}</span>`}</p>
+    </li>`).join('');
+  if (animate && window.gsap && !reduce) gsap.from('#menuList .mi', {y: 16, opacity: 0, stagger: .025, duration: .45, ease: 'expo.out'});
+}
+$('#chips').addEventListener('click', e => {
+  const b = e.target.closest('.chip'); if (!b) return;
+  activeCat = b.dataset.cat;
+  $$('.chip').forEach(c => c.setAttribute('aria-pressed', c === b ? 'true' : 'false'));
+  renderMenu(true);
+});
+renderMenu(false);
+
+/* ---------- (05) reservation ---------- */
+const SLOTS = ['7:00 PM','8:00 PM','9:00 PM','10:00 PM','11:00 PM'];
+$('#slots').innerHTML = SLOTS.map((s, i) => `<input type="radio" name="slot" id="slot${i}" value="${s}"${i === 1 ? ' checked' : ''}><label for="slot${i}" class="num">${s.replace(':00', '')}</label>`).join('');
+let party = 8;
+const dateEl = $('#resDate');
+(function initDate(){
+  const n = lahoreNow();
+  dateEl.min = n.ymd;
+  const d = new Date(n.ymd + 'T12:00:00'); d.setDate(d.getDate() + ((5 - d.getDay() + 7) % 7 || 7));
+  dateEl.value = d.toISOString().slice(0, 10);
+})();
+function renderRes(){
+  $('#partyOut').textContent = party;
+  const seat = $('#resSeat');
+  $('#partyHint').textContent = party <= 12 ? `Booth for ${party <= 4 ? 4 : party <= 6 ? 6 : party <= 8 ? 8 : 12} in the family hall` : party <= 24 ? 'Joined tables or the private room' : 'Half the family hall or the rooftop';
+  $('#sumTitle').textContent = 'Table for ' + party;
+  const dv = dateEl.value ? new Date(dateEl.value + 'T12:00:00') : null;
+  $('#sumDate').textContent = dv ? dv.toLocaleDateString('en-GB', {weekday:'short', day:'numeric', month:'short'}) : '—';
+  const slot = $('input[name="slot"]:checked');
+  $('#sumTime').textContent = slot ? slot.value : '—';
+  $('#sumSeat').textContent = seat.options[seat.selectedIndex].text;
+  $('#sumOcc').textContent = $('#resOccasion').value;
+  $('#sumNote').innerHTML = party > 30 ? 'Groups over 30 get a <b>set menu</b> and need a <b>Rs 5,000</b> advance.' : party > 20 ? 'Groups of 21+ need a <b>Rs 5,000</b> advance, adjusted in the bill.' : 'No advance needed for groups up to 20.';
+  $('#partyMinus').disabled = party <= 2; $('#partyPlus').disabled = party >= 40;
+}
+$('#partyMinus').addEventListener('click', () => { party = Math.max(2, party - 1); renderRes(); });
+$('#partyPlus').addEventListener('click', () => { party = Math.min(40, party + 1); renderRes(); });
+$('#resForm').addEventListener('input', renderRes);
+$('#resForm').addEventListener('change', renderRes);
+function fieldErr(input, errEl, msg){
+  errEl.textContent = msg || '';
+  if (msg) input.setAttribute('aria-invalid', 'true'); else input.removeAttribute('aria-invalid');
+  return !msg;
+}
+$('#resName').addEventListener('blur', e => fieldErr(e.target, $('#resNameErr'), e.target.value.trim() ? '' : 'Add the name the booking is under.'));
+$('#resPhone').addEventListener('blur', e => fieldErr(e.target, $('#resPhoneErr'), /^(03\d{9}|923\d{9})$/.test(e.target.value.replace(/\D/g, '')) || !e.target.value ? '' : 'Use a mobile number like 0300 1234567.'));
+$('#resForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const c = $('#resConfirm'), nameEl = $('#resName'), phoneEl = $('#resPhone');
+  const okName = fieldErr(nameEl, $('#resNameErr'), nameEl.value.trim() ? '' : 'Add the name the booking is under.');
+  const okPhone = fieldErr(phoneEl, $('#resPhoneErr'), /^(03\d{9}|923\d{9})$/.test(phoneEl.value.replace(/\D/g, '')) ? '' : 'Use a mobile number like 0300 1234567 so the hall manager can call you.');
+  if (!okName || !okPhone){ c.hidden = true; (okName ? phoneEl : nameEl).focus(); return; }
+  c.hidden = false;
+  c.textContent = `Request noted for ${party} guests on ${$('#sumDate').textContent} at ${$('#sumTime').textContent}. The hall manager would call ${phoneEl.value.trim()} within 15 minutes to confirm. (Mockup: nothing was sent.)`;
+});
+renderRes();
+
+/* ---------- (06) reviews ---------- */
+const rvCard = r => `<figure class="rv"><q>${r.q}</q><footer><span><b>${r.n}</b>, ${r.a}</span><span class="flames" role="img" aria-label="${r.f} of 5 flames">${[1,2,3,4,5].map(k => flame(k <= r.f)).join('')}</span></footer></figure>`;
+function fillRv(el, list){ const html = list.map(rvCard).join(''); el.innerHTML = html + `<div style="display:contents" aria-hidden="true">${html}</div>`; }
+fillRv($('#rv1'), REVIEWS.slice(0, 4));
+fillRv($('#rv2'), REVIEWS.slice(3).concat(REVIEWS.slice(0, 1)));
+
+/* ---------- (07) open now + real map ---------- */
+(function openNow(){
+  const n = lahoreNow(), mins = n.h * 60 + n.m, dow = DAYS.indexOf(n.wd), prev = DAYS[(dow + 6) % 7];
+  const close = d => (d === 'Fri' || d === 'Sat') ? 180 : 120;
+  const open = d => d === 'Sun' ? 780 : 1080;
+  const isOpen = mins >= open(n.wd) || mins < close(prev);
+  const el = $('#openNow');
+  el.classList.toggle('on', isOpen);
+  $('span', el).textContent = isOpen ? 'Open now, Lahore time' : 'Closed now, opens ' + (n.wd === 'Sun' ? '1 PM' : '6 PM');
+  $$('#hours li').forEach(li => li.classList.toggle('today', li.dataset.days.split(' ').includes(n.wd)));
+})();
+
+let leaflet = null;
+function leafletCssReady(){
+  const probe = document.createElement('div');
+  probe.className = 'leaflet-container';
+  probe.style.cssText = 'position:absolute;left:-9999px;top:0;width:1px;height:1px';
+  document.body.appendChild(probe);
+  const ok = getComputedStyle(probe).overflow === 'hidden';
+  probe.remove();
+  return ok;
+}
+function initMap(){
+  const el = $('#map');
+  if (!el || !window.L || leaflet || !leafletCssReady()) return;
+  const lat = +el.dataset.lat, lng = +el.dataset.lng;
+  leaflet = L.map(el, {center: [lat, lng], zoom: +el.dataset.zoom || 16, scrollWheelZoom: false, dragging: !L.Browser.mobile, tap: false});
+  let tilesOk = false;
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/' + el.dataset.tiles + '/{z}/{x}/{y}{r}.png', {subdomains: 'abcd', maxZoom: 20,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'})
+    .on('tileload', () => { tilesOk = true; $('#mapbox').classList.add('map-ready'); })
+    .once('tileerror', () => { if (!tilesOk) $('#mapbox').classList.remove('map-ready'); })
+    .addTo(leaflet);
+  L.marker([lat, lng], {title: 'Koyla Karahi House', icon: L.divIcon({className: 'brand-pin', html: '<div class="pin"><b>K</b></div>', iconSize: [52, 62], iconAnchor: [26, 62]})}).addTo(leaflet);
+}
+function loadLeaflet(){
+  if (window.L) return initMap();
+  const s = document.createElement('script');
+  s.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+  s.onload = initMap;
+  document.body.appendChild(s);
+}
+if ('IntersectionObserver' in window){
+  const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)){ io.disconnect(); loadLeaflet(); } }, {rootMargin: '600px 0px'});
+  io.observe($('#mapbox'));
+} else loadLeaflet();
+
+/* ---------- newsletter ---------- */
+$('#newsForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const inp = $('#newsPhone'), note = $('#newsNote');
+  if (!/^(03\d{9}|923\d{9})$/.test(inp.value.replace(/\D/g, ''))){
+    note.textContent = 'Enter a Pakistani mobile number, for example 0300 1234567.'; note.classList.add('bad');
+    inp.setAttribute('aria-invalid', 'true'); inp.focus(); return;
+  }
+  inp.removeAttribute('aria-invalid'); note.classList.remove('bad');
+  note.textContent = 'Done. You will hear from us on Friday. (Mockup: nothing was sent.)'; inp.value = '';
+});
+
+/* ---------- header ---------- */
+let lastY = scrollY, ticking = false;
+function onScroll(){
+  const y = scrollY;
+  hdr.classList.toggle('is-solid', y > window.innerHeight * .6);
+  hdr.classList.toggle('is-hidden', y > lastY + 4 && y > window.innerHeight * .9);
+  if (y < lastY - 4) hdr.classList.remove('is-hidden');
+  lastY = y; ticking = false;
+}
+addEventListener('scroll', () => { if (!ticking){ ticking = true; requestAnimationFrame(onScroll); } }, {passive: true});
+hdr.addEventListener('focusin', () => hdr.classList.remove('is-hidden'));
+
+/* ---------- hero: canvas sparks (streaks) over a glowing coal bed ---------- */
+(function embers(){
+  const cv = $('#embers'), ctx = cv.getContext('2d'), hero = $('.hero'), glow = $('#htGlow');
+  let W = 0, H = 0, dpr = 1, parts = [], running = false, last = performance.now(), boost = 0, lastY = scrollY, lastT = performance.now();
+  function size(){
+    dpr = Math.min(2, window.devicePixelRatio || 1);
+    W = hero.clientWidth; H = hero.clientHeight;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  function spawn(){
+    const life = 1.4 + Math.random() * 2.8;
+    parts.push({x: Math.random() * W, y: H - 70 - Math.random() * 50, vx: (Math.random() - .5) * 26, vy: -(70 + Math.random() * 150) * (1 + boost * .35), w: .8 + Math.random() * 1.6, life, age: 0, sway: Math.random() * 6.28});
+  }
+  function drawCoals(t){
+    if (hero.classList.contains('has-video')) return;
+    const base = H - 80;
+    const g = ctx.createLinearGradient(0, base - 50, 0, H);
+    g.addColorStop(0, 'rgba(255,107,26,0)'); g.addColorStop(.55, 'rgba(193,18,31,.32)'); g.addColorStop(1, 'rgba(255,120,40,.55)');
+    ctx.fillStyle = g; ctx.fillRect(0, base - 50, W, H - base + 50);
+    // flickering heat bands: wide and low, so the bed reads as one glow rather than orbs
+    for (let i = 0; i < 9; i++){
+      const x = (i + .5) * W / 9, f = .55 + .45 * Math.sin(t * .003 + i * 1.7) * Math.sin(t * .0017 + i);
+      ctx.save(); ctx.translate(x, H - 18); ctx.scale(3.4, 1);
+      const rg = ctx.createRadialGradient(0, 0, 0, 0, 0, 60);
+      rg.addColorStop(0, `rgba(255,170,60,${(.32 * f + .14 * boost).toFixed(3)})`); rg.addColorStop(1, 'rgba(255,107,26,0)');
+      ctx.fillStyle = rg; ctx.fillRect(-60, -60, 120, 60); ctx.restore();
+    }
+  }
+  function drawSpark(p, k, a){
+    const col = k < .3 ? '255,220,130' : k < .65 ? '255,128,44' : '214,48,30';
+    const sx = p.vx + Math.sin(p.sway) * 22, len = .045 + .02 * (1 - k);
+    ctx.strokeStyle = `rgba(${col},${a.toFixed(3)})`;
+    ctx.lineWidth = p.w * (1 - k * .45);
+    ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p.x - sx * len, p.y - p.vy * len); ctx.stroke();
+  }
+  function frame(t){
+    if (!running) return;
+    const dt = Math.min(.05, (t - last) / 1000); last = t;
+    boost = Math.max(0, boost - dt * 1.4);
+    ctx.clearRect(0, 0, W, H);
+    ctx.globalCompositeOperation = 'lighter';
+    ctx.lineCap = 'butt';
+    drawCoals(t);
+    const rate = (W / 1440) * (60 + boost * 240) * dt;
+    for (let i = 0; i < rate; i++) if (Math.random() < rate - i) spawn();
+    parts = parts.filter(p => (p.age += dt) < p.life);
+    for (const p of parts){
+      p.sway += dt * 3; p.x += (p.vx + Math.sin(p.sway) * 22) * dt; p.y += p.vy * dt;
+      const k = p.age / p.life, a = (1 - k) * (k < .1 ? k * 10 : 1);
+      drawSpark(p, k, a);
+    }
+    ctx.globalCompositeOperation = 'source-over';
+    glow.style.opacity = (.32 + Math.min(.55, boost * .16)).toFixed(3);
+    requestAnimationFrame(frame);
+  }
+  function staticFrame(){
+    ctx.clearRect(0, 0, W, H); ctx.globalCompositeOperation = 'lighter'; ctx.lineCap = 'butt'; drawCoals(0);
+    for (let i = 0; i < 80; i++){
+      const p = {x: Math.random() * W, y: H - 70 - Math.random() * H * .75, vx: (Math.random() - .5) * 20, vy: -(80 + Math.random() * 120), w: .8 + Math.random() * 1.4, sway: 0};
+      drawSpark(p, (H - p.y) / H, .25 + Math.random() * .5);
+    }
+    ctx.globalCompositeOperation = 'source-over';
+  }
+  size();
+  addEventListener('resize', () => { size(); if (reduce) staticFrame(); });
+  if (reduce){ staticFrame(); return; }
+  for (let i = 0; i < 60; i++){ spawn(); parts[i].age = Math.random() * parts[i].life; parts[i].y -= Math.random() * H * .6; }
+  addEventListener('scroll', () => {
+    const now = performance.now(), v = Math.abs(scrollY - lastY) / Math.max(16, now - lastT) * 1000;
+    lastY = scrollY; lastT = now;
+    boost = Math.min(4, Math.max(boost, v / 600));
+  }, {passive: true});
+  const io = new IntersectionObserver(([e]) => {
+    if (e.isIntersecting && !document.hidden){ if (!running){ running = true; last = performance.now(); requestAnimationFrame(frame); } }
+    else running = false;
+  });
+  io.observe(hero);
+  document.addEventListener('visibilitychange', () => { if (document.hidden) running = false; else if (hero.getBoundingClientRect().bottom > 0){ running = true; last = performance.now(); requestAnimationFrame(frame); } });
+})();
+
+/* ---------- motion ---------- */
+if (window.gsap && window.ScrollTrigger && !reduce){
+  gsap.registerPlugin(ScrollTrigger);
+  if (window.SplitText) gsap.registerPlugin(SplitText);
+  gsap.defaults({ease: 'expo.out', duration: 1});
+
+  if (window.Lenis && fine){
+    lenis = new Lenis({duration: 1.15, smoothWheel: true});
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(t => lenis.raf(t * 1000));
+    gsap.ticker.lagSmoothing(0);
+  }
+
+  // hero: the wordmark rises out of the coals
+  gsap.from('.ht-stack', {yPercent: 22, opacity: 0, duration: 1.6, delay: .15});
+  gsap.from('.ht-ur, .ht-sub, .hero-kicker, .lede, .ctas', {y: 30, opacity: 0, stagger: .08, delay: .35, duration: 1.1});
+  gsap.from('.fireboard', {y: 40, opacity: 0, delay: .7});
+  gsap.to('.hero-inner', {yPercent: -10, ease: 'none', scrollTrigger: {trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true}});
+
+  // headline line reveals
+  (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(() => {
+    if (!window.SplitText) return;
+    $$('[data-split]').forEach(el => SplitText.create(el, {type: 'lines', mask: 'lines', autoSplit: true, onSplit(self){
+      return gsap.from(self.lines, {yPercent: 110, duration: 1.15, stagger: .08, scrollTrigger: {trigger: el, start: 'top 86%', once: true}});
+    }}));
+  });
+  $$('.sec-head').forEach(h => gsap.from($$('.label, .sec-intro', h), {y: 26, opacity: 0, stagger: .08, scrollTrigger: {trigger: h, start: 'top 85%', once: true}}));
+
+  // (01) dishes: frame rises, art settles from 1.18, copy follows, number drifts
+  $$('.dish').forEach(d => {
+    const fr = $('.dish-frame', d);
+    const tl = gsap.timeline({scrollTrigger: {trigger: d, start: 'top 78%', once: true}});
+    tl.from(fr, {y: 60, opacity: 0, duration: 1.2})
+      .from($('.reveal-inner', fr), {scale: 1.18, duration: 1.6}, '<')
+      .from($('.dish-copy', d).children, {y: 30, opacity: 0, stagger: .06}, '-=1.2');
+    gsap.fromTo($('.dish-num', d), {yPercent: 25}, {yPercent: -25, ease: 'none', scrollTrigger: {trigger: d, start: 'top bottom', end: 'bottom top', scrub: true}});
+  });
+
+  // (02) deals rise, saving stamps count up
+  ScrollTrigger.batch('.deal', {start: 'top 88%', once: true, onEnter: b => gsap.from(b, {y: 70, opacity: 0, stagger: .1, duration: 1.1})});
+  $$('.stamp').forEach(s => {
+    const b = $('[data-save]', s), target = +b.dataset.save, o = {v: 0};
+    gsap.from(s, {y: -30, rotate: -12, opacity: 0, duration: .9, ease: 'back.out(2)', scrollTrigger: {trigger: s, start: 'top 88%', once: true}});
+    gsap.to(o, {v: target, duration: 1.4, ease: 'power2.out', scrollTrigger: {trigger: s, start: 'top 88%', once: true}, onUpdate: () => { b.textContent = rs(Math.round(o.v / 10) * 10); }, onComplete: () => { b.textContent = rs(target); }});
+  });
+
+  // (03) services: pinned on desktop, scroll walks through the four tabs
+  const mm = gsap.matchMedia();
+  mm.add('(min-width: 768px) and (prefers-reduced-motion: no-preference)', () => {
+    svcTrigger = ScrollTrigger.create({
+      trigger: '#services', start: 'top top', end: () => '+=' + window.innerHeight * 1.8, pin: true, anticipatePin: 1,
+      onUpdate: self => setService(Math.min(panels.length - 1, Math.floor(self.progress * panels.length)), true)
+    });
+    return () => { svcTrigger = null; };
+  });
+
+  gsap.from('.chip', {y: 14, opacity: 0, stagger: .04, scrollTrigger: {trigger: '#chips', start: 'top 88%', once: true}});
+  gsap.from('#menuList .mi', {y: 24, opacity: 0, stagger: .03, scrollTrigger: {trigger: '#menuList', start: 'top 85%', once: true}});
+  gsap.from('.res-form, .res-summary', {y: 50, opacity: 0, stagger: .12, scrollTrigger: {trigger: '.res-grid', start: 'top 82%', once: true}});
+  gsap.from('.mapbox, .info', {y: 50, opacity: 0, stagger: .12, scrollTrigger: {trigger: '.visit-grid', start: 'top 85%', once: true}});
+  gsap.from('.foot-word', {yPercent: 30, opacity: 0, duration: 1.4, scrollTrigger: {trigger: '.foot', start: 'top 88%', once: true}});
+
+  if (fine){
+    $$('.magnetic').forEach(btn => {
+      const xTo = gsap.quickTo(btn, 'x', {duration: .5, ease: 'power3'}), yTo = gsap.quickTo(btn, 'y', {duration: .5, ease: 'power3'});
+      btn.addEventListener('pointermove', e => { const r = btn.getBoundingClientRect(); xTo(((e.clientX - r.left) / r.width - .5) * 16); yTo(((e.clientY - r.top) / r.height - .5) * 16); });
+      btn.addEventListener('pointerleave', () => { xTo(0); yTo(0); });
+    });
+  }
+}
+</script>
+</body>
+</html>

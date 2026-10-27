@@ -1,0 +1,1154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Levain &amp; Co.</title>
+<meta name="description" content="Levain & Co. is a sourdough boulangerie on Y Block Commercial, DHA Phase 3, Lahore. 48-hour fermented loaves, croissants and focaccia from four bakes a day. Pre-order by 8 pm for next-morning pickup.">
+<meta name="theme-color" content="#26446B">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Libre+Caslon+Display&family=Libre+Franklin:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" media="print" onload="this.media='all'">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Bakery",
+  "name": "Levain & Co.",
+  "description": "Sourdough boulangerie: 48-hour fermented loaves, laminated pastry and focaccia, baked four times a day. Pre-orders for pickup.",
+  "servesCuisine": ["Bakery", "Sourdough", "French pastry"],
+  "priceRange": "Rs 380 - Rs 4,150",
+  "telephone": "+92 300 555 0147",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Shop 9, Y Block Commercial, DHA Phase 3",
+    "addressLocality": "Lahore",
+    "addressRegion": "Punjab",
+    "addressCountry": "PK"
+  },
+  "geo": {"@type": "GeoCoordinates", "latitude": 31.4770, "longitude": 74.3786},
+  "hasMap": "https://www.google.com/maps/dir/?api=1&destination=31.4770,74.3786",
+  "openingHoursSpecification": [
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday","Wednesday","Thursday","Saturday"], "opens": "07:00", "closes": "18:00"},
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "07:00", "closes": "12:30"},
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "14:30", "closes": "18:00"},
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "07:00", "closes": "15:00"}
+  ],
+  "acceptsReservations": false,
+  "hasMenu": "#counter"
+}
+</script>
+<style>
+/* Layout: an enamel-blue shopfront hero with a gilt frame; flour-white shop floor below. Courier bake tickets,
+   an oven "departure board" and a till receipt carry the bakery's paperwork through every section. */
+:root{
+  --blue:#26446B;        /* workwear blue: brand, shopfront */
+  --blue-deep:#1A3150;   /* evening blue: dark bands */
+  --blue-ink:#4F6684;    /* secondary text on flour */
+  --flour:#F5F4EF;       /* page ground */
+  --flour-2:#ECEAE3;     /* banded sections */
+  --paper:#FBFAF6;       /* tickets, cards */
+  --crust:#8B4A21;       /* crust: accents on light */
+  --wheat:#E0AE48;       /* wheat: accents on blue, CTA */
+  --rye:#1B1A18;         /* text, footer */
+  --linen:#C9CDD1;       /* hairlines, couche */
+  --sold:#8F8C85;
+  --display:"Libre Caslon Display","Big Caslon","Iowan Old Style",Georgia,serif;
+  --body:"Libre Franklin","Franklin Gothic Book","Helvetica Neue",Arial,sans-serif;
+  --mono:"Courier Prime","Courier New",ui-monospace,monospace;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --gl:max(16px,env(safe-area-inset-left,0px));
+  --gr:max(16px,env(safe-area-inset-right,0px));
+  --head-h:72px;
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--flour);color:var(--rye);font:400 17px/1.62 var(--body);-webkit-font-smoothing:antialiased}
+img,svg,video{max-width:100%}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--wheat);outline-offset:3px}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.02;letter-spacing:-.01em;text-wrap:balance;margin:0}
+p{margin:0}
+.wrap{overflow-x:clip}
+.inner{max-width:1280px;margin:0 auto;padding-left:var(--gl);padding-right:var(--gr)}
+.skip{position:absolute;left:12px;top:-60px;z-index:100;background:var(--wheat);color:var(--rye);padding:10px 14px;font:700 14px/1 var(--body);text-decoration:none}
+.skip:focus{top:12px}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.grain{position:relative;isolation:isolate}
+.grain::after{content:"";position:absolute;inset:0;background-image:var(--grain);opacity:.07;mix-blend-mode:overlay;pointer-events:none;z-index:3}
+
+.tb-strip{display:flex;justify-content:space-between;gap:12px;padding:7px max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));background:#111;color:#cfcfcf;font:500 12px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.02em}
+.tb-strip a{color:#fff;text-decoration:none}.tb-strip a:hover{text-decoration:underline}
+.in-board .tb-strip{display:none}
+@media (max-width:480px){.tb-strip span{display:none}}
+
+/* ---------- Buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:14px 22px;border-radius:2px;font:600 14px/1 var(--body);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;border:1.5px solid currentColor;cursor:pointer;background:transparent;color:inherit;transition:background .25s,color .25s,border-color .25s,transform .3s var(--ease)}
+.btn svg{width:16px;height:16px;flex:none}
+.btn-wheat{background:var(--wheat);border-color:var(--wheat);color:var(--rye)}
+.btn-wheat:hover{background:#EDC064;border-color:#EDC064}
+.btn-blue{background:var(--blue);border-color:var(--blue);color:var(--flour)}
+.btn-blue:hover{background:var(--blue-deep);border-color:var(--blue-deep)}
+.btn-line:hover{background:rgba(245,244,239,.1)}
+.on-light .btn-line:hover{background:rgba(38,68,107,.07)}
+.magnetic{will-change:transform}
+
+/* ---------- Header ---------- */
+.site-head{position:fixed;left:0;right:0;top:0;z-index:40;color:var(--flour);padding-top:env(safe-area-inset-top,0px);transition:transform .5s var(--ease),background-color .35s,color .35s,box-shadow .35s}
+.site-head.solid{background:rgba(245,244,239,.95);color:var(--blue);box-shadow:0 1px 0 rgba(38,68,107,.16);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.site-head.hide{transform:translateY(-110%)}
+.site-head .inner{display:flex;align-items:center;gap:28px;min-height:var(--head-h)}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none;font:400 25px/1 var(--display);letter-spacing:0}
+.logo svg{width:30px;height:30px;flex:none}
+.nav{display:flex;gap:26px;margin-left:auto;font:700 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase}
+.nav a{text-decoration:none;opacity:.8;padding:8px 0;border-bottom:1px solid transparent;transition:opacity .2s,border-color .2s}
+.nav a:hover{opacity:1;border-color:currentColor}
+.head-cta{min-height:44px;padding:12px 18px}
+.site-head:not(.solid) .head-cta{background:var(--wheat);border-color:var(--wheat);color:var(--rye)}
+.site-head.solid .head-cta{background:var(--blue);border-color:var(--blue);color:var(--flour)}
+@media (max-width:980px){.nav{display:none}.head-cta{margin-left:auto}}
+@media (max-width:767px){.head-cta{display:none}:root{--head-h:60px}.logo{font-size:22px}}
+
+/* ---------- Section plaque label ---------- */
+.plaque{display:inline-flex;align-items:stretch;justify-self:start;font:700 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;border:1px solid currentColor}
+.plaque b{display:grid;place-items:center;padding:8px 10px;background:currentColor}
+.plaque b span{color:var(--flour)}
+.plaque > span{display:grid;place-items:center;padding:8px 12px}
+.on-blue .plaque b span{color:var(--blue-deep)}
+.sec{padding-block:clamp(84px,11vw,150px);scroll-margin-top:var(--head-h)}
+.sec-head{display:grid;gap:20px;max-width:820px;margin-bottom:clamp(36px,5vw,64px)}
+.sec-head h2{font-size:clamp(40px,6.2vw,84px);color:var(--blue)}
+.sec-head p{color:var(--blue-ink);max-width:58ch;font-size:18px}
+.on-blue .sec-head h2{color:var(--flour)}
+.on-blue .sec-head p{color:#B7C3D3}
+.plaque{color:var(--blue)}
+.on-blue .plaque{color:var(--wheat)}
+
+/* ---------- Hero: the shopfront ---------- */
+.hero{position:relative;background:var(--blue);color:var(--flour);overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:
+  linear-gradient(180deg,rgba(10,22,40,.0) 60%,rgba(10,22,40,.35) 100%),
+  repeating-linear-gradient(90deg,rgba(255,255,255,.04) 0 1px,transparent 1px 128px);pointer-events:none}
+.hero-frame{position:absolute;top:calc(var(--head-h) + 10px);bottom:18px;left:max(10px,1.4vw);right:max(10px,1.4vw);border:1px solid rgba(224,174,72,.5);outline:1px solid rgba(224,174,72,.18);outline-offset:6px;pointer-events:none}
+.hero .inner{position:relative;display:grid;grid-template-columns:minmax(0,1.04fr) minmax(0,1fr);gap:clamp(28px,4vw,72px);align-items:center;min-height:100svh;padding-block:calc(var(--head-h) + 48px) 84px}
+.hero-copy{display:grid;gap:26px;min-width:0}
+.ticket-line{display:flex;flex-wrap:wrap;gap:6px 18px;font:700 12px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#C3CEDC}
+.ticket-line b{color:var(--wheat);font-weight:700}
+.ticket-line span{display:inline-flex;align-items:center;gap:10px}
+.ticket-line span + span::before{content:"";width:5px;height:5px;background:var(--wheat);transform:rotate(45deg)}
+.hero h1{font-size:clamp(52px,7.4vw,120px);line-height:.96;color:var(--flour)}
+.hero h1 em{font-style:normal;color:var(--wheat);display:inline-block}
+.hero-copy > p{font-size:clamp(17px,1.35vw,20px);max-width:44ch;color:#D7DEE7;font-weight:300}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:12px}
+.cutoff{font:400 14px/1.45 var(--mono);color:#B7C3D3;border-top:1px solid rgba(224,174,72,.35);padding-top:16px;max-width:46ch}
+.cutoff strong{color:var(--wheat)}
+.stage{position:relative;min-width:0}
+.window{position:relative;aspect-ratio:5/3.5;border:1px solid rgba(224,174,72,.6);outline:1px solid rgba(224,174,72,.2);outline-offset:8px;overflow:hidden;background:
+  radial-gradient(90% 70% at 50% -6%,rgba(224,174,72,.38),rgba(224,174,72,0) 62%),
+  linear-gradient(180deg,#2A4A73 0%,#162B47 100%)}
+.window .media-art{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;transition:opacity .8s}
+.window .media-art svg{display:block;width:100%;height:auto}
+.window-cap{position:absolute;left:14px;top:12px;z-index:2;font:700 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:rgba(245,244,239,.8)}
+.ticket{position:absolute;right:-28px;top:-46px;z-index:4;width:min(258px,52%);background:var(--paper);color:var(--rye);padding:20px 18px 18px;font:400 13px/1.5 var(--mono);box-shadow:0 26px 50px -24px rgba(5,12,24,.7);transform:rotate(-2.5deg);
+  --z:6px;-webkit-mask:linear-gradient(#000 0 0) bottom/100% calc(100% - var(--z)) no-repeat,conic-gradient(from 135deg at top,#0000,#000 1deg 89deg,#0000 90deg) top/calc(2*var(--z)) var(--z) repeat-x;
+  mask:linear-gradient(#000 0 0) bottom/100% calc(100% - var(--z)) no-repeat,conic-gradient(from 135deg at top,#0000,#000 1deg 89deg,#0000 90deg) top/calc(2*var(--z)) var(--z) repeat-x}
+.ticket h4{margin:0 0 10px;font:700 11px/1.2 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--blue);display:flex;justify-content:space-between;gap:8px}
+.ticket ol{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.ticket li{display:flex;justify-content:space-between;gap:10px;opacity:.35;transition:opacity .3s}
+.ticket li.on{opacity:1}
+.ticket li.on span:first-child::before{content:"\2192  ";color:var(--crust)}
+.ticket .core{margin-top:12px;padding-top:10px;border-top:1px dashed #B9B5AA;display:flex;justify-content:space-between;font-variant-numeric:tabular-nums;font-weight:700;color:var(--crust)}
+.cue{position:absolute;right:max(28px,3vw);bottom:34px;display:flex;align-items:center;gap:12px;font:700 11px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:#C3CEDC}
+.cue i{display:block;width:44px;height:1px;background:rgba(224,174,72,.4);position:relative;overflow:hidden}
+.cue i::after{content:"";position:absolute;inset:0;background:var(--wheat);animation:cue 2s var(--ease) infinite}
+@keyframes cue{0%{transform:translateX(-100%)}60%,100%{transform:translateX(100%)}}
+@media (max-width:900px){
+  .hero .inner{grid-template-columns:1fr;min-height:0;padding-block:calc(var(--head-h) + 36px) 88px;gap:44px}
+  .stage{max-width:620px;width:100%;margin-inline:auto}
+  .ticket{right:-6px;top:-34px;width:min(250px,60%)}
+  .cue{display:none}
+}
+@media (max-width:480px){.ticket{position:relative;right:auto;top:auto;margin:-22px 0 0 auto;width:86%}}
+
+/* ---------- Media slots ---------- */
+[data-media]{position:relative;overflow:hidden}
+.media-layer{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s var(--ease);z-index:1}
+.has-media .media-layer{opacity:1}
+.has-media .media-art{opacity:0}
+
+/* ---------- Marquee ---------- */
+.marquee{background:var(--flour-2);color:var(--blue);overflow:hidden;border-block:1px solid rgba(38,68,107,.18)}
+.marquee-track{display:flex;width:max-content;animation:marq 42s linear infinite}
+.marquee:hover .marquee-track{animation-play-state:paused}
+.marquee span{font:400 clamp(24px,3vw,40px)/1 var(--display);padding:22px 0;white-space:nowrap;display:flex;align-items:center}
+.marquee span::after{content:"";width:9px;height:9px;margin:0 34px;background:var(--wheat);transform:rotate(45deg)}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+/* ---------- 01 Counter ---------- */
+.counter{background:var(--flour)}
+.counter-pin{padding-block:calc(var(--head-h) + clamp(40px,6vw,80px)) clamp(64px,8vw,104px)}
+.counter-viewport{overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:var(--gl);-webkit-overflow-scrolling:touch;padding-bottom:14px;scrollbar-width:thin}
+.counter-track{display:flex;gap:28px;width:max-content;padding-left:var(--gl);padding-right:var(--gr)}
+.is-pinned .counter-viewport{overflow:visible;scroll-snap-type:none}
+.is-pinned .counter-track{padding-left:max(var(--gl),calc((100vw - 1280px)/2 + 16px))}
+.item{scroll-snap-align:start;width:clamp(260px,23vw,320px);display:grid;grid-template-rows:auto 1fr;position:relative}
+.item-art{position:relative;height:220px;display:flex;align-items:flex-end;justify-content:center;background:linear-gradient(180deg,#E9E7E0 0%,#DEDBD2 100%);border-bottom:12px solid #7A4E2E;box-shadow:inset 0 18px 30px -22px rgba(27,26,24,.35),0 12px 0 -6px #5E3B22}
+.item-art svg{width:84%;height:auto;margin-bottom:-2px}
+.fresh{position:absolute;top:14px;right:14px;background:var(--blue);color:var(--flour);font:700 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;padding:8px 10px;border-radius:1px;box-shadow:0 6px 14px -8px rgba(26,49,80,.8)}
+.fresh::before{content:"";position:absolute;left:50%;top:-12px;width:1px;height:12px;background:rgba(26,49,80,.5)}
+.item-body{padding:22px 2px 0;display:grid;gap:8px;align-content:start}
+.item-body h3{font-size:27px;color:var(--blue)}
+.item-body p{font-size:15px;color:#4A4943}
+.price-row{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font:700 15px/1 var(--mono);font-variant-numeric:tabular-nums;color:var(--crust);border-top:1px solid var(--linen);padding-top:12px;margin-top:6px}
+.price-row small{font-weight:400;color:var(--blue-ink)}
+.item.sold .item-art svg{filter:grayscale(1);opacity:.4}
+.item.sold h3,.item.sold .price-row{color:var(--sold)}
+.item.sold .fresh{background:var(--sold)}
+.counter-foot{display:flex;flex-wrap:wrap;gap:12px 32px;margin-top:30px;font:400 14px/1.4 var(--mono);color:var(--blue-ink)}
+.counter-foot b{color:var(--crust)}
+.key{display:inline-flex;align-items:center;gap:8px}
+.key i{width:14px;height:14px;background:var(--blue)}
+.key i.muted{background:var(--sold)}
+
+/* ---------- 02 Oven departures ---------- */
+.bakes{background:var(--blue-deep);color:var(--flour)}
+.next{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px 48px;align-items:end;margin-bottom:40px}
+.next small{font:700 12px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--wheat)}
+.next-what{font:400 clamp(24px,2.8vw,36px)/1.2 var(--display);margin-top:12px;max-width:26ch}
+.clock{font:700 clamp(54px,9vw,128px)/.9 var(--mono);font-variant-numeric:tabular-nums;letter-spacing:-.03em;color:var(--wheat)}
+.board{background:#0F1F35;border:1px solid rgba(224,174,72,.35);box-shadow:0 30px 80px -40px rgba(0,0,0,.8);font-family:var(--mono)}
+.b-row{display:grid;grid-template-columns:150px minmax(0,1fr) 170px;gap:20px;align-items:center;padding:18px 22px;border-top:1px solid rgba(201,205,209,.12);transform-origin:50% 0}
+.b-row.head{border-top:0;font:700 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:#8EA0B6;padding-block:14px;background:rgba(255,255,255,.03)}
+.b-time{font:700 34px/1 var(--mono);font-variant-numeric:tabular-nums;color:var(--flour);letter-spacing:-.02em}
+.b-what{font-size:15px;color:#C8D2DE;line-height:1.45}
+.b-st{justify-self:start;font:700 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;padding:9px 10px;background:#22395A;color:#C8D2DE;border:1px solid transparent}
+.b-row.out .b-time{color:#7D8EA4}
+.b-row.out .b-st{background:transparent;border-color:#3A5274;color:#8EA0B6}
+.b-row.up{background:rgba(224,174,72,.08)}
+.b-row.up .b-time{color:var(--wheat)}
+.b-row.up .b-st{background:var(--wheat);color:var(--rye)}
+.board-note{margin-top:16px;font:400 13px/1.5 var(--mono);color:#8EA0B6}
+@media (max-width:760px){
+  .next{grid-template-columns:1fr}
+  .b-row{grid-template-columns:86px minmax(0,1fr);gap:8px 14px;padding:16px}
+  .b-row.head span:last-child{display:none}
+  .b-time{font-size:24px;grid-row:span 2}
+  .b-st{grid-column:2}
+}
+
+/* ---------- 03 Bundles ---------- */
+.bundles-top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.8fr);gap:clamp(24px,4vw,64px);align-items:end;margin-bottom:clamp(36px,5vw,64px)}
+.bundles-top .sec-head{margin:0}
+.bundle-photo{aspect-ratio:4/3;background:#E2DFD6;border:1px solid var(--linen)}
+.bundle-photo .media-art{position:absolute;inset:0;display:grid;place-items:center;background:linear-gradient(180deg,#E9E7E0,#DBD7CD)}
+.bundle-photo .media-art svg{width:92%;height:auto}
+.bundles-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.bundle{position:relative;background:var(--paper);border:1px solid var(--linen);display:grid;align-content:start}
+.bundle-head{background:var(--blue);color:var(--flour);padding:22px 22px 20px;display:grid;gap:8px}
+.bundle-head h3{font-size:31px}
+.bundle .for{font:700 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--wheat)}
+.bundle-body{padding:20px 22px 24px;display:grid;gap:16px}
+.bundle ul{list-style:none;margin:0;padding:0;display:grid;gap:7px;font-size:15px}
+.bundle li{display:flex;justify-content:space-between;gap:12px;border-bottom:1px dashed #CFCBC0;padding-bottom:7px}
+.bundle li span:last-child{font-family:var(--mono);color:var(--blue-ink);font-variant-numeric:tabular-nums;white-space:nowrap}
+.bundle-price{display:flex;align-items:baseline;gap:8px 14px;flex-wrap:wrap}
+.bundle-price strong{font:400 40px/1 var(--display);color:var(--crust)}
+.bundle-price strong small{font:400 14px var(--mono);color:var(--blue-ink)}
+.bundle-price s{font:400 15px/1 var(--mono);color:var(--sold)}
+.bundle-price em{flex-basis:100%;font:400 13px/1.3 var(--mono);font-style:normal;color:var(--blue-ink)}
+.stamp{position:absolute;top:14px;right:14px;display:grid;gap:3px;justify-items:center;padding:8px 10px;border:2px solid var(--wheat);outline:1px solid var(--wheat);outline-offset:2px;color:var(--wheat);font:700 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;transform:rotate(6deg);background:rgba(26,49,80,.35)}
+.stamp b{font-size:16px;letter-spacing:0;font-variant-numeric:tabular-nums}
+.bundle .btn{justify-self:start}
+@media (max-width:1000px){.bundles-grid{grid-template-columns:1fr;max-width:600px}.bundles-top{grid-template-columns:1fr}}
+
+/* ---------- 04 Pre-order ---------- */
+.preorder{background:var(--flour-2);border-block:1px solid var(--linen)}
+.po-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(28px,4vw,64px);align-items:start}
+.po-form{display:grid;gap:32px}
+fieldset{border:0;margin:0;padding:0;display:grid;gap:12px;min-width:0}
+legend{font:700 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:14px;padding:0}
+.days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}
+.day input,.slot input{position:absolute;opacity:0;pointer-events:none}
+.day label{display:grid;gap:3px;place-items:center;text-align:center;min-height:76px;padding:10px 4px;border:1px solid #BFC4C9;background:var(--paper);cursor:pointer;font:700 11px/1.2 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--blue-ink);transition:background .2s,border-color .2s,color .2s}
+.day label b{font:400 26px/1 var(--display);color:var(--blue);text-transform:none;letter-spacing:0}
+.day label small{font:400 10px/1.1 var(--mono);text-transform:none;letter-spacing:0;min-height:11px}
+.day label:hover{border-color:var(--blue)}
+.day input:checked + label{background:var(--blue);border-color:var(--blue);color:#C3CEDC}
+.day input:checked + label b{color:var(--flour)}
+.day input:focus-visible + label,.slot input:focus-visible + label{outline:2px solid var(--wheat);outline-offset:2px}
+.day input:disabled + label{opacity:.45;cursor:not-allowed;background:transparent;border-style:dashed}
+@media (max-width:560px){.days{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.slots{display:flex;flex-wrap:wrap;gap:8px}
+.slot label{display:inline-flex;align-items:center;min-height:44px;padding:10px 16px;border:1px solid #BFC4C9;font:700 13px/1 var(--mono);cursor:pointer;background:var(--paper);transition:border-color .2s}
+.slot label:hover{border-color:var(--blue)}
+.slot input:checked + label{background:var(--rye);border-color:var(--rye);color:var(--flour)}
+.qty-list{display:grid;border-top:1px solid #CFCBC0}
+.qty{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid #CFCBC0}
+.qty-name{display:grid;gap:2px;min-width:0}
+.qty-name b{font-weight:600}
+.qty-name span{font:400 13px/1.3 var(--mono);color:var(--blue-ink)}
+.stepper{display:inline-flex;align-items:center;border:1px solid var(--blue);background:var(--paper)}
+.stepper button{width:44px;height:44px;border:0;background:transparent;font:700 18px/1 var(--mono);color:var(--blue);cursor:pointer;transition:background .2s}
+.stepper button:hover{background:rgba(38,68,107,.08)}
+.stepper output{min-width:30px;text-align:center;font:700 15px/1 var(--mono);font-variant-numeric:tabular-nums}
+.field{display:grid;gap:7px}
+.field label{font:700 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
+.field input{font:400 16px/1.2 var(--body);min-height:50px;padding:13px 14px;border:1px solid #AEB4BA;border-radius:2px;background:var(--paper);color:var(--rye);width:100%}
+.field input:focus{border-color:var(--blue);outline:none;box-shadow:0 0 0 3px rgba(224,174,72,.5)}
+.field input[aria-invalid="true"]{border-color:#A2331F}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:520px){.two{grid-template-columns:1fr}}
+.receipt{position:sticky;top:calc(var(--head-h) + 24px);background:#FFFFFE;color:var(--rye);padding:28px 24px 34px;font:400 14px/1.5 var(--mono);box-shadow:0 30px 60px -34px rgba(27,26,24,.5);
+  --z:8px;-webkit-mask:linear-gradient(#000 0 0) top/100% calc(100% - var(--z)) no-repeat,conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/calc(2*var(--z)) var(--z) repeat-x;
+  mask:linear-gradient(#000 0 0) top/100% calc(100% - var(--z)) no-repeat,conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/calc(2*var(--z)) var(--z) repeat-x}
+.receipt h3{font:400 26px/1 var(--display);color:var(--blue);text-align:center;margin-bottom:6px}
+.receipt .sub{text-align:center;color:var(--blue-ink);font-size:12px;margin-bottom:18px;letter-spacing:.06em;text-transform:uppercase}
+.r-lines{display:grid;gap:4px;min-height:64px;border-block:1px dashed #B9B5AA;padding-block:12px}
+.r-line{display:flex;justify-content:space-between;gap:10px;font-variant-numeric:tabular-nums}
+.r-empty{color:var(--sold)}
+.r-meta{display:grid;gap:2px;margin-top:12px;color:var(--blue-ink);font-size:13px}
+.r-total{display:flex;justify-content:space-between;margin-top:16px;font:700 22px/1 var(--mono);font-variant-numeric:tabular-nums;color:var(--crust)}
+.receipt .btn{width:100%;margin-top:20px}
+.err{color:#A2331F;font-size:13px;min-height:18px;margin-top:10px}
+.confirm{display:none;margin-top:14px;padding:12px 14px;border:1px solid var(--blue);font-size:13px;color:var(--blue);background:rgba(38,68,107,.06)}
+.confirm.show{display:block}
+@media (max-width:900px){.po-grid{grid-template-columns:1fr}.receipt{position:relative;top:auto}}
+
+/* ---------- 05 Story ---------- */
+.story-grid{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:clamp(32px,6vw,96px);align-items:start}
+.baker{position:sticky;top:calc(var(--head-h) + 32px);display:grid;gap:22px}
+.baker h2{font-size:clamp(40px,5.6vw,76px);color:var(--blue)}
+.baker blockquote{margin:0;font:400 clamp(22px,2.2vw,30px)/1.25 var(--display);color:var(--crust);text-wrap:balance}
+.baker p{color:#4A4943;max-width:52ch}
+.baker cite{font:700 12px/1.3 var(--mono);font-style:normal;letter-spacing:.12em;text-transform:uppercase;color:var(--blue-ink)}
+.story-photo{aspect-ratio:16/10;border:1px solid var(--linen);background:#DCD8CE}
+.story-photo .media-art{position:absolute;inset:0;display:grid;place-items:center;background:radial-gradient(70% 70% at 50% 45%,#E6E2D8,#CFCABD)}
+.story-photo .media-art svg{width:min(78%,380px);height:auto}
+.ferment-wrap{position:relative;min-width:0;padding-top:8px}
+.ferment{list-style:none;margin:0;padding:0 0 0 72px;display:grid;gap:34px}
+.ferment-wrap::before,.ferment-fill{content:"";position:absolute;left:23px;top:14px;bottom:14px;width:2px;background:var(--linen)}
+.ferment-fill{background:var(--crust);transform-origin:top}
+.step{position:relative;display:grid;gap:6px}
+.step::before{content:"";position:absolute;left:-55px;top:5px;width:14px;height:14px;background:var(--flour);border:2px solid var(--crust);transform:rotate(45deg)}
+.step .h{font:700 12px/1 var(--mono);letter-spacing:.1em;color:var(--blue-ink);font-variant-numeric:tabular-nums}
+.step h3{font-size:30px;color:var(--blue)}
+.step p{color:#4A4943;max-width:52ch}
+.step .t{font:400 13px/1.3 var(--mono);color:var(--crust)}
+@media (max-width:900px){.story-grid{grid-template-columns:1fr}.baker{position:relative;top:auto}}
+
+/* ---------- 06 Visit ---------- */
+.visit{background:var(--blue-deep);color:var(--flour)}
+.visit-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(28px,4vw,64px);align-items:stretch}
+.status{display:inline-flex;align-items:center;gap:10px;font:700 12px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;padding:10px 12px;border:1px solid rgba(224,174,72,.5);color:var(--wheat);margin-bottom:22px}
+.status i{width:8px;height:8px;background:currentColor;transform:rotate(45deg)}
+.status.closed{color:#C8D2DE;border-color:rgba(200,210,222,.35)}
+.hours{width:100%;border-collapse:collapse;font:400 15px/1.4 var(--mono);font-variant-numeric:tabular-nums}
+.hours td{padding:12px 0;border-bottom:1px solid rgba(201,205,209,.16)}
+.hours td:last-child{text-align:right}
+.hours tr.today td{color:var(--wheat);font-weight:700}
+.hours tr.today td:first-child::before{content:"\2192  "}
+.hours tr.closed td:last-child{color:#8EA0B6}
+.addr{display:grid;gap:10px;margin-top:28px}
+.addr p{font:400 clamp(24px,2.4vw,32px)/1.2 var(--display)}
+.addr .mono{font:400 15px/1.6 var(--mono);color:#B7C3D3}
+.visit-ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.mapbox{position:relative;min-height:440px;border:1px solid rgba(224,174,72,.5);outline:1px solid rgba(224,174,72,.18);outline-offset:6px;background:#E8EAEC}
+.map{position:absolute;inset:0;z-index:1}
+.mapbox:not(.map-ready) .map{visibility:hidden}
+.map .leaflet-tile-pane{filter:sepia(.28) hue-rotate(175deg) saturate(.85) brightness(1.02) contrast(.98)}
+.map .leaflet-control-attribution{font:400 11px/1.4 var(--body);background:rgba(245,244,239,.88)}
+.map .leaflet-bar{border:1px solid var(--blue);border-radius:0;box-shadow:none}
+.map .leaflet-bar a{border-radius:0!important;color:var(--blue);width:36px;height:36px;line-height:36px}
+.brand-pin{background:none;border:0}
+.brand-pin span{position:relative;display:grid;place-items:center;width:44px;height:44px;background:var(--blue);color:var(--wheat);font:400 15px/1 var(--display);border:1.5px solid var(--wheat);box-shadow:0 10px 22px -8px rgba(10,22,40,.6)}
+.brand-pin span::after{content:"";position:absolute;left:50%;bottom:-8px;width:13px;height:13px;background:var(--blue);border-right:1.5px solid var(--wheat);border-bottom:1.5px solid var(--wheat);transform:translateX(-50%) rotate(45deg)}
+.map-fallback{position:absolute;inset:0;z-index:2;display:grid;align-content:center;gap:16px;padding:clamp(24px,4vw,48px);color:var(--blue-deep);background:
+  linear-gradient(rgba(38,68,107,.07) 1px,transparent 1px) 0 0/100% 32px,
+  linear-gradient(90deg,rgba(38,68,107,.07) 1px,transparent 1px) 0 0/32px 100%,var(--flour)}
+.mapbox.map-ready .map-fallback{display:none}
+.map-fallback .mf-k{font:700 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--crust)}
+.map-fallback .mf-a{font:400 clamp(28px,3vw,42px)/1.05 var(--display);color:var(--blue)}
+.map-fallback .mf-c{font:400 14px/1.6 var(--mono);color:var(--blue-ink)}
+.map-fallback .btn{justify-self:start}
+@media (max-width:900px){.visit-grid{grid-template-columns:1fr}.mapbox{min-height:360px}}
+
+/* ---------- Footer ---------- */
+.foot{background:var(--rye);color:#C9C6BE}
+.foot .inner{padding-block:clamp(64px,8vw,104px) 28px}
+.foot .foot-mark{font:400 clamp(64px,15.5vw,236px)/.82 var(--display);color:var(--flour);letter-spacing:-.025em;margin:0 0 clamp(40px,6vw,72px);white-space:nowrap}
+.foot-mark span{color:var(--wheat)}
+.foot-cols{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px;padding-top:32px;border-top:1px solid rgba(245,244,239,.16)}
+.foot h4{margin:0 0 12px;font:700 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--wheat)}
+.foot p,.foot li{font-size:15px;line-height:1.7}
+.foot ul{list-style:none;margin:0;padding:0}
+.foot a{text-decoration-color:rgba(245,244,239,.35);text-underline-offset:3px}
+.foot a:hover{color:var(--flour)}
+.alert-form{display:flex;gap:8px;margin-top:10px}
+.alert-form input{flex:1;min-width:0;min-height:46px;font:400 15px var(--body);padding:10px 12px;border:1px solid rgba(245,244,239,.3);background:transparent;color:var(--flour);border-radius:2px}
+.alert-form input::placeholder{color:#8F8C85}
+.alert-form input:focus{outline:none;border-color:var(--wheat)}
+.alert-form .btn{min-height:46px;padding:10px 14px}
+.alert-ok{font:400 13px/1.5 var(--mono);color:var(--wheat);min-height:20px;margin-top:8px}
+.legal{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:48px;padding-top:20px;border-top:1px solid rgba(245,244,239,.12);font:400 12px/1.5 var(--mono);color:#8F8C85}
+@media (max-width:900px){.foot-cols{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.foot-cols{grid-template-columns:1fr}}
+
+/* ---------- Mobile action bar ---------- */
+.actionbar{display:none}
+@media (max-width:767px){
+  body{padding-bottom:calc(72px + env(safe-area-inset-bottom,0px))}
+  .actionbar{display:grid;grid-template-columns:1.7fr 1fr 1fr 1fr;gap:4px;position:fixed;left:0;right:0;bottom:0;z-index:50;background:var(--blue-deep);border-top:1px solid rgba(224,174,72,.45);padding:8px max(10px,env(safe-area-inset-right,0px)) calc(8px + env(safe-area-inset-bottom,0px)) max(10px,env(safe-area-inset-left,0px))}
+  .actionbar a{display:grid;place-items:center;gap:4px;min-height:52px;padding:6px 4px;color:#D7DEE7;text-decoration:none;font:700 10.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase}
+  .actionbar a svg{width:20px;height:20px}
+  .actionbar a.main{background:var(--wheat);color:var(--rye);font-size:12px;grid-auto-flow:column;gap:8px}
+}
+@media (prefers-reduced-motion:reduce){
+  .marquee-track,.cue i::after{animation:none}
+  .cue{display:none}
+  *{transition:none!important}
+}
+</style>
+</head>
+<body>
+<div class="tb-strip"><a href="../index.html">&larr; Tasting Board</a><span>Mockup 07 / 10 &middot; concept, not a live site</span></div>
+<script>try{if(window.parent!==window&&window.parent.__TASTING_BOARD__)document.documentElement.classList.add('in-board')}catch(e){}</script>
+<a class="skip" href="#main">Skip to main content</a>
+
+<header class="site-head" id="site-head">
+  <div class="inner">
+    <a class="logo" href="#top" aria-label="Levain &amp; Co. home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 30V8" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round"/><g fill="#E0AE48"><path d="M16 4c2 2 2 5 0 7-2-2-2-5 0-7Z"/><path d="M15 14c-3 0-5-2-5-5 3 0 5 2 5 5Z"/><path d="M17 14c3 0 5-2 5-5-3 0-5 2-5 5Z"/><path d="M15 20c-3 0-5-2-5-5 3 0 5 2 5 5Z"/><path d="M17 20c3 0 5-2 5-5-3 0-5 2-5 5Z"/><path d="M15 26c-3 0-5-2-5-5 3 0 5 2 5 5Z"/><path d="M17 26c3 0 5-2 5-5-3 0-5 2-5 5Z"/></g></svg>
+      Levain &amp; Co.
+    </a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#counter">Counter</a><a href="#bakes">Oven times</a><a href="#bundles">Bundles</a><a href="#story">48 hours</a><a href="#visit">Visit</a>
+    </nav>
+    <a class="btn head-cta magnetic" href="#preorder">Pre-order</a>
+  </div>
+</header>
+
+<main class="wrap" id="main">
+  <!-- HERO -->
+  <section class="hero grain" id="top" aria-labelledby="hero-title">
+    <div class="hero-frame" aria-hidden="true"></div>
+    <div class="inner">
+      <div class="hero-copy">
+        <div class="ticket-line"><span>Y Block, DHA Phase 3</span><span>Oven out <b>07:00</b></span><span>Sold out by <b>noon</b></span></div>
+        <h1 id="hero-title" data-split>Bread that takes 48 hours. <em>Gone by noon.</em></h1>
+        <p>Naturally leavened loaves from stone-ground Punjab wheat, cold-proofed overnight and baked four times a day. Reserve yours tonight and it waits on the shelf with your name on it.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-wheat magnetic" href="#preorder">Pre-order for tomorrow</a>
+          <a class="btn btn-line" href="#counter">Today&rsquo;s counter</a>
+        </div>
+        <p class="cutoff" id="hero-cutoff">Order by <strong>8:00 pm</strong> for next-morning pickup.</p>
+      </div>
+      <div class="stage">
+        <div class="window" data-media="hero">
+          <!-- HEYGEN: 6-8 s loop, 16:9 1080p. A wooden baker's peel slides crusty sourdough loaves out of a stone deck oven at dawn: deep golden crust with an open scored ear, light flour dust, a puff of steam; wall behind painted workwear blue (#26446B), warm oven glow mixed with cool daylight. No people, no text. Poster frame: first frame. -->
+          <span class="window-cap" aria-hidden="true">Batch 1 &middot; deck oven</span>
+          <div class="media-art" aria-hidden="true">
+            <svg viewBox="20 70 600 360" preserveAspectRatio="xMidYMax meet" role="img" aria-label="A sourdough loaf proofing, scoring and baking">
+              <defs>
+                <radialGradient id="g-raw" cx="50%" cy="30%" r="75%"><stop offset="0" stop-color="#F6EEDD"/><stop offset="1" stop-color="#E2D3B6"/></radialGradient>
+                <radialGradient id="g-gold" cx="50%" cy="28%" r="78%"><stop offset="0" stop-color="#E0A85C"/><stop offset=".7" stop-color="#B8742F"/><stop offset="1" stop-color="#8B4A21"/></radialGradient>
+                <radialGradient id="g-dark" cx="50%" cy="25%" r="80%"><stop offset="0" stop-color="#8E5226" stop-opacity=".2"/><stop offset=".55" stop-color="#6E3A18" stop-opacity=".75"/><stop offset="1" stop-color="#3B2010"/></radialGradient>
+                <pattern id="torchon" width="40" height="10" patternUnits="userSpaceOnUse"><rect width="40" height="10" fill="#E9EBEC"/><rect x="0" width="5" height="10" fill="#26446B"/><rect x="9" width="2" height="10" fill="#26446B"/><path d="M0 5h40" stroke="#D6DADD" stroke-width=".8"/></pattern>
+                <clipPath id="loaf-clip"><path d="M128 378 C118 300 196 214 320 210 C444 214 522 300 512 378 C470 398 170 398 128 378Z"/></clipPath>
+              </defs>
+              <rect x="40" y="350" width="560" height="64" rx="4" fill="#A97A4E"/>
+              <path d="M40 366h560M40 382h560M40 398h560" stroke="#8C6038" stroke-width="1.5" opacity=".55"/>
+              <path d="M70 360 C70 330 90 318 110 318 L540 318 C560 318 580 330 576 360 L580 396 L64 396Z" fill="url(#torchon)"/>
+              <path d="M70 360 C70 330 90 318 110 318 L540 318 C560 318 580 330 576 360" fill="none" stroke="#F5F4EF" stroke-width="2" opacity=".6"/>
+              <ellipse id="shadow" cx="320" cy="388" rx="196" ry="14" fill="#1B1A18" opacity=".26"/>
+              <g id="loaf">
+                <path d="M128 378 C118 300 196 214 320 210 C444 214 522 300 512 378 C470 398 170 398 128 378Z" fill="url(#g-raw)"/>
+                <path id="crust-gold" d="M128 378 C118 300 196 214 320 210 C444 214 522 300 512 378 C470 398 170 398 128 378Z" fill="url(#g-gold)"/>
+                <path id="crust-dark" d="M128 378 C118 300 196 214 320 210 C444 214 522 300 512 378 C470 398 170 398 128 378Z" fill="url(#g-dark)" opacity=".85"/>
+                <g clip-path="url(#loaf-clip)" fill="none" stroke="#FBF6EA" stroke-linecap="round" id="rings" opacity=".55">
+                  <path d="M150 352 C210 312 430 312 490 352" stroke-width="3"/>
+                  <path d="M170 318 C230 284 410 284 470 318" stroke-width="3"/>
+                  <path d="M150 380 C230 352 410 352 490 380" stroke-width="2.5"/>
+                </g>
+                <path id="score" d="M196 270 C260 236 360 228 440 246" fill="none" stroke="#CDBFA5" stroke-width="2.5" stroke-linecap="round" opacity="0"/>
+                <g id="ear">
+                  <path d="M196 270 C260 236 360 228 440 246 C376 206 268 208 196 270Z" fill="#F4E2BC"/>
+                  <path d="M200 268 C262 226 362 214 438 244" fill="none" stroke="#E8CF9C" stroke-width="5" opacity=".7"/>
+                  <path d="M196 270 C268 208 376 206 440 246" fill="none" stroke="#5A3218" stroke-width="5" stroke-linecap="round"/>
+                </g>
+              </g>
+              <g id="steam" fill="none" stroke="#F5F4EF" stroke-width="4" stroke-linecap="round" opacity="0">
+                <path d="M270 190 C250 160 290 140 270 106"/>
+                <path d="M322 182 C302 146 344 124 322 84"/>
+                <path d="M376 192 C356 162 396 142 376 110"/>
+              </g>
+            </svg>
+          </div>
+        </div>
+        <div class="ticket" id="ticket" aria-label="Bake ticket for batch 1">
+          <h4><span>Bake ticket</span><span>No. 0701</span></h4>
+          <ol>
+            <li data-stage="0" class="on"><span>Proof</span><span>4 h &middot; 26&deg;C</span></li>
+            <li data-stage="1" class="on"><span>Score</span><span>1 cut &middot; 30&deg;</span></li>
+            <li data-stage="2" class="on"><span>Bake</span><span>250&rarr;230&deg;C</span></li>
+          </ol>
+          <div class="core"><span>Core temp</span><span id="core">97&deg;C</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="cue" aria-hidden="true"><span>Scroll to bake</span><i></i></div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Fresh at 7:00</span><span>48-hour ferment</span><span>Chakki atta from Okara</span><span>Sold out by noon</span><span>Pre-order by 8 pm</span><span>No commercial yeast</span>
+      <span>Fresh at 7:00</span><span>48-hour ferment</span><span>Chakki atta from Okara</span><span>Sold out by noon</span><span>Pre-order by 8 pm</span><span>No commercial yeast</span>
+    </div>
+  </div>
+
+  <!-- 01 COUNTER -->
+  <section class="counter on-light" id="counter" aria-labelledby="counter-title">
+    <div class="counter-pin">
+      <div class="inner">
+        <div class="sec-head">
+          <span class="plaque"><b><span>01</span></b><span>The counter</span></span>
+          <h2 id="counter-title" data-split>What&rsquo;s on the shelves this morning</h2>
+          <p>Each tag shows when that tray left the oven. Sold-out items stay on the shelf, greyed, with the time of the next bake.</p>
+        </div>
+      </div>
+      <div class="counter-viewport" id="counter-viewport">
+        <div class="counter-track" id="counter-track"></div>
+      </div>
+      <div class="inner">
+        <div class="counter-foot">
+          <span class="key"><i></i> Oven-out time</span>
+          <span class="key"><i class="muted"></i> Sold out, back next batch</span>
+          <span>Loaves are <b>sliced free</b> on request.</span>
+        </div>
+      </div>
+    </div>
+    <noscript><div class="inner"><p>Today&rsquo;s counter needs JavaScript. Call +92 300 555 0147 to check what&rsquo;s left.</p></div></noscript>
+  </section>
+
+  <!-- 02 OVEN DEPARTURES -->
+  <section class="bakes sec on-blue grain" id="bakes" aria-labelledby="bakes-title">
+    <div class="inner">
+      <div class="sec-head">
+        <span class="plaque"><b><span>02</span></b><span>Oven departures</span></span>
+        <h2 id="bakes-title" data-split>Four bakes a day. Time your visit to the oven.</h2>
+        <p>Lahore time. The 7:00 bake is the full range; later bakes top up what sold.</p>
+      </div>
+      <div class="next" aria-live="polite">
+        <div>
+          <small id="next-label">Next batch out in</small>
+          <div class="next-what" id="next-what">Butter croissants, pain au chocolat, cardamom buns</div>
+        </div>
+        <div class="clock" id="clock">00:00:00</div>
+      </div>
+      <div class="board" id="board" role="table" aria-label="Today's oven times">
+        <div class="b-row head" role="row"><span role="columnheader">Out at</span><span role="columnheader">Bake</span><span role="columnheader">Status</span></div>
+      </div>
+      <p class="board-note">Closed Mondays, the oven rests. Friday has a break for Jumu&rsquo;ah, 12:30&ndash;14:30.</p>
+    </div>
+  </section>
+
+  <!-- 03 BUNDLES -->
+  <section class="sec on-light" id="bundles" aria-labelledby="bundles-title">
+    <div class="inner">
+      <div class="bundles-top">
+        <div class="sec-head">
+          <span class="plaque"><b><span>03</span></b><span>Bundles</span></span>
+          <h2 id="bundles-title" data-split>Feed the table, pay less per loaf</h2>
+          <p>Bundles are packed the night before, so they are the one sure way to get a seeded rye on a Saturday.</p>
+        </div>
+        <figure class="bundle-photo reveal-media" data-media="croissants" style="margin:0">
+          <!-- HEYGEN: still frame or 5 s clip, 4:3. Rows of laminated butter croissants and knotted cardamom buns cooling on a steel bakery rack, golden flaky layers, cool daylight, blue-grey linen and a workwear-blue wall behind. No people, no text. -->
+          <div class="media-art" aria-hidden="true" id="tray-art"></div>
+        </figure>
+      </div>
+      <div class="bundles-grid" id="bundles-grid"></div>
+    </div>
+  </section>
+
+  <!-- 04 PRE-ORDER -->
+  <section class="preorder sec on-light" id="preorder" aria-labelledby="po-title">
+    <div class="inner">
+      <div class="sec-head">
+        <span class="plaque"><b><span>04</span></b><span>Pre-order</span></span>
+        <h2 id="po-title" data-split>Reserve tonight, collect warm tomorrow</h2>
+        <p id="po-cutoff">Orders close at 8:00 pm for next-morning pickup. Pay at the counter.</p>
+      </div>
+      <div class="po-grid">
+        <form class="po-form" id="po-form" novalidate>
+          <fieldset><legend>1 &middot; Pickup day</legend><div class="days" id="days"></div></fieldset>
+          <fieldset><legend>2 &middot; Pickup window</legend><div class="slots" id="slots"></div></fieldset>
+          <fieldset><legend>3 &middot; What should we hold?</legend><div class="qty-list" id="qty-list"></div></fieldset>
+          <fieldset>
+            <legend>4 &middot; Name on the bag</legend>
+            <div class="two">
+              <div class="field"><label for="po-name">Name *</label><input id="po-name" name="name" autocomplete="name" placeholder="Ayesha K." required></div>
+              <div class="field"><label for="po-phone">Mobile *</label><input id="po-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="0300 1234567" required></div>
+            </div>
+          </fieldset>
+        </form>
+        <aside class="receipt" aria-live="polite" aria-label="Your pre-order ticket">
+          <h3>Levain &amp; Co.</h3>
+          <div class="sub">Pre-order ticket &middot; pay at pickup</div>
+          <div class="r-lines" id="r-lines"><div class="r-empty">Nothing held yet. Add a loaf.</div></div>
+          <div class="r-meta"><span id="r-day">Pickup: choose a day</span><span id="r-slot">Window: 8:00&ndash;9:00</span></div>
+          <div class="r-total"><span>Total</span><span id="r-total">Rs 0</span></div>
+          <button class="btn btn-blue" type="submit" form="po-form">Hold my order</button>
+          <div class="err" id="po-err" role="alert"></div>
+          <div class="confirm" id="po-confirm"></div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 STORY -->
+  <section class="sec on-light" id="story" aria-labelledby="story-title">
+    <div class="inner">
+      <div class="story-grid">
+        <div class="baker">
+          <span class="plaque"><b><span>05</span></b><span>48 hours</span></span>
+          <h2 id="story-title" data-split>Why a loaf takes two days</h2>
+          <figure class="story-photo reveal-media" data-media="crumb" style="margin:0">
+            <!-- HEYGEN: 5 s clip or still, 16:10. A halved country sourdough slowly rotating on an oak board, revealing an open, glossy crumb and a dark blistered crust, flour-dusted blue-striped linen beneath, soft side daylight. No hands, no people, no text. -->
+            <div class="media-art" aria-hidden="true">
+              <svg viewBox="0 0 300 300"><g fill="none" stroke="#A9895F" stroke-width="7"><path d="M150 34a116 116 0 1 1-.1 0"/></g><g fill="none" stroke="#C9AC80" stroke-width="3" opacity=".9"><path d="M150 56a94 94 0 1 1-.1 0"/><path d="M150 76a74 74 0 1 1-.1 0"/><path d="M150 96a54 54 0 1 1-.1 0"/><path d="M150 116a34 34 0 1 1-.1 0"/></g><g fill="none" stroke="#F5F4EF" stroke-width="2" opacity=".75"><path d="M150 66a84 84 0 1 1-.1 0"/><path d="M150 86a64 64 0 1 1-.1 0"/><path d="M150 106a44 44 0 1 1-.1 0"/></g></svg>
+            </div>
+          </figure>
+          <blockquote>&ldquo;Most of the work is waiting. The flour and the levain do the rest.&rdquo;</blockquote>
+          <p>Hira Saeed started Levain &amp; Co. from a home oven in 2019, feeding the same starter every morning. Whole-wheat chakki atta comes from a single farm in Okara, and every loaf spends a full night in the cold room before it meets the oven.</p>
+          <cite>Hira Saeed &middot; head baker</cite>
+        </div>
+        <div class="ferment-wrap" id="ferment"><span class="ferment-fill" id="ferment-fill" aria-hidden="true"></span>
+          <ol class="ferment">
+            <li class="step"><span class="h">HOUR 00 &middot; DAY 1, 08:00</span><h3>Levain build</h3><p>A spoon of the 2019 starter is fed flour and water at 1:5:5 and left to rise and peak.</p><span class="t">26&deg;C &middot; 10 hours</span></li>
+            <li class="step"><span class="h">HOUR 10 &middot; 18:00</span><h3>Autolyse</h3><p>Flour and water rest together for an hour so the bran softens and the gluten starts on its own.</p><span class="t">Hydration 78%</span></li>
+            <li class="step"><span class="h">HOUR 11 &middot; 19:00</span><h3>Mix &amp; salt</h3><p>The ripe levain and sea salt go in by hand. No commercial yeast, no improvers.</p><span class="t">2% salt &middot; 20% levain</span></li>
+            <li class="step"><span class="h">HOUR 12&ndash;17</span><h3>Bulk ferment</h3><p>Four sets of coil folds in the first two hours, then the dough is left to grow by about half.</p><span class="t">25&deg;C &middot; 5 hours</span></li>
+            <li class="step"><span class="h">HOUR 17 &middot; DAY 2, 01:00</span><h3>Divide &amp; shape</h3><p>Each loaf is weighed, pre-shaped, rested, then shaped tight and set seam-up in a linen-lined banneton.</p><span class="t">900 g per country loaf</span></li>
+            <li class="step"><span class="h">HOUR 18&ndash;46</span><h3>Cold retard</h3><p>A long, cold night slows the yeast and lets the bacteria build the sour, nutty flavour and the blistered crust.</p><span class="t">4&deg;C &middot; 28 hours</span></li>
+            <li class="step"><span class="h">HOUR 46 &middot; DAY 3, 06:00</span><h3>Score &amp; bake</h3><p>Turned out cold, scored once at a low angle, baked with steam so the ear lifts.</p><span class="t">250&deg;C then 230&deg;C &middot; 45 min</span></li>
+            <li class="step"><span class="h">HOUR 48 &middot; 07:00</span><h3>On the counter</h3><p>Out of the oven, onto the racks, onto the shelf. Core temperature 97&deg;C.</p><span class="t">Cool 1 hour before slicing</span></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 VISIT -->
+  <section class="visit sec on-blue grain" id="visit" aria-labelledby="visit-title">
+    <div class="inner">
+      <div class="sec-head">
+        <span class="plaque"><b><span>06</span></b><span>Visit</span></span>
+        <h2 id="visit-title" data-split>Y Block Commercial, DHA Phase 3</h2>
+      </div>
+      <div class="visit-grid">
+        <div>
+          <div class="status" id="open-status" aria-live="polite"><i></i><span>Checking hours</span></div>
+          <table class="hours" id="hours" aria-label="Opening hours">
+            <tbody>
+              <tr data-d="2"><td>Tuesday</td><td>7:00 &ndash; 18:00</td></tr>
+              <tr data-d="3"><td>Wednesday</td><td>7:00 &ndash; 18:00</td></tr>
+              <tr data-d="4"><td>Thursday</td><td>7:00 &ndash; 18:00</td></tr>
+              <tr data-d="5"><td>Friday</td><td>7:00 &ndash; 12:30 &middot; 14:30 &ndash; 18:00</td></tr>
+              <tr data-d="6"><td>Saturday</td><td>7:00 &ndash; 18:00</td></tr>
+              <tr data-d="0"><td>Sunday</td><td>7:00 &ndash; 15:00</td></tr>
+              <tr data-d="1" class="closed"><td>Monday</td><td>Closed, the oven rests</td></tr>
+            </tbody>
+          </table>
+          <div class="addr">
+            <p>Shop 9, Y Block Commercial, DHA Phase 3, Lahore</p>
+            <p class="mono">+92 300 555 0147 &middot; call or WhatsApp<br>Two doors from the bank &middot; parking in front after 9 am</p>
+          </div>
+          <div class="visit-ctas">
+            <a class="btn btn-wheat magnetic" href="https://www.google.com/maps/dir/?api=1&amp;destination=31.4770,74.3786" target="_blank" rel="noopener">Get directions</a>
+            <a class="btn btn-line" href="https://wa.me/923005550147?text=Hi%20Levain%20%26%20Co.%2C%20is%20there%20seeded%20rye%20left%20today%3F" target="_blank" rel="noopener">WhatsApp the counter</a>
+          </div>
+        </div>
+        <div class="mapbox" id="mapbox">
+          <div class="map" id="map" data-lat="31.4770" data-lng="74.3786" data-zoom="16" data-tiles="light_all" role="region" aria-label="Map showing Levain &amp; Co., Shop 9, Y Block Commercial, DHA Phase 3, Lahore"></div>
+          <div class="map-fallback">
+            <span class="mf-k">Find the blue shopfront</span>
+            <span class="mf-a">Shop 9, Y Block Commercial<br>DHA Phase 3, Lahore</span>
+            <span class="mf-c">31.4770&deg; N, 74.3786&deg; E<br>Tue&ndash;Sat 7:00&ndash;18:00 &middot; Sun 7:00&ndash;15:00 &middot; Mon closed</span>
+            <a class="btn btn-blue" href="https://www.google.com/maps/dir/?api=1&amp;destination=31.4770,74.3786" target="_blank" rel="noopener">Open in Google Maps</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="inner">
+    <p class="foot-mark" aria-hidden="true">Levain <span>&amp;</span> Co.</p>
+    <div class="foot-cols">
+      <div><h4>Bakery</h4><p>Shop 9, Y Block Commercial<br>DHA Phase 3, Lahore</p></div>
+      <div><h4>Hours</h4><p>Tue&ndash;Sat 7:00&ndash;18:00<br>Sun 7:00&ndash;15:00 &middot; Mon closed</p></div>
+      <div><h4>Contact</h4><ul><li>+92 300 555 0147</li><li><a href="https://wa.me/923005550147" target="_blank" rel="noopener">WhatsApp the counter</a></li><li>Instagram &middot; Facebook &middot; TikTok</li></ul></div>
+      <div>
+        <h4>Bake alerts</h4>
+        <p>One WhatsApp message when the seeded rye comes out.</p>
+        <form class="alert-form" id="alert-form" novalidate>
+          <label class="vh" for="alert-phone">WhatsApp number</label>
+          <input id="alert-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="0300 1234567">
+          <button class="btn btn-wheat" type="submit">Join</button>
+        </form>
+        <div class="alert-ok" id="alert-ok" aria-live="polite"></div>
+      </div>
+    </div>
+    <div class="legal"><span>Concept mockup &mdash; fictional business. &copy; 2026 Levain &amp; Co., Lahore.</span><span>Prices in PKR, inclusive of tax.</span></div>
+  </div>
+</footer>
+
+<nav class="actionbar" aria-label="Quick actions">
+  <a class="main" href="#preorder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>Pre-order</a>
+  <a href="tel:+923005550147"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-3 2a11 11 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg>Call</a>
+  <a href="https://wa.me/923005550147" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20l1.4-4A8 8 0 1 1 8 18.6L4 20Z"/></svg>Chat</a>
+  <a href="https://www.google.com/maps/dir/?api=1&amp;destination=31.4770,74.3786" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-6.3 7-12a7 7 0 0 0-14 0c0 5.7 7 12 7 12Z"/><path d="M12 6.5 14.5 9 12 11.5 9.5 9Z"/></svg>Map</a>
+</nav>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+/* ---------- Media manifest: set a path and the photo/video replaces the illustration ---------- */
+const MEDIA = {
+  hero:   { mp4: null, poster: null, alt: 'Sourdough loaves coming out of the deck oven at dawn' },
+  photos: { croissants: null, crumb: null },   // e.g. '../assets/bakery-levain/crumb.webp'
+  alts:   { croissants: 'Croissants and cardamom buns cooling on a bakery rack', crumb: 'A halved country sourdough showing its open crumb' }
+};
+
+/* ---------- Data (mirrors future Supabase tables: items, deals, hours) ---------- */
+const ITEMS = [
+  {slug:'country', name:'Country sourdough', kind:'boule', desc:'White and 15% chakki atta, open crumb, deep crust.', price:1150, unit:'900 g', fresh_at:'07:00', sold_out:false},
+  {slug:'atta', name:'Chakki atta levain', kind:'batard', desc:'60% whole-wheat from Okara. Nutty, tight crumb.', price:1050, unit:'850 g', fresh_at:'07:00', sold_out:false},
+  {slug:'rye', name:'Seeded rye', kind:'rye', desc:'Sunflower, flax and sesame. Slices thin for days.', price:1350, unit:'1 kg tin', fresh_at:'07:00', sold_out:true, back_at:'12:00'},
+  {slug:'baguette', name:'Baguette', kind:'baguette', desc:'Overnight poolish, crackling crust.', price:480, unit:'each', fresh_at:'07:30', sold_out:false},
+  {slug:'croissant', name:'Butter croissant', kind:'croissant', desc:'27 layers, cultured butter, 3-day lamination.', price:450, unit:'each', fresh_at:'09:30', sold_out:false},
+  {slug:'painchoc', name:'Pain au chocolat', kind:'painchoc', desc:'Two batons of 64% dark chocolate.', price:520, unit:'each', fresh_at:'09:30', sold_out:true, back_at:'16:00'},
+  {slug:'focaccia', name:'Rosemary focaccia', kind:'focaccia', desc:'Olive oil, flaky salt, rosemary from the roof.', price:900, unit:'quarter slab', fresh_at:'12:00', sold_out:false},
+  {slug:'bun', name:'Cardamom bun', kind:'bun', desc:'Green cardamom sugar, knotted by hand.', price:380, unit:'each', fresh_at:'09:30', sold_out:false}
+];
+const PRICE = Object.fromEntries(ITEMS.map(i => [i.slug, i]));
+const BATCHES = [
+  {t:'07:00', what:['Country sourdough','Chakki atta levain','Seeded rye','Baguette']},
+  {t:'09:30', what:['Butter croissant','Pain au chocolat','Cardamom bun']},
+  {t:'12:00', what:['Rosemary focaccia','Seeded rye','Croissants, second bake']},
+  {t:'16:00', what:['Evening baguettes','Pain au chocolat','Focaccia slab']}
+];
+const DEALS = [
+  {title:'Weekend bread box', for:'Fri &amp; Sat pickup', type:'bundle', items:[['country',1],['rye',1],['croissant',4],['Cultured butter, 200 g',1,650]], price:4150, badge:'Save', ends_at:'2099-12-31'},
+  {title:'Breakfast for 4', for:'Any day, before 11 am', type:'bundle', items:[['croissant',4],['bun',4],['baguette',1],['Cultured butter, 200 g',1,650]], price:3990, badge:'Save', ends_at:'2099-12-31'},
+  {title:'Loaf subscription', for:'1 country loaf a week', type:'percent', items:[['country',4]], price:3900, per:'/ month', badge:'Save', ends_at:'2099-12-31'},
+  {title:'Basant focaccia platter', for:'Feb only', type:'bundle', items:[['focaccia',3]], price:2300, badge:'Save', ends_at:'2026-02-28'}
+];
+const HOURS = {0:[['07:00','15:00']],1:[],2:[['07:00','18:00']],3:[['07:00','18:00']],4:[['07:00','18:00']],5:[['07:00','12:30'],['14:30','18:00']],6:[['07:00','18:00']]};
+const SLOTS = ['8:00–9:00','9:00–10:00','10:00–11:00','16:00–17:00'];
+const PREORDERABLE = ['country','atta','rye','baguette','croissant','painchoc','focaccia','bun'];
+
+const rs = n => 'Rs ' + n.toLocaleString('en-PK');
+const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const FINE = matchMedia('(pointer: fine)').matches;
+function nowPKT(){ try { return new Date(new Date().toLocaleString('en-US', {timeZone:'Asia/Karachi'})); } catch(e){ return new Date(); } }
+function minutesOf(t){ const [h,m] = t.split(':').map(Number); return h*60+m; }
+const DAYS_LONG = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+
+/* ---------- Bread illustrations (no dots: dimples are pressed arcs, seeds are grains) ---------- */
+const K = {crust:'#B87436', dark:'#7A4520', crumb:'#F3E3C3', flour:'#FBF7EE', choc:'#3A2015', herb:'#5E7A4A'};
+function breadSVG(kind){
+  const sh = '<ellipse cx="110" cy="146" rx="84" ry="7" fill="rgba(27,26,24,.22)"/>';
+  const v = (inner) => `<svg viewBox="0 0 220 156" aria-hidden="true">${sh}${inner}</svg>`;
+  switch(kind){
+    case 'boule': return v(`<path d="M30 140C24 92 60 46 110 44C160 46 196 92 190 140C170 150 50 150 30 140Z" fill="${K.crust}"/><path d="M30 140C24 92 60 46 110 44C160 46 196 92 190 140" fill="none" stroke="${K.dark}" stroke-width="4"/><path d="M58 82C86 60 136 58 164 72C134 54 90 54 58 82Z" fill="${K.crumb}"/><path d="M58 82C88 58 136 56 164 72" fill="none" stroke="${K.dark}" stroke-width="3"/><path d="M42 118C76 100 144 100 178 118M56 98C86 84 134 84 164 98" stroke="${K.flour}" stroke-opacity=".55" stroke-width="2.5" fill="none"/>`);
+    case 'batard': return v(`<path d="M14 132C14 96 60 70 110 70C160 70 206 96 206 132C180 146 40 146 14 132Z" fill="#9E5F2C"/><g fill="none" stroke="${K.crumb}" stroke-width="5" stroke-linecap="round"><path d="M52 98l26-14M92 90l28-12M134 92l26-12"/></g><path d="M30 122C70 112 150 112 190 122" stroke="${K.flour}" stroke-opacity=".4" stroke-width="2" fill="none"/>`);
+    case 'rye': return v(`<rect x="34" y="62" width="152" height="80" rx="8" fill="#5B3A22"/><path d="M34 76C34 56 186 56 186 76" fill="#6C4528"/><g fill="#E9DDC4">${Array.from({length:36},(_,i)=>`<path d="M${46+(i*37)%132} ${64+(i*23)%70}l5 -1.6" stroke="#E9DDC4" stroke-width="2.2" stroke-linecap="round" transform="rotate(${(i*47)%180} ${46+(i*37)%132} ${64+(i*23)%70})"/>`).join('')}</g>`);
+    case 'baguette': return v(`<g transform="rotate(-8 110 100)"><path d="M10 112C10 92 210 80 212 98C214 116 14 132 10 112Z" fill="#C0803E"/><g stroke="${K.crumb}" stroke-width="5" stroke-linecap="round"><path d="M36 106l22-12M76 102l22-12M116 98l22-12M156 94l22-12"/></g></g>`);
+    case 'croissant': return v(`<path d="M24 120C30 86 70 64 110 64C150 64 190 86 196 120C182 132 160 116 150 104C136 120 84 120 70 104C60 116 38 132 24 120Z" fill="#D18E42"/><g fill="none" stroke="#9A5A22" stroke-width="3"><path d="M70 104C76 84 90 72 110 68M150 104C144 84 130 72 110 68M110 68V112M88 74C84 90 86 104 92 114M132 74C136 90 134 104 128 114"/></g><path d="M60 82C80 70 140 70 160 82" stroke="#F2C27E" stroke-width="3" fill="none" opacity=".6"/>`);
+    case 'painchoc': return v(`<rect x="34" y="72" width="152" height="68" rx="14" fill="#C98840"/><g fill="none" stroke="#9A5A22" stroke-width="3"><path d="M40 92H180M40 110H180M40 126H180"/></g><rect x="26" y="96" width="16" height="10" rx="2" fill="${K.choc}"/><rect x="178" y="96" width="16" height="10" rx="2" fill="${K.choc}"/><rect x="26" y="114" width="16" height="10" rx="2" fill="${K.choc}"/><rect x="178" y="114" width="16" height="10" rx="2" fill="${K.choc}"/>`);
+    case 'focaccia': return v(`<rect x="18" y="76" width="184" height="64" rx="6" fill="#DCA554"/><rect x="18" y="76" width="184" height="12" rx="6" fill="#E8BB6C"/><g fill="none" stroke="#B07330" stroke-width="3" stroke-linecap="round">${Array.from({length:15},(_,i)=>`<path d="M${30+(i%5)*36} ${100+Math.floor(i/5)*14}q5 4 10 0"/>`).join('')}</g><g stroke="${K.herb}" stroke-width="2.5" stroke-linecap="round" fill="none"><path d="M50 90l14 6M54 88l2 6M60 92l2 -6M130 112l16 4M136 110l0 6M142 116l2 -6M160 92l12 8M164 92l0 6"/></g>`);
+    case 'bun': return v(`<path d="M46 132C40 100 60 76 82 76C100 76 110 90 110 104C110 90 120 76 138 76C160 76 180 100 174 132C150 142 70 142 46 132Z" fill="#C98A44"/><path d="M60 96C76 84 98 92 102 106C106 120 92 130 78 128M160 96C144 84 122 92 118 106C114 120 128 130 142 128" fill="none" stroke="#8E5523" stroke-width="4" stroke-linecap="round"/><g fill="#FFFDF4">${Array.from({length:14},(_,i)=>`<rect x="${62+(i*19)%96}" y="${88+(i*13)%34}" width="5" height="2.4" rx=".8" transform="rotate(${i*31} ${64+(i*19)%96} ${89+(i*13)%34})"/>`).join('')}</g><g fill="#6C8F4E"><rect x="94" y="96" width="5" height="3" rx="1" transform="rotate(30 96 97)"/><rect x="124" y="114" width="5" height="3" rx="1" transform="rotate(-20 126 115)"/></g>`);
+  }
+  return '';
+}
+
+/* ---------- Counter ---------- */
+document.getElementById('counter-track').innerHTML = ITEMS.map(i => `
+  <article class="item${i.sold_out ? ' sold' : ''}">
+    <div class="item-art">${breadSVG(i.kind)}<span class="fresh">${i.sold_out ? 'Sold out &middot; back ' + i.back_at : 'Fresh at ' + i.fresh_at}</span></div>
+    <div class="item-body">
+      <h3>${i.name}</h3>
+      <p>${i.desc}</p>
+      <div class="price-row"><span>${rs(i.price)}</span><small>${i.unit}</small></div>
+    </div>
+  </article>`).join('');
+
+/* tray illustration for the bundles photo slot */
+document.getElementById('tray-art').innerHTML = `<svg viewBox="0 0 420 300"><rect x="20" y="214" width="380" height="14" fill="#9AA3AB"/><rect x="20" y="228" width="380" height="5" fill="#7A838B"/><path d="M40 233v50M380 233v50" stroke="#7A838B" stroke-width="5"/>
+  <g transform="translate(26 92) scale(.82)">${breadSVG('croissant').replace(/<\/?svg[^>]*>/g,'')}</g><g transform="translate(150 96) scale(.8)">${breadSVG('bun').replace(/<\/?svg[^>]*>/g,'')}</g><g transform="translate(270 92) scale(.82)">${breadSVG('croissant').replace(/<\/?svg[^>]*>/g,'')}</g>
+  <g transform="translate(86 26) scale(.7)">${breadSVG('painchoc').replace(/<\/?svg[^>]*>/g,'')}</g><g transform="translate(214 24) scale(.72)">${breadSVG('bun').replace(/<\/?svg[^>]*>/g,'')}</g></svg>`;
+
+/* ---------- Oven departure board ---------- */
+const board = document.getElementById('board');
+board.insertAdjacentHTML('beforeend', BATCHES.map((b, i) => `<div class="b-row" role="row" data-i="${i}"><span class="b-time" role="cell">${b.t}</span><span class="b-what" role="cell">${b.what.join(' &middot; ')}</span><span role="cell"><span class="b-st">Later</span></span></div>`).join(''));
+const rows = [...board.querySelectorAll('.b-row[data-i]')];
+function tick(){
+  const now = nowPKT();
+  const mins = now.getHours()*60 + now.getMinutes() + now.getSeconds()/60;
+  const monday = now.getDay() === 1;
+  const nextIdx = monday ? -1 : BATCHES.findIndex(b => minutesOf(b.t) > mins);
+  rows.forEach((r, i) => {
+    const out = !monday && minutesOf(BATCHES[i].t) <= mins;
+    const up = i === nextIdx;
+    r.classList.toggle('out', out); r.classList.toggle('up', up);
+    const label = monday ? 'Tuesday' : out ? 'Out of oven' : up ? 'Up next' : 'Later';
+    const st = r.querySelector('.b-st'); if (st.textContent !== label) st.textContent = label;
+  });
+  const label = document.getElementById('next-label'), what = document.getElementById('next-what');
+  let target, list;
+  if (nextIdx === -1){
+    const t = new Date(now); t.setDate(t.getDate() + 1);
+    if (t.getDay() === 1) t.setDate(t.getDate() + 1);
+    t.setHours(7,0,0,0);
+    target = t; list = BATCHES[0].what;
+    label.textContent = monday ? 'Closed Mondays. First bake Tuesday in' : 'Last bake is out. First bake in';
+  } else {
+    const t = new Date(now); const m = minutesOf(BATCHES[nextIdx].t); t.setHours(Math.floor(m/60), m%60, 0, 0);
+    target = t; list = BATCHES[nextIdx].what; label.textContent = 'Next batch out in';
+  }
+  what.textContent = list.join(', ');
+  const diff = Math.max(0, Math.floor((target - now)/1000));
+  const p = n => String(n).padStart(2,'0');
+  document.getElementById('clock').textContent = `${p(Math.floor(diff/3600))}:${p(Math.floor(diff%3600/60))}:${p(diff%60)}`;
+}
+tick(); setInterval(tick, 1000);
+
+/* ---------- Bundles (expired deals drop out by ends_at) ---------- */
+const today = new Date();
+document.getElementById('bundles-grid').innerHTML = DEALS.filter(d => new Date(d.ends_at + 'T23:59:59') >= today).map(d => {
+  let sum = 0;
+  const lines = d.items.map(([slug, q, p]) => {
+    const it = PRICE[slug]; const name = it ? it.name : slug; const each = it ? it.price : p;
+    sum += each * q;
+    return `<li><span>${q} &times; ${name}</span><span>${rs(each*q)}</span></li>`;
+  }).join('');
+  const save = sum - d.price;
+  const perItem = Math.round(save / d.items.reduce((a, [,q]) => a + q, 0));
+  return `<article class="bundle">
+    <div class="bundle-head"><span class="for">${d.for}</span><h3>${d.title}</h3></div>
+    <span class="stamp" aria-label="Save ${rs(save)}">${d.badge}<b data-save="${save}">${rs(save)}</b></span>
+    <div class="bundle-body">
+      <ul>${lines}</ul>
+      <div class="bundle-price"><strong>${rs(d.price)}${d.per ? `<small> ${d.per}</small>` : ''}</strong><s>${rs(sum)}</s><em>About ${rs(perItem)} less per item</em></div>
+      <a class="btn btn-blue" href="#preorder">Reserve this box</a>
+    </div>
+  </article>`;
+}).join('');
+
+/* ---------- Pre-order ---------- */
+const DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function renderDays(){
+  const now = nowPKT(); const pastCutoff = now.getHours() >= 20;
+  let firstOpen = null, html = '';
+  for (let i = 1; i <= 7; i++){
+    const d = new Date(now); d.setDate(now.getDate() + i);
+    const closed = d.getDay() === 1, cut = i === 1 && pastCutoff, disabled = closed || cut;
+    if (!disabled && firstOpen === null) firstOpen = i;
+    const note = closed ? 'Closed' : cut ? 'Cut-off' : (i === 1 ? 'Tomorrow' : '');
+    html += `<div class="day"><input type="radio" name="day" id="day-${i}" value="${DOW[d.getDay()]} ${d.getDate()} ${MON[d.getMonth()]}" ${disabled ? 'disabled' : ''}><label for="day-${i}">${DOW[d.getDay()]}<b>${d.getDate()}</b><small>${note}</small></label></div>`;
+  }
+  document.getElementById('days').innerHTML = html;
+  if (firstOpen !== null) document.getElementById('day-' + firstOpen).checked = true;
+  const left = (20*60) - (now.getHours()*60 + now.getMinutes());
+  document.getElementById('po-cutoff').textContent = (pastCutoff
+    ? 'Tonight’s 8:00 pm cut-off has passed, so the earliest pickup is the day after tomorrow.'
+    : `Order by 8:00 pm for tomorrow. ${Math.floor(left/60)} h ${left%60} m left today.`) + ' Pay at the counter.';
+  document.getElementById('hero-cutoff').innerHTML = pastCutoff
+    ? 'Cut-off passed for tomorrow. <strong>Pre-order for the day after.</strong>'
+    : `Order by <strong>8:00 pm</strong> for tomorrow &middot; <strong>${Math.floor(left/60)} h ${left%60} m</strong> left.`;
+}
+renderDays();
+document.getElementById('slots').innerHTML = SLOTS.map((s, i) => `<span class="slot"><input type="radio" name="slot" id="slot-${i}" value="${s}" ${i === 0 ? 'checked' : ''}><label for="slot-${i}">${s}</label></span>`).join('');
+const qty = {};
+document.getElementById('qty-list').innerHTML = PREORDERABLE.map(slug => {
+  const it = PRICE[slug]; qty[slug] = 0;
+  return `<div class="qty"><div class="qty-name"><b>${it.name}</b><span>${rs(it.price)} &middot; ${it.unit}${it.sold_out ? ' &middot; held from the next bake' : ''}</span></div>
+  <div class="stepper"><button type="button" data-slug="${slug}" data-d="-1" aria-label="Remove one ${it.name}">&minus;</button><output id="q-${slug}" aria-live="polite">0</output><button type="button" data-slug="${slug}" data-d="1" aria-label="Add one ${it.name}">+</button></div></div>`;
+}).join('');
+const form = document.getElementById('po-form');
+function updateReceipt(){
+  const lines = PREORDERABLE.filter(s => qty[s] > 0);
+  const total = lines.reduce((a, s) => a + qty[s] * PRICE[s].price, 0);
+  document.getElementById('r-lines').innerHTML = lines.length
+    ? lines.map(s => `<div class="r-line"><span>${qty[s]} &times; ${PRICE[s].name}</span><span>${rs(qty[s]*PRICE[s].price)}</span></div>`).join('')
+    : '<div class="r-empty">Nothing held yet. Add a loaf.</div>';
+  document.getElementById('r-total').textContent = rs(total);
+  const day = form.querySelector('input[name="day"]:checked'), slot = form.querySelector('input[name="slot"]:checked');
+  document.getElementById('r-day').textContent = 'Pickup: ' + (day ? day.value : 'choose a day');
+  document.getElementById('r-slot').textContent = 'Window: ' + (slot ? slot.value : '');
+}
+document.getElementById('qty-list').addEventListener('click', e => {
+  const b = e.target.closest('button[data-slug]'); if (!b) return;
+  const s = b.dataset.slug; qty[s] = Math.max(0, Math.min(12, qty[s] + Number(b.dataset.d)));
+  document.getElementById('q-' + s).textContent = qty[s];
+  updateReceipt();
+});
+form.addEventListener('change', updateReceipt);
+qty.country = 1; document.getElementById('q-country').textContent = 1;
+qty.croissant = 2; document.getElementById('q-croissant').textContent = 2;
+updateReceipt();
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  const err = document.getElementById('po-err'), conf = document.getElementById('po-confirm');
+  const nameEl = document.getElementById('po-name'), phoneEl = document.getElementById('po-phone');
+  const name = nameEl.value.trim(), phone = phoneEl.value.trim();
+  [nameEl, phoneEl].forEach(el => el.removeAttribute('aria-invalid'));
+  conf.classList.remove('show');
+  if (!PREORDERABLE.some(s => qty[s] > 0)){ err.textContent = 'Add at least one item to hold.'; return; }
+  const day = form.querySelector('input[name="day"]:checked');
+  if (!day){ err.textContent = 'Choose a pickup day.'; return; }
+  if (!name){ err.textContent = 'Add your name so we can label the bag.'; nameEl.setAttribute('aria-invalid','true'); nameEl.focus(); return; }
+  if (phone.replace(/\D/g,'').length < 10){ err.textContent = 'Add an 11-digit mobile number, for example 0300 1234567.'; phoneEl.setAttribute('aria-invalid','true'); phoneEl.focus(); return; }
+  err.textContent = '';
+  conf.innerHTML = `<b>Ticket LV-${Math.floor(1000 + Math.random()*9000)} held for ${name.replace(/</g,'&lt;')}</b><br>${day.value}, ${form.querySelector('input[name="slot"]:checked').value}. Mockup only: no order was sent.`;
+  conf.classList.add('show');
+});
+
+/* ---------- Hours: today + open now ---------- */
+(function(){
+  const n = nowPKT(), d = n.getDay(), m = n.getHours()*60 + n.getMinutes();
+  const row = document.querySelector(`#hours tr[data-d="${d}"]`); if (row) row.classList.add('today');
+  const t12 = mm => { const h = Math.floor(mm/60), mi = mm%60; return `${h}:${String(mi).padStart(2,'0')}`; };
+  const spans = HOURS[d].map(([a,b]) => [minutesOf(a), minutesOf(b)]);
+  const cur = spans.find(([a,b]) => m >= a && m < b);
+  const el = document.getElementById('open-status');
+  let text;
+  if (cur) text = `Open now · until ${t12(cur[1])}`;
+  else {
+    const later = spans.find(([a]) => m < a);
+    if (later) text = `Closed now · opens ${t12(later[0])} today`;
+    else for (let i = 1; i <= 7; i++){ const dd = (d+i)%7; if (HOURS[dd].length){ text = `Closed now · opens ${DAYS_LONG[dd]} ${HOURS[dd][0][0]}`; break; } }
+    el.classList.add('closed');
+  }
+  el.querySelector('span').textContent = text;
+})();
+
+/* ---------- Bake alerts ---------- */
+document.getElementById('alert-form').addEventListener('submit', e => {
+  e.preventDefault();
+  const v = document.getElementById('alert-phone').value.replace(/\D/g,'');
+  document.getElementById('alert-ok').textContent = v.length >= 10 ? 'Added to bake alerts. Mockup only: nothing was sent.' : 'Enter a mobile number with at least 10 digits.';
+});
+
+/* ---------- Media slots ---------- */
+document.querySelectorAll('[data-media]').forEach(slot => {
+  const key = slot.dataset.media;
+  const src = key === 'hero' ? MEDIA.hero.mp4 : MEDIA.photos[key];
+  if (!src) return;
+  let el;
+  if (key === 'hero'){
+    el = document.createElement('video');
+    el.muted = true; el.loop = true; el.playsInline = true; el.preload = 'metadata';
+    el.setAttribute('muted',''); el.setAttribute('playsinline',''); el.setAttribute('aria-hidden','true');
+    if (!REDUCED) el.autoplay = true;
+    if (MEDIA.hero.poster) el.poster = MEDIA.hero.poster;
+    el.addEventListener('loadeddata', () => slot.classList.add('has-media'), {once:true});
+  } else {
+    el = new Image(); el.alt = MEDIA.alts[key] || ''; el.loading = 'lazy'; el.decoding = 'async';
+    el.addEventListener('load', () => slot.classList.add('has-media'), {once:true});
+  }
+  el.className = 'media-layer';
+  el.addEventListener('error', () => el.remove(), {once:true});
+  el.src = src;
+  slot.appendChild(el);
+});
+
+/* ---------- Real map (Leaflet + CARTO), with a designed fallback card ---------- */
+(function(){
+  const el = document.getElementById('map'), box = document.getElementById('mapbox');
+  function cssReady(){
+    const p = document.createElement('div'); p.className = 'leaflet-container';
+    p.style.cssText = 'position:absolute;left:-9999px;top:0;width:1px;height:1px';
+    document.body.appendChild(p); const ok = getComputedStyle(p).overflow === 'hidden'; p.remove(); return ok;
+  }
+  function init(){
+    if (!window.L || !cssReady()) return false;
+    const lat = +el.dataset.lat, lng = +el.dataset.lng;
+    const map = L.map(el, {center:[lat,lng], zoom:+el.dataset.zoom || 16, scrollWheelZoom:false, dragging:!L.Browser.mobile, tap:false});
+    const layer = L.tileLayer('https://{s}.basemaps.cartocdn.com/' + el.dataset.tiles + '/{z}/{x}/{y}{r}.png', {subdomains:'abcd', maxZoom:20,
+      attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'}).addTo(map);
+    let loaded = false;
+    layer.on('tileload', () => { loaded = true; });
+    layer.once('tileerror', () => { if (!loaded) box.classList.remove('map-ready'); });
+    L.marker([lat,lng], {icon:L.divIcon({className:'brand-pin', html:'<span aria-hidden="true">L&amp;C</span>', iconSize:[44,52], iconAnchor:[22,52]}), title:'Levain & Co.', keyboard:true}).addTo(map);
+    box.classList.add('map-ready');
+    return true;
+  }
+  function attempt(){ if (!init()) window.addEventListener('load', init, {once:true}); }
+  if ('IntersectionObserver' in window){
+    const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)){ io.disconnect(); attempt(); } }, {rootMargin:'500px'});
+    io.observe(box);
+  } else attempt();
+})();
+
+/* ---------- Header: transparent over the shopfront, solid after, hides on scroll down ---------- */
+(function(){
+  const head = document.getElementById('site-head'), hero = document.getElementById('top');
+  const strip = document.querySelector('.tb-strip');
+  let lastY = scrollY;
+  function onScroll(){
+    const y = scrollY;
+    const stripH = strip && strip.offsetParent !== null ? strip.offsetHeight : 0;
+    head.style.top = Math.max(0, stripH - y) + 'px';
+    const past = hero.getBoundingClientRect().bottom <= head.offsetHeight + 1;
+    head.classList.toggle('solid', past);
+    if (past && y > lastY + 4) head.classList.add('hide');
+    else if (y < lastY - 4 || !past) head.classList.remove('hide');
+    lastY = y;
+  }
+  addEventListener('scroll', onScroll, {passive:true});
+  addEventListener('resize', onScroll);
+  onScroll();
+  head.addEventListener('focusin', () => head.classList.remove('hide'));
+})();
+
+/* ---------- Magnetic buttons ---------- */
+if (FINE && !REDUCED){
+  document.querySelectorAll('.magnetic').forEach(b => {
+    b.addEventListener('pointermove', e => {
+      const r = b.getBoundingClientRect();
+      b.style.transform = `translate(${((e.clientX - r.left)/r.width - .5)*16}px, ${((e.clientY - r.top)/r.height - .5)*12}px)`;
+    });
+    b.addEventListener('pointerleave', () => { b.style.transform = ''; });
+  });
+}
+
+/* ---------- Motion ---------- */
+(function(){
+  let lenis = null;
+  if (window.Lenis && FINE && !REDUCED){
+    lenis = new Lenis({lerp:.1, smoothWheel:true});
+    if (window.gsap && window.ScrollTrigger){
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add(t => lenis.raf(t * 1000));
+      gsap.ticker.lagSmoothing(0);
+    } else {
+      const raf = t => { lenis.raf(t); requestAnimationFrame(raf); }; requestAnimationFrame(raf);
+    }
+  }
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href^="#"]'); if (!a) return;
+    const id = a.getAttribute('href'); if (id.length < 2) return;
+    const target = document.querySelector(id); if (!target) return;
+    e.preventDefault();
+    const off = id === '#top' ? 0 : -document.getElementById('site-head').offsetHeight;
+    if (lenis) lenis.scrollTo(target, {offset:off, duration:1.4});
+    else window.scrollTo({top:target.getBoundingClientRect().top + scrollY + off, behavior:REDUCED ? 'auto' : 'smooth'});
+    if (target.matches('section, form')) target.setAttribute('tabindex','-1');
+  });
+
+  if (!(window.gsap && window.ScrollTrigger)) return;
+  gsap.registerPlugin(ScrollTrigger);
+  if (window.SplitText) gsap.registerPlugin(SplitText);
+  const EASE = 'expo.out';
+  const stages = [...document.querySelectorAll('#ticket li')];
+  const core = document.getElementById('core');
+
+  function bakeTimeline(){
+    const tl = gsap.timeline({defaults:{ease:'none'}});
+    const st = {t:26};
+    tl.fromTo('#loaf', {scaleY:.58, scaleX:1.06, svgOrigin:'320 388'}, {scaleY:1, scaleX:1, duration:4}, 0)
+      .fromTo('#shadow', {scaleX:1.08, svgOrigin:'320 388'}, {scaleX:1, duration:4}, 0)
+      .fromTo('#score', {opacity:0}, {opacity:1, duration:.6}, 4)
+      .fromTo('#ear', {opacity:0, scaleY:0, svgOrigin:'320 250'}, {opacity:1, scaleY:1, duration:1.6}, 4.6)
+      .fromTo('#score', {opacity:1}, {opacity:0, duration:.4, immediateRender:false}, 4.6)
+      .fromTo('#crust-gold', {opacity:0}, {opacity:1, duration:2}, 6.2)
+      .fromTo('#rings', {opacity:.9}, {opacity:.55, duration:2}, 6.2)
+      .fromTo('#crust-dark', {opacity:0}, {opacity:.85, duration:2.2}, 8.2)
+      .fromTo(st, {t:26}, {t:97, duration:4.2, onUpdate:() => { core.textContent = Math.round(st.t) + '°C'; }}, 6.2)
+      .fromTo('#steam', {opacity:0}, {opacity:.6, duration:1}, 10.4);
+    const stageAt = t => t < 4 ? 0 : t < 6.2 ? 1 : 2;
+    let last = -1;
+    tl.eventCallback('onUpdate', () => {
+      const s = stageAt(tl.time());
+      if (s !== last){ last = s; stages.forEach((li, i) => li.classList.toggle('on', i <= s)); }
+      if (tl.time() < 6.2) core.textContent = '26°C';
+    });
+    return tl;
+  }
+
+  const mm = gsap.matchMedia();
+  mm.add({
+    desk:'(min-width: 768px) and (prefers-reduced-motion: no-preference)',
+    phone:'(max-width: 767px) and (prefers-reduced-motion: no-preference)'
+  }, ctx => {
+    gsap.from('.hero-copy > :not(h1)', {y:24, opacity:0, duration:1.1, stagger:.08, ease:EASE, delay:.25});
+    gsap.from('.window', {scale:1.06, opacity:0, duration:1.4, ease:EASE});
+    gsap.from('.ticket', {y:40, rotate:-8, opacity:0, duration:1.2, ease:EASE, delay:.5});
+    if (ctx.conditions.desk){
+      /* Pin 1: the hero bakes as you scroll */
+      const tl = bakeTimeline();
+      const START = 1.6; let introDone = false;
+      tl.pause(0);
+      const scrubTo = p => gsap.to(tl, {time:START + p * (tl.duration() - START), duration:.6, ease:'power3.out', overwrite:true});
+      const st = ScrollTrigger.create({trigger:'#top', start:'top top', end:'+=110%', pin:true, onUpdate:self => { if (introDone) scrubTo(self.progress); }});
+      gsap.to(tl, {time:START, duration:1.6, ease:'power2.out', delay:.3, onComplete:() => { introDone = true; scrubTo(st.progress); }});
+      gsap.to('#steam path', {y:-10, repeat:-1, yoyo:true, duration:2.4, ease:'sine.inOut', stagger:.3});
+      /* Pin 2: the horizontal display counter */
+      const section = document.getElementById('counter');
+      section.classList.add('is-pinned');
+      const trk = document.getElementById('counter-track');
+      const dist = () => Math.max(0, trk.scrollWidth - window.innerWidth + 24);
+      gsap.to(trk, {x:() => -dist(), ease:'none', scrollTrigger:{trigger:section, start:'top top', end:() => '+=' + dist(), pin:true, scrub:.5, invalidateOnRefresh:true}});
+      return () => section.classList.remove('is-pinned');
+    } else {
+      const tl = bakeTimeline(); tl.duration(3.2); tl.play(0);
+      gsap.from('.item', {y:30, opacity:0, duration:.8, stagger:.06, ease:EASE, scrollTrigger:{trigger:'#counter', start:'top 80%'}});
+    }
+  });
+
+  mm.add('(prefers-reduced-motion: no-preference)', () => {
+    gsap.utils.toArray('.plaque').forEach(p => gsap.from(p, {x:-20, opacity:0, duration:.9, ease:EASE, scrollTrigger:{trigger:p, start:'top 88%'}}));
+    gsap.utils.toArray('.sec-head > p').forEach(p => gsap.from(p, {y:20, opacity:0, duration:1, ease:EASE, scrollTrigger:{trigger:p, start:'top 90%'}}));
+    gsap.from('.b-row[data-i]', {rotateX:-90, opacity:0, duration:.9, stagger:.12, ease:'power3.out', transformPerspective:600, scrollTrigger:{trigger:'#board', start:'top 82%'}});
+    gsap.from('.bundle', {y:50, opacity:0, duration:1, stagger:.12, ease:EASE, scrollTrigger:{trigger:'#bundles-grid', start:'top 84%'}});
+    gsap.utils.toArray('.stamp').forEach(s => gsap.from(s, {scale:1.6, rotate:-10, opacity:0, duration:.55, ease:'back.out(2.4)', scrollTrigger:{trigger:s, start:'top 88%'}}));
+    document.querySelectorAll('.stamp b').forEach(b => {
+      const v = Number(b.dataset.save), o = {n:0};
+      gsap.to(o, {n:v, duration:1.4, ease:'power2.out', scrollTrigger:{trigger:b, start:'top 90%'}, onUpdate:() => { b.textContent = rs(Math.round(o.n/10)*10); }, onComplete:() => { b.textContent = rs(v); }});
+    });
+    gsap.utils.toArray('.reveal-media').forEach(m => {
+      gsap.from(m, {y:60, duration:1.2, ease:EASE, scrollTrigger:{trigger:m, start:'top 90%'}});
+      gsap.fromTo(m.querySelector('.media-art'), {scale:1.18}, {scale:1, duration:1.6, ease:EASE, scrollTrigger:{trigger:m, start:'top 90%'}});
+      gsap.to(m.querySelector('.media-art'), {yPercent:-6, ease:'none', scrollTrigger:{trigger:m, start:'top bottom', end:'bottom top', scrub:true}});
+    });
+    gsap.fromTo('#ferment-fill', {scaleY:0}, {scaleY:1, ease:'none', scrollTrigger:{trigger:'#ferment', start:'top 70%', end:'bottom 60%', scrub:.4}});
+    gsap.utils.toArray('.step').forEach(s => gsap.from(s, {x:28, opacity:0, duration:.9, ease:EASE, scrollTrigger:{trigger:s, start:'top 86%'}}));
+    gsap.from('.foot-mark', {yPercent:40, opacity:0, duration:1.4, ease:EASE, scrollTrigger:{trigger:'.foot', start:'top 85%'}});
+    /* SplitText line reveals on the hero H1 and section H2s */
+    if (window.SplitText){
+      const fontsReady = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+      fontsReady.then(() => {
+        document.querySelectorAll('[data-split]').forEach(h => {
+          const inHero = !!h.closest('#top');
+          SplitText.create(h, {type:'lines,words', mask:'lines', autoSplit:true, onSplit(self){
+            return gsap.from(self.lines, {yPercent:110, duration:1.15, stagger:.09, ease:EASE, delay:inHero ? .1 : 0,
+              scrollTrigger: inHero ? undefined : {trigger:h, start:'top 88%', once:true}});
+          }});
+        });
+        ScrollTrigger.refresh();
+      });
+    }
+  });
+})();
+</script>
+</body>
+</html>

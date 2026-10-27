@@ -1,0 +1,1287 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ember &amp; Bean Roasters</title>
+<meta name="description" content="Ember & Bean Roasters, F-7 Markaz Islamabad: single-origin coffee roasted in 5 kg batches every Tuesday and Friday. Pour-over bar, order-ahead pickup and whole-bean subscriptions.">
+<meta name="theme-color" content="#13291F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CafeOrCoffeeShop",
+  "name": "Ember & Bean Roasters",
+  "description": "Specialty roastery café with a pour-over bar, order-ahead pickup and whole-bean subscriptions.",
+  "servesCuisine": ["Coffee", "Pastries"],
+  "priceRange": "Rs 450 - Rs 3,600",
+  "telephone": "+92 51 555 0142",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Shop 14, Block 9-B, F-7 Markaz (Jinnah Super)",
+    "addressLocality": "Islamabad",
+    "addressCountry": "PK"
+  },
+  "geo": {"@type": "GeoCoordinates", "latitude": 33.7212, "longitude": 73.0570},
+  "hasMap": "https://www.google.com/maps/dir/?api=1&destination=33.7212,73.0570",
+  "openingHoursSpecification": [
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday"], "opens": "08:00", "closes": "23:00"},
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "08:00", "closes": "23:59"},
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Saturday","Sunday"], "opens": "09:00", "closes": "23:59"}
+  ],
+  "hasMenu": "#menu"
+}
+</script>
+<style>
+/* Layout: "cherry to cup" — a pine-green roastery lab. Editorial 12-col grid, oversized Instrument Serif,
+   precise Geist Mono data. Dark pine chapters alternate with limestone chapters; cherry is the only action colour. */
+:root{
+  --pine:#13291F;
+  --pine-2:#1B392C;
+  --pine-3:#22463A;
+  --sage:#A9B79A;
+  --cherry:#B8323F;
+  --cherry-hi:#CC4352;
+  --brass:#C9A25A;
+  --brass-ink:#7A5B1E;
+  --lime:#E5E6DE;
+  --lime-2:#F0F1EB;
+  --ink:#0B1410;
+  --ink-2:#3F4A43;
+  --on-dark:#EEF0E8;
+  --dim:rgba(238,240,232,.68);
+  --hair:rgba(169,183,154,.22);
+  --hair-ink:rgba(11,20,16,.14);
+  --coffee:#3A1E10;
+  --f-display:"Instrument Serif","Iowan Old Style","Palatino Linotype",Georgia,serif;
+  --f-body:"Geist","Segoe UI",system-ui,-apple-system,sans-serif;
+  --f-mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --hdr:72px;
+  --gut-l:max(16px,env(safe-area-inset-left,0px));
+  --gut-r:max(16px,env(safe-area-inset-right,0px));
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:calc(var(--hdr) + 12px)}
+body{margin:0;background:var(--pine);color:var(--on-dark);font:400 17px/1.6 var(--f-body);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opacity:.07;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+img,svg,video{max-width:100%}
+a{color:inherit}
+h1,h2,h3{font-family:var(--f-display);font-weight:400;line-height:.95;margin:0;text-wrap:balance;letter-spacing:-.015em}
+p{margin:0}
+:focus-visible{outline:2px solid var(--brass);outline-offset:3px;border-radius:2px}
+.skip{position:absolute;left:var(--gut-l);top:-60px;z-index:100;background:var(--cherry);color:#fff;padding:12px 16px;border-radius:4px;text-decoration:none;font-weight:600}
+.skip:focus{top:12px}
+.page{overflow-x:clip}
+.wrap{max-width:1320px;margin-inline:auto;padding-left:var(--gut-l);padding-right:var(--gut-r)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.mono{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+.num{font-variant-numeric:tabular-nums}
+
+/* tasting board strip */
+.tb-strip{display:flex;justify-content:space-between;gap:12px;padding:7px max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));background:#111;color:#cfcfcf;font:500 12px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.02em}
+.tb-strip a{color:#fff;text-decoration:none}.tb-strip a:hover{text-decoration:underline}
+.in-board .tb-strip{display:none}
+@media (max-width:480px){.tb-strip span{display:none}}
+
+/* buttons: squared, hairline, one action colour */
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:52px;padding:0 24px;border-radius:3px;font:500 15px/1 var(--f-body);letter-spacing:.01em;text-decoration:none;border:1px solid transparent;cursor:pointer;transition:background-color .25s var(--ease),color .25s,border-color .25s;touch-action:manipulation;white-space:nowrap}
+.btn svg{transition:transform .3s var(--ease)}
+.btn:hover svg{transform:translateX(4px)}
+.btn--cherry{background:var(--cherry);color:#fff}
+.btn--cherry:hover{background:var(--cherry-hi)}
+.btn--line{border-color:rgba(238,240,232,.35);color:var(--on-dark)}
+.btn--line:hover{border-color:var(--brass);color:var(--brass)}
+.btn--ink{background:var(--ink);color:var(--lime)}
+.btn--ink:hover{background:var(--pine-3)}
+.on-light .btn--line{border-color:var(--hair-ink);color:var(--ink)}
+.on-light .btn--line:hover{border-color:var(--ink)}
+
+/* header: transparent over the hero, solid after, hides on scroll down */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:61;background:var(--pine)}
+.hdr{position:sticky;top:env(safe-area-inset-top,0px);z-index:60;margin-bottom:calc(-1 * var(--hdr));transition:transform .5s var(--ease),background-color .35s,border-color .35s;border-bottom:1px solid transparent}
+.hdr.is-solid{background:rgba(19,41,31,.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom-color:var(--hair)}
+.hdr.is-hidden{transform:translateY(-110%)}
+.hdr__in{height:var(--hdr);display:flex;align-items:center;gap:32px}
+.logo{display:flex;align-items:baseline;gap:10px;text-decoration:none;font-family:var(--f-display);font-size:27px;line-height:1;white-space:nowrap}
+.logo i{font-style:italic;color:var(--brass)}
+.logo small{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.16em;color:var(--sage);text-transform:uppercase}
+.nav{display:flex;gap:28px;margin-left:auto}
+.nav a{position:relative;text-decoration:none;font-size:14.5px;color:var(--dim);transition:color .2s;padding-block:6px}
+.nav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--brass);transform:scaleX(0);transform-origin:right;transition:transform .35s var(--ease)}
+.nav a:hover{color:var(--on-dark)}
+.nav a:hover::after{transform:scaleX(1);transform-origin:left}
+.hdr .btn{min-height:42px;padding:0 18px;font-size:14px}
+@media (max-width:900px){.nav{display:none}.hdr .btn{margin-left:auto}.logo small{display:none}}
+@media (max-width:767px){.hdr .btn{display:none}}
+
+/* section label system: (01) — Origins */
+.label{display:flex;align-items:center;gap:14px;font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--brass)}
+.label b{font-weight:500;color:var(--on-dark)}
+.label::after{content:"";height:1px;flex:0 0 56px;background:currentColor;opacity:.5}
+.on-light .label{color:var(--brass-ink)}
+.on-light .label b{color:var(--ink)}
+.sec{position:relative;padding-block:clamp(88px,11vw,168px)}
+.sec-head{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:28px 24px;margin-bottom:clamp(48px,6vw,88px);align-items:end}
+.sec-head .label{grid-column:1 / -1}
+.sec-head h2{grid-column:1 / span 8;font-size:clamp(46px,6.6vw,104px)}
+.sec-head h2 em{font-style:italic;color:var(--brass)}
+.on-light .sec-head h2 em{color:var(--cherry)}
+.sec-head p{grid-column:9 / -1;color:var(--dim);max-width:44ch;font-size:16.5px}
+.on-light .sec-head p{color:var(--ink-2)}
+@media (max-width:900px){.sec-head h2,.sec-head p{grid-column:1 / -1}}
+.on-light{background:var(--lime);color:var(--ink)}
+
+/* media slot (illustration fallback, photo/video fade in over it) */
+.media{position:relative;overflow:hidden;isolation:isolate}
+.media__video,.media__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s var(--ease);z-index:2}
+.media.has-media .media__video,.media.has-media .media__img{opacity:1}
+.reveal-mask{overflow:hidden}
+[data-split] > div{padding-bottom:.14em;margin-bottom:-.14em}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;padding-top:var(--hdr);background:
+  radial-gradient(70% 60% at 78% 42%,rgba(201,162,90,.10),transparent 70%),
+  linear-gradient(180deg,var(--pine) 0%,var(--pine) 70%,var(--pine-2) 100%)}
+.hero__grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px;align-items:center;min-height:min(900px,calc(100svh - 30px));padding-block:24px 64px}
+.hero__copy{grid-column:1 / span 7;position:relative;z-index:2}
+.kicker{display:flex;align-items:center;gap:12px;margin-bottom:28px;font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--sage)}
+.kicker i{display:block;width:8px;height:8px;background:var(--cherry);transform:rotate(45deg)}
+.hero h1{font-size:clamp(56px,8.6vw,138px);line-height:.9;letter-spacing:-.025em}
+.hero h1 em{font-style:italic;color:var(--brass)}
+.lede{margin-top:30px;font-size:clamp(17px,1.35vw,19.5px);color:var(--dim);max-width:46ch}
+.hero__ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:38px}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,max-content));gap:12px 48px;margin:52px 0 0;padding-top:24px;border-top:1px solid var(--hair)}
+.facts div{display:grid;gap:6px}
+.facts dt{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--sage)}
+.facts dd{margin:0;font-family:var(--f-display);font-size:30px;line-height:1}
+.cue{display:flex;align-items:center;gap:14px;margin-top:40px;font-family:var(--f-mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.cue i{position:relative;display:block;width:1px;height:44px;background:var(--hair);overflow:hidden}
+.cue i::after{content:"";position:absolute;left:0;top:-40%;width:1px;height:40%;background:var(--brass);animation:cue 1.9s var(--ease) infinite}
+@keyframes cue{to{transform:translateY(350%)}}
+.hero__art{grid-column:8 / -1;position:relative;justify-self:stretch}
+.plate{position:relative;aspect-ratio:4 / 5;width:100%;max-width:520px;margin-left:auto;border:1px solid var(--hair);background:
+  radial-gradient(80% 60% at 50% 40%,rgba(201,162,90,.12),transparent 70%),linear-gradient(180deg,var(--pine-2),var(--pine));perspective:1000px}
+.plate .media__art{position:absolute;inset:0;display:grid;place-items:center;padding:6% 10% 4%}
+.rig{display:block;width:100%;height:100%;transform-style:preserve-3d;will-change:transform}
+.plate__cap{position:absolute;left:0;right:0;bottom:-1px;display:flex;justify-content:space-between;gap:10px;padding:12px 14px;border-top:1px solid var(--hair);background:rgba(11,20,16,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);font-family:var(--f-mono);font-size:11.5px;letter-spacing:.06em;color:var(--dim);z-index:3}
+.plate__cap b{font-weight:500;color:var(--on-dark)}
+.plate__tag{position:absolute;top:14px;left:14px;z-index:3;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--brass)}
+@media (max-width:900px){
+  .hero__grid{grid-template-columns:minmax(0,1fr);min-height:0;padding-block:28px 56px;gap:40px}
+  .hero__copy,.hero__art{grid-column:1 / -1}
+  .plate{max-width:440px;margin-inline:auto}
+  .facts{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 18px}
+  .facts dd{font-size:23px}
+  .plate__cap{font-size:10.5px;gap:6px}
+}
+/* rig micro animation */
+.streak{animation:streak 1.15s cubic-bezier(.55,0,1,.45) infinite}
+.streak:nth-of-type(2){animation-delay:.38s}.streak:nth-of-type(3){animation-delay:.76s}
+@keyframes streak{0%{transform:translateY(0);opacity:0}12%{opacity:1}100%{transform:translateY(150px);opacity:0}}
+.wave{animation:wave 3.4s linear infinite}
+@keyframes wave{to{transform:translateX(-120px)}}
+.steam path{animation:steam 3.8s ease-in-out infinite;opacity:0}
+.steam path:nth-child(2){animation-delay:1.25s}.steam path:nth-child(3){animation-delay:2.5s}
+@keyframes steam{0%{transform:translateY(14px);opacity:0}35%{opacity:.7}100%{transform:translateY(-28px);opacity:0}}
+
+/* ---------- MARQUEE ---------- */
+.marquee{border-block:1px solid var(--hair);background:var(--ink);overflow:hidden;padding-block:22px}
+.marquee__row{display:flex;width:max-content;animation:marq 42s linear infinite}
+.marquee:hover .marquee__row{animation-play-state:paused}
+.marquee__row span{display:flex;align-items:center;gap:34px;padding-right:34px;font-family:var(--f-display);font-style:italic;font-size:clamp(28px,3.6vw,48px);white-space:nowrap;color:var(--lime)}
+.marquee__row span i{display:block;width:9px;height:9px;background:var(--brass);transform:rotate(45deg)}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+/* ---------- 01 ORIGINS ---------- */
+.origins{background:var(--pine-2)}
+.process{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--hair);margin-bottom:clamp(48px,6vw,80px)}
+.process li{list-style:none;padding:18px 18px 0 0;display:grid;gap:6px;border-right:1px solid var(--hair);padding-left:18px}
+.process li:first-child{padding-left:0}
+.process li:last-child{border-right:0}
+.process b{font-family:var(--f-mono);font-weight:500;font-size:11px;letter-spacing:.14em;color:var(--brass)}
+.process span{font-family:var(--f-display);font-size:28px;line-height:1}
+.process small{color:var(--dim);font-size:14px}
+.process{padding:0;margin-top:0}
+@media (max-width:700px){.process{grid-template-columns:repeat(2,minmax(0,1fr))}.process li:nth-child(2){border-right:0}.process li:nth-child(3){padding-left:0}.process li{padding-bottom:16px}}
+.origins__viewport{overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:14px;scrollbar-width:thin;scrollbar-color:var(--pine-3) transparent}
+.origins__track{display:flex;gap:24px;width:max-content;padding-left:var(--gut-l);padding-right:var(--gut-r)}
+.is-pinned .origins__viewport{overflow:visible;scroll-snap-type:none}
+.origins.is-pinned{padding-bottom:24px}
+.origin{scroll-snap-align:center;flex:none;width:min(86vw,1060px);display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);gap:44px;align-items:center;padding:44px;border:1px solid var(--hair);background:linear-gradient(160deg,rgba(238,240,232,.045),rgba(238,240,232,.01))}
+.origin__bag{display:grid;place-items:center;aspect-ratio:4 / 5;background:radial-gradient(60% 50% at 50% 55%,rgba(201,162,90,.10),transparent 70%)}
+.origin__bag svg{width:min(100%,250px);height:auto;filter:drop-shadow(0 34px 40px rgba(0,0,0,.45))}
+.origin__info{display:grid;gap:20px;min-width:0}
+.origin__meta{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--sage)}
+.origin h3{font-size:clamp(40px,4.8vw,72px)}
+.origin h3 em{font-style:italic;color:var(--brass)}
+.specs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 28px;margin:0}
+.specs div{display:grid;gap:3px;padding-top:12px;border-top:1px solid var(--hair)}
+.specs dt{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--sage)}
+.specs dd{margin:0;font-weight:500;font-size:15.5px}
+.dial{display:flex;align-items:center;gap:18px}
+.dial svg{width:150px;height:auto;flex:none}
+.dial p{font-size:14px;color:var(--dim)}
+.dial strong{display:block;color:var(--on-dark);font-family:var(--f-display);font-weight:400;font-size:26px;line-height:1.1}
+.notes{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.notes li{padding:7px 12px;border:1px solid var(--hair);border-radius:2px;font-size:13.5px;color:var(--on-dark);background:rgba(11,20,16,.25)}
+.buy{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:8px}
+.buy p{font-family:var(--f-display);font-size:36px;line-height:1}
+.buy p small{font-family:var(--f-mono);font-size:11px;color:var(--sage);letter-spacing:.12em;margin-left:8px}
+.origins__foot{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:26px}
+.origins__hint{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.origins__bar{flex:0 0 min(320px,40vw);height:1px;background:var(--hair);position:relative;overflow:hidden}
+.origins__bar i{position:absolute;inset:0;background:var(--brass);transform:scaleX(0);transform-origin:left}
+@media (max-width:767px){
+  .origin{grid-template-columns:minmax(0,1fr);padding:22px;gap:20px;width:86vw}
+  .origin__bag{aspect-ratio:auto;padding-block:8px}
+  .origin__bag svg{width:140px}
+  .dial svg{width:118px}
+  .origins__bar{display:none}
+}
+
+/* ---------- 02 MENU ---------- */
+.menu-top{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px;margin-bottom:clamp(48px,6vw,80px);align-items:end}
+.menu-top .sec-head{grid-column:1 / span 7;margin:0;display:grid;grid-template-columns:minmax(0,1fr);gap:24px}
+.menu-top .sec-head h2,.menu-top .sec-head p{grid-column:auto}
+.feature{grid-column:9 / -1;aspect-ratio:4 / 5;border:1px solid var(--hair-ink);background:linear-gradient(180deg,#D8DACF,#C9CCBF)}
+.feature .media__art{position:absolute;inset:0;display:grid;place-items:center}
+.feature figcaption{position:absolute;left:0;right:0;bottom:0;z-index:3;display:flex;justify-content:space-between;gap:10px;padding:12px 14px;font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);background:rgba(240,241,235,.86);border-top:1px solid var(--hair-ink)}
+@media (max-width:900px){.menu-top .sec-head,.feature{grid-column:1 / -1}.feature{aspect-ratio:16 / 10}}
+.menu-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin:0;padding:0;list-style:none;border-top:1px solid var(--hair-ink);border-left:1px solid var(--hair-ink)}
+@media (max-width:1000px){.menu-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:620px){.menu-grid{grid-template-columns:minmax(0,1fr)}}
+.mcard{perspective:1400px;background:var(--lime);border-right:1px solid var(--hair-ink);border-bottom:1px solid var(--hair-ink)}
+.mcard__inner{display:grid;height:100%;transform-style:preserve-3d;transition:transform .9s var(--ease)}
+.mcard.is-flipped .mcard__inner{transform:rotateY(180deg)}
+.mface{grid-area:1/1;display:flex;flex-direction:column;gap:14px;padding:30px 28px 26px;background:var(--lime);backface-visibility:hidden;-webkit-backface-visibility:hidden;min-width:0;transition:background-color .3s}
+.mcard:hover .mface--front{background:var(--lime-2)}
+.mface--back{transform:rotateY(180deg);background:var(--pine);color:var(--on-dark)}
+.micon{height:104px;display:flex;align-items:flex-end}
+.micon svg{height:104px;width:auto;overflow:visible}
+.mface h3{font-size:36px}
+.mface p.desc{color:var(--ink-2);font-size:15px}
+.mface .detail{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.04em;color:var(--brass-ink);padding-top:12px;border-top:1px solid var(--hair-ink)}
+.mfoot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto;padding-top:8px}
+.mfoot .price{font-family:var(--f-display);font-size:28px;line-height:1}
+.mfoot .price small{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;color:var(--ink-2);margin-right:6px;text-transform:uppercase}
+.flip{appearance:none;display:inline-flex;align-items:center;gap:8px;min-height:44px;border:1px solid var(--hair-ink);background:transparent;color:inherit;border-radius:2px;padding:0 14px;font:500 13px/1 var(--f-body);cursor:pointer;transition:background-color .2s,border-color .2s,color .2s;text-decoration:none}
+.flip:hover{border-color:var(--ink);background:var(--ink);color:var(--lime)}
+.mface--back .flip{border-color:var(--hair)}
+.mface--back .flip:hover{background:var(--brass);border-color:var(--brass);color:var(--ink)}
+.sizes{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.sizes th,.sizes td{padding:13px 0;border-bottom:1px solid var(--hair);text-align:left;font-weight:500}
+.sizes td{text-align:right;font-family:var(--f-display);font-size:26px;font-weight:400}
+.sizes th small{display:block;font-family:var(--f-mono);font-size:10.5px;color:var(--sage);letter-spacing:.08em;text-transform:uppercase}
+.mface--back h3{font-size:30px}
+.mface--back .note{font-size:13px;color:var(--dim)}
+.mcard.is-sold .mface--front > *:not(.sold){opacity:.45}
+.mcard.is-sold .mface--front{background:#DCDDD4}
+.sold{align-self:flex-start;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--lime);padding:6px 9px;border-radius:2px}
+.mcard .steam-s path{opacity:0}
+.mcard.is-live .steam-s path,.mcard:hover .steam-s path{animation:steam 2.9s ease-in-out infinite}
+.mcard.is-live .steam-s path:nth-child(2),.mcard:hover .steam-s path:nth-child(2){animation-delay:.95s}
+.mcard.is-live .ice,.mcard:hover .ice{animation:bob 2.6s ease-in-out infinite}
+.mcard .ice:nth-of-type(2){animation-delay:.5s}
+@keyframes bob{50%{transform:translateY(-4px) rotate(-6deg)}}
+
+/* ---------- 03 PAIRINGS ---------- */
+.pairings{background:var(--lime);padding-top:0}
+.pairs{display:grid;border-top:1px solid var(--ink)}
+.pair{display:grid;grid-template-columns:64px 200px minmax(0,1fr) auto;gap:32px;align-items:center;padding:30px 0;border-bottom:1px solid var(--hair-ink);transition:background-color .3s}
+.pair:hover{background:var(--lime-2)}
+.pair__n{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;color:var(--brass-ink)}
+.pair__art{display:flex;align-items:center;gap:8px}
+.pair__art svg{width:80px;height:80px}
+.pair__art b{font-family:var(--f-display);font-style:italic;font-weight:400;font-size:30px;color:var(--cherry)}
+.pair h3{font-size:clamp(28px,2.8vw,40px)}
+.pair p{color:var(--ink-2);margin-top:8px;max-width:54ch;font-size:15.5px}
+.pair__parts{font-family:var(--f-mono);font-size:11.5px;color:var(--ink-2);margin-top:12px;letter-spacing:.02em}
+.pair__price{display:grid;justify-items:end;gap:8px;text-align:right}
+.pair__price s{color:var(--ink-2);font-size:14px}
+.pair__price strong{font-family:var(--f-display);font-weight:400;font-size:40px;line-height:1}
+.stamp{display:inline-block;padding:7px 10px;background:var(--cherry);color:#fff;font:500 11px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;border-radius:2px;transform-origin:50% 50%}
+.stamp.is-on{animation:stamp 3.2s var(--ease) infinite}
+@keyframes stamp{0%,78%,100%{transform:rotate(0)}84%{transform:rotate(-4deg) translateY(-2px)}92%{transform:rotate(2deg)}}
+@media (max-width:860px){
+  .pair{grid-template-columns:minmax(0,1fr);gap:14px;padding:26px 0}
+  .pair__n{display:none}
+  .pair__price{justify-items:start;text-align:left}
+}
+
+/* ---------- 04 ROOM ---------- */
+.room{background:var(--pine);overflow:hidden}
+.strip__row{display:flex;gap:24px;width:max-content;padding-left:var(--gut-l);padding-right:var(--gut-r)}
+.scene{flex:none;width:clamp(290px,34vw,500px);display:grid;gap:14px;margin:0}
+.scene .media{aspect-ratio:11 / 8;border:1px solid var(--hair)}
+.scene .media__art{position:absolute;inset:-6% 0;display:block}
+.scene .media__art svg{display:block;width:100%;height:100%}
+.scene figcaption{display:flex;justify-content:space-between;gap:12px;font-size:15px;color:var(--dim)}
+.scene figcaption b{color:var(--on-dark);font-weight:500}
+.scene figcaption span{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;white-space:nowrap;color:var(--brass)}
+
+/* ---------- 05 SUBSCRIPTION ---------- */
+.beans__grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px;align-items:start}
+.beans__aside{grid-column:1 / span 5;display:grid;gap:24px;position:sticky;top:calc(var(--hdr) + 32px)}
+.beans__aside h2{font-size:clamp(46px,5.6vw,88px)}
+.beans__aside h2 em{font-style:italic;color:var(--cherry)}
+.beans__aside > p{color:var(--ink-2);font-size:16.5px;max-width:44ch}
+.beans__aside ol{margin:0;padding:0;list-style:none;display:grid;border-top:1px solid var(--hair-ink)}
+.beans__aside li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:8px;padding:14px 0;border-bottom:1px solid var(--hair-ink);color:var(--ink-2);font-size:15.5px}
+.beans__aside li b{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.1em;color:var(--brass-ink);font-weight:500;padding-top:3px}
+.form{grid-column:7 / -1;display:grid;gap:26px;padding:clamp(22px,3vw,40px);background:var(--lime-2);border:1px solid var(--hair-ink)}
+fieldset{border:0;margin:0;padding:0;display:grid;gap:10px;min-width:0}
+legend,.flabel{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);padding:0;margin-bottom:12px}
+.chips{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.chip span{display:grid;gap:4px;padding:14px 16px;border:1px solid var(--hair-ink);border-radius:2px;background:#fff;font-weight:500;font-size:15px;transition:border-color .2s,background-color .2s,color .2s;height:100%}
+.chip span small{font-weight:400;font-family:var(--f-mono);font-size:11px;letter-spacing:.04em;color:var(--ink-2)}
+.chip:hover span{border-color:var(--ink)}
+.chip input:checked + span{background:var(--pine);color:var(--lime);border-color:var(--pine)}
+.chip input:checked + span small{color:var(--sage)}
+.chip input:focus-visible + span{outline:2px solid var(--cherry);outline-offset:2px}
+.row2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.field{display:grid;gap:8px;min-width:0}
+.field label{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
+select,input[type=text],input[type=tel]{width:100%;min-height:50px;padding:0 14px;border-radius:2px;border:1px solid var(--hair-ink);background:#fff;color:var(--ink);font:500 15.5px var(--f-body);transition:border-color .2s}
+select:hover,input[type=text]:hover,input[type=tel]:hover{border-color:var(--ink-2)}
+.on-dark select,.on-dark input[type=text],.on-dark input[type=tel]{background:rgba(238,240,232,.05);color:var(--on-dark);border-color:var(--hair)}
+.on-dark select option{color:var(--ink)}
+.summary{display:grid;gap:10px;padding:22px;background:var(--pine);color:var(--on-dark);font-variant-numeric:tabular-nums}
+.summary div{display:flex;justify-content:space-between;gap:12px;font-size:14.5px}
+.summary div span:first-child{color:var(--dim)}
+.summary .total{padding-top:14px;border-top:1px solid var(--hair);font-family:var(--f-display);font-size:34px;line-height:1}
+.summary .total span:first-child{font-family:var(--f-body);font-size:14.5px;align-self:center}
+.summary .total:first-child{border-top:0;padding-top:0}
+.confirm{padding:16px 18px;background:#DDE8D6;color:#1E3A26;border:1px solid #9FBC92;font-size:15px;border-radius:2px}
+.on-dark .field label{color:var(--dim)}
+.on-dark .confirm{background:rgba(201,162,90,.12);color:var(--on-dark);border-color:rgba(201,162,90,.5)}
+@media (max-width:960px){.beans__aside,.form{grid-column:1 / -1}.beans__aside{position:static}}
+@media (max-width:520px){.row2{grid-template-columns:minmax(0,1fr)}}
+
+/* ---------- 06 VISIT (real map) ---------- */
+.visit{background:var(--pine-2)}
+.visit__grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px;align-items:stretch}
+.mapbox{grid-column:1 / span 7;position:relative;min-height:560px;border:1px solid var(--hair);background:var(--ink);overflow:hidden}
+.map{position:absolute;inset:0;z-index:1;background:#0E1A15}
+.map .leaflet-tile-pane{filter:sepia(.35) hue-rotate(58deg) saturate(1.25) brightness(1.08) contrast(1.02)}
+.map .leaflet-control-attribution{background:rgba(11,20,16,.78);color:var(--dim);font:11px/1.4 var(--f-body)}
+.map .leaflet-control-attribution a{color:var(--brass)}
+.map .leaflet-bar a{background:var(--pine);color:var(--on-dark);border-color:var(--hair)!important;border-radius:0!important}
+.map .leaflet-bar a:hover{background:var(--pine-3)}
+.map .leaflet-bar{border:1px solid var(--hair);border-radius:2px;box-shadow:none}
+.brand-pin{background:none;border:0}
+.brand-pin span{position:relative;display:grid;place-items:center;width:46px;height:46px;background:var(--cherry);color:#fff;font:400 19px/1 var(--f-display);border:2px solid var(--brass);box-shadow:0 10px 24px rgba(0,0,0,.45)}
+.brand-pin span::after{content:"";position:absolute;left:50%;bottom:-10px;width:2px;height:10px;background:var(--brass);transform:translateX(-50%)}
+.map-fallback{position:absolute;inset:0;z-index:2;display:grid;align-content:center;justify-items:start;gap:14px;padding:clamp(24px,4vw,48px);background:
+  linear-gradient(115deg,transparent 0 58%,rgba(201,162,90,.10) 58% 58.4%,transparent 58.4%),linear-gradient(28deg,transparent 0 40%,rgba(169,183,154,.12) 40% 41%,transparent 41%),
+  repeating-linear-gradient(90deg,transparent 0 63px,rgba(169,183,154,.08) 63px 64px),repeating-linear-gradient(0deg,transparent 0 63px,rgba(169,183,154,.08) 63px 64px),var(--ink)}
+.map-fallback p{font-family:var(--f-display);font-size:clamp(32px,3.4vw,46px);line-height:1;max-width:14ch}
+.map-fallback .fb-hours{font-size:15px;color:var(--dim)}
+.map-fallback .fb-pin{display:grid;place-items:center;width:46px;height:46px;background:var(--cherry);border:2px solid var(--brass);font:400 19px/1 var(--f-display);color:#fff}
+.mapbox.map-ready .map-fallback{visibility:hidden}
+.map-card{position:absolute;left:16px;bottom:16px;z-index:500;display:flex;gap:10px;align-items:center;padding:10px 12px;background:rgba(11,20,16,.86);border:1px solid var(--hair);font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);max-width:calc(100% - 32px)}
+.map-card b{color:var(--on-dark);font-weight:500}
+.mapbox:not(.map-ready) .map-card{display:none}
+.visit__side{grid-column:8 / -1;display:grid;gap:24px;align-content:start;min-width:0}
+.panel{padding:clamp(22px,2.6vw,32px);border:1px solid var(--hair);background:rgba(11,20,16,.28);display:grid;gap:18px;align-content:start;min-width:0}
+.panel h3{font-size:34px}
+.status{display:inline-flex;align-items:center;gap:10px;font-family:var(--f-mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--on-dark)}
+.status i{display:block;width:8px;height:8px;transform:rotate(45deg);background:var(--sage)}
+.status.closed i{background:var(--cherry)}
+.hours{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:15px}
+.hours td{padding:11px 0;border-bottom:1px solid var(--hair);vertical-align:top}
+.hours td:last-child{text-align:right;color:var(--on-dark)}
+.hours tr.today td{color:var(--brass)}
+.hours tr.today td:first-child::after{content:" · today";font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase}
+.contact{display:grid;gap:6px;color:var(--dim);font-size:15px}
+.contact b{color:var(--on-dark);font-weight:500;user-select:all;font-variant-numeric:tabular-nums}
+.links{display:flex;flex-wrap:wrap;gap:10px}
+@media (max-width:960px){.mapbox,.visit__side{grid-column:1 / -1}.mapbox{min-height:380px}}
+
+/* ---------- FOOTER ---------- */
+.foot{background:var(--ink);color:var(--dim);padding-block:clamp(72px,9vw,120px) 32px;border-top:1px solid var(--hair)}
+.foot__mark{font-family:var(--f-display);font-size:clamp(64px,15.5vw,250px);line-height:.82;letter-spacing:-.035em;color:var(--lime);margin:0 0 clamp(48px,6vw,80px)}
+.foot__mark em{font-style:italic;color:var(--brass)}
+.foot__cols{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px 24px;padding-top:32px;border-top:1px solid var(--hair)}
+.foot__cols > div{grid-column:span 3;display:grid;gap:8px;align-content:start;font-size:15px}
+.foot__cols h4{margin:0 0 6px;font-family:var(--f-mono);font-weight:500;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--brass)}
+.foot__cols a{text-decoration:none;color:var(--on-dark)}
+.foot__cols a:hover{color:var(--brass)}
+.foot__cols b{color:var(--on-dark);font-weight:500;user-select:all}
+.news{grid-column:span 3}
+.news form{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;margin-top:6px}
+.news input{min-height:46px}
+.news .btn{min-height:46px;padding:0 16px}
+.news p.ok{grid-column:1 / -1;font-size:13.5px;color:var(--sage)}
+.legal{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:56px;padding-top:20px;border-top:1px solid var(--hair);font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+@media (max-width:960px){.foot__cols > div,.news{grid-column:span 6}}
+@media (max-width:560px){.foot__cols > div,.news{grid-column:1 / -1}}
+
+/* ---------- PHONE ACTION BAR ---------- */
+.abar{display:none}
+@media (max-width:767px){
+  .abar{position:fixed;left:0;right:0;bottom:0;z-index:70;display:grid;grid-template-columns:1.7fr 1fr 1fr 1fr;gap:6px;padding:10px var(--gut-r) calc(10px + env(safe-area-inset-bottom,0px)) var(--gut-l);background:rgba(11,20,16,.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--hair)}
+  .abar a{display:grid;place-items:center;min-height:48px;border-radius:2px;text-decoration:none;font-weight:500;font-size:13.5px;border:1px solid var(--hair);color:var(--on-dark)}
+  .abar a.primary{background:var(--cherry);border-color:var(--cherry);color:#fff;font-size:15px}
+  body{padding-bottom:calc(78px + env(safe-area-inset-bottom,0px))}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition-duration:.01ms!important}
+  .steam path{opacity:.5}
+  .mcard.is-flipped .mcard__inner{transform:none}
+  .mcard.is-flipped .mface--front{visibility:hidden}
+  .mface--back{transform:none;visibility:hidden}
+  .mcard.is-flipped .mface--back{visibility:visible}
+}
+</style>
+</head>
+<body>
+<div class="tb-strip"><a href="../index.html">&larr; Tasting Board</a><span>Mockup 01 / 10 &middot; concept, not a live site</span></div>
+<script>try{if(window.parent!==window&&window.parent.__TASTING_BOARD__)document.documentElement.classList.add('in-board')}catch(e){}</script>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="hdr" id="hdr">
+  <div class="wrap hdr__in">
+    <a class="logo" href="#top" aria-label="Ember and Bean Roasters, home">Ember <i>&amp;</i> Bean <small>Roasters &middot; Est. 2019</small></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#origins">Origins</a><a href="#menu">Menu</a><a href="#pairings">Pairings</a><a href="#beans">Subscribe</a><a href="#visit">Visit</a>
+    </nav>
+    <a class="btn btn--cherry" href="#order" data-magnetic>Order ahead</a>
+  </div>
+</header>
+
+<main class="page" id="main">
+  <!-- HERO -->
+  <section class="hero" id="top" aria-labelledby="h1">
+    <div class="wrap hero__grid">
+      <div class="hero__copy">
+        <p class="kicker"><i aria-hidden="true"></i>Specialty roastery &middot; F-7 Markaz, Islamabad</p>
+        <h1 id="h1" data-split>Roasted on Tuesday. <em>Poured for you</em> today.</h1>
+        <p class="lede">Four single origins, roasted in 5&nbsp;kg batches behind the bar and brewed by the gram. Sit by the Margalla window, order ahead for pickup, or take a fresh bag home.</p>
+        <div class="hero__ctas">
+          <a class="btn btn--cherry" href="#order" data-magnetic>Order ahead &middot; ready in 8 min <svg width="16" height="10" viewBox="0 0 16 10" aria-hidden="true"><path d="M0 5h14M10 1l4 4-4 4" stroke="currentColor" stroke-width="1.5" fill="none"/></svg></a>
+          <a class="btn btn--line" href="#beans">Subscribe to whole beans</a>
+        </div>
+        <dl class="facts">
+          <div><dt>Roast days</dt><dd>Tue &amp; Fri</dd></div>
+          <div><dt>On the shelf</dt><dd>4 origins</dd></div>
+          <div><dt>Pour-over ratio</dt><dd class="num">1&thinsp;:&thinsp;16.7</dd></div>
+        </dl>
+        <p class="cue"><i aria-hidden="true"></i>Scroll to finish the pour</p>
+      </div>
+
+      <div class="hero__art" id="heroArt">
+        <!-- HEYGEN: 4:5 (or 16:9 cropped) hero loop, 6-8 s seamless — slow-motion macro of a pour-over: a thin spiral of water onto dark ground coffee in a clear glass V60, the bed blooms, coffee drips into a glass server on a black brew scale. Deep pine-green background, warm brass side light, shallow depth of field, no people, no hands, no text. -->
+        <div class="plate media" data-media="hero">
+          <span class="plate__tag">Live brew &middot; Ethiopia Guji</span>
+          <div class="media__art">
+            <svg class="rig" id="rig" viewBox="0 0 420 580" role="img" aria-label="A V60 pour-over dripping coffee into a glass server that sits on a brew scale">
+              <defs>
+                <linearGradient id="gCer" x1="0" x2="1"><stop offset="0" stop-color="#F3F3EC"/><stop offset=".55" stop-color="#D3D6CA"/><stop offset="1" stop-color="#A7AD9C"/></linearGradient>
+                <linearGradient id="gCof" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6B3A1C"/><stop offset=".35" stop-color="#3A1E10"/><stop offset="1" stop-color="#1A0D06"/></linearGradient>
+                <linearGradient id="gGlass" x1="0" x2="1"><stop offset="0" stop-color="#EEF0E8" stop-opacity=".2"/><stop offset=".25" stop-color="#EEF0E8" stop-opacity=".04"/><stop offset="1" stop-color="#EEF0E8" stop-opacity=".1"/></linearGradient>
+                <clipPath id="cGlass"><path d="M127 246 L143 508 L277 508 L293 246 Z"/></clipPath>
+              </defs>
+              <g class="steam" stroke="#A9B79A" stroke-width="2.6" stroke-linecap="round" fill="none">
+                <path d="M178 48 C166 34 190 26 180 10"/>
+                <path d="M212 46 C200 30 226 22 214 4"/>
+                <path d="M244 48 C232 34 256 26 246 10"/>
+              </g>
+              <path d="M112 74 L124 50 L296 50 L308 74 Z" fill="#F5F2EA"/>
+              <path d="M140 50 L136 74 M170 50 L168 74 M200 50 L200 74 M230 50 L232 74 M262 50 L266 74" stroke="#DCD8CC" stroke-width="1.4"/>
+              <path d="M104 70 L316 70 L250 208 Q245 218 234 218 L186 218 Q175 218 170 208 Z" fill="url(#gCer)"/>
+              <path d="M130 92 L182 210 M160 90 L196 210 M260 90 L224 210 M290 92 L238 210" stroke="#98A08C" stroke-width="1.8" opacity=".5"/>
+              <rect x="96" y="62" width="228" height="12" rx="2" fill="#C9A25A"/>
+              <path d="M306 96 C362 92 362 172 292 176" stroke="#D3D6CA" stroke-width="13" fill="none" stroke-linecap="round"/>
+              <rect x="126" y="216" width="168" height="10" rx="2" fill="#B7BCAD"/>
+              <rect x="208" y="226" width="4" height="292" fill="#4A2412"/>
+              <g fill="#5A2E16">
+                <rect class="streak" x="207" y="228" width="6" height="16" rx="3"/>
+                <rect class="streak" x="207.5" y="228" width="5" height="13" rx="2.5"/>
+                <rect class="streak" x="208" y="228" width="4" height="11" rx="2"/>
+              </g>
+              <path d="M120 240 L138 512 Q140 520 150 520 L270 520 Q280 520 282 512 L300 240 Z" fill="rgba(238,240,232,.05)"/>
+              <g clip-path="url(#cGlass)">
+                <g id="liquid" transform="translate(0 150)">
+                  <rect x="100" y="252" width="220" height="270" fill="url(#gCof)"/>
+                  <path class="wave" d="M0 252 Q30 245 60 252 T120 252 T180 252 T240 252 T300 252 T360 252 T420 252 T480 252 T540 252 L540 261 L0 261 Z" fill="#A7754A"/>
+                </g>
+              </g>
+              <path d="M120 240 L138 512 Q140 520 150 520 L270 520 Q280 520 282 512 L300 240" fill="none" stroke="#EEF0E8" stroke-opacity=".55" stroke-width="2.6"/>
+              <path d="M120 240 L138 512 Q140 520 150 520 L270 520 Q280 520 282 512 L300 240 Z" fill="url(#gGlass)"/>
+              <path d="M136 262 L150 480" stroke="#fff" stroke-opacity=".26" stroke-width="4.5" stroke-linecap="round"/>
+              <g fill="none" stroke="#EEF0E8" stroke-opacity=".3" stroke-width="1"><path d="M282 300 h10 M285 350 h10 M288 400 h10 M290 450 h10"/></g>
+              <rect x="70" y="522" width="280" height="40" rx="3" fill="#0B1410" stroke="#C9A25A" stroke-opacity=".6"/>
+              <rect x="94" y="530" width="104" height="24" rx="2" fill="#050A08"/>
+              <text id="scaleG" x="188" y="547.5" text-anchor="end" font-family="Geist Mono, monospace" font-size="15" fill="#C9A25A">126.0 g</text>
+              <rect x="222" y="530" width="104" height="24" rx="2" fill="#050A08"/>
+              <text id="scaleT" x="316" y="547.5" text-anchor="end" font-family="Geist Mono, monospace" font-size="15" fill="#A9B79A">1:46</text>
+            </svg>
+          </div>
+          <div class="plate__cap" aria-hidden="true">
+            <span>DOSE <b>18.0 g</b></span>
+            <span>YIELD <b id="yieldOut">126 / 300 g</b></span>
+            <span>WATER <b>94 &deg;C</b></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__row">
+      <span>Roasted this week <i></i> Ethiopia Guji <i></i> Colombia Huila <i></i> Sumatra Gayo <i></i> Brazil Cerrado <i></i> Brewed by the gram <i></i></span>
+      <span>Roasted this week <i></i> Ethiopia Guji <i></i> Colombia Huila <i></i> Sumatra Gayo <i></i> Brazil Cerrado <i></i> Brewed by the gram <i></i></span>
+    </div>
+  </div>
+
+  <!-- 01 ORIGINS -->
+  <section class="origins sec" id="origins" aria-labelledby="h-origins">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label"><b>(01)</b> Origins</p>
+        <h2 id="h-origins" data-split>Four farms on the shelf <em>this week.</em></h2>
+        <p>Each lot is roasted for how it grew. High, slow-ripened Ethiopian coffee stays light; the Sumatran goes darker to bring out cedar and cacao.</p>
+      </div>
+      <ol class="process" aria-label="From cherry to cup">
+        <li><b>01 · CHERRY</b><span>Picked ripe</span><small>Red cherries only, sorted at the washing station.</small></li>
+        <li><b>02 · GREEN</b><span>Rested 6 weeks</span><small>Stored at 11% moisture in our F-7 bean room.</small></li>
+        <li><b>03 · ROAST</b><span>5 kg drum</span><small>Profiled per lot, out between 196 and 218&nbsp;&deg;C.</small></li>
+        <li><b>04 · CUP</b><span>Weighed in, out</span><small>Every drink brewed to a written recipe.</small></li>
+      </ol>
+    </div>
+    <div class="origins__pin" id="originsPin">
+      <div class="origins__viewport" id="originsViewport">
+        <div class="origins__track" id="originsTrack"></div>
+      </div>
+      <div class="wrap origins__foot"><p class="origins__hint" id="originsHint">Swipe the shelf &rarr;</p><span class="origins__bar" aria-hidden="true"><i id="originsBar"></i></span></div>
+    </div>
+  </section>
+
+  <!-- 02 MENU -->
+  <section class="on-light sec" id="menu" aria-labelledby="h-menu">
+    <div class="wrap">
+      <div class="menu-top">
+        <div class="sec-head">
+          <p class="label"><b>(02)</b> Menu</p>
+          <h2 id="h-menu" data-split>The bar, <em>measured.</em></h2>
+          <p>Every drink is weighed in and weighed out. Tap a card for sizes and prices. Caffeine is an estimate for the size shown.</p>
+        </div>
+        <!-- HEYGEN: 4:5 still — a cortado in a short ribbed glass on a pale limestone counter, layered espresso and microfoam, one brass spoon, soft window light, pine-green wall behind, no people, no text. -->
+        <figure class="feature media" data-media="cortado" data-alt="A cortado in a ribbed glass on a limestone counter">
+          <div class="media__art" aria-hidden="true">
+            <svg viewBox="0 0 400 500" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+              <rect width="400" height="500" fill="#CDD0C4"/>
+              <rect y="330" width="400" height="170" fill="#E9EAE3"/>
+              <rect y="326" width="400" height="6" fill="#B8BCAE"/>
+              <rect x="248" y="0" width="152" height="326" fill="#1B392C"/>
+              <path d="M140 170 h120 l-12 160 q-2 12 -14 12 h-68 q-12 0 -14 -12 z" fill="#EEF0E8" fill-opacity=".55" stroke="#0B1410" stroke-opacity=".35" stroke-width="2"/>
+              <path d="M146 250 h108 l-6 76 q-1 8 -9 8 h-78 q-8 0 -9 -8 z" fill="#3A1E10"/>
+              <path d="M143 214 h114 l-3 36 h-108 z" fill="#C49A6C"/>
+              <path d="M141 190 h118 l-2 24 h-114 z" fill="#F3EEE4"/>
+              <g stroke="#0B1410" stroke-opacity=".18" stroke-width="2"><path d="M164 176 l6 154 M188 176 l3 154 M212 176 l-3 154 M236 176 l-6 154"/></g>
+              <path d="M300 300 l40 -90" stroke="#C9A25A" stroke-width="6" stroke-linecap="round"/>
+              <rect x="70" y="330" width="260" height="10" fill="#0B1410" opacity=".08"/>
+            </svg>
+          </div>
+          <figcaption><span>Cortado &middot; 1 : 1</span><span class="num">Rs 650</span></figcaption>
+        </figure>
+      </div>
+      <ul class="menu-grid" id="menuGrid"></ul>
+    </div>
+  </section>
+
+  <!-- 03 PAIRINGS -->
+  <section class="pairings on-light sec" id="pairings" aria-labelledby="h-pairs">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label"><b>(03)</b> Pairings</p>
+        <h2 id="h-pairs" data-split>Baked down the road, <em>matched at the bar.</em></h2>
+        <p>Pastries arrive from a bakery two streets away at 7 every morning. Order them as a pair and the saving is already taken off.</p>
+      </div>
+      <div class="pairs" id="pairs"></div>
+    </div>
+  </section>
+
+  <!-- 04 ROOM -->
+  <section class="room sec" id="room" aria-labelledby="h-room">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label"><b>(04)</b> The roastery</p>
+        <h2 id="h-room" data-split>Roaster in the corner, <em>hills in the window.</em></h2>
+        <p>Thirty-two seats, a six-seat pour-over bar and a view of the Margallas. On roast days the whole block smells of it.</p>
+      </div>
+    </div>
+    <!-- HEYGEN: 11:8 interior stills — (1) 5 kg drum roaster with beans tumbling in the cooling tray, (2) pour-over bar with three glass V60s under brass pendant lights, (3) window seat facing the Margalla Hills at dusk. Pine-green walls, brass details, no people, no text. -->
+    <div class="strip">
+      <div class="strip__row" id="stripRow">
+        <figure class="scene">
+          <div class="media" data-media="roaster" data-alt="Drum roaster with beans in the cooling tray">
+            <div class="media__art" aria-hidden="true"><svg viewBox="0 0 440 320" preserveAspectRatio="xMidYMid slice"><rect width="440" height="320" fill="#1B392C"/><rect y="250" width="440" height="70" fill="#13291F"/><rect x="262" y="20" width="16" height="104" fill="#0B1410" stroke="#C9A25A" stroke-opacity=".6"/><g stroke="#A9B79A" stroke-width="2.4" fill="none" stroke-linecap="round" opacity=".5"><path d="M270 16 C258 4 280 -4 268 -18"/></g><rect x="96" y="112" width="200" height="120" rx="6" fill="#0B1410" stroke="#C9A25A" stroke-width="2"/><rect x="118" y="138" width="64" height="64" rx="4" fill="#13291F" stroke="#C9A25A" stroke-width="4"/><rect x="138" y="158" width="24" height="24" fill="#B8323F"/><path d="M200 112 L184 64 L262 64 L246 112 Z" fill="#13291F" stroke="#C9A25A" stroke-width="2"/><rect x="210" y="230" width="20" height="24" fill="#0B1410"/><rect x="246" y="232" width="176" height="26" rx="3" fill="#0B1410" stroke="#C9A25A" stroke-width="2"/><g fill="#6B3A1C"><rect x="262" y="238" width="10" height="6" rx="3"/><rect x="282" y="242" width="10" height="6" rx="3"/><rect x="304" y="237" width="10" height="6" rx="3"/><rect x="326" y="243" width="10" height="6" rx="3"/><rect x="348" y="238" width="10" height="6" rx="3"/><rect x="372" y="242" width="10" height="6" rx="3"/><rect x="394" y="238" width="10" height="6" rx="3"/></g><text x="200" y="168" font-family="Geist Mono, monospace" font-size="13" fill="#C9A25A">203&deg;C</text><text x="200" y="188" font-family="Geist Mono, monospace" font-size="10" fill="#A9B79A">FIRST CRACK 9:42</text></svg></div>
+          </div>
+          <figcaption><b>5 kg drum roaster</b><span>TUE &middot; FRI</span></figcaption>
+        </figure>
+        <figure class="scene">
+          <div class="media" data-media="bar" data-alt="Pour-over bar with three glass drippers under brass pendant lights">
+            <div class="media__art" aria-hidden="true"><svg viewBox="0 0 440 320" preserveAspectRatio="xMidYMid slice"><rect width="440" height="320" fill="#13291F"/><g stroke="#C9A25A" stroke-opacity=".5"><path d="M100 0 V64 M220 0 V50 M340 0 V64"/></g><g fill="#C9A25A"><path d="M84 64 h32 l-6 16 h-20z"/><path d="M204 50 h32 l-6 16 h-20z"/><path d="M324 64 h32 l-6 16 h-20z"/></g><g fill="#C9A25A" opacity=".08"><path d="M90 80 h20 l50 156 h-120z"/><path d="M210 66 h20 l50 170 h-120z"/><path d="M330 80 h20 l50 156 h-120z"/></g><rect y="236" width="440" height="84" fill="#22463A"/><rect y="230" width="440" height="8" fill="#C9A25A"/><g><path d="M70 150 h60 l-18 40 h-24z" fill="#E5E6DE"/><rect x="74" y="192" width="52" height="38" rx="2" fill="#EEF0E8" fill-opacity=".16" stroke="#EEF0E8" stroke-opacity=".5"/><rect x="74" y="212" width="52" height="18" fill="#3A1E10"/><path d="M190 150 h60 l-18 40 h-24z" fill="#E5E6DE"/><rect x="194" y="192" width="52" height="38" rx="2" fill="#EEF0E8" fill-opacity=".16" stroke="#EEF0E8" stroke-opacity=".5"/><rect x="194" y="206" width="52" height="24" fill="#3A1E10"/><path d="M310 150 h60 l-18 40 h-24z" fill="#E5E6DE"/><rect x="314" y="192" width="52" height="38" rx="2" fill="#EEF0E8" fill-opacity=".16" stroke="#EEF0E8" stroke-opacity=".5"/><rect x="314" y="218" width="52" height="12" fill="#3A1E10"/></g><rect x="40" y="140" width="360" height="5" fill="#0B1410"/></svg></div>
+          </div>
+          <figcaption><b>Pour-over bar</b><span>6 SEATS</span></figcaption>
+        </figure>
+        <figure class="scene">
+          <div class="media" data-media="window" data-alt="Window seat facing the Margalla Hills at dusk">
+            <div class="media__art" aria-hidden="true"><svg viewBox="0 0 440 320" preserveAspectRatio="xMidYMid slice"><rect width="440" height="320" fill="#13291F"/><rect x="40" y="30" width="360" height="200" fill="#D9C08A"/><rect x="40" y="30" width="360" height="90" fill="#E7D7AE"/><path d="M40 150 L110 104 L170 132 L240 84 L310 124 L400 96 L400 230 L40 230Z" fill="#6E8460"/><path d="M40 184 L120 146 L200 170 L280 136 L400 166 L400 230 L40 230Z" fill="#3E5A40"/><path d="M220 30 V230 M40 130 H400" stroke="#0B1410" stroke-width="9"/><rect x="40" y="30" width="360" height="200" fill="none" stroke="#0B1410" stroke-width="14"/><rect y="244" width="440" height="76" fill="#22463A"/><rect x="0" y="238" width="440" height="8" fill="#C9A25A"/><path d="M180 206 h40 v26 a6 6 0 0 1 -6 6 h-28 a6 6 0 0 1 -6 -6z" fill="#E5E6DE"/><path d="M220 212 c12 0 12 16 0 16" stroke="#E5E6DE" stroke-width="4" fill="none"/><path d="M70 238 c-6 -30 10 -40 20 -60 c6 22 18 30 10 60z" fill="#7E9A6B"/></svg></div>
+          </div>
+          <figcaption><b>Margalla window</b><span>14 SEATS</span></figcaption>
+        </figure>
+        <figure class="scene">
+          <div class="media" data-media="greens" data-alt="Jute sacks of green coffee in the bean room">
+            <div class="media__art" aria-hidden="true"><svg viewBox="0 0 440 320" preserveAspectRatio="xMidYMid slice"><rect width="440" height="320" fill="#1B392C"/><rect y="262" width="440" height="58" fill="#13291F"/><g fill="#A99A6E" stroke="#7A6A42" stroke-width="2"><path d="M40 262 q-6 -80 20 -110 h80 q26 30 20 110z"/><path d="M170 262 q-6 -80 20 -110 h80 q26 30 20 110z"/><path d="M300 262 q-6 -80 20 -110 h80 q26 30 20 110z"/><path d="M105 152 q-6 -70 20 -96 h80 q26 26 20 96z"/></g><g font-family="Geist Mono, monospace" font-size="18" fill="#0B1410" text-anchor="middle"><text x="100" y="216">ETH</text><text x="230" y="216">COL</text><text x="360" y="216">IDN</text><text x="165" y="114">BRA</text></g><g stroke="#0B1410" stroke-width="3"><path d="M64 156 h72"/><path d="M194 156 h72"/><path d="M324 156 h72"/><path d="M129 60 h72"/></g></svg></div>
+          </div>
+          <figcaption><b>Green bean room</b><span>~1,200 KG</span></figcaption>
+        </figure>
+        <figure class="scene">
+          <div class="media" data-media="cupping" data-alt="Score sheet from a public cupping session">
+            <div class="media__art" aria-hidden="true"><svg viewBox="0 0 440 320" preserveAspectRatio="xMidYMid slice"><rect width="440" height="320" fill="#13291F"/><rect x="60" y="52" width="320" height="216" rx="2" fill="#E5E6DE"/><g font-family="Geist Mono, monospace" fill="#0B1410"><text x="84" y="94" font-size="14">CUPPING &middot; THU 4 PM</text><text x="84" y="132" font-size="13" opacity=".7">Guji N . . . . . . 88.5</text><text x="84" y="160" font-size="13" opacity=".7">Huila W . . . . . 87.0</text><text x="84" y="188" font-size="13" opacity=".7">Gayo WH . . . . . 85.5</text><text x="84" y="216" font-size="13" opacity=".7">Cerrado PN . . . 84.0</text></g><rect x="296" y="78" width="62" height="28" fill="#B8323F" transform="rotate(-6 327 92)"/><text x="327" y="97" font-family="Geist Mono, monospace" font-size="12" fill="#fff" text-anchor="middle" transform="rotate(-6 327 92)">FREE</text></svg></div>
+          </div>
+          <figcaption><b>Public cupping</b><span>THURSDAYS</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 BEANS -->
+  <section class="beans on-light sec" id="beans" aria-labelledby="h-beans">
+    <div class="wrap beans__grid">
+      <div class="beans__aside">
+        <p class="label"><b>(05)</b> Bean subscription</p>
+        <h2 id="h-beans" data-split>Fresh roast at your door, <em>every two or four weeks.</em></h2>
+        <p>Bags ship the morning after roasting, so they arrive inside the 5 to 21 day window when beans taste their best.</p>
+        <ol>
+          <li><b>01</b>Pick an origin, or let the roaster choose each time.</li>
+          <li><b>02</b>We grind for your brewer, or send whole beans.</li>
+          <li><b>03</b>Pause, skip or cancel from WhatsApp. Subscribers save 10%.</li>
+        </ol>
+      </div>
+      <form class="form" id="subForm" novalidate>
+        <div class="field">
+          <label for="subOrigin">Origin</label>
+          <select id="subOrigin"></select>
+        </div>
+        <fieldset>
+          <legend>Bag size</legend>
+          <div class="chips" id="sizeChips">
+            <label class="chip"><input type="radio" name="size" id="size250" value="250" checked><span>250 g<small>~16 cups</small></span></label>
+            <label class="chip"><input type="radio" name="size" id="size500" value="500"><span>500 g<small>~33 cups</small></span></label>
+            <label class="chip"><input type="radio" name="size" id="size1000" value="1000"><span>1 kg<small>~66 cups</small></span></label>
+          </div>
+        </fieldset>
+        <div class="row2">
+          <div class="field">
+            <label for="subGrind">Grind</label>
+            <select id="subGrind">
+              <option>Whole bean</option><option>Espresso (fine)</option><option>Pour-over (medium-fine)</option><option>Moka pot (fine-medium)</option><option>French press (coarse)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="subCity">Deliver to</label>
+            <select id="subCity">
+              <option value="isb">Islamabad</option><option value="rwp">Rawalpindi</option><option value="other">Elsewhere in Pakistan</option>
+            </select>
+          </div>
+        </div>
+        <fieldset>
+          <legend>How often</legend>
+          <div class="chips">
+            <label class="chip"><input type="radio" name="freq" id="freq2" value="2" checked><span>Every 2 weeks<small>most popular</small></span></label>
+            <label class="chip"><input type="radio" name="freq" id="freq4" value="4"><span>Every 4 weeks<small>light drinkers</small></span></label>
+          </div>
+        </fieldset>
+        <div class="summary" aria-live="polite">
+          <div><span>Bag price</span><span id="sBag">Rs 0</span></div>
+          <div><span>Subscriber saving (10%)</span><span id="sDisc">&minus; Rs 0</span></div>
+          <div><span>Delivery</span><span id="sDel">Free</span></div>
+          <div><span>First roast ships</span><span id="sShip">&mdash;</span></div>
+          <div class="total"><span>Per delivery</span><span id="sTotal">Rs 0</span></div>
+        </div>
+        <button class="btn btn--cherry" type="submit" data-magnetic>Start my subscription</button>
+        <p class="confirm" id="subConfirm" role="status" hidden></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- 06 VISIT -->
+  <section class="visit on-dark sec" id="visit" aria-labelledby="h-visit">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label"><b>(06)</b> Visit &amp; order</p>
+        <h2 id="h-visit" data-split>Corner of Block 9-B, <em>F-7 Markaz.</em></h2>
+        <p>Order ahead and your drink waits on the pickup shelf by the door. Parking is easiest behind the block after 6 pm.</p>
+      </div>
+      <div class="visit__grid">
+        <div class="mapbox" id="mapbox">
+          <div class="map" id="map" data-lat="33.7212" data-lng="73.0570" data-zoom="17" data-tiles="dark_all" role="region" aria-label="Map showing Ember and Bean Roasters, Shop 14, Block 9-B, F-7 Markaz, Islamabad"></div>
+          <div class="map-fallback">
+            <span class="fb-pin" aria-hidden="true">E&amp;B</span>
+            <span class="mono" style="color:var(--brass)">F-7 Markaz &middot; Islamabad</span>
+            <p>Shop 14, Block&nbsp;9&#8209;B, Jinnah Super.</p>
+            <span class="fb-hours">Open daily from 8 am &middot; Friday to Sunday until midnight</span>
+            <div class="links">
+              <a class="btn btn--cherry" href="https://www.google.com/maps/dir/?api=1&amp;destination=33.7212,73.0570" target="_blank" rel="noopener">Get directions</a>
+              <a class="btn btn--line" href="https://www.google.com/maps/search/?api=1&amp;query=33.7212,73.0570" target="_blank" rel="noopener">Open in Google Maps</a>
+            </div>
+          </div>
+          <div class="map-card"><span>33.7212&deg; N, 73.0570&deg; E</span><b>&middot; 6 min from F-6</b></div>
+        </div>
+        <div class="visit__side">
+          <div class="panel">
+            <span class="status" id="status"><i aria-hidden="true"></i><span>Checking hours</span></span>
+            <table class="hours" id="hoursTable">
+              <tr data-days="1,2,3,4"><td>Mon &ndash; Thu</td><td>8:00 am &ndash; 11:00 pm</td></tr>
+              <tr data-days="5"><td>Friday</td><td>8:00 am &ndash; 12:30 pm<br>2:00 pm &ndash; midnight</td></tr>
+              <tr data-days="6,0"><td>Sat &ndash; Sun</td><td>9:00 am &ndash; midnight</td></tr>
+            </table>
+            <div class="contact">
+              <span>Shop 14, Block 9-B, F-7 Markaz, Islamabad</span>
+              <span>Phone <b>+92 51 555 0142</b></span>
+              <span>WhatsApp <b>+92 300 555 0142</b></span>
+            </div>
+            <div class="links">
+              <a class="btn btn--line" href="https://www.google.com/maps/dir/?api=1&amp;destination=33.7212,73.0570" target="_blank" rel="noopener">Get directions</a>
+              <a class="btn btn--line" href="https://wa.me/923005550142" target="_blank" rel="noopener">WhatsApp us</a>
+            </div>
+          </div>
+          <form class="panel" id="order" novalidate aria-labelledby="h-order">
+            <h3 id="h-order">Order ahead for pickup</h3>
+            <p style="color:var(--dim);font-size:15px">Pay at the counter. We start pulling your shot when you&rsquo;re five minutes out.</p>
+            <div class="field">
+              <label for="oDrink">Drink</label>
+              <select id="oDrink"></select>
+            </div>
+            <div class="row2">
+              <div class="field">
+                <label for="oSize">Size</label>
+                <select id="oSize"></select>
+              </div>
+              <div class="field">
+                <label for="oTime">Pickup</label>
+                <select id="oTime"></select>
+              </div>
+            </div>
+            <div class="field">
+              <label for="oName">Name for the cup</label>
+              <input type="text" id="oName" placeholder="e.g. Hira" autocomplete="given-name">
+            </div>
+            <div class="summary" style="background:rgba(11,20,16,.5)">
+              <div class="total"><span>To pay at pickup</span><span id="oTotal">Rs 0</span></div>
+            </div>
+            <button class="btn btn--cherry" type="submit" data-magnetic>Place pickup order</button>
+            <p class="confirm" id="orderConfirm" role="status" hidden></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p class="foot__mark" aria-hidden="true">Ember <em>&amp;</em> Bean</p>
+    <div class="foot__cols">
+      <div>
+        <h4>Visit</h4>
+        <span>Shop 14, Block 9-B</span>
+        <span>F-7 Markaz, Islamabad</span>
+        <span>Mon&ndash;Thu 8 am&ndash;11 pm &middot; Fri&ndash;Sun till midnight</span>
+      </div>
+      <div>
+        <h4>Talk to us</h4>
+        <span>Phone <b>+92 51 555 0142</b></span>
+        <span>WhatsApp <b>+92 300 555 0142</b></span>
+        <span>Wholesale: <b>trade@emberbean.pk</b></span>
+      </div>
+      <div>
+        <h4>Follow</h4>
+        <a href="#top">Instagram &middot; @emberandbean</a>
+        <a href="#top">Roast log on WhatsApp Channel</a>
+        <a href="#beans">Bean subscription</a>
+      </div>
+      <div class="news">
+        <h4>Roast-day alerts</h4>
+        <span>One message on Tuesdays and Fridays when the new roast is out.</span>
+        <form id="newsForm" novalidate>
+          <label class="sr-only" for="newsPhone">WhatsApp number</label>
+          <input class="on-dark-input" type="tel" id="newsPhone" placeholder="03xx xxx xxxx" autocomplete="tel" style="background:rgba(238,240,232,.05);color:var(--on-dark);border-color:var(--hair)">
+          <button class="btn btn--cherry" type="submit">Join</button>
+          <p class="ok" id="newsOk" role="status" hidden></p>
+        </form>
+      </div>
+    </div>
+    <div class="legal"><span>&copy; 2026 Ember &amp; Bean Roasters</span><span>Concept mockup &mdash; fictional business</span></div>
+  </div>
+</footer>
+
+<nav class="abar" aria-label="Quick actions">
+  <a class="primary" href="#order">Order ahead</a>
+  <a href="#beans">Beans</a>
+  <a href="tel:+92515550142">Call</a>
+  <a href="https://www.google.com/maps/dir/?api=1&amp;destination=33.7212,73.0570" target="_blank" rel="noopener">Map</a>
+</nav>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js" defer></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+<script>
+/* ---------- media manifest: drop HeyGen/photo files in ../assets/cafe-ember-bean/ and set the paths ---------- */
+const MEDIA = {
+  hero:   { mp4: null, poster: null, alt: 'Slow-motion pour-over dripping into a glass server' }, // '../assets/cafe-ember-bean/hero.mp4'
+  photos: { cortado: null, roaster: null, bar: null, window: null, greens: null, cupping: null }   // '../assets/cafe-ember-bean/<key>.webp'
+};
+
+/* ---------- data (mirrors future Supabase tables: items, variants, deals) ---------- */
+const ORIGINS = [
+  {id:'guji', country:'Ethiopia', region:'Guji', zone:'Guji Zone, Oromia', altitude:'2,000 – 2,250 masl', process:'Natural', variety:'Heirloom 74110', best:'V60, 1 : 16', roast:.18, roastName:'Light', notes:['Blueberry','Jasmine','Cacao nib'], price:3600, tag:'#6C7FA8', roasted:'Tue 20 Oct'},
+  {id:'huila', country:'Colombia', region:'Huila', zone:'Pitalito, Huila', altitude:'1,600 – 1,850 masl', process:'Washed', variety:'Caturra, Castillo', best:'Aeropress, 1 : 15', roast:.38, roastName:'Light-medium', notes:['Red apple','Panela','Orange zest'], price:3300, tag:'#B8323F', roasted:'Tue 20 Oct'},
+  {id:'cerrado', country:'Brazil', region:'Cerrado', zone:'Cerrado Mineiro', altitude:'1,000 – 1,200 masl', process:'Pulped natural', variety:'Yellow Catuaí', best:'Espresso, 1 : 2', roast:.56, roastName:'Medium', notes:['Hazelnut','Milk chocolate','Caramel'], price:2800, tag:'#B58B3E', roasted:'Fri 23 Oct'},
+  {id:'gayo', country:'Sumatra', region:'Gayo', zone:'Gayo Highlands, Aceh', altitude:'1,400 – 1,600 masl', process:'Wet-hulled', variety:'Tim Tim, Ateng', best:'Moka pot or milk', roast:.76, roastName:'Medium-dark', notes:['Dark chocolate','Cedar','Molasses'], price:3200, tag:'#5E7A55', roasted:'Fri 23 Oct'}
+];
+const MENU = [
+  {id:'espresso', name:'Espresso', icon:'cup', desc:'House blend of Cerrado and Gayo. Syrupy, cocoa, low acidity.', detail:'18 g in · 36 g out · 28 s · ~126 mg caffeine', sizes:[['Single','1 shot',450],['Double','2 shots',550]], hot:true},
+  {id:'cortado', name:'Cortado', icon:'cup', desc:'Two ristretto shots cut with the same amount of steamed milk.', detail:'1 : 1 milk · 4.5 oz · ~126 mg caffeine', sizes:[['4.5 oz','one size',650]], hot:true},
+  {id:'flat', name:'Flat white', icon:'cup', desc:'Double ristretto under a thin, glossy microfoam.', detail:'Ristretto 1 : 1.5 · ~126 mg caffeine', sizes:[['8 oz','2 shots',750],['12 oz','3 shots',880]], hot:true},
+  {id:'v60', name:'V60 of the day', icon:'glass', desc:'Today: Ethiopia Guji. Brewed to order, about four minutes.', detail:'18 g : 300 g · 1 : 16.7 · ~180 mg caffeine', sizes:[['10 oz','one pour',900],['20 oz','to share',1600]], hot:true},
+  {id:'elaichi', name:'Cardamom latte', icon:'mug', desc:'Green cardamom we grind each morning, steamed into whole milk.', detail:'House syrup · 2 shots · ~126 mg caffeine', sizes:[['8 oz','2 shots',800],['12 oz','2 shots',900],['16 oz','3 shots',1050]], hot:true},
+  {id:'gur', name:'Gur iced latte', icon:'iced', desc:'Espresso over milk and ice, sweetened with jaggery syrup.', detail:'2 shots · served over ice · ~126 mg caffeine', sizes:[['12 oz','2 shots',850],['16 oz','3 shots',1000]], hot:false},
+  {id:'coldbrew', name:'Cold brew', icon:'iced', desc:'Huila steeped for 18 hours, cut with water and served black.', detail:'1 : 8 concentrate · 18 h steep · ~200 mg caffeine', sizes:[['12 oz','',750],['16 oz','',900]], hot:false, soldOut:'Next batch ready at 4:00 pm'},
+  {id:'cacao', name:'Cacao & cinnamon', icon:'mug', desc:'Single-origin cocoa melted into milk with Ceylon cinnamon. No coffee.', detail:'Caffeine-free · ~12 mg from cocoa', sizes:[['8 oz','',700],['12 oz','',850]], hot:true},
+  {id:'pistachio', name:'Pistachio cortado', icon:'cup', desc:'A seasonal cortado with roasted pistachio paste from Gilgit.', detail:'Seasonal · 4.5 oz · ~126 mg caffeine', sizes:[['4.5 oz','one size',780]], hot:true}
+];
+const PAIRINGS = [
+  {id:'p1', title:'Cardamom bun &times; V60 Guji', why:'Blueberry notes in the Guji pick up the green cardamom in the bun.', parts:[['Cardamom bun',650],['V60 of the day',900]], price:1350, ends_at:'2099-01-01', art:['bun','glass']},
+  {id:'p2', title:'Almond croissant &times; Flat white', why:'Toasted almond and a nutty Cerrado espresso. The classic, done carefully.', parts:[['Almond croissant',700],['Flat white 8 oz',750]], price:1250, ends_at:'2099-01-01', art:['croissant','cup']},
+  {id:'p3', title:'Sea-salt cookie &times; Double espresso', why:'Dark chocolate and salt against the Gayo in our house blend.', parts:[['Sea-salt chocolate cookie',450],['Double espresso',550]], price:850, ends_at:'2099-01-01', art:['cookie','cup']},
+  {id:'p4', title:'Pumpkin loaf &times; Cold brew', why:'Autumn pairing that ran in September.', parts:[['Pumpkin loaf',600],['Cold brew 12 oz',750]], price:1150, ends_at:'2025-09-30', art:['bun','iced']}
+];
+
+/* ---------- helpers ---------- */
+const $ = (s, r=document) => r.querySelector(s);
+const rs = n => 'Rs ' + Math.round(n).toLocaleString('en-US');
+const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const fine = window.matchMedia('(pointer: fine)').matches;
+
+/* ---------- small svg art ---------- */
+function bagSVG(o){
+  return `<svg viewBox="0 0 220 300" aria-hidden="true">
+    <path d="M28 52 L192 52 L204 288 Q204 296 196 296 L24 296 Q16 296 16 288 Z" fill="#0E1F18"/>
+    <path d="M28 52 L192 52 L196 98 L24 98 Z" fill="#162C22"/>
+    <path d="M24 20 H196 V54 H24Z" fill="#C9A25A"/>
+    <path d="M24 20 l12 -10 l12 10 l12 -10 l12 10 l12 -10 l12 10 l12 -10 l12 10 l12 -10 l12 10 l12 -10 l12 10 l12 -10 l12 10" fill="#C9A25A"/>
+    <rect x="40" y="128" width="140" height="132" rx="2" fill="${o.tag}"/>
+    <rect x="48" y="136" width="124" height="116" rx="1" fill="none" stroke="#EEF0E8" stroke-opacity=".55"/>
+    <text x="110" y="180" text-anchor="middle" font-family="Instrument Serif, Georgia, serif" font-size="30" fill="#EEF0E8">${o.region}</text>
+    <text x="110" y="200" text-anchor="middle" font-family="Geist Mono, monospace" font-size="9.5" letter-spacing="2" fill="#EEF0E8" opacity=".85">${o.country.toUpperCase()}</text>
+    <text x="110" y="232" text-anchor="middle" font-family="Geist Mono, monospace" font-size="8" letter-spacing=".8" fill="#EEF0E8" opacity=".85">${o.process.toUpperCase()}</text>
+    <text x="110" y="246" text-anchor="middle" font-family="Geist Mono, monospace" font-size="8" letter-spacing=".8" fill="#EEF0E8" opacity=".85">250 G · WHOLE BEAN</text>
+    <rect x="102" y="70" width="16" height="16" rx="3" fill="#0B1410" stroke="#C9A25A" stroke-opacity=".5"/>
+  </svg>`;
+}
+function dialSVG(level){
+  const ang = -90 + level*180, id = 'dg' + Math.round(level*100);
+  return `<svg viewBox="0 0 160 96" aria-hidden="true">
+    <defs><linearGradient id="${id}" x1="0" x2="1"><stop offset="0" stop-color="#A9B79A"/><stop offset=".5" stop-color="#C9A25A"/><stop offset="1" stop-color="#3A1E10"/></linearGradient></defs>
+    <path d="M14 84 A66 66 0 0 1 146 84" fill="none" stroke="url(#${id})" stroke-width="10"/>
+    <g class="needle" data-angle="${ang}" transform="rotate(${ang} 80 84)"><path d="M80 84 L80 28" stroke="#EEF0E8" stroke-width="2.5"/></g>
+    <rect x="75" y="79" width="10" height="10" fill="#B8323F" transform="rotate(45 80 84)"/>
+    <text x="10" y="96" font-family="Geist Mono, monospace" font-size="8.5" fill="#A9B79A">LIGHT</text><text x="150" y="96" text-anchor="end" font-family="Geist Mono, monospace" font-size="8.5" fill="#A9B79A">DARK</text>
+  </svg>`;
+}
+const ICONS = {
+  cup:`<svg viewBox="0 0 120 96" aria-hidden="true"><g class="steam-s" stroke="#7A8D6E" stroke-width="2.6" fill="none" stroke-linecap="round"><path d="M50 30 C42 20 58 14 50 2"/><path d="M68 30 C60 20 76 14 68 2"/></g><rect x="14" y="84" width="92" height="7" rx="2" fill="#C9CCBF"/><path d="M30 40 H90 L84 78 Q82 86 74 86 H46 Q38 86 36 78 Z" fill="#F4F5EF" stroke="#0B1410" stroke-width="2.2"/><path d="M31 40 H89 L88 46 H32 Z" fill="#6B3A1C"/><path d="M89 48 c16 0 16 22 -3 22" stroke="#0B1410" stroke-width="2.2" fill="none"/></svg>`,
+  mug:`<svg viewBox="0 0 120 96" aria-hidden="true"><g class="steam-s" stroke="#7A8D6E" stroke-width="2.6" fill="none" stroke-linecap="round"><path d="M46 22 C38 12 54 6 46 -6"/><path d="M66 22 C58 12 74 6 66 -6"/></g><path d="M28 26 H88 V80 Q88 90 78 90 H38 Q28 90 28 80 Z" fill="#1B392C" stroke="#0B1410" stroke-width="2.2"/><path d="M29 27 H87 V33 H29Z" fill="#E7D3B6"/><path d="M88 38 c20 0 20 32 0 32" stroke="#0B1410" stroke-width="2.2" fill="none"/><path d="M42 54 h32" stroke="#C9A25A" stroke-width="3"/></svg>`,
+  glass:`<svg viewBox="0 0 120 96" aria-hidden="true"><g class="steam-s" stroke="#7A8D6E" stroke-width="2.6" fill="none" stroke-linecap="round"><path d="M52 18 C44 8 60 2 52 -10"/><path d="M70 18 C62 8 78 2 70 -10"/></g><path d="M34 22 H86 L80 88 H40 Z" fill="#F4F5EF" fill-opacity=".5" stroke="#0B1410" stroke-width="2.2"/><path d="M37 46 H83 L80 88 H40 Z" fill="#6B3A1C"/><path d="M38 46 h44" stroke="#A7754A" stroke-width="4"/></svg>`,
+  iced:`<svg viewBox="0 0 120 96" aria-hidden="true"><path d="M34 14 H86 L80 90 H40 Z" fill="#F4F5EF" fill-opacity=".5" stroke="#0B1410" stroke-width="2.2"/><path d="M36 38 H84 L80 90 H40 Z" fill="#7A4A28"/><rect class="ice" x="44" y="26" width="16" height="16" rx="2" fill="#fff" fill-opacity=".85" stroke="#0B1410" stroke-width="1.4"/><rect class="ice" x="62" y="32" width="15" height="15" rx="2" fill="#fff" fill-opacity=".85" stroke="#0B1410" stroke-width="1.4"/><path d="M70 2 L64 60" stroke="#B8323F" stroke-width="4" stroke-linecap="round"/></svg>`,
+  bun:`<svg viewBox="0 0 96 96" aria-hidden="true"><path d="M14 60 C14 34 30 22 48 22 C66 22 82 34 82 60 C82 70 72 76 48 76 C24 76 14 70 14 60Z" fill="#D29A5A" stroke="#5A3418" stroke-width="2.2"/><path d="M30 58 C34 40 62 40 66 58 M38 58 C42 48 54 48 58 58" stroke="#5A3418" stroke-width="2.2" fill="none"/><path d="M28 40 l6 -2 M60 34 l6 2 M48 30 l0 6" stroke="#F4F5EF" stroke-width="2.2" stroke-linecap="round"/></svg>`,
+  croissant:`<svg viewBox="0 0 96 96" aria-hidden="true"><path d="M10 62 C14 30 82 30 86 62 C78 70 66 66 60 58 C56 70 40 70 36 58 C30 66 18 70 10 62Z" fill="#DDA45C" stroke="#5A3418" stroke-width="2.2"/><path d="M36 58 C38 46 46 40 48 38 M60 58 C58 46 50 40 48 38" stroke="#5A3418" stroke-width="2.2" fill="none"/><path d="M38 44 l6 -1 M52 43 l6 1 M45 50 l6 0" stroke="#F4F5EF" stroke-width="2" stroke-linecap="round"/></svg>`,
+  cookie:`<svg viewBox="0 0 96 96" aria-hidden="true"><path d="M48 16 C68 16 82 30 82 50 C82 70 68 84 48 84 C28 84 14 70 14 50 C14 30 28 16 48 16Z" fill="#B57A45" stroke="#5A3418" stroke-width="2.2"/><g fill="#2A140A"><path d="M32 36 l8 -2 l2 7 l-8 3z"/><path d="M56 32 l7 1 l-1 7 l-7 -1z"/><path d="M60 56 l8 2 l-3 7 l-7 -3z"/><path d="M36 60 l7 -2 l2 7 l-7 1z"/></g><path d="M44 28 h3 M66 46 h3 M30 52 h3" stroke="#fff" stroke-width="2.4"/></svg>`
+};
+
+/* ---------- render: origins ---------- */
+const track = $('#originsTrack');
+track.innerHTML = ORIGINS.map((o,i) => `
+  <article class="origin" aria-label="${o.country} ${o.region}">
+    <div class="origin__bag">${bagSVG(o)}</div>
+    <div class="origin__info">
+      <p class="origin__meta"><span>Origin ${String(i+1).padStart(2,'0')} / ${String(ORIGINS.length).padStart(2,'0')}</span><span>Roasted ${o.roasted}</span></p>
+      <h3>${o.country} <em>${o.region}</em></h3>
+      <dl class="specs">
+        <div><dt>Grown</dt><dd>${o.zone}</dd></div>
+        <div><dt>Altitude</dt><dd>${o.altitude}</dd></div>
+        <div><dt>Process</dt><dd>${o.process}</dd></div>
+        <div><dt>We brew it as</dt><dd>${o.best}</dd></div>
+      </dl>
+      <div class="dial">${dialSVG(o.roast)}<p><strong>${o.roastName}</strong>Out of the drum at ${Math.round(196 + o.roast*28)}&nbsp;&deg;C</p></div>
+      <ul class="notes" aria-label="Tasting notes">${o.notes.map(n=>`<li>${n}</li>`).join('')}</ul>
+      <div class="buy"><p class="num">${rs(o.price)}<small>/ 250 G</small></p><a class="btn btn--cherry" href="#beans" data-origin="${o.id}">Subscribe to ${o.region}</a></div>
+    </div>
+  </article>`).join('');
+track.addEventListener('click', e => {
+  const a = e.target.closest('[data-origin]');
+  if (a) { $('#subOrigin').value = a.dataset.origin; updateSub(); }
+});
+
+/* ---------- render: menu ---------- */
+const grid = $('#menuGrid');
+grid.innerHTML = MENU.map(m => {
+  const from = Math.min(...m.sizes.map(s=>s[2]));
+  return `<li class="mcard${m.soldOut?' is-sold':''}" data-id="${m.id}">
+    <div class="mcard__inner">
+      <div class="mface mface--front">
+        ${m.soldOut?`<span class="sold">Sold out today · ${m.soldOut}</span>`:''}
+        <div class="micon">${ICONS[m.icon]}</div>
+        <h3>${m.name}</h3>
+        <p class="desc">${m.desc}</p>
+        <p class="detail">${m.detail}</p>
+        <div class="mfoot"><span class="price num">${m.sizes.length>1?'<small>from</small>':''}${rs(from)}</span><button class="flip" type="button" aria-label="Show sizes and prices for ${m.name}">Sizes &amp; prices</button></div>
+      </div>
+      <div class="mface mface--back" aria-hidden="true" inert>
+        <h3>${m.name}</h3>
+        <table class="sizes"><tbody>${m.sizes.map(s=>`<tr><th>${s[0]}${s[1]?`<small>${s[1]}</small>`:''}</th><td>${rs(s[2])}</td></tr>`).join('')}</tbody></table>
+        <p class="note">Oat or almond milk +Rs 150. Extra shot +Rs 150.</p>
+        <div class="mfoot">${m.soldOut?'<span class="note">Back at 4 pm</span>':`<a class="flip" href="#order" data-order="${m.id}">Order this</a>`}<button class="flip" type="button" aria-label="Back to ${m.name} details">Back</button></div>
+      </div>
+    </div>
+  </li>`;
+}).join('');
+grid.addEventListener('click', e => {
+  const ord = e.target.closest('[data-order]');
+  if (ord) { $('#oDrink').value = ord.dataset.order; fillSizes(); updateOrder(); return; }
+  const btn = e.target.closest('button.flip');
+  if (!btn) return;
+  const card = btn.closest('.mcard');
+  const flipped = card.classList.toggle('is-flipped');
+  const [front, back] = card.querySelectorAll('.mface');
+  front.toggleAttribute('inert', flipped); front.setAttribute('aria-hidden', flipped);
+  back.toggleAttribute('inert', !flipped); back.setAttribute('aria-hidden', !flipped);
+  (flipped ? back : front).querySelector('button.flip').focus({preventScroll:true});
+});
+
+/* ---------- render: pairings (expired deals drop out by ends_at) ---------- */
+const now = new Date();
+$('#pairs').innerHTML = PAIRINGS.filter(p => new Date(p.ends_at) > now).map((p,i) => {
+  const sum = p.parts.reduce((a,b)=>a+b[1],0);
+  return `<article class="pair">
+    <span class="pair__n">P / ${String(i+1).padStart(2,'0')}</span>
+    <div class="pair__art">${ICONS[p.art[0]]}<b>&times;</b>${ICONS[p.art[1]]}</div>
+    <div><h3>${p.title}</h3><p>${p.why}</p><p class="pair__parts">${p.parts.map(x=>`${x[0]} ${rs(x[1])}`).join(' + ')}</p></div>
+    <div class="pair__price num"><s>${rs(sum)}</s><strong>${rs(p.price)}</strong><span class="stamp">Save ${rs(sum-p.price)}</span></div>
+  </article>`;
+}).join('');
+
+/* ---------- subscription ---------- */
+const SIZE_MULT = {250:1, 500:1.9, 1000:3.6};
+const subOrigin = $('#subOrigin');
+subOrigin.innerHTML = `<option value="rotate">Roaster's choice (rotates each delivery)</option>` + ORIGINS.map(o=>`<option value="${o.id}">${o.country} ${o.region} · ${o.roastName}</option>`).join('');
+function nextRoast(){
+  const d = new Date(); d.setDate(d.getDate()+1);
+  while (![2,5].includes(d.getDay())) d.setDate(d.getDate()+1);
+  d.setDate(d.getDate()+1);
+  return d.toLocaleDateString('en-GB',{weekday:'short', day:'numeric', month:'short'});
+}
+function updateSub(){
+  const o = ORIGINS.find(x=>x.id===subOrigin.value);
+  const base = o ? o.price : 3300;
+  const size = document.querySelector('input[name=size]:checked').value;
+  const bag = Math.round(base*SIZE_MULT[size]/50)*50;
+  const disc = Math.round(bag*.1/10)*10;
+  const del = $('#subCity').value === 'other' ? 350 : 0;
+  $('#sBag').textContent = rs(bag);
+  $('#sDisc').textContent = '− ' + rs(disc);
+  $('#sDel').textContent = del ? rs(del) : 'Free';
+  $('#sShip').textContent = nextRoast();
+  $('#sTotal').textContent = rs(bag - disc + del);
+}
+$('#subForm').addEventListener('change', updateSub);
+$('#subForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const v = document.querySelector('input[name=size]:checked').value;
+  const c = $('#subConfirm'); c.hidden = false;
+  c.textContent = `Mockup only: your ${v === '1000' ? '1 kg' : v + ' g'} subscription would start on ${nextRoast()}. Nothing was charged.`;
+});
+updateSub();
+
+/* ---------- order ahead ---------- */
+const oDrink = $('#oDrink'), oSize = $('#oSize'), oTime = $('#oTime');
+oDrink.innerHTML = MENU.map(m=>`<option value="${m.id}"${m.soldOut?' disabled':''}>${m.name}${m.soldOut?' (sold out)':''}</option>`).join('');
+oDrink.value = 'flat';
+function fillSizes(){
+  const m = MENU.find(x=>x.id===oDrink.value);
+  oSize.innerHTML = m.sizes.map((s,i)=>`<option value="${i}">${s[0]} · ${rs(s[2])}</option>`).join('');
+}
+function fillTimes(){
+  const t = new Date(); t.setSeconds(0,0);
+  t.setMinutes(Math.ceil((t.getMinutes()+10)/5)*5);
+  const opts = [];
+  for (let i=0;i<8;i++){ const x = new Date(t.getTime()+i*10*60000); opts.push(x.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})); }
+  oTime.innerHTML = opts.map((x,i)=>`<option>${i===0?'ASAP · ':''}${x}</option>`).join('');
+}
+function updateOrder(){
+  const m = MENU.find(x=>x.id===oDrink.value);
+  $('#oTotal').textContent = rs(m.sizes[oSize.value || 0][2]);
+}
+oDrink.addEventListener('change', ()=>{ fillSizes(); updateOrder(); });
+oSize.addEventListener('change', updateOrder);
+$('#order').addEventListener('submit', e => {
+  e.preventDefault();
+  const m = MENU.find(x=>x.id===oDrink.value);
+  const name = $('#oName').value.trim() || 'you';
+  const c = $('#orderConfirm'); c.hidden = false;
+  c.textContent = `Mockup only: a ${m.sizes[oSize.value][0]} ${m.name} for ${name} would be on the pickup shelf at ${oTime.value.replace('ASAP · ','')}. No order was sent.`;
+});
+fillSizes(); fillTimes(); updateOrder();
+$('#newsForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const ok = $('#newsOk'), v = $('#newsPhone').value.replace(/\D/g,'');
+  ok.hidden = false;
+  ok.textContent = v.length >= 10 ? 'Mockup only: you would get a message on the next roast day. Nothing was sent.' : 'Enter an 11-digit mobile number, for example 0300 555 0142.';
+});
+
+/* ---------- hours: today + live open/closed (Islamabad time) ---------- */
+(function(){
+  const pk = new Date(new Date().toLocaleString('en-US', {timeZone:'Asia/Karachi'}));
+  const day = pk.getDay(), h = pk.getHours() + pk.getMinutes()/60;
+  document.querySelectorAll('#hoursTable tr').forEach(tr => { if (tr.dataset.days.split(',').map(Number).includes(day)) tr.classList.add('today'); });
+  const ranges = day === 5 ? [[8,12.5],[14,24]] : (day === 6 || day === 0) ? [[9,24]] : [[8,23]];
+  const open = ranges.some(([a,b]) => h >= a && h < b);
+  const next = ranges.find(([a]) => h < a);
+  const fmt = x => { const hh = Math.floor(x)%24, mm = Math.round((x%1)*60); return (hh===0?'midnight':`${((hh+11)%12)+1}${mm?':'+String(mm).padStart(2,'0'):''} ${hh<12?'am':'pm'}`); };
+  const st = $('#status');
+  st.classList.toggle('closed', !open);
+  st.querySelector('span').textContent = open ? `Open now · until ${fmt(ranges.find(([a,b]) => h>=a && h<b)[1])}` : `Closed · opens ${next ? fmt(next[0]) : (day===5||day===6 ? '9 am' : '8 am')}`;
+})();
+
+/* ---------- hero fill ---------- */
+const liquid = $('#liquid'), scaleG = $('#scaleG'), scaleT = $('#scaleT'), yieldOut = $('#yieldOut');
+const EMPTY = 262;
+function setFill(p){
+  p = Math.max(0, Math.min(1, p));
+  liquid.setAttribute('transform', `translate(0 ${(EMPTY*(1-p)).toFixed(1)})`);
+  const g = 300*p;
+  scaleG.textContent = g.toFixed(1) + ' g';
+  const secs = Math.round(30 + p*180);
+  scaleT.textContent = Math.floor(secs/60) + ':' + String(secs%60).padStart(2,'0');
+  yieldOut.textContent = Math.round(g) + ' / 300 g';
+}
+setFill(reduce ? .92 : .42);
+
+/* ---------- media slots ---------- */
+function mountMedia(){
+  document.querySelectorAll('[data-media]').forEach(slot => {
+    const key = slot.dataset.media;
+    if (key === 'hero') {
+      const m = MEDIA.hero; if (!m.mp4) return;
+      const v = document.createElement('video');
+      v.className = 'media__video'; v.muted = true; v.loop = true; v.playsInline = true; v.preload = 'metadata';
+      v.setAttribute('playsinline', ''); v.setAttribute('aria-hidden', 'true');
+      if (m.poster) v.poster = m.poster;
+      v.addEventListener('loadeddata', () => { slot.classList.add('has-media'); if (!reduce) v.play().catch(()=>{}); });
+      v.addEventListener('error', () => v.remove());
+      v.src = m.mp4; slot.appendChild(v);
+    } else {
+      const src = MEDIA.photos[key]; if (!src) return;
+      const img = new Image();
+      img.className = 'media__img'; img.alt = slot.dataset.alt || ''; img.loading = 'lazy'; img.decoding = 'async';
+      img.addEventListener('load', () => slot.classList.add('has-media'));
+      img.addEventListener('error', () => img.remove());
+      img.src = src; slot.appendChild(img);
+    }
+  });
+}
+
+/* ---------- real map (Leaflet + CARTO), initialised when near the viewport ---------- */
+function leafletCssReady(){
+  const probe = document.createElement('div');
+  probe.className = 'leaflet-container';
+  probe.style.cssText = 'position:absolute;left:-9999px;top:0;width:1px;height:1px';
+  document.body.appendChild(probe);
+  const ok = getComputedStyle(probe).overflow === 'hidden';
+  probe.remove();
+  return ok;
+}
+function initMap(el){
+  if (!el || !window.L || el._map || !leafletCssReady()) return; // no Leaflet CSS: keep the designed fallback card
+  const box = el.closest('.mapbox');
+  const lat = +el.dataset.lat, lng = +el.dataset.lng;
+  const map = L.map(el, {center:[lat,lng], zoom:+el.dataset.zoom || 16, scrollWheelZoom:false, dragging:!L.Browser.mobile, tap:false, zoomControl:true});
+  const tiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/' + el.dataset.tiles + '/{z}/{x}/{y}{r}.png', {subdomains:'abcd', maxZoom:20,
+    attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'});
+  let loaded = false;
+  tiles.on('tileload', () => { loaded = true; box.classList.add('map-ready'); });
+  tiles.once('tileerror', () => { if (!loaded) box.classList.remove('map-ready'); });
+  tiles.addTo(map);
+  L.marker([lat,lng], {icon:L.divIcon({className:'brand-pin', html:'<span aria-hidden="true">E&amp;B</span>', iconSize:[46,56], iconAnchor:[23,56]}), title:'Ember & Bean Roasters', keyboard:true, alt:'Ember & Bean Roasters'}).addTo(map);
+  el._map = map;
+}
+
+/* ---------- boot: libraries load with defer ---------- */
+document.addEventListener('DOMContentLoaded', () => {
+  mountMedia();
+
+  const mapEl = $('#map');
+  if ('IntersectionObserver' in window) {
+    const mio = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { initMap(mapEl); mio.disconnect(); } }), {rootMargin:'600px 0px'});
+    mio.observe(mapEl);
+  } else initMap(mapEl);
+
+  const hdr = $('#hdr');
+  const hasG = !!(window.gsap && window.ScrollTrigger);
+  let lenis = null;
+  if (hasG) {
+    gsap.registerPlugin(ScrollTrigger);
+    if (window.SplitText) gsap.registerPlugin(SplitText);
+  }
+  if (hasG && window.Lenis && fine && !reduce) {
+    lenis = new Lenis({lerp:.1, wheelMultiplier:1});
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(t => lenis.raf(t * 1000));
+    gsap.ticker.lagSmoothing(0);
+  }
+
+  /* in-page links */
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    const id = a.getAttribute('href');
+    if (id.length < 2) return;
+    const t = document.querySelector(id);
+    if (!t) return;
+    e.preventDefault();
+    const off = -(hdr.offsetHeight + 8);
+    if (lenis) lenis.scrollTo(t, {offset:off, duration:1.3});
+    else window.scrollTo({top:t.getBoundingClientRect().top + window.scrollY + off, behavior:reduce ? 'auto' : 'smooth'});
+    if (!t.hasAttribute('tabindex')) t.setAttribute('tabindex', '-1');
+    t.focus({preventScroll:true});
+  });
+
+  /* header: solid after hero, hides on scroll down */
+  let lastY = window.scrollY;
+  const hero = $('.hero');
+  function onScroll(){
+    const y = window.scrollY;
+    hdr.classList.toggle('is-solid', y > hero.offsetTop + hero.offsetHeight * .6);
+    const down = y > lastY + 4, up = y < lastY - 4;
+    if (down && y > 240 && !hdr.contains(document.activeElement)) hdr.classList.add('is-hidden');
+    else if (up || y < 120) hdr.classList.remove('is-hidden');
+    lastY = y;
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  /* steam/ice only on cards in view */
+  const io = new IntersectionObserver(es => es.forEach(en => en.target.classList.toggle('is-live', en.isIntersecting)), {threshold:.7});
+  document.querySelectorAll('.mcard').forEach(c => io.observe(c));
+
+  if (!hasG) return;
+  const EASE = 'expo.out';
+  const BASE = .42;
+  const mm = gsap.matchMedia();
+
+  mm.add({
+    desk:'(min-width: 768px) and (prefers-reduced-motion: no-preference)',
+    phone:'(max-width: 767px) and (prefers-reduced-motion: no-preference)'
+  }, ctx => {
+    const { desk } = ctx.conditions;
+    /* signature: the server fills as the first screen scrolls (pinned on desktop) */
+    if (desk) {
+      ScrollTrigger.create({trigger:'.hero', start:'top top', end:'+=700', pin:true, scrub:true, onUpdate:self => setFill(BASE + (1-BASE)*self.progress)});
+      gsap.to('.hero__copy', {yPercent:-6, ease:'none', scrollTrigger:{trigger:'.hero', start:'top top', end:'+=700', scrub:true}});
+      gsap.to('#rig', {yPercent:4, ease:'none', scrollTrigger:{trigger:'.hero', start:'top top', end:'+=700', scrub:true}});
+    } else {
+      ScrollTrigger.create({trigger:'#rig', start:'top 70%', end:'bottom 35%', scrub:true, onUpdate:self => setFill(BASE + (1-BASE)*self.progress)});
+    }
+    /* origins: pinned horizontal bean shelf on desktop */
+    if (desk) {
+      const sec = $('#origins');
+      sec.classList.add('is-pinned');
+      $('#originsHint').textContent = 'Keep scrolling to move along the shelf';
+      const dist = () => Math.max(0, track.scrollWidth - window.innerWidth);
+      gsap.to(track, {x:() => -dist(), ease:'none', scrollTrigger:{trigger:'#originsPin', start:'center center', end:() => '+=' + dist(), pin:true, scrub:.6,
+        onUpdate:s => gsap.set('#originsBar', {scaleX:s.progress})}});
+      return () => { sec.classList.remove('is-pinned'); $('#originsHint').textContent = 'Swipe the shelf →'; };
+    }
+  });
+
+  mm.add('(prefers-reduced-motion: no-preference)', () => {
+    /* headline line reveals */
+    const split = () => {
+      if (!window.SplitText) return;
+      document.querySelectorAll('[data-split]').forEach(el => {
+        const inHero = !!el.closest('.hero');
+        SplitText.create(el, {type:'lines', mask:'lines', autoSplit:true, onSplit(self){
+          return gsap.from(self.lines, {yPercent:110, duration:1.15, stagger:.09, ease:EASE, delay:inHero ? .15 : 0,
+            scrollTrigger:inHero ? undefined : {trigger:el, start:'top 86%', once:true}});
+        }});
+      });
+    };
+    document.fonts && document.fonts.ready ? document.fonts.ready.then(split) : split();
+
+    /* supporting copy */
+    gsap.utils.toArray('.sec-head p:not(.label), .lede, .hero__ctas, .facts, .process li').forEach(el => {
+      gsap.from(el, {y:28, opacity:0, duration:1, ease:EASE, delay:el.closest('.hero') ? .45 : 0, scrollTrigger:el.closest('.hero') ? undefined : {trigger:el, start:'top 90%', once:true}});
+    });
+    /* hero plate */
+    gsap.from('.plate', {y:60, opacity:0, duration:1.4, ease:EASE, delay:.25});
+    gsap.from('.plate .media__art', {scale:1.12, duration:1.8, ease:EASE, delay:.25});
+    /* roast dial needles */
+    gsap.utils.toArray('.needle').forEach(n => {
+      gsap.fromTo(n, {rotation:-90, svgOrigin:'80 84'}, {rotation:+n.dataset.angle, svgOrigin:'80 84', duration:1.6, ease:'elastic.out(1,.6)', scrollTrigger:{trigger:'#origins', start:'top 60%', once:true}});
+    });
+    /* menu cards stagger */
+    const cards = gsap.utils.toArray('.mcard');
+    gsap.set(cards, {y:40, opacity:0});
+    ScrollTrigger.batch(cards, {start:'top 92%', once:true, onEnter:b => gsap.to(b, {y:0, opacity:1, duration:.9, stagger:.06, ease:EASE})});
+    /* feature photo: mask reveal */
+    gsap.from('.feature', {y:60, duration:1.2, ease:EASE, scrollTrigger:{trigger:'.feature', start:'top 88%', once:true}});
+    gsap.from('.feature .media__art', {scale:1.18, duration:1.6, ease:EASE, scrollTrigger:{trigger:'.feature', start:'top 88%', once:true}});
+    /* pairing rows + stamps */
+    gsap.utils.toArray('.pair').forEach(p => gsap.from(p, {y:30, opacity:0, duration:1, ease:EASE, scrollTrigger:{trigger:p, start:'top 90%', once:true}}));
+    gsap.utils.toArray('.stamp').forEach(b => gsap.from(b, {rotation:-14, y:-10, opacity:0, duration:.8, ease:'back.out(2)', onComplete:() => b.classList.add('is-on'), scrollTrigger:{trigger:b, start:'top 92%', once:true}}));
+    /* room strip: sideways drift + inner parallax */
+    gsap.fromTo('#stripRow', {x:0}, {x:() => -Math.max(0, $('#stripRow').scrollWidth - window.innerWidth) * .9, ease:'none', scrollTrigger:{trigger:'#room', start:'top bottom', end:'bottom top', scrub:true, invalidateOnRefresh:true}});
+    gsap.utils.toArray('.scene .media__art').forEach((s,i) => {
+      gsap.fromTo(s, {yPercent:i%2 ? 4 : -4}, {yPercent:i%2 ? -4 : 4, ease:'none', scrollTrigger:{trigger:'#room', start:'top bottom', end:'bottom top', scrub:true}});
+    });
+    /* footer wordmark */
+    gsap.from('.foot__mark', {yPercent:30, opacity:0, duration:1.4, ease:EASE, scrollTrigger:{trigger:'.foot', start:'top 85%', once:true}});
+  });
+
+  /* pointer-only: rig tilt + magnetic buttons */
+  if (fine && !reduce) {
+    const art = $('#heroArt'), rig = $('#rig');
+    art.addEventListener('pointermove', e => {
+      const r = art.getBoundingClientRect();
+      const x = (e.clientX - r.left)/r.width - .5, y = (e.clientY - r.top)/r.height - .5;
+      gsap.to(rig, {rotateY:x*12, rotateX:-y*7, rotation:x*2.5, duration:.8, ease:'power3.out'});
+    });
+    art.addEventListener('pointerleave', () => gsap.to(rig, {rotateY:0, rotateX:0, rotation:0, duration:1, ease:EASE}));
+    document.querySelectorAll('[data-magnetic]').forEach(b => {
+      const xTo = gsap.quickTo(b, 'x', {duration:.45, ease:'power3'}), yTo = gsap.quickTo(b, 'y', {duration:.45, ease:'power3'});
+      b.addEventListener('pointermove', e => { const r = b.getBoundingClientRect(); xTo(((e.clientX - r.left)/r.width - .5) * 16); yTo(((e.clientY - r.top)/r.height - .5) * 12); });
+      b.addEventListener('pointerleave', () => { xTo(0); yTo(0); });
+    });
+  }
+
+  window.addEventListener('load', () => ScrollTrigger.refresh());
+});
+</script>
+</body>
+</html>

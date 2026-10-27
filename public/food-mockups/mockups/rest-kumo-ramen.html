@@ -1,0 +1,1427 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kumo Ramen Bar</title>
+<meta name="description" content="Kumo is a 14-seat halal ramen counter on Zamzama Boulevard, Clifton, Karachi. 18-hour beef-bone broth, open 6 pm to 1 am, closed Monday. No reservations: join the queue from your phone.">
+<meta name="theme-color" content="#0B0B12">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Space+Mono:wght@400;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<link rel="stylesheet" id="leaflet-css" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" media="print" onload="this.media='all'">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "Kumo Ramen Bar",
+  "description": "14-seat halal ramen counter with an 18-hour beef-bone broth. Walk-in only, with a remote waitlist.",
+  "servesCuisine": ["Japanese", "Ramen"],
+  "priceRange": "Rs 1,950 – Rs 2,450 per bowl",
+  "acceptsReservations": "False",
+  "telephone": "+92 21 555 0193",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Shop 9, Zamzama Boulevard, Clifton",
+    "addressLocality": "Karachi",
+    "addressRegion": "Sindh",
+    "addressCountry": "PK"
+  },
+  "geo": { "@type": "GeoCoordinates", "latitude": 24.8139, "longitude": 67.0352 },
+  "hasMap": "https://www.google.com/maps/dir/?api=1&destination=24.8139,67.0352",
+  "openingHoursSpecification": [{
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    "opens": "18:00",
+    "closes": "01:00"
+  }]
+}
+</script>
+<style>
+/* Layout: a night counter under neon. Noren header, full-bleed hero with a neon sign, a pinned bowl build,
+   a ticket-machine menu, paper queue tickets, and a real map of Zamzama. Squared edges throughout. */
+:root{
+  --night:#0B0B12;
+  --night-2:#12121D;
+  --night-3:#1A1A28;
+  --indigo:#1F2A5A;
+  --indigo-2:#2C3B7A;
+  --broth:#E8B04A;
+  --paper:#EDE3CF;
+  --paper-2:#D2C7B0;
+  --ink-on-paper:#1A1A24;
+  --red:#FF3B47;
+  --cyan:#4FE3E0;
+  --scallion:#7CC36A;
+  --mute:#9490A6;
+  --line:rgba(237,227,207,.14);
+  --display:"Dela Gothic One","Hiragino Kaku Gothic StdN","Arial Black",Impact,sans-serif;
+  --body:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic","Segoe UI",system-ui,sans-serif;
+  --mono:"Space Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --gl:max(clamp(18px,3.6vw,48px),env(safe-area-inset-left,0px));
+  --gr:max(clamp(18px,3.6vw,48px),env(safe-area-inset-right,0px));
+  --header-h:70px;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:calc(var(--header-h) + 24px)}
+body{margin:0;background:var(--night);color:var(--paper);font-family:var(--body);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+img,svg,video{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1;margin:0;text-wrap:balance}
+p{margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+::selection{background:var(--red);color:#fff}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+.page{overflow-x:clip}
+.wrap{max-width:1360px;margin:0 auto;padding-left:var(--gl);padding-right:var(--gr)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.skip{position:absolute;left:12px;top:-60px;z-index:200;padding:12px 18px;background:var(--cyan);color:var(--night);font-family:var(--mono);font-weight:700;text-decoration:none}
+.skip:focus{top:12px}
+
+/* Film grain */
+.grain{position:fixed;inset:-50%;width:200%;height:200%;z-index:90;pointer-events:none;opacity:.08;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");animation:grain 1.1s steps(6) infinite}
+@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-1%)}80%{transform:translate(3%,3%)}100%{transform:translate(0,0)}}
+
+/* Tasting Board strip */
+.tb-strip{display:flex;justify-content:space-between;gap:12px;padding:7px max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));background:#111;color:#cfcfcf;font:500 12px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.02em}
+.tb-strip a{color:#fff;text-decoration:none}.tb-strip a:hover{text-decoration:underline}
+.in-board .tb-strip{display:none}
+@media (max-width:480px){.tb-strip span{display:none}}
+
+/* Buttons */
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 24px;border-radius:3px;border:2px solid var(--red);background:var(--red);color:#fff;font-family:var(--mono);font-weight:700;font-size:.84rem;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:box-shadow .3s var(--ease),background .25s var(--ease),color .25s var(--ease)}
+.btn:hover{box-shadow:0 0 0 1px var(--red),0 0 30px rgba(255,59,71,.55)}
+.btn:disabled{opacity:.42;cursor:not-allowed;box-shadow:none}
+.btn-cyan{background:transparent;border-color:var(--cyan);color:var(--cyan)}
+.btn-cyan:hover{background:var(--cyan);color:var(--night);box-shadow:0 0 30px rgba(79,227,224,.4)}
+
+/* Header (noren) */
+.site-header{position:sticky;top:0;z-index:60;height:calc(var(--header-h) + env(safe-area-inset-top,0px));padding-top:env(safe-area-inset-top,0px);transition:transform .5s var(--ease),background-color .35s var(--ease)}
+.site-header::after{content:"";position:absolute;left:0;right:0;top:100%;height:14px;background:repeating-linear-gradient(90deg,var(--indigo) 0 calc(20% - 10px),transparent calc(20% - 10px) 20%);opacity:0;transition:opacity .35s var(--ease);pointer-events:none}
+.site-header.is-solid{background:var(--indigo)}
+.site-header.is-solid::after{opacity:1}
+.site-header.is-hidden{transform:translateY(calc(-100% - 16px))}
+.site-header .wrap{display:flex;align-items:center;gap:22px;height:var(--header-h)}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none;margin-right:auto}
+.hanko{display:grid;place-items:center;width:42px;height:42px;border-radius:4px;background:var(--red);color:var(--night);font-family:var(--display);font-size:1.4rem;line-height:1;box-shadow:inset 0 0 0 3px var(--red),inset 0 0 0 5px rgba(11,11,18,.85)}
+.logo b{font-family:var(--display);font-weight:400;font-size:1.3rem;letter-spacing:.1em}
+.logo small{display:block;font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;color:var(--paper-2);margin-top:2px}
+.nav{display:flex;gap:26px;font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase}
+.nav a{position:relative;text-decoration:none;color:var(--paper-2);padding-block:8px;transition:color .25s var(--ease)}
+.nav a::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:2px;background:var(--cyan);transform:scaleX(0);transform-origin:right;transition:transform .4s var(--ease)}
+.nav a:hover{color:var(--cyan)}
+.nav a:hover::after{transform:scaleX(1);transform-origin:left}
+.wait-tag{display:inline-flex;align-items:center;gap:10px;min-height:36px;padding:0 12px;border:1px solid rgba(79,227,224,.45);border-radius:3px;font-family:var(--mono);font-size:.74rem;color:var(--cyan);white-space:nowrap}
+.wait-tag i{width:8px;height:8px;background:var(--cyan);box-shadow:0 0 10px var(--cyan);animation:blink 1.6s steps(2,end) infinite}
+@keyframes blink{50%{opacity:.25}}
+.header-cta{min-height:42px;padding:0 16px;font-size:.76rem}
+.menu-btn{display:none;align-items:center;gap:10px;min-height:44px;padding:0 4px;background:none;border:0;cursor:pointer;font-family:var(--mono);font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;color:var(--paper)}
+.menu-btn i{display:grid;gap:5px;width:22px}
+.menu-btn i::before,.menu-btn i::after{content:"";height:2px;background:currentColor}
+@media (max-width:1100px){.nav{display:none}.menu-btn{display:inline-flex}}
+@media (max-width:767px){.header-cta,.wait-tag{display:none}.logo small{display:none}}
+
+/* Mobile menu */
+.menu{position:fixed;inset:0;z-index:120;background:var(--indigo);display:grid;grid-template-rows:auto 1fr auto;padding:calc(env(safe-area-inset-top,0px) + 14px) var(--gr) calc(env(safe-area-inset-bottom,0px) + 28px) var(--gl)}
+.menu-top{display:flex;justify-content:space-between;align-items:center;min-height:56px}
+.menu-close{background:none;border:0;cursor:pointer;min-height:44px;font-family:var(--mono);font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;color:var(--paper)}
+.menu nav{display:grid;align-content:center}
+.menu nav a{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:16px 0;border-bottom:1px solid rgba(237,227,207,.2);text-decoration:none;font-family:var(--display);font-size:clamp(2rem,9vw,3rem);line-height:1.05}
+.menu nav a small{font-family:var(--mono);font-size:.8rem;color:var(--cyan)}
+.menu-foot{font-family:var(--mono);font-size:.8rem;color:var(--paper-2)}
+
+/* Hero */
+.hero{position:relative;min-height:max(680px,100svh);margin-top:calc((var(--header-h) + env(safe-area-inset-top,0px)) * -1);display:flex;align-items:center;isolation:isolate;overflow:hidden;background:
+  radial-gradient(70% 70% at 78% 42%,rgba(31,42,90,.7) 0%,rgba(11,11,18,0) 70%),
+  radial-gradient(40% 50% at 82% 20%,rgba(255,59,71,.14) 0%,rgba(11,11,18,0) 70%),
+  var(--night)}
+.hero::before{content:"";position:absolute;inset:auto 0 0 0;height:34%;z-index:-1;background:linear-gradient(0deg,rgba(58,42,28,.35),rgba(11,11,18,0))}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:40px clamp(32px,5vw,80px);align-items:center;width:100%;padding-block:calc(var(--header-h) + 64px) 72px}
+.kicker{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;font-family:var(--mono);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan)}
+.kicker span + span::before{content:"";display:inline-block;width:6px;height:6px;margin-right:14px;background:var(--red);vertical-align:middle}
+.hero h1{font-size:clamp(4rem,8.2vw,8.8rem);line-height:.86;letter-spacing:-.015em;margin:26px 0 28px}
+.hero h1 .ln{display:block}
+.hero h1 .r{color:var(--broth)}
+.hero h1 .jp{display:block;margin-top:1rem;font-size:max(1rem,.24em);line-height:1.2;letter-spacing:.32em;color:var(--paper-2)}
+.hero-lede{max-width:46ch;font-size:clamp(1.02rem,1.3vw,1.14rem);color:var(--paper-2)}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.hero-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:40px;max-width:520px;border:1px solid var(--line);border-radius:3px}
+.hero-stats div{display:grid;gap:4px;padding:14px 16px}
+.hero-stats div + div{border-left:1px solid var(--line)}
+.hero-stats b{font-family:var(--display);font-weight:400;font-size:1.7rem;line-height:1;color:var(--paper);font-variant-numeric:tabular-nums}
+.hero-stats small{font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.hero-art{position:relative;max-width:600px;width:100%;justify-self:center;aspect-ratio:1/1}
+.neon-sign{position:absolute;right:0;top:-4%;display:grid;place-items:center;width:46%;aspect-ratio:3/4;border:3px solid var(--red);border-radius:14px;box-shadow:0 0 8px rgba(255,59,71,.9),0 0 26px rgba(255,59,71,.6),inset 0 0 18px rgba(255,59,71,.35);font-family:var(--display);font-size:clamp(6rem,15vw,12rem);line-height:1;color:var(--red);text-shadow:0 0 6px rgba(255,59,71,.9),0 0 24px rgba(255,59,71,.7),0 0 60px rgba(255,59,71,.45);animation:flicker 7s steps(1,end) infinite;pointer-events:none;user-select:none}
+.neon-vert{position:absolute;left:2%;top:4%;writing-mode:vertical-rl;font-family:var(--display);font-size:clamp(1.4rem,2.6vw,2.2rem);letter-spacing:.24em;color:var(--cyan);text-shadow:0 0 6px rgba(79,227,224,.9),0 0 20px rgba(79,227,224,.55);animation:hum 3s ease-in-out infinite;pointer-events:none}
+@keyframes flicker{0%{opacity:.94}41%{opacity:.94}42%{opacity:.25}43%{opacity:.9}44%{opacity:.3}46%{opacity:.94}78%{opacity:.94}79%{opacity:.5}80%{opacity:.94}100%{opacity:.94}}
+@keyframes hum{50%{opacity:.82}}
+.bowl-hero{position:absolute;left:0;right:0;bottom:0;width:100%;height:auto}
+.steam path{fill:none;stroke:var(--paper);stroke-width:5;stroke-linecap:round;opacity:0;animation:steam 3.6s ease-in-out infinite}
+.steam path:nth-child(2){animation-delay:1.2s}
+.steam path:nth-child(3){animation-delay:2.4s}
+@keyframes steam{0%{opacity:0;transform:translateY(16px)}35%{opacity:.35}100%{opacity:0;transform:translateY(-46px)}}
+.chops{animation:chop 3.2s ease-in-out infinite alternate}
+.strands{transform-box:fill-box;transform-origin:50% 100%;animation:lift 3.2s ease-in-out infinite alternate}
+@keyframes chop{to{transform:translateY(-46px)}}
+@keyframes lift{to{transform:scaleY(1.33)}}
+.hero-media{position:absolute;inset:6% 10% 0 10%;overflow:hidden;border-radius:3px;opacity:0;transition:opacity 1.4s var(--ease)}
+.hero-media.is-live{opacity:1}
+.hero-media video,.hero-media img{width:100%;height:100%;object-fit:cover}
+.scroll-cue{position:absolute;left:var(--gl);bottom:24px;display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.scroll-cue i{display:block;width:12px;height:12px;border-right:2px solid var(--cyan);border-bottom:2px solid var(--cyan);transform:rotate(45deg);animation:nudge 1.6s ease-in-out infinite}
+@keyframes nudge{50%{transform:translateY(5px) rotate(45deg)}}
+@media (max-width:899px){.hero-grid{grid-template-columns:minmax(0,1fr)}.hero-art{max-width:440px}.scroll-cue{display:none}}
+@media (max-width:767px){.hero-grid{padding-block:calc(var(--header-h) + 40px) 48px}.hero-stats b{font-size:1.2rem;white-space:nowrap}.hero-stats div{padding:12px 10px}}
+
+/* Marquee strip */
+.strip{background:var(--cyan);color:var(--night);overflow:hidden;padding-block:14px;border-block:2px solid var(--night)}
+.strip-track{display:flex;width:max-content;animation:marquee 30s linear infinite}
+.strip:hover .strip-track,.reviews:hover .strip-track{animation-play-state:paused}
+.strip-group{display:flex;flex-shrink:0}
+.strip-item{display:flex;align-items:center;gap:22px;padding-right:22px;font-family:var(--mono);font-weight:700;font-size:.95rem;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+.strip-item::after{content:"";width:9px;height:9px;background:var(--night);transform:rotate(45deg)}
+@keyframes marquee{to{transform:translateX(-50%)}}
+.reverse .strip-track{animation-direction:reverse}
+@media (prefers-reduced-motion:reduce){.strip,.reviews-row{overflow-x:auto}.strip-track{animation:none}}
+
+/* Sections */
+.section{padding-block:clamp(96px,11vw,160px)}
+.label{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;font-family:var(--mono);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--paper-2)}
+.label b{color:var(--cyan);font-weight:700}
+.label span{font-family:var(--display);letter-spacing:.1em;color:var(--red)}
+.head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.8fr);gap:24px 64px;align-items:end;margin-bottom:clamp(40px,6vw,80px)}
+.head h2{font-size:clamp(2.8rem,7vw,6.2rem);line-height:.92;margin-top:20px}
+.head p{color:var(--paper-2);max-width:48ch}
+/* SplitText line masks: room for descenders without shifting layout */
+.ln-split-mask{padding-bottom:.26em;margin-bottom:-.26em}
+@media (max-width:767px){.head{grid-template-columns:minmax(0,1fr)}}
+
+/* Build the bowl */
+.build{background:var(--night-2);border-top:1px solid var(--line)}
+.build-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px clamp(32px,6vw,96px);align-items:start}
+.bowl-top-wrap{position:sticky;top:calc(var(--header-h) + 40px);display:grid;gap:16px;justify-items:center}
+.bowl-top{width:100%;max-width:500px;height:auto;filter:drop-shadow(0 30px 40px rgba(0,0,0,.6))}
+.build-meter{display:flex;gap:16px;font-family:var(--mono);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.build-meter b{color:var(--broth)}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.step{display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:4px 18px;align-items:baseline;padding:20px 0 20px 18px;border-left:3px solid var(--line);transition:opacity .4s var(--ease),border-color .4s var(--ease)}
+.step .n{font-family:var(--mono);font-weight:700;color:var(--cyan)}
+.step h3{font-size:1.55rem;display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline}
+.step h3 small{font-family:var(--body);font-weight:500;font-size:.92rem;color:var(--mute)}
+.step .t{font-family:var(--mono);font-size:.78rem;padding:3px 10px;border-radius:2px;background:rgba(232,176,74,.14);color:var(--broth);white-space:nowrap}
+.step p{grid-column:2/-1;color:var(--paper-2);max-width:46ch}
+.halal{margin-top:24px;padding:16px 18px;border:1px solid rgba(124,195,106,.5);border-left-width:4px;border-radius:2px;font-size:.95rem;color:var(--paper-2)}
+.halal b{color:var(--scallion)}
+.build.is-pinned .build-stage{height:100vh;display:flex;align-items:center}
+.build.is-pinned .build-grid{width:100%;align-items:center}
+.build.is-pinned .bowl-top-wrap{position:static}
+.build.is-pinned .bowl-top{max-width:min(500px,62vh)}
+.build.is-pinned .step{opacity:.32;padding-block:10px}
+.build.is-pinned .step p{display:none}
+.build.is-pinned .step.on{opacity:1;border-left-color:var(--cyan)}
+.build.is-pinned .step.on p{display:block}
+.build.is-pinned .build-intro{display:none}
+@media (max-width:767px){.build-grid{grid-template-columns:minmax(0,1fr)}.bowl-top-wrap{position:static}.bowl-top{max-width:320px}.step{grid-template-columns:40px minmax(0,1fr)}.step .t{grid-column:2;justify-self:start}}
+
+/* Ticket machine */
+.bowls{background:radial-gradient(70% 60% at 20% 0%,rgba(44,59,122,.45),rgba(11,11,18,0) 70%),var(--night)}
+.menu-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,.65fr);gap:32px;align-items:start}
+.machine{background:linear-gradient(180deg,#ECE6D8,#D9D0BC);color:var(--ink-on-paper);border-radius:8px;padding:20px;box-shadow:inset 0 0 0 6px #C7BCA4,0 30px 60px rgba(0,0,0,.5)}
+.led{display:flex;justify-content:space-between;gap:12px;align-items:center;background:var(--night);color:var(--cyan);border-radius:3px;padding:12px 16px;font-family:var(--mono);font-size:.84rem;letter-spacing:.06em;margin-bottom:16px;text-shadow:0 0 8px rgba(79,227,224,.6)}
+.led span:last-child{color:var(--broth);text-shadow:none}
+.bowl-btns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.bowl-btn{position:relative;display:grid;gap:6px;align-content:start;text-align:left;background:#FFFDF8;color:var(--ink-on-paper);border:0;border-radius:4px;padding:16px 16px 18px;box-shadow:0 5px 0 #A79B82;cursor:pointer;transition:transform .12s var(--ease),box-shadow .12s var(--ease),background .2s}
+.bowl-btn:hover{background:#FFF7E6}
+.bowl-btn:active{transform:translateY(4px);box-shadow:0 1px 0 #A79B82}
+.bowl-btn[aria-pressed="true"]{background:#FFF0CF;box-shadow:0 5px 0 #A79B82,inset 0 0 0 3px var(--red)}
+.bowl-btn .ph{position:relative;display:block;aspect-ratio:4/3;margin:-4px -4px 6px;overflow:hidden;border-radius:2px;background:#E9E3D6}
+.bowl-btn .ph img{width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .8s var(--ease)}
+.bowl-btn .ph.is-live img{opacity:1}
+.bowl-btn .no{font-family:var(--mono);font-size:.74rem;font-weight:700;color:#5F584A}
+.bowl-btn .name{font-family:var(--display);font-size:1.35rem;line-height:1.1}
+.bowl-btn .jp{font-size:.88rem;color:#5F584A}
+.bowl-btn .desc{font-size:.88rem;line-height:1.45;color:#433E32}
+.bowl-btn .row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:6px}
+.bowl-btn .price{font-family:var(--mono);font-weight:700;font-size:1.02rem}
+.spice{display:inline-flex;gap:3px;align-items:center;font-family:var(--mono);font-size:.7rem;color:#5F584A}
+.spice i{width:10px;height:10px;border:1.5px solid #C2332B;transform:rotate(45deg)}
+.spice i.on{background:#E2372D;border-color:#E2372D}
+.lamp{position:absolute;top:14px;right:14px;display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.66rem;font-weight:700;color:#2F6A25}
+.lamp::before{content:"";width:10px;height:10px;background:#55C443;box-shadow:0 0 8px #55C443}
+.bowl-btn.sold{cursor:not-allowed;background:#E9E3D6;color:#6B6458}
+.bowl-btn.sold .name,.bowl-btn.sold .price{color:#6B6458;text-decoration:line-through;text-decoration-thickness:2px}
+.bowl-btn.sold .lamp{color:#B4241D}
+.bowl-btn.sold .lamp::before{background:var(--red);box-shadow:0 0 10px var(--red)}
+.bowl-btn.sold:active{transform:none;box-shadow:0 5px 0 #A79B82}
+.addons-title{font-family:var(--mono);font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;color:#5F584A;margin:20px 4px 10px}
+.addon-btns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.addon-btn{display:grid;gap:2px;text-align:left;background:#FFFDF8;border:0;border-radius:3px;padding:10px 12px;min-height:52px;box-shadow:0 3px 0 #A79B82;cursor:pointer;color:var(--ink-on-paper);font-size:.88rem;line-height:1.3}
+.addon-btn small{font-family:var(--mono);font-size:.74rem;color:#5F584A}
+.addon-btn[aria-pressed="true"]{background:#E0F7F6;box-shadow:0 3px 0 #A79B82,inset 0 0 0 2px #1E9C99}
+.addon-btn:disabled{opacity:.45;cursor:not-allowed}
+.machine-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.ticket{position:relative;background:var(--paper);color:var(--ink-on-paper);font-family:var(--mono);padding:24px 22px 28px;border-radius:2px 2px 0 0;box-shadow:0 24px 40px rgba(0,0,0,.45)}
+.ticket::after{content:"";position:absolute;left:0;right:0;bottom:-12px;height:12px;background:linear-gradient(-45deg,transparent 8px,var(--paper) 0) 0 0/16px 12px repeat-x,linear-gradient(45deg,transparent 8px,var(--paper) 0) 0 0/16px 12px repeat-x}
+.ticket h3{font-family:var(--display);font-size:1.7rem;margin-bottom:4px}
+.ticket .sub{font-size:.76rem;color:#5F584A;margin-bottom:16px}
+.ticket ul{list-style:none;margin:0 0 14px;padding:12px 0;border-block:1px dashed #9F947D;display:grid;gap:10px;font-size:.86rem;min-height:60px}
+.ticket li{display:flex;justify-content:space-between;gap:12px}
+.ticket li span:first-child{min-width:0}
+.ticket li button{border:0;background:none;color:#B4241D;font-family:var(--mono);font-size:.74rem;cursor:pointer;padding:0 0 0 8px;min-height:32px}
+.ticket .empty{color:#5F584A}
+.ticket .total{display:flex;justify-content:space-between;font-weight:700;font-size:1.05rem;font-variant-numeric:tabular-nums}
+.ticket .note{font-size:.76rem;color:#5F584A;margin-top:10px}
+.ticket .btn{width:100%;margin-top:16px}
+.ticket-confirm{margin-top:14px;padding:12px;border:1px solid #1E9C99;background:#E0F7F6;font-size:.8rem}
+@media (max-width:960px){.menu-grid{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:560px){.bowl-btns{grid-template-columns:minmax(0,1fr)}.addon-btns{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Visit tabs */
+.visit{background:var(--night-2);border-top:1px solid var(--line)}
+.tablist{display:flex;gap:0;overflow-x:auto;margin-bottom:28px;border-bottom:1px solid var(--line);scrollbar-width:none}
+.tablist::-webkit-scrollbar{display:none}
+.tab{flex:none;display:inline-flex;align-items:center;gap:8px;min-height:52px;padding:0 20px;border:0;border-bottom:3px solid transparent;background:transparent;color:var(--paper-2);font-family:var(--mono);font-size:.84rem;letter-spacing:.04em;cursor:pointer;white-space:nowrap;transition:color .25s var(--ease),border-color .25s var(--ease)}
+.tab small{color:var(--mute);font-family:var(--body)}
+.tab:hover{color:var(--paper)}
+.tab[aria-selected="true"]{color:var(--paper);border-bottom-color:var(--red)}
+.panel{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px 56px;align-items:center;padding:clamp(24px,4vw,48px);border:1px solid var(--line);border-radius:3px;background:var(--night)}
+.panel h3{font-size:clamp(2rem,3.8vw,3.1rem);margin:10px 0 14px}
+.panel .jp{font-family:var(--display);font-size:1rem;color:var(--red);letter-spacing:.1em}
+.panel p{color:var(--paper-2);max-width:48ch}
+.panel ul{list-style:none;padding:0;margin:18px 0 24px;display:grid;gap:8px}
+.panel li{display:flex;gap:12px;color:var(--paper-2);font-size:.98rem}
+.panel li::before{content:"";flex:none;width:8px;height:8px;margin-top:.6em;background:var(--cyan);transform:rotate(45deg)}
+.panel-art{display:grid;place-items:center;min-height:220px}
+.sms{max-width:330px;width:100%;display:grid;gap:10px}
+.sms-card{background:#1C1E2E;border:1px solid rgba(237,227,207,.1);border-left:3px solid var(--cyan);border-radius:3px;padding:12px 14px;font-size:.94rem;box-shadow:0 18px 36px rgba(0,0,0,.4)}
+.sms-card .from{display:flex;justify-content:space-between;gap:8px;font-family:var(--mono);font-size:.7rem;color:var(--mute);margin-bottom:6px}
+.mini-ticket{background:var(--paper);color:var(--ink-on-paper);font-family:var(--mono);padding:18px 20px;border-radius:2px;transform:rotate(-3deg);box-shadow:0 18px 36px rgba(0,0,0,.45);font-size:.88rem;min-width:220px}
+.mini-ticket b{display:block;font-family:var(--display);font-weight:400;font-size:1.7rem}
+@media (max-width:767px){.panel{grid-template-columns:minmax(0,1fr)}}
+
+/* Waitlist */
+.queue{background:linear-gradient(180deg,var(--night) 0%,#0F1027 100%)}
+.queue-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:40px clamp(32px,5vw,80px);align-items:start}
+.counter-card{border:1px solid var(--line);border-radius:3px;padding:26px;background:var(--night-2)}
+.counter-card h3{font-size:1.4rem;margin-bottom:6px}
+.counter-card .sub{font-family:var(--mono);font-size:.78rem;color:var(--mute);letter-spacing:.06em}
+.counter-svg{width:100%;height:auto;margin:16px 0}
+.legend{display:flex;flex-wrap:wrap;gap:16px;font-family:var(--mono);font-size:.76rem;color:var(--paper-2)}
+.legend span{display:inline-flex;align-items:center;gap:8px}
+.legend i{width:12px;height:12px;border-radius:2px}
+.line-title{font-family:var(--mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin:26px 0 10px}
+.qline{display:flex;gap:10px;overflow-x:auto;padding:6px 2px 14px}
+.qt{flex:none;display:grid;gap:2px;min-width:86px;padding:10px 12px;background:var(--paper);color:var(--ink-on-paper);border-radius:2px;font-family:var(--mono);font-size:.74rem}
+.qt b{font-family:var(--display);font-weight:400;font-size:1.25rem}
+.qt.you{background:var(--red);color:#fff}
+.q-form{display:grid;gap:22px;border:1px solid var(--line);border-radius:3px;padding:clamp(22px,3vw,34px);background:var(--night-2)}
+.q-form h3{font-size:1.9rem}
+.estimate{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;padding:16px 18px;border-radius:2px;background:rgba(79,227,224,.08);border:1px solid rgba(79,227,224,.3);border-left-width:4px}
+.estimate b{font-family:var(--display);font-weight:400;font-size:2.6rem;color:var(--cyan);line-height:1;font-variant-numeric:tabular-nums}
+.estimate span{font-size:.94rem;color:var(--paper-2)}
+.fld{display:grid;gap:8px;border:0;margin:0;padding:0;min-width:0}
+.fld label,.fld legend{font-family:var(--mono);font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;color:var(--paper-2);padding:0;margin-bottom:8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{position:relative}
+.chip input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer}
+.chip span{display:grid;place-items:center;min-width:52px;min-height:50px;padding:0 14px;border:1px solid var(--line);border-radius:3px;font-family:var(--display);font-size:1.15rem;transition:border-color .2s var(--ease)}
+.chip:hover span{border-color:rgba(79,227,224,.5)}
+.chip input:checked + span{background:var(--cyan);color:var(--night);border-color:var(--cyan)}
+.chip input:focus-visible + span{outline:2px solid var(--cyan);outline-offset:2px}
+.inp{width:100%;min-height:52px;padding:10px 14px;border-radius:3px;border:1px solid var(--line);background:var(--night);color:var(--paper)}
+.inp:focus{border-color:var(--cyan);outline:none}
+.inp[aria-invalid="true"]{border-color:#FF8A92}
+.hint{font-size:.88rem;color:var(--mute)}
+.err{font-size:.9rem;color:#FF8A92}
+.q-done{display:grid;gap:12px;padding:22px;border-radius:3px;border:1px solid var(--red);border-left-width:4px;background:rgba(255,59,71,.08)}
+.q-done b{font-family:var(--display);font-weight:400;font-size:2.8rem;color:var(--red);line-height:1}
+.q-done p{color:var(--paper-2)}
+@media (max-width:899px){.queue-grid{grid-template-columns:minmax(0,1fr)}}
+
+/* Reviews */
+.reviews{background:var(--night);padding-block:30px;border-block:1px solid var(--line);display:grid;gap:16px}
+.reviews-row{overflow:hidden}
+.review{flex:none;display:flex;flex-direction:column;justify-content:space-between;gap:10px;width:310px;margin-right:16px;padding:18px 20px;background:var(--paper);color:var(--ink-on-paper);border-radius:2px;font-size:.98rem;line-height:1.45}
+.review small{font-family:var(--mono);font-size:.74rem;color:#5F584A}
+.review:nth-child(3n+2){transform:rotate(1.2deg)}
+.review:nth-child(3n){transform:rotate(-1deg)}
+.neon-row .strip-item{color:var(--cyan);text-shadow:0 0 8px rgba(79,227,224,.55)}
+.neon-row .strip-item::after{background:var(--red);box-shadow:0 0 8px var(--red)}
+
+/* Hours & map */
+.hours-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:48px clamp(32px,6vw,96px);align-items:start}
+.hours-grid h2{font-size:clamp(2.8rem,6.4vw,5.4rem);line-height:.92;margin:20px 0 18px}
+.status{display:inline-flex;align-items:center;gap:10px;margin-bottom:26px;padding:8px 12px;border:1px solid var(--line);border-radius:3px;font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--paper-2)}
+.status::before{content:"";width:8px;height:8px;background:var(--mute)}
+.status.is-open{color:var(--cyan);border-color:rgba(79,227,224,.45)}
+.status.is-open::before{background:var(--cyan);box-shadow:0 0 8px var(--cyan)}
+.hours-table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:.94rem;font-variant-numeric:tabular-nums}
+.hours-table th,.hours-table td{text-align:left;padding:14px 0;border-bottom:1px solid var(--line)}
+.hours-table th{font-weight:400;color:var(--paper-2)}
+.hours-table td{text-align:right}
+.hours-table tr.today th,.hours-table tr.today td{color:var(--cyan)}
+.hours-table tr.closed td{color:var(--red)}
+.info{display:grid;gap:18px;margin:28px 0 0}
+.info div{display:grid;gap:2px}
+.info dt{font-family:var(--mono);font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.info dd{margin:0;font-size:1.05rem}
+.visit-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.mapbox{position:relative;aspect-ratio:1/1;max-width:100%;border:1px solid var(--line);border-radius:3px;overflow:hidden;background:#0D0E1A}
+.map{position:absolute;inset:0;z-index:0;background:#0D0E1A}
+.map .leaflet-tile-pane{filter:sepia(.25) hue-rotate(195deg) saturate(1.6) brightness(.92) contrast(1.06)}
+.mapbox .leaflet-container{font-family:var(--mono);background:#0D0E1A}
+.mapbox .leaflet-bar{border:1px solid rgba(79,227,224,.4);border-radius:3px;box-shadow:none;overflow:hidden}
+.mapbox .leaflet-bar a{width:40px;height:40px;line-height:40px;background:var(--night);color:var(--cyan);border-bottom-color:var(--line);border-radius:0!important}
+.mapbox .leaflet-bar a:hover{background:var(--indigo);color:var(--paper)}
+.mapbox .leaflet-control-attribution{background:rgba(11,11,18,.85);color:var(--paper-2);font-size:11px;padding:2px 8px}
+.mapbox .leaflet-control-attribution a{color:var(--cyan)}
+.brand-pin{background:none;border:0}
+.pin-mark{position:absolute;left:50%;top:0;width:40px;height:40px;margin-left:-20px;display:grid;place-items:center;border-radius:4px;background:var(--red);color:var(--night);font-family:var(--display);font-size:1.3rem;box-shadow:inset 0 0 0 3px var(--red),inset 0 0 0 5px rgba(11,11,18,.85),0 0 22px rgba(255,59,71,.65)}
+.pin-stem{position:absolute;left:50%;top:40px;width:2px;height:12px;margin-left:-1px;background:var(--red)}
+.map-fallback{position:absolute;inset:0;z-index:2;display:grid;align-content:space-between;gap:20px;padding:clamp(22px,4vw,36px);background:
+  linear-gradient(rgba(79,227,224,.07) 1px,transparent 1px) 0 0/48px 48px,
+  linear-gradient(90deg,rgba(79,227,224,.07) 1px,transparent 1px) 0 0/48px 48px,
+  linear-gradient(160deg,#151A3A,#0D0E1A 70%);transition:opacity .8s var(--ease),visibility .8s}
+.mapbox.map-ready .map-fallback{opacity:0;visibility:hidden}
+.mf-top{display:flex;justify-content:space-between;gap:16px;font-family:var(--mono);font-size:.76rem;letter-spacing:.08em;color:var(--cyan)}
+.mf-road{position:relative;height:16px;margin-inline:calc(clamp(22px,4vw,36px) * -1);background:var(--cyan);box-shadow:0 0 24px rgba(79,227,224,.45)}
+.mf-road span{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:grid;place-items:center;width:46px;height:46px;border-radius:4px;background:var(--red);color:var(--night);font-family:var(--display);font-size:1.4rem;box-shadow:inset 0 0 0 3px var(--red),inset 0 0 0 5px rgba(11,11,18,.85),0 0 24px rgba(255,59,71,.6)}
+.mf-body{display:grid;gap:10px}
+.mf-body p:first-child{font-family:var(--display);font-size:clamp(1.8rem,3.2vw,2.6rem);line-height:1}
+.mf-body p{color:var(--paper-2)}
+.mf-body .btn{justify-self:start;margin-top:6px}
+@media (max-width:767px){.hours-grid{grid-template-columns:minmax(0,1fr)}}
+
+/* Footer */
+.footer{position:relative;padding-block:clamp(72px,9vw,120px) 36px;border-top:1px solid var(--line);background:var(--night)}
+.foot-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:36px 44px}
+.foot-grid h4{margin:0 0 14px;font-family:var(--mono);font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan)}
+.foot-grid p,.foot-grid li{color:var(--paper-2);font-size:.98rem}
+.foot-grid ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.foot-grid a{text-decoration:none;transition:color .25s var(--ease)}
+.foot-grid a:hover{color:var(--cyan)}
+.sms-list{display:grid;gap:12px}
+.sms-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
+.foot-mark{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin:clamp(56px,8vw,110px) 0 0;font-family:var(--display);line-height:.8;color:var(--paper)}
+.foot-mark span:first-child{font-size:clamp(5rem,21vw,19rem);letter-spacing:-.02em}
+.foot-mark span:last-child{font-size:clamp(4rem,15vw,13rem);color:var(--red);text-shadow:0 0 30px rgba(255,59,71,.45)}
+.foot-legal{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:36px;padding-top:22px;border-top:1px solid var(--line);font-family:var(--mono);font-size:.78rem;color:var(--mute)}
+@media (max-width:899px){.foot-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.foot-grid{grid-template-columns:minmax(0,1fr)}}
+
+/* Mobile action bar */
+.actionbar{display:none}
+@media (max-width:767px){
+  body{padding-bottom:calc(80px + env(safe-area-inset-bottom,0px))}
+  .actionbar{display:grid;grid-template-columns:1.7fr 1fr 1fr;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:70;padding:10px var(--gr) calc(10px + env(safe-area-inset-bottom,0px)) var(--gl);background:rgba(11,11,18,.97);border-top:1px solid var(--line)}
+  .actionbar a{display:grid;place-items:center;align-content:center;min-height:56px;border-radius:3px;border:1px solid var(--line);text-decoration:none;font-family:var(--mono);font-weight:700;font-size:.78rem;text-transform:uppercase;letter-spacing:.04em}
+  .actionbar a small{font-weight:400;text-transform:none;font-size:.7rem;color:var(--mute)}
+  .actionbar a.primary{background:var(--red);border-color:var(--red);color:#fff}
+  .actionbar a.primary small{color:#FFE2E4}
+}
+@media (prefers-reduced-motion:reduce){.grain,.neon-sign,.neon-vert,.steam path,.chops,.strands,.wait-tag i,.scroll-cue i{animation:none}.steam path{opacity:.25}}
+</style>
+</head>
+<body>
+<div class="tb-strip"><a href="../index.html">&larr; Tasting Board</a><span>Mockup 06 / 10 &middot; concept, not a live site</span></div>
+<script>try{if(window.parent!==window&&window.parent.__TASTING_BOARD__)document.documentElement.classList.add('in-board')}catch(e){}</script>
+<a class="skip" href="#main">Skip to content</a>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="page">
+<header class="site-header" id="site-header">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Kumo Ramen Bar, back to top"><span class="hanko" aria-hidden="true">雲</span><span><b>KUMO</b><small>RAMEN BAR · ZAMZAMA</small></span></a>
+    <nav class="nav" aria-label="Main">
+      <a href="#build">The bowl</a>
+      <a href="#bowls">Menu</a>
+      <a href="#visit">How to visit</a>
+      <a href="#queue">Queue</a>
+      <a href="#hours">Hours</a>
+    </nav>
+    <span class="wait-tag" aria-live="polite"><i aria-hidden="true"></i><span data-wait-pill>Wait ~35 min</span></span>
+    <a class="btn header-cta" href="#queue" data-magnetic>Join the queue</a>
+    <button class="menu-btn" type="button" id="menu-open" aria-expanded="false" aria-controls="menu"><i aria-hidden="true"></i>Menu</button>
+  </div>
+</header>
+
+<div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+  <div class="menu-top"><span class="logo"><span class="hanko" aria-hidden="true">雲</span><span><b>KUMO</b></span></span><button class="menu-close" type="button" id="menu-close">Close</button></div>
+  <nav aria-label="Mobile">
+    <a href="#build">The bowl <small>01</small></a>
+    <a href="#bowls">Menu <small>02</small></a>
+    <a href="#visit">How to visit <small>03</small></a>
+    <a href="#queue">Join the queue <small>04</small></a>
+    <a href="#hours">Hours <small>05</small></a>
+  </nav>
+  <p class="menu-foot">Shop 9, Zamzama Boulevard, Clifton &middot; +92 21 555 0193</p>
+</div>
+
+<main id="main">
+  <section class="hero" id="top" aria-label="Kumo Ramen Bar">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="kicker"><span>Zamzama · Clifton · Karachi</span><span>6 pm to 1 am</span></p>
+        <h1 id="hero-title"><span class="ln">Kumo</span><span class="ln r">Ramen</span><span class="ln">Bar</span><span class="jp" aria-hidden="true">雲 ラーメン</span></h1>
+        <p class="hero-lede">Fourteen stools around one counter. A beef-bone broth boiled hard for eighteen hours. No reservations: join the queue from your phone and we'll text you when your seats are ready.</p>
+        <div class="hero-actions">
+          <a class="btn" href="#queue" data-magnetic>Join the queue</a>
+          <a class="btn btn-cyan" href="#bowls">Order pickup</a>
+        </div>
+        <div class="hero-stats">
+          <div><b>14</b><small>Seats</small></div>
+          <div><b>18 h</b><small>Broth</small></div>
+          <div><b data-wait-short>~35 min</b><small>Wait for 2</small></div>
+        </div>
+      </div>
+      <div class="hero-art">
+        <span class="neon-sign" aria-hidden="true">雲</span>
+        <span class="neon-vert" aria-hidden="true">ラーメン</span>
+        <svg class="bowl-hero" viewBox="0 0 520 520" role="img" aria-label="A steaming bowl of ramen with chopsticks lifting noodles">
+          <defs>
+            <linearGradient id="h-broth" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#F3CE7E"/><stop offset="1" stop-color="#D3923A"/></linearGradient>
+            <linearGradient id="h-body" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#1D2140"/><stop offset="1" stop-color="#0D0E1A"/></linearGradient>
+            <pattern id="h-wave" width="26" height="13" patternUnits="userSpaceOnUse"><path d="M0 13 a13 13 0 0 1 26 0 M6.5 13 a6.5 6.5 0 0 1 13 0" fill="none" stroke="#3B4C96" stroke-width="2"/></pattern>
+            <clipPath id="h-body-clip"><path d="M85 330 A175 44 0 0 0 435 330 L405 428 Q390 474 330 480 L190 480 Q130 474 115 428 Z"/></clipPath>
+          </defs>
+          <g class="steam" aria-hidden="true">
+            <path d="M200 170 q-18 -26 0 -52 t0 -52"/>
+            <path d="M262 150 q-18 -26 0 -52 t0 -52"/>
+            <path d="M322 170 q-18 -26 0 -52 t0 -52"/>
+          </g>
+          <ellipse cx="260" cy="492" rx="200" ry="18" fill="#000" opacity=".45"/>
+          <ellipse cx="260" cy="330" rx="175" ry="44" fill="#262B52" stroke="#EDE3CF" stroke-opacity=".5" stroke-width="2"/>
+          <ellipse cx="260" cy="334" rx="160" ry="36" fill="url(#h-broth)"/>
+          <path d="M170 326 q40 -10 90 -4 M280 344 q30 -2 60 -10" fill="none" stroke="#FFF3D0" stroke-opacity=".45" stroke-width="2.5" stroke-linecap="round"/>
+          <rect x="122" y="250" width="66" height="86" rx="3" transform="rotate(-14 155 293)" fill="#16241A" stroke="#2F4A36" stroke-width="2"/>
+          <path d="M138 262 l40 -8 M136 280 l40 -8 M134 298 l40 -8" stroke="#24382A" stroke-width="2" transform="rotate(-14 155 293)"/>
+          <ellipse cx="350" cy="326" rx="34" ry="14" fill="#8A4B2F" stroke="#5A2C1A" stroke-width="3"/>
+          <path d="M330 326 q20 -10 40 0" fill="none" stroke="#E9B9A0" stroke-width="4"/>
+          <ellipse cx="300" cy="346" rx="22" ry="11" fill="#F2DDB8" stroke="#D9B98A" stroke-width="2"/>
+          <ellipse cx="300" cy="345" rx="11" ry="6" fill="#F08A1C"/>
+          <g fill="#7CC36A"><rect x="222" y="338" width="10" height="4" rx="1" transform="rotate(-20 227 340)"/><rect x="238" y="346" width="9" height="4" rx="1" transform="rotate(15 242 348)"/><rect x="212" y="350" width="9" height="4" rx="1" transform="rotate(40 216 352)"/><rect x="376" y="340" width="9" height="4" rx="1" transform="rotate(-30 380 342)"/></g>
+          <g class="strands">
+            <path d="M246 200 C240 240 254 280 246 336" fill="none" stroke="#F4DC9A" stroke-width="5" stroke-linecap="round"/>
+            <path d="M254 200 C262 240 248 284 258 338" fill="none" stroke="#EFD38A" stroke-width="5" stroke-linecap="round"/>
+            <path d="M262 200 C256 244 272 286 266 338" fill="none" stroke="#F4DC9A" stroke-width="5" stroke-linecap="round"/>
+            <path d="M270 200 C280 246 264 288 276 336" fill="none" stroke="#E8C976" stroke-width="5" stroke-linecap="round"/>
+            <path d="M240 202 C230 250 244 290 236 334" fill="none" stroke="#EFD38A" stroke-width="5" stroke-linecap="round"/>
+          </g>
+          <g class="chops">
+            <rect x="248" y="70" width="10" height="190" rx="5" transform="rotate(24 253 165)" fill="#C9A26A"/>
+            <rect x="268" y="66" width="10" height="190" rx="5" transform="rotate(32 273 161)" fill="#B88F58"/>
+            <rect x="248" y="70" width="10" height="34" rx="5" transform="rotate(24 253 165)" fill="#FF3B47"/>
+            <rect x="268" y="66" width="10" height="34" rx="5" transform="rotate(32 273 161)" fill="#FF3B47"/>
+          </g>
+          <path d="M85 330 A175 44 0 0 0 435 330 L405 428 Q390 474 330 480 L190 480 Q130 474 115 428 Z" fill="url(#h-body)"/>
+          <rect x="80" y="372" width="360" height="40" fill="url(#h-wave)" clip-path="url(#h-body-clip)"/>
+          <path d="M85 330 A175 44 0 0 0 435 330" fill="none" stroke="#EDE3CF" stroke-opacity=".7" stroke-width="3"/>
+          <path d="M120 420 Q150 460 200 470" fill="none" stroke="#4FE3E0" stroke-opacity=".35" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+        <!-- HEYGEN: hero loop, 4:5, 1080p, 8 s. Close-up of a dark indigo ramen bowl on a wooden counter at night; chopsticks
+             lift glossy thin noodles out of milky golden beef-bone broth; jammy ajitama egg, beef chashu, nori, scallions;
+             thick steam, red neon glow behind, cyan rim light. Halal. No people, no text. -->
+        <div class="hero-media" id="hero-media" aria-hidden="true"></div>
+      </div>
+    </div>
+    <p class="scroll-cue" aria-hidden="true"><i></i>Scroll · 下へ · build a bowl</p>
+  </section>
+
+  <div class="strip" aria-hidden="true">
+    <div class="strip-track">
+      <div class="strip-group"><span class="strip-item">18-hour broth</span><span class="strip-item">14 seats</span><span class="strip-item">No reservations</span><span class="strip-item">Open till 1 am</span><span class="strip-item">替玉 Kaedama Rs 300</span><span class="strip-item">100% halal</span><span class="strip-item">Closed Mondays</span></div>
+      <div class="strip-group"><span class="strip-item">18-hour broth</span><span class="strip-item">14 seats</span><span class="strip-item">No reservations</span><span class="strip-item">Open till 1 am</span><span class="strip-item">替玉 Kaedama Rs 300</span><span class="strip-item">100% halal</span><span class="strip-item">Closed Mondays</span></div>
+    </div>
+  </div>
+
+  <section id="build" class="section build" aria-labelledby="build-title">
+    <div class="build-stage">
+      <div class="wrap">
+        <div class="head build-intro">
+          <div>
+            <p class="label"><span>(01)</span> <b>Build the bowl</b> 作り方</p>
+            <h2 id="build-title" data-split>Seven layers, built in under a minute</h2>
+          </div>
+          <p>Every bowl is built in the same order, at the counter, in front of you. The broth takes eighteen hours. The rest takes about fifty seconds.</p>
+        </div>
+        <div class="build-grid">
+          <div class="bowl-top-wrap">
+            <svg class="bowl-top" viewBox="0 0 400 400" role="img" aria-label="Top-down view of a finished ramen bowl: broth, noodles, chashu, egg, nori, scallions and chilli oil">
+              <defs>
+                <radialGradient id="t-broth" cx="45%" cy="40%" r="65%"><stop offset="0" stop-color="#F6D898"/><stop offset=".6" stop-color="#E8B04A"/><stop offset="1" stop-color="#B9792A"/></radialGradient>
+                <pattern id="t-wave" width="20" height="10" patternUnits="userSpaceOnUse"><path d="M0 10 a10 10 0 0 1 20 0 M5 10 a5 5 0 0 1 10 0" fill="none" stroke="#3B4C96" stroke-width="1.6"/></pattern>
+              </defs>
+              <circle cx="200" cy="200" r="196" fill="#161A36"/>
+              <circle cx="200" cy="200" r="196" fill="url(#t-wave)" opacity=".75"/>
+              <circle cx="200" cy="200" r="172" fill="#0E0F18" stroke="#EDE3CF" stroke-opacity=".35" stroke-width="2"/>
+              <g id="L-broth">
+                <circle cx="200" cy="200" r="166" fill="url(#t-broth)"/>
+                <g fill="none" stroke="#FFF3D0" stroke-opacity=".5" stroke-width="3" stroke-linecap="round"><path d="M120 140 q30 -22 70 -18"/><path d="M230 300 q30 -4 56 -22"/><path d="M110 236 q4 20 18 34"/></g>
+              </g>
+              <g id="L-noodles" fill="none" stroke-linecap="round" stroke-width="6">
+                <path d="M96 236 q16 -16 32 0 t32 0 t32 0 t32 0" stroke="#F4DC9A"/>
+                <path d="M100 252 q16 -16 32 0 t32 0 t32 0 t32 0" stroke="#EFD38A"/>
+                <path d="M106 268 q16 -16 32 0 t32 0 t32 0 t26 0" stroke="#F4DC9A"/>
+                <path d="M114 284 q16 -16 32 0 t32 0 t32 0 t20 0" stroke="#E8C976"/>
+                <path d="M126 300 q16 -16 32 0 t32 0 t26 0" stroke="#EFD38A"/>
+                <path d="M92 220 q16 -16 32 0 t32 0 t32 0 t32 0" stroke="#E8C976"/>
+                <path d="M140 316 q16 -16 32 0 t30 0" stroke="#F4DC9A"/>
+              </g>
+              <g id="L-chashu">
+                <g><circle cx="262" cy="128" r="42" fill="#8A4B2F" stroke="#4F2414" stroke-width="5"/><path d="M240 124 q10 -22 30 -12 q18 12 4 28 q-14 12 -26 -2" fill="none" stroke="#E9B9A0" stroke-width="6"/></g>
+                <g><circle cx="304" cy="186" r="38" fill="#93543A" stroke="#4F2414" stroke-width="5"/><path d="M286 182 q8 -18 26 -10 q16 10 4 24 q-12 10 -22 -2" fill="none" stroke="#EDC3AC" stroke-width="5"/></g>
+              </g>
+              <g id="L-egg">
+                <ellipse cx="250" cy="262" rx="30" ry="36" fill="#E9C9A0" stroke="#C99E6E" stroke-width="2"/>
+                <ellipse cx="250" cy="262" rx="24" ry="30" fill="#FFF6E6"/>
+                <ellipse cx="250" cy="264" rx="15" ry="18" fill="#F08A1C"/>
+                <ellipse cx="248" cy="260" rx="7" ry="8" fill="#F7B54A"/>
+                <ellipse cx="306" cy="250" rx="28" ry="34" fill="#E9C9A0" stroke="#C99E6E" stroke-width="2"/>
+                <ellipse cx="306" cy="250" rx="22" ry="28" fill="#FFF6E6"/>
+                <ellipse cx="306" cy="252" rx="14" ry="17" fill="#F08A1C"/>
+                <ellipse cx="304" cy="248" rx="6" ry="7" fill="#F7B54A"/>
+              </g>
+              <g id="L-nori">
+                <rect x="72" y="70" width="86" height="124" rx="3" transform="rotate(-24 115 132)" fill="#16241A" stroke="#2F4A36" stroke-width="2"/>
+                <path d="M84 96 l64 -28 M90 116 l64 -28 M96 136 l64 -28 M102 156 l64 -28" stroke="#24382A" stroke-width="2"/>
+              </g>
+              <g id="L-scallion" fill="#7CC36A">
+                <rect x="180" y="172" width="12" height="5" rx="1" transform="rotate(-25 186 174)"/><rect x="195" y="157" width="11" height="5" rx="1" transform="rotate(30 200 160)"/><rect x="208" y="178" width="12" height="5" rx="1" transform="rotate(60 214 181)"/><rect x="171" y="193" width="11" height="5" rx="1" transform="rotate(-50 176 196)"/><rect x="220" y="197" width="11" height="5" rx="1" transform="rotate(10 226 200)"/><rect x="190" y="203" width="12" height="5" rx="1" transform="rotate(-10 196 206)"/><rect x="203" y="223" width="11" height="5" rx="1" transform="rotate(45 208 226)"/><rect x="175" y="215" width="11" height="5" rx="1" transform="rotate(75 180 218)"/><rect x="225" y="165" width="10" height="5" rx="1" transform="rotate(-35 230 168)"/><rect x="161" y="173" width="10" height="5" rx="1" transform="rotate(20 166 176)"/><rect x="235" y="217" width="10" height="5" rx="1" transform="rotate(-65 240 220)"/><rect x="151" y="203" width="10" height="5" rx="1" transform="rotate(5 156 206)"/><rect x="215" y="143" width="10" height="5" rx="1" transform="rotate(40 220 146)"/>
+              </g>
+              <g id="L-chilli">
+                <g fill="none" stroke="#D7261E" stroke-opacity=".75" stroke-width="5" stroke-linecap="round"><path d="M146 300 q14 -8 30 2"/><path d="M190 318 q10 -6 22 0"/><path d="M310 300 q8 -8 20 -4"/><path d="M132 170 q6 -6 14 -2"/><path d="M290 110 q8 -6 18 -2"/></g>
+                <g fill="none" stroke="#FFF0CC" stroke-width="1.6" stroke-linecap="round"><path d="M160 298 l4 0"/><path d="M196 316 l3 0"/><path d="M318 298 l3 0"/><path d="M188 190 l4 0"/><path d="M216 210 l4 0"/></g>
+              </g>
+            </svg>
+            <p class="build-meter" aria-live="off"><span>Step <b data-step-no>07</b> / 07</span><span><b data-step-time>Ready</b></span></p>
+          </div>
+          <div>
+            <ol class="steps">
+              <li class="step"><span class="n">01</span><h3>Broth <small>スープ</small></h3><span class="t">18 h</span><p>Beef bones boiled hard for eighteen hours until the broth turns milky, then ladled over shio tare at 98&deg;C.</p></li>
+              <li class="step"><span class="n">02</span><h3>Noodles <small>麺</small></h3><span class="t">55 s</span><p>Thin, low-hydration noodles cut every morning. Boiled fifty-five seconds and folded in by hand.</p></li>
+              <li class="step"><span class="n">03</span><h3>Chashu <small>チャーシュー</small></h3><span class="t">6 h</span><p>Beef brisket rolled, braised six hours in soy and ginger, and torched just before it goes on.</p></li>
+              <li class="step"><span class="n">04</span><h3>Ajitama <small>味玉</small></h3><span class="t">6 m 30 s</span><p>Eggs boiled six and a half minutes, then marinated twelve hours in soy, kombu and black tea. Jammy yolk every time.</p></li>
+              <li class="step"><span class="n">05</span><h3>Nori <small>海苔</small></h3><span class="t">1 sheet</span><p>Toasted seaweed set against the rim so it stays crisp for your first bite.</p></li>
+              <li class="step"><span class="n">06</span><h3>Scallions <small>ねぎ</small></h3><span class="t">At service</span><p>Spring onion sliced thin when your ticket comes in, never before.</p></li>
+              <li class="step"><span class="n">07</span><h3>Chilli oil <small>ラー油</small></h3><span class="t">2 or 20 drops</span><p>House rayu with Kashmiri chilli, garlic and sesame. You decide how much.</p></li>
+            </ol>
+            <p class="halal"><b>All halal.</b> Our tonkotsu-style broth is made only from beef bones. No pork, no mirin, no alcohol anywhere in the kitchen.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="bowls" class="section bowls" aria-labelledby="bowls-title">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <p class="label"><span>(02)</span> <b>The bowls</b> 食券</p>
+          <h2 id="bowls-title" data-split>Press a button, get a ticket</h2>
+        </div>
+        <p>Like the ramen shops in Tokyo, you order at the ticket machine. Pick a bowl, add toppings, and take the ticket for pickup, or hand it over at the counter.</p>
+      </div>
+      <div class="menu-grid">
+        <div class="machine" id="machine">
+          <div class="led"><span>食券 &middot; Choose a bowl</span><span data-led-total>Rs 0</span></div>
+          <div class="bowl-btns" id="bowl-btns"></div>
+          <noscript>
+            <ul>
+              <li>01 Kumo Tonkotsu, Rs 2,450</li>
+              <li>02 Spicy Miso, Rs 2,350</li>
+              <li>03 Shoyu Chicken, Rs 2,150 (sold out tonight)</li>
+              <li>04 Vegan Tantanmen, Rs 1,950</li>
+            </ul>
+          </noscript>
+          <p class="addons-title">Toppings · トッピング</p>
+          <div class="addon-btns" id="addon-btns"></div>
+          <div class="machine-actions">
+            <button class="btn" type="button" id="add-bowl" disabled>Print ticket</button>
+          </div>
+        </div>
+        <aside class="ticket" aria-live="polite" aria-labelledby="ticket-title">
+          <h3 id="ticket-title">Pickup ticket</h3>
+          <p class="sub">KUMO RAMEN · ZAMZAMA · <span data-ticket-no>No. 0482</span></p>
+          <ul id="ticket-lines"><li class="empty">No bowls yet. Press a bowl on the machine.</li></ul>
+          <p class="total"><span>Total</span><span id="ticket-total">Rs 0</span></p>
+          <p class="note">Broth and noodles are packed separately so nothing goes soft. Ready in about 15 minutes.</p>
+          <button class="btn" type="button" id="place-order" disabled>Place pickup order</button>
+          <div id="ticket-confirm"></div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section id="visit" class="section visit" aria-labelledby="visit-title">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <p class="label"><span>(03)</span> <b>How to visit</b> 来店</p>
+          <h2 id="visit-title" data-split>Five ways to get a bowl</h2>
+        </div>
+        <p>The counter is walk-in only. If there's a line, put your name down from anywhere and we'll text you when you're two parties away.</p>
+      </div>
+      <div class="tablist" role="tablist" aria-label="Ways to visit">
+        <button class="tab" role="tab" id="tab-counter" aria-controls="panel-counter" aria-selected="true">Counter <small>walk in</small></button>
+        <button class="tab" role="tab" id="tab-wait" aria-controls="panel-wait" aria-selected="false" tabindex="-1">Waitlist <small>by SMS</small></button>
+        <button class="tab" role="tab" id="tab-pickup" aria-controls="panel-pickup" aria-selected="false" tabindex="-1">Pickup <small>15 min</small></button>
+        <button class="tab" role="tab" id="tab-delivery" aria-controls="panel-delivery" aria-selected="false" tabindex="-1">Delivery <small>5 km</small></button>
+        <button class="tab" role="tab" id="tab-private" aria-controls="panel-private" aria-selected="false" tabindex="-1">Private night <small>Mondays</small></button>
+      </div>
+      <div class="panel" role="tabpanel" id="panel-counter" aria-labelledby="tab-counter">
+        <div>
+          <p class="jp">カウンター</p>
+          <h3>Fourteen stools, no reservations</h3>
+          <p>Come in, take a stool when one opens, order at the machine. It's a ramen counter, so most guests eat and go in about forty minutes.</p>
+          <ul><li>Groups of up to 6 sit together; bigger groups split</li><li>45-minute seat limit on Friday and Saturday nights</li><li>Solo diners usually get in fastest</li></ul>
+          <a class="btn btn-cyan" href="#queue">See the wait now</a>
+        </div>
+        <div class="panel-art"><svg viewBox="0 0 360 200" width="360" aria-hidden="true" data-counter-art></svg></div>
+      </div>
+      <div class="panel" role="tabpanel" id="panel-wait" aria-labelledby="tab-wait">
+        <div>
+          <p class="jp">ウェイティング</p>
+          <h3>Wait somewhere nicer</h3>
+          <p>Add your name and number. We text you once when you're two parties away and again when your seats are ready. You have ten minutes to arrive.</p>
+          <ul><li>Join from 5:30 pm, before we open</li><li>Reply 1 to say you're on the way, 2 to drop out</li></ul>
+          <a class="btn" href="#queue">Join the queue</a>
+        </div>
+        <div class="panel-art">
+          <div class="sms" aria-hidden="true">
+            <div class="sms-card"><p class="from"><span>KUMO · SMS</span><span>9:38 pm</span></p><p>You're 2 parties away. Head over to Shop 9, Zamzama Blvd. Reply 1 if you're coming.</p></div>
+            <div class="sms-card"><p class="from"><span>KUMO · SMS</span><span>9:42 pm</span></p><p>Your 2 stools are ready. We'll hold them until 9:52 pm.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="panel" role="tabpanel" id="panel-pickup" aria-labelledby="tab-pickup">
+        <div>
+          <p class="jp">テイクアウト</p>
+          <h3>Order ahead, skip the line</h3>
+          <p>Print a ticket on the machine above and collect from the side window. Broth comes hot in a sealed tub, noodles and toppings separately.</p>
+          <ul><li>Ready in about 15 minutes</li><li>Pickup window 6:00 pm to 12:30 am</li><li>Reheat the broth, pour over, eat within ten minutes</li></ul>
+          <a class="btn btn-cyan" href="#bowls">Open the ticket machine</a>
+        </div>
+        <div class="panel-art"><div class="mini-ticket" aria-hidden="true">PICKUP No. 0482<b>Ready 9:40 pm</b>1 × Kumo Tonkotsu<br>+ Ajitama egg</div></div>
+      </div>
+      <div class="panel" role="tabpanel" id="panel-delivery" aria-labelledby="tab-delivery">
+        <div>
+          <p class="jp">デリバリー</p>
+          <h3>Delivered within 5 km</h3>
+          <p>Our own riders cover Clifton, DHA and Bath Island. Further out, order through Foodpanda. Everything is packed to travel: broth sealed, noodles slightly firm.</p>
+          <ul><li>Own riders: Rs 200 delivery, 30 to 40 minutes</li><li>Foodpanda: across Karachi South</li></ul>
+          <a class="btn btn-cyan" href="https://www.foodpanda.pk/" target="_blank" rel="noopener">Order on Foodpanda</a>
+        </div>
+        <div class="panel-art"><div class="mini-ticket" aria-hidden="true">DELIVERY · 4.2 km<b>~35 min</b>Broth sealed · noodles separate</div></div>
+      </div>
+      <div class="panel" role="tabpanel" id="panel-private" aria-labelledby="tab-private">
+        <div>
+          <p class="jp">貸切</p>
+          <h3>Book the whole counter</h3>
+          <p>On Mondays, when we're closed, the counter is yours for up to fourteen guests. The cook makes five half-size bowls, including one that isn't on the menu.</p>
+          <ul><li>From Rs 70,000 for up to 10 guests, Rs 6,500 each after</li><li>7 pm to 10 pm, playlist is yours</li><li>Book two weeks ahead: +92 21 555 0193</li></ul>
+          <a class="btn btn-cyan" href="#hours">Call to book</a>
+        </div>
+        <div class="panel-art"><div class="mini-ticket" aria-hidden="true">MONDAY · 貸切<b>14 seats</b>5 half bowls · 1 secret</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="queue" class="section queue" aria-labelledby="queue-title">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <p class="label"><span>(04)</span> <b>Join the queue</b> 順番待ち</p>
+          <h2 id="queue-title" data-split>The line, live</h2>
+        </div>
+        <p>Here's the counter right now and the parties ahead of you. Your estimate updates with the size of your group.</p>
+      </div>
+      <div class="queue-grid">
+        <div class="counter-card">
+          <h3>At the counter</h3>
+          <p class="sub" data-counter-sub>11 of 14 stools taken · average meal 38 min</p>
+          <svg class="counter-svg" viewBox="0 0 360 200" aria-hidden="true" data-counter-art></svg>
+          <div class="legend"><span><i style="background:var(--red)"></i>Taken</span><span><i style="border:2px solid var(--cyan)"></i>Free</span></div>
+          <p class="line-title">Parties in line</p>
+          <div class="qline" id="qline" aria-label="Parties waiting"></div>
+        </div>
+        <form class="q-form" id="q-form" novalidate>
+          <h3>Put your name down</h3>
+          <div class="estimate" aria-live="polite"><b id="q-est">~35 min</b><span id="q-est-note">for a party of 2, 6 parties ahead</span></div>
+          <fieldset class="fld">
+            <legend>Party size</legend>
+            <div class="chips" id="q-sizes">
+              <label class="chip"><input type="radio" name="size" value="1" id="size-1"><span>1</span></label>
+              <label class="chip"><input type="radio" name="size" value="2" id="size-2" checked><span>2</span></label>
+              <label class="chip"><input type="radio" name="size" value="3" id="size-3"><span>3</span></label>
+              <label class="chip"><input type="radio" name="size" value="4" id="size-4"><span>4</span></label>
+              <label class="chip"><input type="radio" name="size" value="5" id="size-5"><span>5</span></label>
+              <label class="chip"><input type="radio" name="size" value="6" id="size-6"><span>6</span></label>
+            </div>
+            <p class="hint">7 or more? Book a Monday private night.</p>
+          </fieldset>
+          <div class="fld"><label for="q-name">Name *</label><input class="inp" id="q-name" name="name" autocomplete="given-name" placeholder="First name is fine"></div>
+          <div class="fld"><label for="q-phone">Mobile for the SMS *</label><input class="inp" id="q-phone" name="phone" type="tel" autocomplete="tel" placeholder="03xx xxxxxxx"></div>
+          <p class="err" id="q-err" role="alert" hidden></p>
+          <button class="btn" type="submit" data-magnetic>Join the queue</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="reviews" aria-labelledby="rev-title">
+    <h2 id="rev-title" class="sr-only">What guests say</h2>
+    <div class="reviews-row">
+      <div class="strip-track">
+        <div class="strip-group">
+          <p class="review">Worth the forty-minute wait. The egg alone. <small>Z.H. · Saturday</small></p>
+          <p class="review">The vegan tantanmen is the best thing on Zamzama after midnight. <small>S.A.</small></p>
+          <p class="review">They text you when you're two parties away. Had a coffee next door and walked in on time. <small>N.K.</small></p>
+          <p class="review">Kaedama for Rs 300. Ordered it twice. <small>M.R.</small></p>
+          <p class="review">Fourteen stools, one cook, very good music. <small>A.F. · solo</small></p>
+          <p class="review">Spicy miso at level three is not a joke. Bring tissues. <small>R.B.</small></p>
+        </div>
+        <div class="strip-group" aria-hidden="true">
+          <p class="review">Worth the forty-minute wait. The egg alone. <small>Z.H. · Saturday</small></p>
+          <p class="review">The vegan tantanmen is the best thing on Zamzama after midnight. <small>S.A.</small></p>
+          <p class="review">They text you when you're two parties away. Had a coffee next door and walked in on time. <small>N.K.</small></p>
+          <p class="review">Kaedama for Rs 300. Ordered it twice. <small>M.R.</small></p>
+          <p class="review">Fourteen stools, one cook, very good music. <small>A.F. · solo</small></p>
+          <p class="review">Spicy miso at level three is not a joke. Bring tissues. <small>R.B.</small></p>
+        </div>
+      </div>
+    </div>
+    <div class="reviews-row neon-row reverse" aria-hidden="true">
+      <div class="strip-track">
+        <div class="strip-group"><span class="strip-item">いらっしゃいませ</span><span class="strip-item">Slurping encouraged</span><span class="strip-item">Last ticket 12:30 am</span><span class="strip-item">替玉 refill anytime</span><span class="strip-item">Cash or card</span></div>
+        <div class="strip-group"><span class="strip-item">いらっしゃいませ</span><span class="strip-item">Slurping encouraged</span><span class="strip-item">Last ticket 12:30 am</span><span class="strip-item">替玉 refill anytime</span><span class="strip-item">Cash or card</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="hours" class="section" aria-labelledby="hours-title">
+    <div class="wrap hours-grid">
+      <div>
+        <p class="label"><span>(05)</span> <b>Hours &amp; location</b> 営業時間</p>
+        <h2 id="hours-title" data-split>Open late, six nights</h2>
+        <p class="status" id="open-status" aria-live="polite">Tuesday to Sunday, 6 pm to 1 am</p>
+        <table class="hours-table" id="hours-table">
+          <caption class="sr-only">Opening hours</caption>
+          <tbody>
+            <tr data-day="1" class="closed"><th scope="row">Monday</th><td>Closed · private nights</td></tr>
+            <tr data-day="2"><th scope="row">Tuesday</th><td>6:00 pm – 1:00 am</td></tr>
+            <tr data-day="3"><th scope="row">Wednesday</th><td>6:00 pm – 1:00 am</td></tr>
+            <tr data-day="4"><th scope="row">Thursday</th><td>6:00 pm – 1:00 am</td></tr>
+            <tr data-day="5"><th scope="row">Friday</th><td>6:00 pm – 1:00 am</td></tr>
+            <tr data-day="6"><th scope="row">Saturday</th><td>6:00 pm – 1:00 am</td></tr>
+            <tr data-day="0"><th scope="row">Sunday</th><td>6:00 pm – 1:00 am</td></tr>
+          </tbody>
+        </table>
+        <dl class="info">
+          <div><dt>Address</dt><dd>Shop 9, Zamzama Boulevard, Clifton, Karachi</dd></div>
+          <div><dt>Phone</dt><dd>+92 21 555 0193</dd></div>
+          <div><dt>Parking</dt><dd>Street parking on Zamzama. Valet after 9 pm, Friday to Sunday.</dd></div>
+        </dl>
+        <div class="visit-actions">
+          <a class="btn" href="#queue" data-magnetic>Join the queue</a>
+          <a class="btn btn-cyan" href="https://www.google.com/maps/dir/?api=1&amp;destination=24.8139,67.0352" target="_blank" rel="noopener">Get directions</a>
+        </div>
+      </div>
+      <div class="mapbox" id="mapbox">
+        <div class="map" id="map" data-lat="24.8139" data-lng="67.0352" data-zoom="16" data-tiles="dark_all" role="region" aria-label="Map showing Kumo Ramen Bar, Shop 9, Zamzama Boulevard, Clifton, Karachi"></div>
+        <div class="map-fallback">
+          <p class="mf-top"><span>24.8139&deg; N</span><span>67.0352&deg; E</span></p>
+          <div class="mf-road" aria-hidden="true"><span>雲</span></div>
+          <div class="mf-body">
+            <p>Zamzama Boulevard</p>
+            <p>Shop 9, Clifton, Karachi. Between the 4th and 5th lanes, red noren over the door.</p>
+            <a class="btn btn-cyan" href="https://www.google.com/maps/dir/?api=1&amp;destination=24.8139,67.0352" target="_blank" rel="noopener">Open in Google Maps</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div><h4>Visit</h4><p>Shop 9, Zamzama Boulevard<br>Clifton, Karachi</p></div>
+      <div><h4>Hours</h4><p>Tuesday to Sunday<br>6 pm to 1 am &middot; last ticket 12:30</p></div>
+      <div><h4>Contact</h4><ul><li>+92 21 555 0193</li><li>WhatsApp +92 300 555 0193</li><li><a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a></li></ul></div>
+      <form class="sms-list" id="sms-list" novalidate>
+        <h4>The 1 am list</h4>
+        <p>One text when the secret Monday bowl goes on the menu. Nothing else.</p>
+        <div class="sms-row"><label class="sr-only" for="sms-phone">Mobile number</label><input class="inp" id="sms-phone" type="tel" autocomplete="tel" placeholder="03xx xxxxxxx" required><button class="btn" type="submit">Join</button></div>
+        <p class="hint" id="sms-msg" aria-live="polite"></p>
+      </form>
+    </div>
+    <p class="foot-mark" aria-hidden="true"><span>KUMO</span><span>雲</span></p>
+    <div class="foot-legal"><span>&copy; 2026 Kumo Ramen Bar, Karachi</span><span>Concept mockup &mdash; fictional business. Prices, waits and availability are illustrative.</span></div>
+  </div>
+</footer>
+</div>
+
+<nav class="actionbar" aria-label="Quick actions">
+  <a class="primary" href="#queue">Join queue<small data-wait-bar>~35 min wait</small></a>
+  <a href="#bowls">Pickup<small>15 min</small></a>
+  <a href="tel:+92215550193">Call<small>555 0193</small></a>
+</nav>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+/* ---------- Data (mirrors future Supabase tables: items, variants, queue, media) ---------- */
+const MEDIA = {
+  hero: { mp4: null, poster: null, alt: "Chopsticks lifting noodles from a bowl of Kumo tonkotsu" }, // '../assets/rest-kumo-ramen/hero.mp4'
+  photos: {
+    hero: null,      // 4:5 still used when there is no video
+    tonkotsu: null,  // HEYGEN: 4:3 overhead, Kumo Tonkotsu, milky broth, beef chashu, ajitama, nori, indigo bowl, dark wood
+    miso: null,      // HEYGEN: 4:3 overhead, Spicy Miso, red broth, minced beef, sprouts, butter corn
+    shoyu: null,     // HEYGEN: 4:3 overhead, Shoyu Chicken, clear amber broth, chicken chashu, bamboo
+    tantan: null     // HEYGEN: 4:3 overhead, Vegan Tantanmen, sesame broth, chilli oil, mushroom mince, bok choy
+  }
+};
+const BOWLS = [
+  { id: "tonkotsu", no: "01", name: "Kumo Tonkotsu", jp: "雲とんこつ", price: 2450, spice: 0, available: true, desc: "18-hour beef-bone broth, shio tare, beef chashu, ajitama, nori, scallion." },
+  { id: "miso", no: "02", name: "Spicy Miso", jp: "辛味噌", price: 2350, spice: 3, available: true, desc: "Red miso and chilli paste, minced beef, bean sprouts, butter corn." },
+  { id: "shoyu", no: "03", name: "Shoyu Chicken", jp: "鶏醤油", price: 2150, spice: 0, available: false, desc: "Clear chicken broth, soy tare, chicken chashu, bamboo shoots.", note: "Sold out tonight · back tomorrow 6 pm" },
+  { id: "tantan", no: "04", name: "Vegan Tantanmen", jp: "担々麺", price: 1950, spice: 2, available: true, desc: "Sesame and soy-milk broth, chilli oil, mushroom mince, bok choy." }
+];
+const ADDONS = [
+  { id: "egg", name: "Ajitama egg", jp: "味玉", price: 250 },
+  { id: "chashu", name: "Extra chashu", jp: "チャーシュー", price: 450 },
+  { id: "kaedama", name: "Kaedama refill", jp: "替玉", price: 300 },
+  { id: "menma", name: "Menma", jp: "メンマ", price: 200 },
+  { id: "corn", name: "Butter corn", jp: "バターコーン", price: 250 },
+  { id: "rayu", name: "Extra chilli oil", jp: "ラー油", price: 100 }
+];
+const QUEUE = {
+  seats: 14,
+  taken: [0, 1, 2, 3, 5, 6, 7, 9, 10, 11, 13],
+  avgMealMin: 38,
+  parties: [ { no: 36, size: 2 }, { no: 37, size: 4 }, { no: 38, size: 1 }, { no: 39, size: 2 }, { no: 40, size: 3 }, { no: 41, size: 2 } ]
+};
+const OPEN_DAYS = [0, 2, 3, 4, 5, 6]; // closed Monday
+const OPEN_MIN = 18 * 60, CLOSE_MIN = 60; // 6 pm to 1 am next day
+
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const finePointer = window.matchMedia("(pointer: fine)").matches;
+const hasGsap = !!(window.gsap && window.ScrollTrigger);
+const rs = (n) => "Rs " + n.toLocaleString("en-US");
+const DAY_NAMES = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+function pkNow() {
+  const parts = Object.fromEntries(new Intl.DateTimeFormat("en-US", { timeZone: "Asia/Karachi", weekday: "short", hour: "2-digit", minute: "2-digit", hour12: false })
+    .formatToParts(new Date()).map((p) => [p.type, p.value]));
+  return { day: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].indexOf(parts.weekday), min: (+parts.hour % 24) * 60 + +parts.minute };
+}
+
+/* ---------- Smooth scroll (desktop pointer only) ---------- */
+let lenis = null;
+if (window.Lenis && !reduceMotion && finePointer) {
+  lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
+  if (hasGsap) {
+    lenis.on("scroll", ScrollTrigger.update);
+    gsap.ticker.add((t) => lenis.raf(t * 1000));
+    gsap.ticker.lagSmoothing(0);
+  } else {
+    const raf = (t) => { lenis.raf(t); requestAnimationFrame(raf); };
+    requestAnimationFrame(raf);
+  }
+}
+const headerEl = document.getElementById("site-header");
+function goTo(target) {
+  const offset = -(headerEl ? headerEl.offsetHeight : 0) - 12;
+  if (lenis) lenis.scrollTo(target, { offset, duration: 1.3 });
+  else window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY + offset, behavior: reduceMotion ? "auto" : "smooth" });
+}
+document.addEventListener("click", (e) => {
+  const a = e.target.closest('a[href^="#"]');
+  if (!a || a.getAttribute("href").length < 2) return;
+  const target = document.querySelector(a.getAttribute("href"));
+  if (!target) return;
+  e.preventDefault();
+  closeMenu();
+  goTo(target);
+});
+
+/* ---------- Header: transparent over the hero, noren drops in after, hides on the way down ---------- */
+(function header() {
+  const hero = document.querySelector(".hero");
+  let lastY = window.scrollY, ticking = false;
+  function update() {
+    const y = window.scrollY;
+    const past = y > hero.offsetHeight - headerEl.offsetHeight - 40;
+    headerEl.classList.toggle("is-solid", y > 40);
+    if (past && y > lastY + 4) headerEl.classList.add("is-hidden");
+    else if (y < lastY - 4 || !past) headerEl.classList.remove("is-hidden");
+    lastY = y; ticking = false;
+  }
+  window.addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+  headerEl.addEventListener("focusin", () => headerEl.classList.remove("is-hidden"));
+  update();
+})();
+
+/* ---------- Mobile menu ---------- */
+const menu = document.getElementById("menu");
+const menuOpenBtn = document.getElementById("menu-open");
+function openMenu() {
+  menu.hidden = false; menuOpenBtn.setAttribute("aria-expanded", "true");
+  if (lenis) lenis.stop(); document.documentElement.style.overflow = "hidden";
+  document.getElementById("menu-close").focus();
+  if (hasGsap && !reduceMotion) gsap.from("#menu nav a", { x: -30, opacity: 0, duration: 0.6, stagger: 0.05, ease: "expo.out" });
+}
+function closeMenu() {
+  if (menu.hidden) return;
+  menu.hidden = true; menuOpenBtn.setAttribute("aria-expanded", "false");
+  if (lenis) lenis.start(); document.documentElement.style.overflow = "";
+  menuOpenBtn.focus({ preventScroll: true });
+}
+menuOpenBtn.addEventListener("click", openMenu);
+document.getElementById("menu-close").addEventListener("click", closeMenu);
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeMenu(); });
+
+/* ---------- Media manifest: footage and photos drop in when their paths are set ---------- */
+function addPhoto(el, src, alt) {
+  const img = new Image();
+  img.loading = "lazy"; img.decoding = "async"; img.alt = alt || "";
+  img.addEventListener("load", () => el.classList.add("is-live"), { once: true });
+  img.addEventListener("error", () => img.remove(), { once: true });
+  img.src = src;
+  el.appendChild(img);
+}
+(function heroMedia() {
+  const slot = document.getElementById("hero-media");
+  if (!slot) return;
+  if (MEDIA.hero.mp4) {
+    const v = document.createElement("video");
+    v.muted = true; v.defaultMuted = true; v.loop = true; v.playsInline = true; v.autoplay = !reduceMotion; v.preload = "metadata";
+    v.setAttribute("muted", ""); v.setAttribute("playsinline", ""); v.setAttribute("aria-label", MEDIA.hero.alt);
+    if (MEDIA.hero.poster) v.poster = MEDIA.hero.poster;
+    v.addEventListener("loadeddata", () => slot.classList.add("is-live"), { once: true });
+    const s = document.createElement("source"); s.src = MEDIA.hero.mp4; s.type = "video/mp4";
+    s.addEventListener("error", () => v.remove(), { once: true });
+    v.appendChild(s); slot.appendChild(v);
+  } else if (MEDIA.photos.hero) {
+    addPhoto(slot, MEDIA.photos.hero, MEDIA.hero.alt);
+  } else {
+    slot.remove();
+  }
+})();
+
+/* ---------- Queue estimate ---------- */
+function estimate(size) {
+  const ahead = QUEUE.parties.reduce((a, p) => a + p.size, 0);
+  const free = QUEUE.seats - QUEUE.taken.length;
+  const perMin = QUEUE.seats / QUEUE.avgMealMin;
+  let m = Math.max(0, ahead + size - free) / perMin + (size > 2 ? (size - 2) * 4 : 0);
+  if (size === 1) m *= 0.6;
+  return Math.max(10, Math.round(m / 5) * 5);
+}
+(function waitLabels() {
+  const w2 = estimate(2);
+  document.querySelectorAll("[data-wait-pill]").forEach((n) => (n.textContent = `Wait ~${w2} min`));
+  document.querySelectorAll("[data-wait-short]").forEach((n) => (n.textContent = `~${w2} min`));
+  document.querySelectorAll("[data-wait-bar]").forEach((n) => (n.textContent = `~${w2} min wait`));
+  document.querySelectorAll("[data-counter-sub]").forEach((n) => (n.textContent = `${QUEUE.taken.length} of ${QUEUE.seats} stools taken · average meal ${QUEUE.avgMealMin} min`));
+})();
+
+/* ---------- Counter seat diagrams (square stools) ---------- */
+(function counterArt() {
+  const NS = "http://www.w3.org/2000/svg";
+  document.querySelectorAll("[data-counter-art]").forEach((svg) => {
+    const add = (tag, a) => { const n = document.createElementNS(NS, tag); for (const k in a) n.setAttribute(k, a[k]); svg.appendChild(n); return n; };
+    add("path", { d: "M40 40 H320 V150 H280 V80 H80 V150 H40 Z", fill: "#3A2A1C", stroke: "#5A4129", "stroke-width": 2 });
+    add("rect", { x: 96, y: 92, width: 168, height: 46, rx: 3, fill: "#1A1A28", stroke: "#2C3B7A" });
+    const t = add("text", { x: 180, y: 121, "text-anchor": "middle", fill: "#9490A6", "font-family": "Space Mono, monospace", "font-size": 12 }); t.textContent = "KITCHEN";
+    const pos = [];
+    for (let i = 0; i < 6; i++) pos.push([62 + i * 47, 22]);
+    for (let i = 0; i < 4; i++) pos.push([340, 62 + i * 30]);
+    for (let i = 0; i < 4; i++) pos.push([20, 152 - i * 30]);
+    pos.forEach(([x, y], i) => {
+      const taken = QUEUE.taken.includes(i);
+      add("rect", { x: x - 10, y: y - 10, width: 20, height: 20, rx: 3, fill: taken ? "#FF3B47" : "none", stroke: taken ? "#FF3B47" : "#4FE3E0", "stroke-width": 2.5 });
+    });
+    const ft = add("text", { x: 180, y: 188, "text-anchor": "middle", fill: "#9490A6", "font-family": "Space Mono, monospace", "font-size": 11 });
+    ft.textContent = `${QUEUE.seats - QUEUE.taken.length} STOOLS FREE`;
+  });
+})();
+
+/* ---------- Ticket machine ---------- */
+(function machine() {
+  const bowlWrap = document.getElementById("bowl-btns");
+  const addonWrap = document.getElementById("addon-btns");
+  const addBtn = document.getElementById("add-bowl");
+  const linesEl = document.getElementById("ticket-lines");
+  const totalEl = document.getElementById("ticket-total");
+  const ledTotal = document.querySelector("[data-led-total]");
+  const placeBtn = document.getElementById("place-order");
+  const confirmEl = document.getElementById("ticket-confirm");
+  let selected = null;
+  const chosen = new Set();
+  const order = [];
+
+  BOWLS.forEach((b) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "bowl-btn" + (b.available ? "" : " sold");
+    btn.setAttribute("aria-pressed", "false");
+    if (!b.available) btn.setAttribute("aria-disabled", "true");
+    const marks = [0, 1, 2].map((i) => `<i class="${i < b.spice ? "on" : ""}"></i>`).join("");
+    btn.innerHTML = `${MEDIA.photos[b.id] ? '<span class="ph"></span>' : ""}<span class="lamp">${b.available ? "OK" : "売切 SOLD OUT"}</span><span class="no">${b.no}</span><span class="name">${b.name}</span><span class="jp">${b.jp}</span><span class="desc">${b.available ? b.desc : b.note}</span><span class="row"><span class="price">${rs(b.price)}</span><span class="spice" aria-label="Spice level ${b.spice} of 3">${marks}</span></span>`;
+    if (MEDIA.photos[b.id]) addPhoto(btn.querySelector(".ph"), MEDIA.photos[b.id], b.name);
+    btn.addEventListener("click", () => {
+      if (!b.available) return;
+      selected = selected === b.id ? null : b.id;
+      bowlWrap.querySelectorAll(".bowl-btn").forEach((n, i) => n.setAttribute("aria-pressed", String(BOWLS[i].id === selected)));
+      sync();
+    });
+    bowlWrap.appendChild(btn);
+  });
+  ADDONS.forEach((a) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "addon-btn";
+    btn.setAttribute("aria-pressed", "false");
+    btn.innerHTML = `<span>${a.name} <small>${a.jp}</small></span><small>+ ${rs(a.price)}</small>`;
+    btn.addEventListener("click", () => {
+      chosen.has(a.id) ? chosen.delete(a.id) : chosen.add(a.id);
+      btn.setAttribute("aria-pressed", String(chosen.has(a.id)));
+      sync();
+    });
+    addonWrap.appendChild(btn);
+  });
+
+  function current() {
+    if (!selected) return 0;
+    const b = BOWLS.find((x) => x.id === selected);
+    return b.price + [...chosen].reduce((s, id) => s + ADDONS.find((a) => a.id === id).price, 0);
+  }
+  function sync() {
+    addonWrap.querySelectorAll(".addon-btn").forEach((n) => (n.disabled = !selected));
+    addBtn.disabled = !selected;
+    addBtn.textContent = selected ? `Print ticket · ${rs(current())}` : "Choose a bowl first";
+    ledTotal.textContent = rs(current());
+  }
+  function renderTicket() {
+    linesEl.innerHTML = "";
+    if (!order.length) {
+      const li = document.createElement("li"); li.className = "empty"; li.textContent = "No bowls yet. Press a bowl on the machine."; linesEl.appendChild(li);
+    }
+    order.forEach((line, idx) => {
+      const li = document.createElement("li");
+      const label = document.createElement("span");
+      label.textContent = line.label;
+      const right = document.createElement("span");
+      right.textContent = rs(line.price);
+      const rm = document.createElement("button");
+      rm.type = "button"; rm.textContent = "remove"; rm.setAttribute("aria-label", "Remove " + line.label);
+      rm.addEventListener("click", () => { order.splice(idx, 1); renderTicket(); });
+      right.appendChild(rm);
+      li.append(label, right);
+      linesEl.appendChild(li);
+    });
+    const total = order.reduce((s, l) => s + l.price, 0);
+    totalEl.textContent = rs(total);
+    placeBtn.disabled = !order.length;
+    confirmEl.innerHTML = "";
+  }
+  addBtn.addEventListener("click", () => {
+    if (!selected) return;
+    const b = BOWLS.find((x) => x.id === selected);
+    const extras = [...chosen].map((id) => ADDONS.find((a) => a.id === id).name);
+    order.push({ label: b.name + (extras.length ? " + " + extras.join(", ") : ""), price: current() });
+    renderTicket();
+    if (hasGsap && !reduceMotion) gsap.from(linesEl.lastElementChild, { y: -14, opacity: 0, duration: 0.5, ease: "expo.out" });
+    selected = null; chosen.clear();
+    bowlWrap.querySelectorAll(".bowl-btn").forEach((n) => n.setAttribute("aria-pressed", "false"));
+    addonWrap.querySelectorAll(".addon-btn").forEach((n) => n.setAttribute("aria-pressed", "false"));
+    sync();
+  });
+  placeBtn.addEventListener("click", () => {
+    const ready = new Date(Date.now() + 15 * 60000);
+    const time = ready.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", timeZone: "Asia/Karachi" });
+    confirmEl.innerHTML = "";
+    const p = document.createElement("p");
+    p.className = "ticket-confirm";
+    p.setAttribute("role", "status");
+    p.textContent = `Order No. 0482 would be ready at ${time} at the side window. This is a mockup: nothing was ordered or charged.`;
+    confirmEl.appendChild(p);
+  });
+  sync();
+})();
+
+/* ---------- Visit tabs (ARIA tabs with arrow keys) ---------- */
+(function tabs() {
+  const tabs = [...document.querySelectorAll('[role="tab"]')];
+  const panels = tabs.map((t) => document.getElementById(t.getAttribute("aria-controls")));
+  function select(i, focus) {
+    tabs.forEach((t, j) => {
+      const on = i === j;
+      t.setAttribute("aria-selected", String(on));
+      t.tabIndex = on ? 0 : -1;
+      panels[j].hidden = !on;
+    });
+    if (focus) tabs[i].focus();
+    if (hasGsap && !reduceMotion) gsap.from(panels[i].children, { y: 16, opacity: 0, duration: 0.6, ease: "expo.out", stagger: 0.06 });
+  }
+  tabs.forEach((t, i) => {
+    t.addEventListener("click", () => select(i, false));
+    t.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight") { e.preventDefault(); select((i + 1) % tabs.length, true); }
+      if (e.key === "ArrowLeft") { e.preventDefault(); select((i - 1 + tabs.length) % tabs.length, true); }
+      if (e.key === "Home") { e.preventDefault(); select(0, true); }
+      if (e.key === "End") { e.preventDefault(); select(tabs.length - 1, true); }
+    });
+  });
+  tabs.forEach((t, j) => { panels[j].hidden = j !== 0; });
+})();
+
+/* ---------- Waitlist ---------- */
+(function waitlist() {
+  const form = document.getElementById("q-form");
+  const line = document.getElementById("qline");
+  const est = document.getElementById("q-est");
+  const note = document.getElementById("q-est-note");
+  const err = document.getElementById("q-err");
+  const qt = (p, you) => {
+    const d = document.createElement("div");
+    d.className = "qt" + (you ? " you" : "");
+    d.innerHTML = `<span>No. ${p.no}</span><b>${you ? "You" : p.size}</b><span>${you ? p.size + " ppl" : p.size === 1 ? "solo" : "party"}</span>`;
+    return d;
+  };
+  QUEUE.parties.forEach((p) => line.appendChild(qt(p)));
+  const size = () => +form.querySelector('input[name="size"]:checked').value;
+  function update() {
+    const s = size();
+    est.textContent = `~${estimate(s)} min`;
+    note.textContent = `for a party of ${s}, ${QUEUE.parties.length} parties ahead` + (s === 1 ? ". Solo stools open fastest." : "");
+  }
+  form.addEventListener("change", update);
+  ["q-name", "q-phone"].forEach((id) => {
+    const input = document.getElementById(id);
+    input.addEventListener("blur", () => {
+      const v = input.value.trim();
+      const bad = id === "q-name" ? !v : v.replace(/\D/g, "").length < 10;
+      if (v || input.getAttribute("aria-invalid")) input.setAttribute("aria-invalid", String(bad));
+    });
+  });
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const nameIn = form.elements.name, phoneIn = form.elements.phone;
+    const name = nameIn.value.trim();
+    const phone = phoneIn.value.trim();
+    let msg = "", bad = null;
+    if (!name) { msg = "Add a name so we can call it out at the door."; bad = nameIn; }
+    else if (phone.replace(/\D/g, "").length < 10) { msg = "Add a mobile number with at least 10 digits for the SMS."; bad = phoneIn; }
+    err.hidden = !msg; err.textContent = msg;
+    if (bad) { bad.setAttribute("aria-invalid", "true"); bad.focus(); }
+    if (msg) return;
+    const s = size();
+    const me = { no: QUEUE.parties[QUEUE.parties.length - 1].no + 1, size: s };
+    const t = qt(me, true);
+    line.appendChild(t);
+    line.scrollTo({ left: line.scrollWidth, behavior: reduceMotion ? "auto" : "smooth" });
+    if (hasGsap && !reduceMotion) gsap.from(t, { x: 80, opacity: 0, rotate: 8, duration: 0.8, ease: "expo.out" });
+    const pos = QUEUE.parties.length + 1;
+    form.innerHTML = "";
+    const box = document.createElement("div");
+    box.className = "q-done"; box.setAttribute("role", "status"); box.tabIndex = -1;
+    const big = document.createElement("b"); big.textContent = "No. " + pos;
+    const p1 = document.createElement("p"); p1.textContent = `${name}, you're number ${pos} in line for ${s}. Estimated wait about ${estimate(s)} minutes.`;
+    const p2 = document.createElement("p"); p2.textContent = `On the live site we'd text ${phone} when you're two parties away. This is a mockup: no place was saved and no SMS will be sent.`;
+    box.append(big, p1, p2); form.appendChild(box); box.focus({ preventScroll: true });
+    if (hasGsap && !reduceMotion) { const o = { v: 0 }; gsap.to(o, { v: pos, duration: 1, ease: "power2.out", onUpdate() { big.textContent = "No. " + Math.round(o.v); } }); }
+  });
+  update();
+})();
+
+/* ---------- Hours: today + open status in Karachi time ---------- */
+(function hours() {
+  const now = pkNow();
+  const row = document.querySelector(`#hours-table tr[data-day="${now.day}"]`);
+  if (row) row.classList.add("today");
+  const status = document.getElementById("open-status");
+  const prev = (now.day + 6) % 7;
+  const openLate = now.min < CLOSE_MIN && OPEN_DAYS.includes(prev);
+  const openEvening = now.min >= OPEN_MIN && OPEN_DAYS.includes(now.day);
+  if (openLate || openEvening) {
+    const closeIn = openLate ? CLOSE_MIN - now.min : 24 * 60 + CLOSE_MIN - now.min;
+    status.textContent = closeIn <= 30 ? `Open now · last tickets, closing in ${closeIn} min` : "Open now · until 1 am";
+    status.classList.add("is-open");
+  } else if (OPEN_DAYS.includes(now.day) && now.min < OPEN_MIN) {
+    status.textContent = "Opens today at 6 pm · queue opens 5:30";
+  } else {
+    let next = (now.day + 1) % 7; while (!OPEN_DAYS.includes(next)) next = (next + 1) % 7;
+    status.textContent = `Closed now · opens ${next === (now.day + 1) % 7 ? "tomorrow" : DAY_NAMES[next]} at 6 pm`;
+  }
+})();
+
+/* ---------- Real map (Leaflet + CARTO), lazy, with a designed fallback ---------- */
+(function map() {
+  const box = document.getElementById("mapbox");
+  const el = document.getElementById("map");
+  if (!box || !el) return;
+  let started = false;
+  function leafletCssReady() {
+    const probe = document.createElement("div");
+    probe.className = "leaflet-container";
+    probe.style.cssText = "position:absolute;left:-9999px;top:0;width:10px;height:10px";
+    document.body.appendChild(probe);
+    const ok = getComputedStyle(probe).overflow === "hidden";
+    probe.remove();
+    return ok;
+  }
+  function init() {
+    if (started || !window.L) return;
+    if (!leafletCssReady()) {
+      const link = document.getElementById("leaflet-css");
+      if (link && !link.dataset.waited) { link.dataset.waited = "1"; link.addEventListener("load", init, { once: true }); }
+      return;
+    }
+    started = true;
+    const lat = +el.dataset.lat, lng = +el.dataset.lng;
+    const m = L.map(el, { center: [lat, lng], zoom: +el.dataset.zoom || 16, scrollWheelZoom: false, dragging: !L.Browser.mobile, tap: false, zoomControl: true });
+    const layer = L.tileLayer("https://{s}.basemaps.cartocdn.com/" + el.dataset.tiles + "/{z}/{x}/{y}{r}.png", {
+      subdomains: "abcd", maxZoom: 20,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
+    }).addTo(m);
+    let tilesOk = false;
+    layer.on("tileload", () => { if (!tilesOk) { tilesOk = true; box.classList.add("map-ready"); } });
+    layer.once("tileerror", () => { if (!tilesOk) box.classList.remove("map-ready"); });
+    L.marker([lat, lng], {
+      title: "Kumo Ramen Bar, Shop 9, Zamzama Boulevard",
+      icon: L.divIcon({ className: "brand-pin", html: '<span class="pin-mark" aria-hidden="true">雲</span><span class="pin-stem" aria-hidden="true"></span>', iconSize: [44, 52], iconAnchor: [22, 52] })
+    }).addTo(m);
+  }
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver((en) => { if (en[0].isIntersecting) { io.disconnect(); init(); } }, { rootMargin: "400px" });
+    io.observe(box);
+  } else init();
+})();
+
+/* ---------- Footer SMS list ---------- */
+document.getElementById("sms-list").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const input = document.getElementById("sms-phone");
+  const msg = document.getElementById("sms-msg");
+  const ok = input.value.replace(/\D/g, "").length >= 10;
+  input.setAttribute("aria-invalid", String(!ok));
+  msg.textContent = ok ? "You're on the 1 am list. (Mockup: no SMS will be sent.)" : "Enter a mobile number with at least 10 digits.";
+  msg.className = ok ? "hint" : "err";
+});
+
+/* ---------- Motion (GSAP 3.13: ScrollTrigger + SplitText) ---------- */
+if (hasGsap) {
+  gsap.registerPlugin(ScrollTrigger);
+  if (window.SplitText) gsap.registerPlugin(SplitText);
+  const EASE = "expo.out";
+
+  if (!reduceMotion) {
+    // Hero: each line of the sign slides up out of its own mask
+    if (window.SplitText) {
+      const split = SplitText.create("#hero-title .ln", { type: "words,chars", mask: "words" });
+      gsap.from(split.chars, { yPercent: 110, duration: 1.2, ease: EASE, stagger: 0.04, delay: 0.1 });
+    }
+    gsap.from(".hero-copy > :not(h1), #hero-title .jp", { y: 30, opacity: 0, duration: 1.2, ease: EASE, stagger: 0.08, delay: 0.4 });
+    gsap.from(".bowl-hero", { y: 60, opacity: 0, duration: 1.5, ease: EASE, delay: 0.3 });
+    gsap.from(".neon-sign", { opacity: 0, scale: 0.92, duration: 0.25, ease: "steps(4)", delay: 0.9 });
+    gsap.to(".neon-sign", { yPercent: -18, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+    gsap.to(".bowl-hero", { yPercent: 8, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+
+    document.fonts.ready.then(() => {
+      if (window.SplitText) {
+        document.querySelectorAll("[data-split]").forEach((el) => {
+          SplitText.create(el, {
+            type: "lines", mask: "lines", linesClass: "ln-split", autoSplit: true,
+            onSplit(self) {
+              return gsap.from(self.lines, { yPercent: 110, duration: 1.1, ease: EASE, stagger: 0.08, scrollTrigger: { trigger: el, start: "top 86%", once: true } });
+            }
+          });
+        });
+      }
+      ScrollTrigger.refresh();
+    });
+
+    gsap.utils.toArray(".head > p").forEach((p) => gsap.from(p, { y: 30, opacity: 0, duration: 1.1, ease: EASE, scrollTrigger: { trigger: p, start: "top 88%" } }));
+    gsap.from(".bowl-btn, .addon-btn", { y: 24, opacity: 0, duration: 0.8, ease: EASE, stagger: 0.04, scrollTrigger: { trigger: ".machine", start: "top 80%" } });
+    gsap.from(".ticket", { y: 60, rotate: 3, opacity: 0, duration: 1.1, ease: EASE, scrollTrigger: { trigger: ".ticket", start: "top 88%" } });
+    gsap.from(".qt", { x: 40, opacity: 0, duration: 0.7, ease: EASE, stagger: 0.06, scrollTrigger: { trigger: "#qline", start: "top 90%" } });
+    gsap.from(".mapbox", { y: 70, duration: 1.4, ease: EASE, scrollTrigger: { trigger: ".mapbox", start: "top 92%" } });
+    gsap.from(".foot-mark span", { yPercent: 50, opacity: 0, duration: 1.4, ease: EASE, stagger: 0.12, scrollTrigger: { trigger: ".foot-mark", start: "top 96%" } });
+
+    if (finePointer) {
+      const clamp = gsap.utils.clamp(-8, 8);
+      document.querySelectorAll("[data-magnetic]").forEach((btn) => {
+        const xTo = gsap.quickTo(btn, "x", { duration: 0.5, ease: "power3" });
+        const yTo = gsap.quickTo(btn, "y", { duration: 0.5, ease: "power3" });
+        btn.addEventListener("pointermove", (e) => {
+          const r = btn.getBoundingClientRect();
+          xTo(clamp((e.clientX - (r.left + r.width / 2)) * 0.3));
+          yTo(clamp((e.clientY - (r.top + r.height / 2)) * 0.4));
+        });
+        btn.addEventListener("pointerleave", () => { xTo(0); yTo(0); });
+      });
+    }
+  }
+
+  const mm = gsap.matchMedia();
+  mm.add("(min-width: 768px) and (prefers-reduced-motion: no-preference)", () => {
+    const section = document.querySelector(".build");
+    const stage = section.querySelector(".build-stage");
+    const steps = gsap.utils.toArray(".step");
+    const stepNo = section.querySelector("[data-step-no]");
+    const stepTime = section.querySelector("[data-step-time]");
+    section.classList.add("is-pinned");
+
+    const noodles = gsap.utils.toArray("#L-noodles path");
+    noodles.forEach((p) => { const L = p.getTotalLength(); p.style.strokeDasharray = L; p.style.strokeDashoffset = L; });
+
+    const setStep = (i) => {
+      steps.forEach((s, j) => s.classList.toggle("on", j === i));
+      stepNo.textContent = String(i + 1).padStart(2, "0");
+      stepTime.textContent = steps[i].querySelector(".t").textContent;
+    };
+    setStep(0);
+
+    const tl = gsap.timeline({
+      defaults: { ease: "power2.out", duration: 0.8 },
+      scrollTrigger: {
+        trigger: stage,
+        start: "top top",
+        end: () => "+=" + window.innerHeight * 0.6 * 7,
+        pin: true,
+        scrub: 0.5,
+        onUpdate: (self) => setStep(Math.min(6, Math.floor(self.progress * 7)))
+      }
+    });
+    tl.from("#L-broth", { scale: 0.05, opacity: 0, transformOrigin: "50% 50%" }, 0)
+      .to(noodles, { strokeDashoffset: 0, stagger: 0.05, duration: 0.7, ease: "none" }, 1)
+      .from("#L-chashu > g", { x: 160, y: -160, rotate: 40, opacity: 0, stagger: 0.15 }, 2)
+      .from("#L-egg", { y: -120, scale: 1.25, opacity: 0, transformOrigin: "50% 50%" }, 3)
+      .from("#L-nori", { x: -180, rotate: -30, opacity: 0, transformOrigin: "50% 50%" }, 4)
+      .from("#L-scallion rect", { y: -30, opacity: 0, stagger: 0.03, duration: 0.4 }, 5)
+      .from("#L-chilli > g", { opacity: 0, scale: 0.6, transformOrigin: "50% 50%", stagger: 0.1 }, 6)
+      .to({}, { duration: 0.3 });
+
+    return () => {
+      section.classList.remove("is-pinned");
+      steps.forEach((s) => s.classList.remove("on"));
+      noodles.forEach((p) => { p.style.strokeDasharray = ""; p.style.strokeDashoffset = ""; });
+      stepNo.textContent = "07"; stepTime.textContent = "Ready";
+    };
+  });
+  mm.add("(max-width: 767px) and (prefers-reduced-motion: no-preference)", () => {
+    gsap.utils.toArray(".step").forEach((s) => gsap.from(s, { x: -20, opacity: 0, duration: 0.8, ease: EASE, scrollTrigger: { trigger: s, start: "top 90%" } }));
+  });
+  window.addEventListener("load", () => ScrollTrigger.refresh());
+}
+</script>
+</body>
+</html>
