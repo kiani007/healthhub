@@ -4,10 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Layer &amp; Lace Cake Studio</title>
-<meta name="description" content="Layer & Lace is a custom celebration cake studio in F-6, Islamabad. Wedding, nikkah, mehndi, birthday and corporate cakes, built to order. Tastings on Saturdays by appointment.">
+<meta name="description" content="Layer & Lace is a custom celebration cake studio at F-6 Supermarket, Islamabad. Wedding, nikkah, mehndi, birthday and corporate cakes, built to order. Tastings on Saturdays by appointment.">
+<meta name="theme-color" content="#FBF8F4">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400;1,6..96,500&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&family=Pinyon+Script&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400;1,6..96,500&family=Figtree:wght@300;400;500;600;700&family=Great+Vibes&display=swap">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" media="print" onload="this.media='all'">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -24,278 +26,351 @@
     "addressRegion": "ICT",
     "addressCountry": "PK"
   },
+  "geo": {"@type": "GeoCoordinates", "latitude": 33.7280, "longitude": 73.0760},
+  "hasMap": "https://www.google.com/maps/dir/?api=1&destination=33.7280,73.0760",
   "openingHoursSpecification": [
     {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday"], "opens": "11:00", "closes": "19:00"},
-    {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Saturday"], "opens": "10:00", "closes": "17:00"}
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "10:00", "closes": "17:00"}
   ],
   "acceptsReservations": true
 }
 </script>
 <style>
-/* Layout: arched windows and piped-bead borders; copy / cake / build-sheet in three columns, studio-order feel. */
+/* Layout: a couture lookbook. Porcelain ground, oversized Bodoni, blush and pistachio colour fields, gold hairlines;
+   the hero is a glass vitrine where the cake is built tier by tier, with the atelier's order sheet beside it. */
 :root{
-  --butter:#FFF6E5;     /* buttercream: page ground */
-  --blush:#F4C9C4;      /* blush: arches, highlights */
-  --blush-soft:#FBE6E2;
-  --pista:#BFD8B8;      /* pistachio: secondary surfaces */
-  --pista-soft:#EAF2E6;
-  --pista-deep:#5E7F58; /* pistachio ink for small text */
-  --choc:#3B2420;       /* chocolate: text, primary buttons */
-  --choc-2:#6A4A40;
-  --gold:#C8A15A;       /* gold leaf: rules, numerals, topper */
-  --gold-deep:#9A7533;
-  --display:"Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
-  --body:"Nunito Sans", "Avenir Next", "Segoe UI", Arial, sans-serif;
-  --script:"Pinyon Script", "Snell Roundhand", cursive;
-  --ease:cubic-bezier(.22,1,.36,1);
-  --gutter-l:max(16px, env(safe-area-inset-left, 0px));
-  --gutter-r:max(16px, env(safe-area-inset-right, 0px));
+  --porcelain:#FBF8F4;   /* page ground */
+  --blush:#F2C4C0;       /* colour field, marquee */
+  --blush-soft:#F8E3E0;
+  --blush-deep:#C9797A;  /* decorative only (large type, art) */
+  --pista:#B9D3B0;
+  --pista-soft:#E8F0E4;
+  --pista-deep:#5E7F58;  /* small text on light */
+  --choc:#3B2420;        /* text, primary buttons, footer */
+  --choc-2:#6A4A40;      /* secondary text */
+  --gold:#C6A15B;        /* hairlines, ornaments */
+  --gold-deep:#8A672C;   /* gold text on light */
+  --display:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif;
+  --body:"Figtree","Avenir Next","Segoe UI",Arial,sans-serif;
+  --script:"Great Vibes","Snell Roundhand",cursive;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --gl:max(16px,env(safe-area-inset-left,0px));
+  --gr:max(16px,env(safe-area-inset-right,0px));
+  --head-h:76px;
   color-scheme:light;
 }
 *,*::before,*::after{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-body{margin:0;background:var(--butter);color:var(--choc);font:400 17px/1.65 var(--body)}
-svg{max-width:100%}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--porcelain);color:var(--choc);font:400 17px/1.65 var(--body);-webkit-font-smoothing:antialiased}
+svg,img,video{max-width:100%}
 a{color:inherit}
-:focus-visible{outline:2px solid var(--choc);outline-offset:3px;border-radius:4px}
-h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.05;margin:0;text-wrap:balance;letter-spacing:-.01em}
+:focus-visible{outline:2px solid var(--choc);outline-offset:3px}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.02;margin:0;text-wrap:balance;letter-spacing:-.015em}
 p{margin:0}
 .wrap{overflow-x:clip}
-.inner{max-width:1280px;margin:0 auto;padding-left:var(--gutter-l);padding-right:var(--gutter-r)}
+.inner{max-width:1320px;margin:0 auto;padding-left:var(--gl);padding-right:var(--gr)}
+.skip{position:absolute;left:12px;top:-60px;z-index:100;background:var(--choc);color:var(--porcelain);padding:10px 14px;font:600 14px/1 var(--body);text-decoration:none}
+.skip:focus{top:12px}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 .tb-strip{display:flex;justify-content:space-between;gap:12px;padding:7px max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));background:#111;color:#cfcfcf;font:500 12px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.02em}
 .tb-strip a{color:#fff;text-decoration:none}.tb-strip a:hover{text-decoration:underline}
 .in-board .tb-strip{display:none}
 @media (max-width:480px){.tb-strip span{display:none}}
 
-/* Header */
-.site-head{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:rgba(255,246,229,.94);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
-.site-head::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:6px;background:radial-gradient(circle at 6px 0,var(--blush) 5px,transparent 5.5px) 0 0/12px 6px repeat-x;opacity:.9}
-.site-head .inner{display:flex;align-items:center;gap:28px;min-height:72px}
+/* ---------- Buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:50px;padding:15px 26px;border-radius:0;font:600 13px/1 var(--body);letter-spacing:.16em;text-transform:uppercase;text-decoration:none;border:1px solid var(--choc);cursor:pointer;background:transparent;color:var(--choc);transition:background .25s,color .25s,border-color .25s,transform .3s var(--ease)}
+.btn-primary{background:var(--choc);color:var(--porcelain)}
+.btn-primary:hover{background:#24130F}
+.btn-line:hover{background:var(--choc);color:var(--porcelain)}
+.magnetic{will-change:transform}
+
+/* ---------- Header ---------- */
+.site-head{position:fixed;left:0;right:0;top:0;z-index:40;padding-top:env(safe-area-inset-top,0px);transition:transform .5s var(--ease),background-color .35s,box-shadow .35s}
+.site-head.solid{background:rgba(251,248,244,.95);box-shadow:0 1px 0 rgba(198,161,90,.55);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.site-head.hide{transform:translateY(-110%)}
+.site-head .inner{display:flex;align-items:center;gap:28px;min-height:var(--head-h)}
 .logo{display:grid;text-decoration:none;line-height:1}
-.logo b{font:500 25px/1 var(--display);letter-spacing:.01em}
-.logo i{font:400 19px/1 var(--script);color:var(--gold-deep);margin:-2px 0 0 38px}
-.nav{display:flex;gap:24px;margin-left:auto;font:700 13px/1 var(--body);letter-spacing:.12em;text-transform:uppercase}
-.nav a{text-decoration:none;color:var(--choc-2)}
-.nav a:hover{color:var(--choc)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:15px 26px;border-radius:999px;font:800 14px/1 var(--body);letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border:1.5px solid var(--choc);cursor:pointer;transition:transform .35s var(--ease),background .3s,color .3s}
-.btn-primary{background:var(--choc);color:var(--butter)}
-.btn-primary:hover{transform:translateY(-2px);background:#2A1714}
-.btn-line{background:transparent;color:var(--choc)}
-.btn-line:hover{background:var(--blush-soft)}
-.head-cta{padding:12px 20px}
-@media (max-width:1060px){.nav{display:none}.head-cta{margin-left:auto}}
-@media (max-width:767px){.head-cta{display:none}}
+.logo b{font:500 26px/1 var(--display);letter-spacing:-.01em}
+.logo b em{font-style:italic;color:var(--gold-deep)}
+.logo i{font:400 21px/1 var(--script);color:var(--gold-deep);margin:-3px 0 0 44px}
+.nav{display:flex;gap:28px;margin-left:auto;font:600 12px/1 var(--body);letter-spacing:.16em;text-transform:uppercase}
+.nav a{text-decoration:none;color:var(--choc-2);padding:8px 0;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
+.nav a:hover{color:var(--choc);border-color:var(--gold)}
+.head-cta{min-height:44px;padding:12px 18px}
+@media (max-width:1080px){.nav{display:none}.head-cta{margin-left:auto}}
+@media (max-width:767px){.head-cta{display:none}:root{--head-h:64px}.logo b{font-size:23px}}
 
-/* Section label: gold-ringed numeral + spaced caps */
-.eyebrow{display:inline-flex;align-items:center;gap:12px;font:800 12px/1 var(--body);letter-spacing:.2em;text-transform:uppercase;color:var(--choc-2)}
-.eyebrow i{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;border:1.5px solid var(--gold);font:italic 500 17px/1 var(--display);letter-spacing:0;color:var(--gold-deep);background:var(--butter)}
-.sec{padding-block:clamp(76px,10vw,136px)}
-.sec-head{display:grid;gap:18px;max-width:720px;margin-bottom:clamp(36px,5vw,60px)}
-.sec-head h2{font-size:clamp(34px,4.6vw,60px)}
-.sec-head h2 em{font-style:italic;font-weight:400;color:var(--gold-deep)}
-.sec-head p{color:var(--choc-2);max-width:58ch}
-.scallop{position:relative}
-.scallop::before{content:"";position:absolute;left:0;right:0;top:-14px;height:14px;background:radial-gradient(circle at 14px 14px,var(--bg) 13.5px,transparent 14px) 0 0/28px 14px repeat-x}
+/* ---------- Section label ---------- */
+.label{display:flex;align-items:center;gap:14px;font:600 12px/1 var(--body);letter-spacing:.22em;text-transform:uppercase;color:var(--choc-2)}
+.label em{font:italic 400 22px/1 var(--display);letter-spacing:0;text-transform:none;color:var(--gold-deep)}
+.label::after{content:"";flex:0 1 120px;height:1px;background:var(--gold)}
+.sec{padding-block:clamp(88px,11vw,160px);scroll-margin-top:var(--head-h)}
+.sec-head{display:grid;gap:22px;max-width:860px;margin-bottom:clamp(40px,5vw,72px)}
+.sec-head h2{font-size:clamp(42px,6.4vw,96px)}
+.sec-head h2 em{font-style:italic;color:var(--gold-deep)}
+.sec-head p{color:var(--choc-2);max-width:56ch;font-size:18px}
 
-/* Hero */
+/* ---------- Hero: the vitrine ---------- */
 .hero{position:relative}
-.hero .inner{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr) minmax(0,.62fr);grid-template-areas:"copy cake sheet";gap:clamp(20px,3vw,48px);align-items:center;min-height:calc(100vh - 72px);padding-block:40px}
-.hero-copy{grid-area:copy;display:grid;gap:22px;min-width:0}
-.hero-copy .loc{font:800 12px/1.4 var(--body);letter-spacing:.2em;text-transform:uppercase;color:var(--pista-deep)}
-.hero h1{font-size:clamp(42px,4.6vw,74px)}
-.hero h1 em{font-style:italic;font-weight:400;color:var(--gold-deep)}
-.hero-copy p{color:var(--choc-2);max-width:40ch}
+.hero .inner{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.02fr) minmax(0,.6fr);grid-template-areas:"copy cake sheet";gap:clamp(24px,3vw,52px);align-items:center;min-height:100svh;padding-block:calc(var(--head-h) + 36px) 56px}
+.hero-copy{grid-area:copy;display:grid;gap:26px;min-width:0}
+.loc{font:600 12px/1.5 var(--body);letter-spacing:.22em;text-transform:uppercase;color:var(--pista-deep)}
+.hero h1{font-size:clamp(48px,5.6vw,96px);line-height:.98}
+.hero h1 em{font-style:italic;color:var(--gold-deep)}
+.hero-copy > p{color:var(--choc-2);max-width:38ch;font-size:18px;font-weight:300}
 .hero-ctas{display:flex;flex-wrap:wrap;gap:12px}
-.cake-stage{grid-area:cake;position:relative;min-width:0;align-self:stretch;display:flex;align-items:flex-end;justify-content:center}
-.arch{position:absolute;left:6%;right:6%;top:4%;bottom:0;background:var(--blush);border-radius:999px 999px 0 0}
-.arch::after{content:"";position:absolute;inset:14px 14px 0;border:1.5px solid rgba(255,246,229,.8);border-bottom:0;border-radius:999px 999px 0 0}
-.cake-stage svg{position:relative;width:min(100%,520px);height:auto;display:block}
-.sheet{grid-area:sheet;align-self:center;background:#FFFCF4;border:1px solid rgba(200,161,90,.5);padding:22px 20px;min-width:0;box-shadow:0 24px 50px -30px rgba(59,36,32,.4)}
-.sheet h2{font:500 13px/1.2 var(--body);letter-spacing:.18em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:4px}
-.sheet .ref{font:italic 400 22px/1.2 var(--display);margin-bottom:14px}
-.sheet ol{list-style:none;margin:0;padding:0;display:grid;gap:0;counter-reset:s}
-.sheet li{counter-increment:s;display:grid;grid-template-columns:24px 1fr;gap:4px 8px;padding:10px 0;border-top:1px dashed rgba(59,36,32,.2);opacity:.38;transition:opacity .35s}
-.sheet li::before{content:counter(s);font:italic 500 18px/1.2 var(--display);color:var(--gold-deep)}
+.hero-note{font:400 15px/1.4 var(--display);font-style:italic;color:var(--choc-2);border-top:1px solid var(--gold);padding-top:16px;max-width:36ch}
+.vitrine{grid-area:cake;position:relative;aspect-ratio:13/16;min-width:0;background:linear-gradient(180deg,var(--blush-soft) 0%,var(--blush) 100%);overflow:hidden}
+.vitrine::before{content:"";position:absolute;inset:14px;border:1px solid rgba(198,161,90,.75);z-index:3;pointer-events:none}
+.vitrine::after{content:"";position:absolute;left:0;right:0;bottom:0;height:13%;background:linear-gradient(180deg,#FFFCF8,#EFE6DD);border-top:1px solid rgba(198,161,90,.6);z-index:0}
+.vitrine .media-art{position:absolute;inset:0;z-index:1;display:flex;align-items:flex-end;justify-content:center;padding:0 6% 7%;transition:opacity .8s}
+.vitrine .media-art svg{width:100%;height:100%;display:block}
+.vitrine-cap{position:absolute;left:28px;top:26px;z-index:4;font:600 11px/1 var(--body);letter-spacing:.2em;text-transform:uppercase;color:var(--choc-2)}
+.sheet{grid-area:sheet;align-self:center;background:#FFFDF9;padding:26px 22px;min-width:0;border:1px solid rgba(198,161,90,.6);outline:1px solid rgba(198,161,90,.3);outline-offset:5px}
+.sheet h2{font:600 11px/1.2 var(--body);letter-spacing:.22em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:6px}
+.sheet .ref{font:italic 400 24px/1.15 var(--display);margin-bottom:16px}
+.sheet ol{list-style:none;margin:0;padding:0;display:grid;counter-reset:s}
+.sheet li{counter-increment:s;display:grid;grid-template-columns:28px 1fr;gap:2px 8px;padding:11px 0;border-top:1px solid rgba(198,161,90,.45);opacity:.32;transition:opacity .35s}
+.sheet li::before{content:counter(s,upper-roman);font:italic 400 15px/1.5 var(--display);color:var(--gold-deep)}
 .sheet li.on{opacity:1}
-.sheet li b{display:block;font:700 14px/1.3 var(--body)}
+.sheet li b{display:block;font:600 14px/1.35 var(--body)}
 .sheet li span{grid-column:2;font-size:13px;line-height:1.4;color:var(--choc-2)}
-.cue{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);display:flex;align-items:center;gap:10px;font:800 11px/1 var(--body);letter-spacing:.2em;text-transform:uppercase;color:var(--choc-2)}
-.cue span{display:flex;gap:5px}
-.cue span i{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:bead 1.6s var(--ease) infinite}
-.cue span i:nth-child(2){animation-delay:.15s}.cue span i:nth-child(3){animation-delay:.3s}
-@keyframes bead{0%,100%{transform:translateY(0);opacity:.4}50%{transform:translateY(4px);opacity:1}}
-@media (max-width:1099px){
-  .hero .inner{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"copy cake" "sheet cake";min-height:0}
-}
+.cue{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);display:flex;align-items:center;gap:12px;font:600 11px/1 var(--body);letter-spacing:.22em;text-transform:uppercase;color:var(--choc-2)}
+.cue i{display:block;width:44px;height:1px;background:rgba(198,161,90,.5);position:relative;overflow:hidden}
+.cue i::after{content:"";position:absolute;inset:0;background:var(--choc);animation:cue 2s var(--ease) infinite}
+@keyframes cue{0%{transform:translateX(-100%)}60%,100%{transform:translateX(100%)}}
+@media (max-width:1100px){.hero .inner{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"copy cake" "sheet cake";min-height:0}}
 @media (max-width:767px){
-  .hero .inner{grid-template-columns:1fr;grid-template-areas:"copy" "cake" "sheet";padding-block:28px 48px}
-  .cake-stage{min-height:0;max-width:440px;width:100%;margin:0 auto}
+  .hero .inner{grid-template-columns:1fr;grid-template-areas:"copy" "cake" "sheet";padding-block:calc(var(--head-h) + 28px) 56px;gap:36px}
+  .vitrine{max-width:460px;width:100%;margin:0 auto}
   .cue{display:none}
 }
 
-/* Marquee */
-.marquee{--bg:var(--blush);background:var(--blush);overflow:hidden}
-.marquee-track{display:flex;width:max-content;animation:marq 40s linear infinite}
+/* ---------- Media slots ---------- */
+[data-media]{position:relative;overflow:hidden}
+.media-layer{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s var(--ease);z-index:2}
+.has-media .media-layer{opacity:1}
+.has-media .media-art{opacity:0}
+
+/* ---------- Marquee ---------- */
+.marquee{background:var(--blush);overflow:hidden;border-block:1px solid rgba(198,161,90,.6)}
+.marquee-track{display:flex;width:max-content;animation:marq 44s linear infinite}
 .marquee:hover .marquee-track{animation-play-state:paused}
-.marquee span{font:italic 400 clamp(22px,2.6vw,34px)/1 var(--display);padding:22px 0;white-space:nowrap;display:flex;align-items:center}
-.marquee span::after{content:"";width:8px;height:8px;margin:0 30px;border-radius:50%;background:var(--butter);box-shadow:14px 0 0 var(--butter),-14px 0 0 var(--butter)}
+.marquee span{font:italic 400 clamp(26px,3.2vw,46px)/1 var(--display);padding:24px 0;white-space:nowrap;display:flex;align-items:center}
+.marquee span::after{content:"";width:9px;height:9px;margin:0 36px;background:var(--gold);transform:rotate(45deg)}
 @keyframes marq{to{transform:translateX(-50%)}}
 
-/* Occasions */
-.occ-row{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:var(--gutter-l);padding:4px var(--gutter-r) 18px var(--gutter-l);scrollbar-width:thin}
-.occ{scroll-snap-align:start;flex:0 0 clamp(240px,22vw,290px);display:grid;grid-template-rows:auto 1fr;background:var(--card);border-radius:999px 999px 18px 18px;padding:26px 22px 24px;gap:14px;position:relative}
-.occ::before{content:"";position:absolute;inset:8px;border:1px solid rgba(59,36,32,.14);border-radius:999px 999px 12px 12px;pointer-events:none}
-.occ svg{width:100%;height:150px}
-.occ h3{font-size:30px}
+/* ---------- 01 Occasions ---------- */
+.occ-row{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:var(--gl);padding:4px var(--gr) 20px var(--gl);scrollbar-width:thin}
+.occ-wrap{max-width:1320px;margin:0 auto}
+.occ{scroll-snap-align:start;flex:0 0 clamp(260px,24vw,320px);display:grid;grid-template-rows:auto 1fr;background:#FFFDF9;border:1px solid rgba(198,161,90,.5)}
+.occ-art{background:var(--card);padding:22px 22px 0;border-bottom:1px solid rgba(198,161,90,.5)}
+.occ-art svg{display:block;width:100%;height:170px}
+.occ-body{display:grid;gap:10px;align-content:start;padding:22px}
+.occ h3{font-size:34px}
 .occ p{font-size:15px;color:var(--choc-2)}
-.occ dl{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:6px 0 0;font-size:14px}
-.occ dt{font-weight:800;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--choc-2);padding-top:3px}
+.occ dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:6px 0 0;font-size:14px;padding-top:12px;border-top:1px solid rgba(198,161,90,.4)}
+.occ dt{font-weight:600;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--choc-2);padding-top:3px}
 .occ dd{margin:0;font-variant-numeric:tabular-nums}
-.occ-wrap{max-width:1280px;margin:0 auto}
 
-/* Configurator */
-.builder{--bg:var(--pista-soft);background:var(--pista-soft)}
-.b-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(24px,4vw,64px);align-items:start}
-.b-controls{display:grid;gap:30px}
+/* ---------- 02 Builder ---------- */
+.builder{background:var(--pista-soft);border-block:1px solid rgba(94,127,88,.25)}
+.b-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(28px,4vw,72px);align-items:start}
+.b-controls{display:grid;gap:34px}
 fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:12px}
-legend{padding:0;margin-bottom:12px;font:800 12px/1 var(--body);letter-spacing:.18em;text-transform:uppercase;color:var(--pista-deep)}
+legend{padding:0;margin-bottom:14px;font:600 12px/1 var(--body);letter-spacing:.2em;text-transform:uppercase;color:var(--pista-deep)}
 .opts{display:flex;flex-wrap:wrap;gap:10px}
-.opt input{position:absolute;opacity:0;pointer-events:none}
-.opt label{display:grid;gap:2px;padding:12px 16px;border-radius:14px;border:1.5px solid rgba(59,36,32,.22);background:#fff;cursor:pointer;min-width:110px;transition:border-color .2s,background .2s}
-.opt label b{font:500 18px/1.15 var(--display)}
+.opt input,.sw input{position:absolute;opacity:0;pointer-events:none}
+.opt label{display:grid;gap:3px;padding:13px 16px;border:1px solid rgba(59,36,32,.25);background:#FFFDF9;cursor:pointer;min-width:118px;min-height:52px;transition:border-color .2s,background .2s,box-shadow .2s}
+.opt label:hover{border-color:var(--choc)}
+.opt label b{font:500 19px/1.15 var(--display)}
 .opt label small{font-size:12.5px;color:var(--choc-2);line-height:1.3}
-.opt input:checked + label{border-color:var(--choc);background:var(--butter);box-shadow:inset 0 0 0 1px var(--choc)}
-.opt input:focus-visible + label{outline:2px solid var(--choc);outline-offset:3px}
+.opt input:checked + label{border-color:var(--choc);box-shadow:inset 0 0 0 1px var(--choc),inset 0 -3px 0 var(--gold)}
+.opt input:focus-visible + label,.sw input:focus-visible + label{outline:2px solid var(--choc);outline-offset:3px}
 .opt input:disabled + label{opacity:.45;cursor:not-allowed;background:transparent;border-style:dashed}
 .swatches{display:flex;flex-wrap:wrap;gap:12px}
-.sw input{position:absolute;opacity:0;pointer-events:none}
-.sw label{display:grid;justify-items:center;gap:6px;cursor:pointer;font-size:12.5px;font-weight:700;color:var(--choc-2);text-align:center;width:86px}
-.sw .dots{display:flex;padding:6px;border-radius:999px;border:1.5px solid transparent;background:#fff}
-.sw .dots i{width:24px;height:24px;border-radius:50%;margin-left:-6px;box-shadow:0 0 0 2px #fff}
-.sw .dots i:first-child{margin-left:0}
-.sw input:checked + label .dots{border-color:var(--choc)}
-.sw input:focus-visible + label .dots{outline:2px solid var(--choc);outline-offset:2px}
+.sw label{display:grid;gap:8px;cursor:pointer;font-size:12.5px;font-weight:600;color:var(--choc-2);width:104px;padding:8px;border:1px solid transparent;background:#FFFDF9;transition:border-color .2s}
+.sw label:hover{border-color:rgba(59,36,32,.35)}
+.sw .chips{display:grid;grid-template-columns:2fr 2fr 1fr;height:30px;border:1px solid rgba(59,36,32,.12)}
+.sw input:checked + label{border-color:var(--choc);box-shadow:inset 0 -3px 0 var(--gold)}
 .b-mini{display:none}
-.b-preview{position:sticky;top:100px;background:var(--butter);border-radius:999px 999px 24px 24px;padding:44px 28px 28px;display:grid;gap:18px;box-shadow:0 30px 60px -36px rgba(59,36,32,.45)}
-.b-preview svg{width:100%;height:auto;max-height:360px}
-.b-sum{display:grid;grid-template-columns:1fr 1fr;gap:12px 18px;border-top:1px solid rgba(200,161,90,.6);padding-top:16px}
-.b-sum div{display:grid;gap:2px;min-width:0}
-.b-sum dt,.b-sum span{font:800 11px/1.2 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--choc-2)}
-.b-sum strong{font:500 22px/1.15 var(--display);font-variant-numeric:lining-nums tabular-nums}
-.b-sum .price strong{font-size:34px}
+.b-preview{position:sticky;top:calc(var(--head-h) + 20px);background:#FFFDF9;border:1px solid rgba(198,161,90,.6);outline:1px solid rgba(198,161,90,.3);outline-offset:6px;padding:32px 28px 28px;display:grid;gap:20px}
+.b-preview .stagebox{background:linear-gradient(180deg,var(--blush-soft),#FFFDF9);padding:18px 18px 4px;border:1px solid rgba(198,161,90,.35)}
+.b-preview svg{width:100%;height:auto;max-height:340px;display:block}
+.b-sum{display:grid;grid-template-columns:1fr 1fr;gap:14px 20px;border-top:1px solid rgba(198,161,90,.6);padding-top:18px;margin:0}
+.b-sum div{display:grid;gap:3px;min-width:0}
+.b-sum dt{font:600 11px/1.2 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--choc-2)}
+.b-sum dd{margin:0}
+.b-sum strong{font:500 24px/1.15 var(--display);font-variant-numeric:lining-nums tabular-nums}
+.b-sum .price strong{font-size:38px}
 .b-note{font-size:13.5px;color:var(--choc-2)}
 .b-preview .btn{width:100%}
-@media (max-width:480px){.b-sum .price strong{font-size:27px;white-space:nowrap}.b-preview .btn{letter-spacing:.04em;padding-inline:14px}.b-preview{padding:36px 18px 22px}}
+@media (max-width:480px){.b-sum .price strong{font-size:28px;white-space:nowrap}.b-preview .btn{letter-spacing:.08em;padding-inline:12px}.b-preview{padding:24px 16px 20px}}
 @media (max-width:900px){.b-grid{grid-template-columns:1fr}.b-preview{position:relative;top:auto}
-  .b-mini{display:flex;justify-content:space-between;align-items:center;gap:12px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 78px);z-index:5;background:var(--choc);color:var(--butter);border-radius:999px;padding:10px 12px 10px 18px;font:800 12px/1.2 var(--body);letter-spacing:.08em;text-transform:uppercase}
+  .b-mini{display:flex;justify-content:space-between;align-items:center;gap:12px;position:sticky;top:calc(env(safe-area-inset-top,0px) + var(--head-h) + 8px);z-index:5;background:var(--choc);color:var(--porcelain);padding:10px 10px 10px 16px;font:600 12px/1.2 var(--body);letter-spacing:.12em;text-transform:uppercase}
   .b-mini strong{font:500 20px/1 var(--display);letter-spacing:0;text-transform:none;margin-left:6px}
-  .b-mini a{color:var(--butter);background:rgba(255,246,229,.15);border-radius:999px;padding:8px 12px;text-decoration:none}}
+  .b-mini a{color:var(--porcelain);border:1px solid rgba(251,248,244,.4);padding:8px 12px;text-decoration:none}}
 
-/* Lookbook */
-.masonry{columns:3 280px;column-gap:18px}
-.look{break-inside:avoid;margin:0 0 18px;background:var(--tile);border-radius:18px;padding:22px 18px 16px;display:grid;gap:10px}
-.look svg{width:100%;height:auto}
-.look figcaption{display:flex;justify-content:space-between;gap:12px;align-items:baseline;font-size:14px;border-top:1px solid rgba(59,36,32,.14);padding-top:10px}
-.look figcaption b{font:italic 500 18px/1.2 var(--display)}
+/* ---------- 03 Lookbook ---------- */
+.masonry{columns:3 280px;column-gap:20px}
+.look{break-inside:avoid;margin:0 0 20px;background:var(--tile);padding:24px 20px 16px;display:grid;gap:12px;border:1px solid rgba(198,161,90,.35);position:relative;overflow:hidden}
+.look svg{width:100%;height:auto;transition:transform .8s var(--ease)}
+.look:hover svg{transform:scale(1.04)}
+.look figcaption{display:flex;justify-content:space-between;gap:12px;align-items:baseline;font-size:14px;border-top:1px solid rgba(198,161,90,.45);padding-top:12px}
+.look figcaption b{font:italic 400 20px/1.2 var(--display)}
 .look figcaption span{color:var(--choc-2);font-size:13px;text-align:right}
 
-/* Tasting + seasons */
-.tasting{--bg:var(--blush-soft);background:var(--blush-soft)}
-.t-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:start}
-.tbox{background:var(--butter);border-radius:24px;padding:30px;display:grid;gap:16px;position:relative}
-.tbox svg{width:100%;height:auto}
-.tbox h3{font-size:clamp(28px,3vw,38px)}
+/* ---------- 04 Tasting ---------- */
+.tasting{background:var(--blush-soft)}
+.t-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,4vw,64px);align-items:start}
+.tbox{background:#FFFDF9;border:1px solid rgba(198,161,90,.55);display:grid}
+.tbox-photo{aspect-ratio:16/9;background:var(--blush)}
+.tbox-photo .media-art{position:absolute;inset:0;display:grid;place-items:center;transition:opacity .8s}
+.tbox-photo .media-art svg{width:100%;height:100%}
+.tbox-body{padding:28px;display:grid;gap:16px}
+.tbox h3{font-size:clamp(32px,3.4vw,46px)}
 .tbox .price{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px}
-.tbox .price strong{font:500 40px/1 var(--display)}
-.tbox .price span{font-size:14px;color:var(--pista-deep);font-weight:700}
-.tbox ul{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:6px 16px;font-size:15px}
-.tbox li::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--gold);margin-right:10px;vertical-align:2px}
-.slots{display:grid;gap:12px;margin-bottom:34px}
-.slots h3{font:800 12px/1 var(--body);letter-spacing:.18em;text-transform:uppercase;color:var(--choc-2)}
+.tbox .price strong{font:500 44px/1 var(--display)}
+.tbox .price span{font-size:14px;color:var(--pista-deep);font-weight:600}
+.tbox ul{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px 18px;font-size:15px}
+.tbox li{display:flex;gap:10px;align-items:baseline}
+.tbox li::before{content:"";flex:none;width:14px;height:1px;background:var(--gold);transform:translateY(-4px)}
+.slots{display:grid;gap:14px;margin-bottom:36px}
+.slots h3{font:600 12px/1 var(--body);letter-spacing:.2em;text-transform:uppercase;color:var(--choc-2)}
 .slot-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-.mslot{background:#fff;border-radius:16px;padding:16px;display:grid;gap:6px;border:1.5px solid transparent;position:relative}
-.mslot b{font:500 22px/1.1 var(--display)}
-.mslot .bar{height:6px;border-radius:6px;background:var(--blush-soft);overflow:hidden}
+.mslot{background:#FFFDF9;padding:18px 16px 16px;display:grid;gap:8px;border:1px solid rgba(59,36,32,.12);position:relative}
+.mslot b{font:500 24px/1.1 var(--display)}
+.mslot .bar{height:4px;background:var(--blush);overflow:hidden}
 .mslot .bar i{display:block;height:100%;background:var(--choc);transform-origin:left}
 .mslot small{font-size:13px;color:var(--choc-2)}
-.mslot.hot{border-color:var(--choc)}
-.mslot.hot{padding-top:24px}
-.badge{position:absolute;top:-13px;left:12px;white-space:nowrap;background:var(--choc);color:var(--butter);font:800 10px/1 var(--body);letter-spacing:.06em;text-transform:uppercase;padding:8px 12px;border-radius:999px}
-.badge::before{content:"";position:absolute;inset:-4px;border-radius:999px;border:1.5px solid var(--choc);animation:ring 2s var(--ease) infinite}
-@keyframes ring{0%{transform:scale(.9);opacity:.9}100%{transform:scale(1.25);opacity:0}}
-.seasons{display:grid;gap:0}
-.season{display:grid;grid-template-columns:44px 1fr auto;gap:14px;align-items:center;padding:14px 0;border-top:1px solid rgba(59,36,32,.14)}
-.season:last-child{border-bottom:1px solid rgba(59,36,32,.14)}
-.season i{width:44px;height:44px;border-radius:50%;display:block;box-shadow:inset 0 -10px 0 rgba(0,0,0,.08)}
-.season b{font:500 21px/1.2 var(--display);display:block}
+.mslot.hot{border-color:var(--choc);padding-top:28px}
+.badge{position:absolute;top:-1px;left:-1px;right:-1px;background:var(--choc);color:var(--porcelain);font:600 10.5px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;padding:7px 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.seasons{display:grid}
+.season{display:grid;grid-template-columns:40px 1fr auto;gap:16px;align-items:center;padding:16px 0;border-top:1px solid rgba(198,161,90,.5)}
+.season:last-child{border-bottom:1px solid rgba(198,161,90,.5)}
+.season i{width:40px;height:40px;display:block;background:var(--c);box-shadow:inset 0 -12px 0 rgba(0,0,0,.08)}
+.season b{font:500 22px/1.2 var(--display);display:block}
 .season small{font-size:14px;color:var(--choc-2)}
-.season em{font-style:normal;font:800 11px/1 var(--body);letter-spacing:.12em;text-transform:uppercase;padding:7px 10px;border-radius:999px;background:var(--pista);color:var(--choc);white-space:nowrap}
+.season em{font-style:normal;font:600 10.5px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;padding:8px 10px;background:var(--pista);color:var(--choc);white-space:nowrap}
 .season em.soon{background:transparent;border:1px solid var(--choc-2);color:var(--choc-2)}
 @media (max-width:900px){.t-grid{grid-template-columns:1fr}}
 @media (max-width:480px){.slot-row{grid-template-columns:1fr}.tbox ul{grid-template-columns:1fr}}
 
-/* Process */
-.process{position:relative}
-.steps{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
-.piping{position:absolute;left:0;right:0;top:34px;height:30px;width:100%;pointer-events:none}
-.step{position:relative;display:grid;gap:12px;align-content:start}
-.step .n{width:68px;height:68px;border-radius:50%;background:var(--butter);border:1.5px solid var(--gold);display:grid;place-items:center;font:italic 500 32px/1 var(--display);color:var(--gold-deep);position:relative;z-index:1}
-.step h3{font-size:28px}
-.step p{font-size:15.5px;color:var(--choc-2)}
-.step .meta{font:800 11px/1.3 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--pista-deep)}
-@media (max-width:900px){.steps{grid-template-columns:1fr 1fr;row-gap:40px}.piping{display:none}}
-@media (max-width:520px){.steps{grid-template-columns:1fr}}
+/* ---------- 05 Process ---------- */
+.p-grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(28px,5vw,80px);align-items:start}
+.p-photo{aspect-ratio:4/5;background:var(--blush);position:sticky;top:calc(var(--head-h) + 28px)}
+.p-photo .media-art{position:absolute;inset:0;transition:opacity .8s}
+.p-photo .media-art svg{width:100%;height:100%;display:block}
+.steps{position:relative;display:grid;gap:0}
+.piping{position:absolute;left:30px;top:0;bottom:0;width:1px;background:var(--gold);transform-origin:top}
+.step{position:relative;display:grid;grid-template-columns:64px minmax(0,1fr);gap:4px 24px;padding:26px 0;border-bottom:1px solid rgba(198,161,90,.4)}
+.step:first-child{padding-top:0}
+.step .n{grid-row:span 3;font:italic 400 52px/1 var(--display);color:var(--gold-deep);background:var(--porcelain);position:relative;z-index:1;padding-bottom:6px}
+.step h3{font-size:clamp(30px,3vw,40px)}
+.step p{font-size:16px;color:var(--choc-2);max-width:52ch}
+.step .meta{font:600 11px/1.3 var(--body);letter-spacing:.18em;text-transform:uppercase;color:var(--pista-deep)}
+@media (max-width:900px){.p-grid{grid-template-columns:1fr}.p-photo{position:relative;top:auto;aspect-ratio:16/10}}
 
-/* FAQ + inquiry */
-.inquire{--bg:var(--blush);background:var(--blush)}
-.i-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(24px,5vw,72px);align-items:start}
-.faq{display:grid;gap:0}
-.faq details{border-top:1px solid rgba(59,36,32,.25)}
-.faq details:last-child{border-bottom:1px solid rgba(59,36,32,.25)}
-.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:16px;align-items:center;padding:18px 0;font:500 21px/1.25 var(--display)}
+/* ---------- 06 FAQ + inquiry ---------- */
+.inquire{background:var(--blush)}
+.i-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(28px,5vw,80px);align-items:start}
+.faq details{border-top:1px solid rgba(59,36,32,.3)}
+.faq details:last-child{border-bottom:1px solid rgba(59,36,32,.3)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:16px;align-items:center;padding:20px 0;font:400 23px/1.25 var(--display);min-height:44px}
 .faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:"+";font:300 28px/1 var(--body);transition:transform .3s var(--ease)}
+.faq summary::after{content:"+";font:300 28px/1 var(--body);transition:transform .3s var(--ease);flex:none}
 .faq details[open] summary::after{transform:rotate(45deg)}
-.faq details p{padding:0 0 18px;color:var(--choc-2);font-size:16px;max-width:56ch}
-.form{background:var(--butter);border-radius:28px;padding:clamp(22px,3vw,36px);display:grid;gap:16px}
-.form h3{font-size:clamp(28px,3vw,36px)}
+.faq details p{padding:0 0 20px;color:var(--choc);font-size:16px;max-width:56ch}
+.form{background:var(--porcelain);padding:clamp(24px,3.4vw,44px);display:grid;gap:18px;border:1px solid rgba(198,161,90,.6);outline:1px solid rgba(198,161,90,.3);outline-offset:6px}
+.form h3{font-size:clamp(32px,3.4vw,44px)}
 .form h3 + p{color:var(--choc-2);font-size:15px;margin-top:-6px}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.f{display:grid;gap:6px;min-width:0}
-.f label{font:800 11px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--choc-2)}
-.f input,.f select,.f textarea{font:400 16px/1.35 var(--body);color:var(--choc);background:#fff;border:1.5px solid rgba(59,36,32,.25);border-radius:12px;padding:12px 14px;width:100%}
-.f textarea{min-height:92px;resize:vertical}
-.f input:focus,.f select:focus,.f textarea:focus{outline:none;border-color:var(--choc);box-shadow:0 0 0 3px rgba(200,161,90,.35)}
-.f small{font-size:12.5px;color:var(--pista-deep);font-weight:700}
+.f{display:grid;gap:7px;min-width:0}
+.f label{font:600 11px/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--choc-2)}
+.f input,.f select,.f textarea{font:400 16px/1.35 var(--body);color:var(--choc);background:#FFFDF9;border:1px solid rgba(59,36,32,.3);border-radius:0;padding:13px 14px;width:100%;min-height:50px}
+.f textarea{min-height:96px;resize:vertical}
+.f input:focus,.f select:focus,.f textarea:focus{outline:none;border-color:var(--choc);box-shadow:0 0 0 3px rgba(198,161,90,.35)}
+.f [aria-invalid="true"]{border-color:#9B2335}
+.f small{font-size:12.5px;color:var(--pista-deep);font-weight:600}
 .check{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--choc-2)}
-.check input{margin-top:4px;width:18px;height:18px;accent-color:var(--choc)}
-.ferr{color:#9B2335;font-size:14px;font-weight:700;min-height:20px}
-.fok{display:none;border:1.5px dashed var(--gold-deep);border-radius:16px;padding:14px 16px;background:#FFFCF4;font-size:15px}
+.check input{margin-top:4px;width:18px;height:18px;accent-color:var(--choc);flex:none}
+.ferr{color:#9B2335;font-size:14px;font-weight:600;min-height:20px}
+.fok{display:none;border:1px solid var(--gold-deep);padding:16px;background:#FFFDF9;font-size:15px}
 .fok.show{display:block}
-.fok b{font:italic 500 20px/1.2 var(--display);display:block;margin-bottom:4px}
+.fok b{font:italic 400 22px/1.2 var(--display);display:block;margin-bottom:4px}
 @media (max-width:900px){.i-grid{grid-template-columns:1fr}}
 @media (max-width:520px){.row2{grid-template-columns:1fr}}
 
-.foot{background:var(--choc);color:#E9D9C9}
-.foot .inner{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;padding-block:44px 36px}
-.foot b{display:block;font:500 22px/1.2 var(--display);color:var(--butter);margin-bottom:8px}
-.foot p{font-size:15px}
-.foot .script{font:400 30px/1 var(--script);color:var(--gold)}
-@media (max-width:767px){.foot .inner{grid-template-columns:1fr}}
+/* ---------- 07 Studio ---------- */
+.studio{background:var(--porcelain)}
+.s-grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(28px,4vw,64px);align-items:stretch}
+.status{display:inline-flex;align-items:center;gap:10px;font:600 11px/1 var(--body);letter-spacing:.16em;text-transform:uppercase;padding:10px 12px;border:1px solid var(--pista-deep);color:var(--pista-deep);margin-bottom:22px}
+.status i{width:7px;height:7px;background:currentColor;transform:rotate(45deg)}
+.status.closed{border-color:var(--choc-2);color:var(--choc-2)}
+.hours{width:100%;border-collapse:collapse;font-size:16px;font-variant-numeric:tabular-nums}
+.hours td{padding:12px 0;border-bottom:1px solid rgba(198,161,90,.45)}
+.hours td:last-child{text-align:right;color:var(--choc-2)}
+.hours tr.today td{font-weight:600;color:var(--choc)}
+.hours tr.today td:first-child{font-family:var(--display);font-style:italic;font-size:19px}
+.addr{margin-top:26px;display:grid;gap:8px}
+.addr p:first-child{font:400 clamp(26px,2.6vw,34px)/1.15 var(--display)}
+.addr p + p{color:var(--choc-2);font-size:15px}
+.s-ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.mapbox{position:relative;min-height:460px;border:1px solid rgba(198,161,90,.6);outline:1px solid rgba(198,161,90,.3);outline-offset:6px;background:var(--blush-soft)}
+.map{position:absolute;inset:0;z-index:1}
+.mapbox:not(.map-ready) .map{visibility:hidden}
+.map .leaflet-tile-pane{filter:sepia(.32) hue-rotate(-22deg) saturate(1.1) brightness(1.03)}
+.map .leaflet-control-attribution{font:400 11px/1.4 var(--body);background:rgba(251,248,244,.9)}
+.map .leaflet-bar{border:1px solid var(--choc);border-radius:0;box-shadow:none}
+.map .leaflet-bar a{border-radius:0!important;color:var(--choc);width:36px;height:36px;line-height:36px}
+.brand-pin{background:none;border:0}
+.brand-pin span{position:relative;display:grid;place-items:center;width:46px;height:46px;background:var(--choc);color:var(--blush);font:italic 400 16px/1 var(--display);border:1px solid var(--gold);box-shadow:0 10px 22px -8px rgba(59,36,32,.6)}
+.brand-pin span::after{content:"";position:absolute;left:50%;bottom:-8px;width:13px;height:13px;background:var(--choc);border-right:1px solid var(--gold);border-bottom:1px solid var(--gold);transform:translateX(-50%) rotate(45deg)}
+.map-fallback{position:absolute;inset:0;z-index:2;display:grid;align-content:center;gap:16px;padding:clamp(24px,4vw,56px);background:linear-gradient(135deg,var(--blush-soft),var(--porcelain) 70%)}
+.map-fallback::before{content:"";position:absolute;inset:16px;border:1px solid rgba(198,161,90,.6);pointer-events:none}
+.mapbox.map-ready .map-fallback{display:none}
+.mf-k{font:600 11px/1 var(--body);letter-spacing:.2em;text-transform:uppercase;color:var(--pista-deep)}
+.mf-a{font:400 clamp(30px,3.2vw,46px)/1.05 var(--display)}
+.mf-a em{font-style:italic;color:var(--gold-deep)}
+.mf-c{font-size:15px;color:var(--choc-2);line-height:1.6}
+.map-fallback .btn{justify-self:start;position:relative}
+@media (max-width:900px){.s-grid{grid-template-columns:1fr}.mapbox{min-height:380px}}
 
-/* Mobile action bar */
+/* ---------- Footer ---------- */
+.foot{background:var(--choc);color:#E5D3C6}
+.foot .inner{padding-block:clamp(64px,8vw,110px) 28px}
+.foot .foot-mark{font:400 clamp(58px,12.6vw,200px)/.86 var(--display);color:var(--porcelain);letter-spacing:-.03em;margin:0;white-space:nowrap}
+.foot .foot-mark em{font-style:italic;color:var(--gold)}
+.foot .foot-script{font:400 clamp(34px,4vw,60px)/1 var(--script);color:var(--blush);margin:-.1em 0 clamp(40px,6vw,72px) .4em}
+.foot-cols{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px;padding-top:32px;border-top:1px solid rgba(198,161,90,.4)}
+.foot h4{margin:0 0 12px;font:600 11px/1 var(--body);letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.foot p,.foot li{font-size:15px;line-height:1.7}
+.foot ul{list-style:none;margin:0;padding:0}
+.foot a{text-decoration-color:rgba(242,196,192,.5);text-underline-offset:3px}
+.foot a:hover{color:var(--blush)}
+.notes-form{display:flex;gap:8px;margin-top:10px}
+.notes-form input{flex:1;min-width:0;min-height:46px;font:400 15px var(--body);padding:10px 12px;border:1px solid rgba(251,248,244,.3);background:transparent;color:var(--porcelain);border-radius:0}
+.notes-form input::placeholder{color:#A88E82}
+.notes-form input:focus{outline:none;border-color:var(--gold)}
+.notes-form .btn{min-height:46px;padding:10px 14px;border-color:var(--blush);color:var(--choc);background:var(--blush)}
+.notes-ok{font-size:13px;color:var(--blush);min-height:20px;margin-top:8px}
+.legal{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:48px;padding-top:20px;border-top:1px solid rgba(198,161,90,.25);font-size:12.5px;color:#A88E82}
+@media (max-width:900px){.foot-cols{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.foot-cols{grid-template-columns:1fr}}
+
+/* ---------- Mobile action bar ---------- */
 .actionbar{display:none}
 @media (max-width:767px){
   body{padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))}
-  .actionbar{display:grid;grid-template-columns:2fr 1fr 1fr;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:50;background:var(--butter);border-top:1.5px solid var(--gold);padding:10px max(12px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px))}
-  .actionbar a{display:flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;padding:12px 8px;text-decoration:none;font:800 12px/1 var(--body);letter-spacing:.08em;text-transform:uppercase;border:1.5px solid var(--choc);color:var(--choc)}
-  .actionbar a.main{background:var(--choc);color:var(--butter)}
+  .actionbar{display:grid;grid-template-columns:2fr 1fr 1fr;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:50;background:var(--porcelain);border-top:1px solid var(--gold);padding:10px max(12px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px))}
+  .actionbar a{display:flex;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:12px 8px;text-decoration:none;font:600 12px/1 var(--body);letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--choc);color:var(--choc)}
+  .actionbar a.main{background:var(--choc);color:var(--porcelain)}
   .actionbar svg{width:18px;height:18px;flex:none}
 }
 @media (prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  .marquee-track,.badge::before,.cue span i{animation:none}
+  .marquee-track,.cue i::after{animation:none}
   .cue{display:none}
   *{transition:none!important}
 }
@@ -304,104 +379,97 @@ legend{padding:0;margin-bottom:12px;font:800 12px/1 var(--body);letter-spacing:.
 <body>
 <div class="tb-strip"><a href="../index.html">&larr; Tasting Board</a><span>Mockup 08 / 10 &middot; concept, not a live site</span></div>
 <script>try{if(window.parent!==window&&window.parent.__TASTING_BOARD__)document.documentElement.classList.add('in-board')}catch(e){}</script>
+<a class="skip" href="#main">Skip to main content</a>
 
-<header class="site-head">
+<header class="site-head" id="site-head">
   <div class="inner">
-    <a class="logo" href="#top" aria-label="Layer &amp; Lace Cake Studio home"><b>Layer &amp; Lace</b><i>cake studio</i></a>
+    <a class="logo" href="#top" aria-label="Layer &amp; Lace Cake Studio home"><b>Layer <em>&amp;</em> Lace</b><i>cake studio</i></a>
     <nav class="nav" aria-label="Sections">
-      <a href="#occasions">Occasions</a><a href="#build">Build a cake</a><a href="#lookbook">Lookbook</a><a href="#tasting">Tasting</a><a href="#inquire">FAQ</a>
+      <a href="#occasions">Occasions</a><a href="#build">Build a cake</a><a href="#lookbook">Lookbook</a><a href="#tasting">Tasting</a><a href="#studio">Studio</a>
     </nav>
-    <a class="btn btn-primary head-cta" href="#inquire">Start your cake</a>
+    <a class="btn btn-primary head-cta magnetic" href="#inquire">Start your cake</a>
   </div>
 </header>
 
-<main class="wrap" id="top">
+<main class="wrap" id="main">
   <!-- HERO -->
-  <section class="hero" id="hero" aria-labelledby="hero-title">
+  <section class="hero" id="top" aria-labelledby="hero-title">
     <div class="inner">
       <div class="hero-copy">
         <span class="loc">F-6 Supermarket, Islamabad &middot; by appointment</span>
-        <h1 id="hero-title">Celebration cakes, built <em>tier by tier</em> for your day.</h1>
-        <p>Wedding, nikkah, mehndi and birthday cakes designed with you at a Saturday tasting, then baked, stacked and set up at your venue.</p>
+        <h1 id="hero-title" data-split>Celebration cakes, built <em>tier by tier</em> for your day.</h1>
+        <p>Wedding, nikkah, mehndi and birthday cakes designed with you at a Saturday tasting, then baked, stacked and finished at your venue.</p>
         <div class="hero-ctas">
-          <a class="btn btn-primary" href="#build">Design your cake</a>
+          <a class="btn btn-primary magnetic" href="#build">Design your cake</a>
           <a class="btn btn-line" href="#tasting">Book a tasting box</a>
+        </div>
+        <p class="hero-note">December wedding dates are almost gone: six cake slots left.</p>
+      </div>
+
+      <div class="vitrine" data-media="hero">
+        <!-- HEYGEN: 6 s loop, 4:5 crop of a 16:9 1080p clip. An elegant three-tier wedding cake slowly rotating on a turntable: smooth blush-pink buttercream tiers, pistachio-green accents, pressed white sugar flowers cascading down one side, touches of gold leaf; soft diffused studio light, porcelain-white backdrop. No people, no hands, no text. -->
+        <span class="vitrine-cap" aria-hidden="true">No. LL-1127 &middot; Nikkah</span>
+        <div class="media-art" aria-hidden="true">
+          <svg viewBox="40 150 440 490" preserveAspectRatio="xMidYMax meet" id="hero-cake">
+            <defs>
+              <linearGradient id="gold" x1="0" x2="1"><stop offset="0" stop-color="#9A7533"/><stop offset=".45" stop-color="#E6CB8A"/><stop offset="1" stop-color="#A9823D"/></linearGradient>
+              <linearGradient id="side" x1="0" x2="1"><stop offset="0" stop-color="#000" stop-opacity=".1"/><stop offset=".25" stop-color="#000" stop-opacity="0"/><stop offset=".8" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".12"/></linearGradient>
+              <pattern id="lattice" width="16" height="16" patternUnits="userSpaceOnUse"><path d="M0 0L16 16M16 0L0 16" stroke="#FBF8F4" stroke-width="1.3" opacity=".75"/></pattern>
+              <pattern id="rope" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(40)"><rect width="7" height="7" fill="#FFFDF9"/><rect width="3" height="7" fill="#EBDDD0"/></pattern>
+            </defs>
+            <g id="stand">
+              <path d="M230 584 C238 600 236 614 214 626 L306 626 C284 614 282 600 290 584Z" fill="url(#gold)"/>
+              <ellipse cx="260" cy="628" rx="86" ry="8" fill="url(#gold)"/>
+              <ellipse cx="260" cy="578" rx="212" ry="15" fill="url(#gold)"/>
+              <ellipse cx="260" cy="574" rx="204" ry="10" fill="#F3E3BC"/>
+            </g>
+            <g id="t1">
+              <rect x="80" y="436" width="360" height="138" rx="6" fill="#F2C4C0"/>
+              <rect x="80" y="436" width="360" height="138" rx="6" fill="url(#side)"/>
+              <rect x="80" y="558" width="360" height="12" fill="url(#rope)"/>
+            </g>
+            <g id="drape">
+              <path id="swag" d="M84 452 Q114 500 144 452 Q174 500 204 452 Q234 500 264 452 Q294 500 324 452 Q354 500 384 452 Q414 500 436 452" fill="none" stroke="#FFFDF9" stroke-width="6" stroke-linecap="round"/>
+              <g id="drips" fill="#FFFDF9"><path d="M114 476 q-4 18 0 26 q4 -8 0 -26Z"/><path d="M174 476 q-4 24 0 32 q4 -8 0 -32Z"/><path d="M234 476 q-4 14 0 22 q4 -8 0 -22Z"/><path d="M294 476 q-4 22 0 30 q4 -8 0 -30Z"/><path d="M354 476 q-4 16 0 24 q4 -8 0 -24Z"/><path d="M414 474 q-4 20 0 28 q4 -8 0 -28Z"/></g>
+            </g>
+            <g id="t2">
+              <rect x="130" y="318" width="260" height="120" rx="6" fill="#B9D3B0"/>
+              <rect x="130" y="318" width="260" height="120" rx="6" fill="url(#lattice)"/>
+              <rect x="130" y="318" width="260" height="120" rx="6" fill="url(#side)"/>
+              <rect x="130" y="424" width="260" height="11" fill="url(#rope)"/>
+            </g>
+            <g id="t3">
+              <rect x="182" y="216" width="156" height="104" rx="6" fill="#FFFDF9"/>
+              <rect x="182" y="216" width="156" height="104" rx="6" fill="url(#side)"/>
+              <rect x="182" y="306" width="156" height="10" fill="#F2C4C0"/>
+            </g>
+            <g id="goldleaf" fill="#D4B06A"><path d="M204 238 l14 -4 l6 10 l-12 6Z"/><path d="M262 262 l16 -2 l2 12 l-14 4Z"/><path d="M300 236 l10 2 l-2 10 l-10 -2Z"/><path d="M226 290 l12 -6 l6 8 l-10 6Z"/><path d="M310 280 l10 0 l0 8 l-10 2Z"/></g>
+            <g id="flowers"></g>
+            <g id="topper">
+              <path d="M232 214 V172 M288 214 V172" stroke="#B48C45" stroke-width="2.5"/>
+              <text x="260" y="182" text-anchor="middle" font-family="Great Vibes, cursive" font-size="58" fill="url(#gold)">Mubarak</text>
+            </g>
+          </svg>
         </div>
       </div>
 
-      <div class="cake-stage" aria-hidden="true">
-        <div class="arch"></div>
-        <!-- HEYGEN: three-tier wedding cake on a gold pedestal stand, blush bottom tier with piped buttercream swags, pistachio middle tier with lace piping, ivory top tier with gold leaf, cascading blush and white sugar roses, gold script topper, soft studio light against a blush arch backdrop, 4:5 -->
-        <svg viewBox="0 0 520 640" id="hero-cake">
-          <defs>
-            <linearGradient id="gold" x1="0" x2="1"><stop offset="0" stop-color="#9A7533"/><stop offset=".45" stop-color="#E6CB8A"/><stop offset="1" stop-color="#A9823D"/></linearGradient>
-            <linearGradient id="side" x1="0" x2="1"><stop offset="0" stop-color="#000" stop-opacity=".1"/><stop offset=".25" stop-color="#000" stop-opacity="0"/><stop offset=".8" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".12"/></linearGradient>
-            <pattern id="lace" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="9" cy="9" r="5" fill="none" stroke="#FFF6E5" stroke-width="1.4" opacity=".75"/><circle cx="0" cy="0" r="1.6" fill="#FFF6E5" opacity=".8"/><circle cx="18" cy="18" r="1.6" fill="#FFF6E5" opacity=".8"/></pattern>
-          </defs>
-          <!-- stand -->
-          <g id="stand">
-            <path d="M230 584 C238 600 236 614 214 626 L306 626 C284 614 282 600 290 584Z" fill="url(#gold)"/>
-            <ellipse cx="260" cy="628" rx="86" ry="9" fill="url(#gold)"/>
-            <ellipse cx="260" cy="578" rx="212" ry="16" fill="url(#gold)"/>
-            <ellipse cx="260" cy="574" rx="204" ry="11" fill="#F3E3BC"/>
-          </g>
-          <!-- tier 1 -->
-          <g id="t1">
-            <rect x="80" y="436" width="360" height="138" rx="10" fill="#F4C9C4"/>
-            <rect x="80" y="436" width="360" height="138" rx="10" fill="url(#side)"/>
-            <g fill="#FFF6E5" id="beads1"></g>
-          </g>
-          <g id="drape">
-            <path id="swag" d="M84 452 Q114 500 144 452 Q174 500 204 452 Q234 500 264 452 Q294 500 324 452 Q354 500 384 452 Q414 500 436 452" fill="none" stroke="#FFF6E5" stroke-width="6" stroke-linecap="round"/>
-            <g id="pearls" fill="#FFFFFF"><circle cx="144" cy="452" r="6"/><circle cx="204" cy="452" r="6"/><circle cx="264" cy="452" r="6"/><circle cx="324" cy="452" r="6"/><circle cx="384" cy="452" r="6"/></g>
-            <g id="drips" fill="#FFF6E5"><path d="M114 476 q-4 18 0 26 q4 -8 0 -26Z"/><path d="M174 476 q-4 24 0 32 q4 -8 0 -32Z"/><path d="M234 476 q-4 14 0 22 q4 -8 0 -22Z"/><path d="M294 476 q-4 22 0 30 q4 -8 0 -30Z"/><path d="M354 476 q-4 16 0 24 q4 -8 0 -24Z"/><path d="M414 474 q-4 20 0 28 q4 -8 0 -28Z"/></g>
-          </g>
-          <!-- tier 2 -->
-          <g id="t2">
-            <rect x="130" y="318" width="260" height="120" rx="10" fill="#BFD8B8"/>
-            <rect x="130" y="318" width="260" height="120" rx="10" fill="url(#lace)"/>
-            <rect x="130" y="318" width="260" height="120" rx="10" fill="url(#side)"/>
-            <g fill="#FFF6E5" id="beads2"></g>
-          </g>
-          <!-- tier 3 -->
-          <g id="t3">
-            <rect x="182" y="216" width="156" height="104" rx="10" fill="#FFF6E5"/>
-            <rect x="182" y="216" width="156" height="104" rx="10" fill="url(#side)"/>
-            <g fill="#D4B06A"><path d="M204 238 l14 -4 l6 10 l-12 6Z"/><path d="M262 262 l16 -2 l2 12 l-14 4Z"/><path d="M300 236 l10 2 l-2 10 l-10 -2Z"/><path d="M226 290 l12 -6 l6 8 l-10 6Z"/><path d="M308 284 l10 0 l0 8 l-10 2Z"/></g>
-            <g fill="#F4C9C4" id="beads3"></g>
-          </g>
-          <!-- sugar flowers -->
-          <g id="flowers"></g>
-          <!-- topper -->
-          <g id="topper">
-            <path d="M232 214 V172 M288 214 V172" stroke="#B48C45" stroke-width="2.5"/>
-            <text x="260" y="182" text-anchor="middle" font-family="Pinyon Script, cursive" font-size="58" fill="url(#gold)">Mubarak</text>
-          </g>
-          <g id="sparkle" fill="#C8A15A">
-            <path d="M96 300 l4 10 l10 4 l-10 4 l-4 10 l-4 -10 l-10 -4 l10 -4Z"/>
-            <path d="M432 236 l3 8 l8 3 l-8 3 l-3 8 l-3 -8 l-8 -3 l8 -3Z"/>
-            <path d="M452 380 l3 7 l7 3 l-7 3 l-3 7 l-3 -7 l-7 -3 l7 -3Z"/>
-          </g>
-        </svg>
-      </div>
-
       <aside class="sheet" aria-label="How this cake is built">
-        <h2>Build sheet</h2>
+        <h2>Atelier order sheet</h2>
         <div class="ref">No. LL-1127 &middot; Nikkah</div>
         <ol id="sheet">
           <li class="on"><b>Base tier, 10&Prime;</b><span>Vanilla bean sponge, strawberry compote</span></li>
           <li class="on"><b>Buttercream swags</b><span>Hand-piped, 40 minutes per tier</span></li>
-          <li class="on"><b>Middle tier, 8&Prime;</b><span>Pistachio &amp; rose, lace piping</span></li>
+          <li class="on"><b>Middle tier, 8&Prime;</b><span>Pistachio &amp; rose, lattice piping</span></li>
           <li class="on"><b>Top tier, 6&Prime;</b><span>Chocolate fudge, 24k gold leaf</span></li>
           <li class="on"><b>Sugar flowers</b><span>Two days to shape and dry</span></li>
           <li class="on"><b>Gold topper</b><span>Mubarak, hand-lettered</span></li>
         </ol>
       </aside>
     </div>
-    <div class="cue" aria-hidden="true">Scroll to stack <span><i></i><i></i><i></i></span></div>
+    <div class="cue" aria-hidden="true">Scroll to stack <i></i></div>
   </section>
 
-  <div class="marquee scallop" aria-hidden="true">
+  <div class="marquee" aria-hidden="true">
     <div class="marquee-track">
       <span>Weddings</span><span>Nikkah</span><span>Mehndi</span><span>Birthdays</span><span>Baby showers &amp; aqiqah</span><span>Corporate</span><span>Tastings every Saturday</span>
       <span>Weddings</span><span>Nikkah</span><span>Mehndi</span><span>Birthdays</span><span>Baby showers &amp; aqiqah</span><span>Corporate</span><span>Tastings every Saturday</span>
@@ -412,20 +480,20 @@ legend{padding:0;margin-bottom:12px;font:800 12px/1 var(--body);letter-spacing:.
   <section class="sec" id="occasions" aria-labelledby="occ-title">
     <div class="inner">
       <div class="sec-head">
-        <span class="eyebrow"><i>01</i> Occasions</span>
-        <h2 id="occ-title">Every cake starts with <em>the occasion</em></h2>
-        <p>Lead times depend on the size of the day. A wedding cake with sugar flowers needs three weeks; a birthday cake can be ready in five days.</p>
+        <span class="label"><em>N&ordm; 01</em> Occasions</span>
+        <h2 id="occ-title" data-split>Every cake starts with <em>the occasion</em></h2>
+        <p>Lead times follow the size of the day. A wedding cake with sugar flowers needs three weeks; a birthday cake can be ready in five days.</p>
       </div>
     </div>
     <div class="occ-wrap"><div class="occ-row" id="occ-row"></div></div>
   </section>
 
   <!-- 02 BUILDER -->
-  <section class="builder sec scallop" id="build" aria-labelledby="build-title">
+  <section class="builder sec" id="build" aria-labelledby="build-title">
     <div class="inner">
       <div class="sec-head">
-        <span class="eyebrow"><i>02</i> Build your cake</span>
-        <h2 id="build-title">Sketch it here, <em>perfect it at the tasting</em></h2>
+        <span class="label"><em>N&ordm; 02</em> Build your cake</span>
+        <h2 id="build-title" data-split>Sketch it here, <em>perfect it at the tasting</em></h2>
         <p>Choose a size, sponge, finish, palette and topper. The estimate updates as you go and becomes the starting brief for your inquiry.</p>
       </div>
       <div class="b-grid">
@@ -438,12 +506,12 @@ legend{padding:0;margin-bottom:12px;font:800 12px/1 var(--body);letter-spacing:.
           <fieldset><legend>Topper</legend><div class="opts" id="o-topper"></div></fieldset>
         </form>
         <div class="b-preview" id="preview-card" aria-live="polite">
-          <div id="preview"></div>
+          <div class="stagebox"><div id="preview"></div></div>
           <dl class="b-sum">
-            <div class="price"><dt>Estimate</dt><dd style="margin:0"><strong id="s-price">Rs 0</strong></dd></div>
-            <div><dt>Serves</dt><dd style="margin:0"><strong id="s-serves">0</strong></dd></div>
-            <div><dt>40% deposit</dt><dd style="margin:0"><strong id="s-deposit">Rs 0</strong></dd></div>
-            <div><dt>Earliest date</dt><dd style="margin:0"><strong id="s-date">-</strong></dd></div>
+            <div class="price"><dt>Estimate</dt><dd><strong id="s-price">Rs 0</strong></dd></div>
+            <div><dt>Serves</dt><dd><strong id="s-serves">0</strong></dd></div>
+            <div><dt>40% deposit</dt><dd><strong id="s-deposit">Rs 0</strong></dd></div>
+            <div><dt>Earliest date</dt><dd><strong id="s-date">-</strong></dd></div>
           </dl>
           <p class="b-note" id="s-note">Includes boxing. Delivery and venue setup in Islamabad and Rawalpindi from Rs 2,500.</p>
           <a class="btn btn-primary" href="#inquire" id="send-design">Send this design with my inquiry</a>
@@ -453,38 +521,38 @@ legend{padding:0;margin-bottom:12px;font:800 12px/1 var(--body);letter-spacing:.
   </section>
 
   <!-- 03 LOOKBOOK -->
-  <section class="sec scallop" id="lookbook" aria-labelledby="look-title" style="--bg:var(--butter)">
+  <section class="sec" id="lookbook" aria-labelledby="look-title">
     <div class="inner">
       <div class="sec-head">
-        <span class="eyebrow"><i>03</i> Lookbook</span>
-        <h2 id="look-title">Recent cakes, <em>from nikkah to first birthdays</em></h2>
+        <span class="label"><em>N&ordm; 03</em> Lookbook</span>
+        <h2 id="look-title" data-split>Recent cakes, <em>from nikkah to first birthdays</em></h2>
       </div>
       <div class="masonry" id="masonry"></div>
     </div>
   </section>
 
   <!-- 04 TASTING -->
-  <section class="tasting sec scallop" id="tasting" aria-labelledby="tasting-title">
+  <section class="tasting sec" id="tasting" aria-labelledby="tasting-title">
     <div class="inner">
       <div class="sec-head">
-        <span class="eyebrow"><i>04</i> Tasting &amp; seasons</span>
-        <h2 id="tasting-title">Taste six sponges <em>before you choose one</em></h2>
+        <span class="label"><em>N&ordm; 04</em> Tasting &amp; seasons</span>
+        <h2 id="tasting-title" data-split>Taste six sponges <em>before you choose one</em></h2>
       </div>
       <div class="t-grid">
         <article class="tbox">
-          <svg viewBox="0 0 480 220" aria-hidden="true">
-            <rect x="20" y="40" width="440" height="168" rx="14" fill="#F4C9C4"/>
-            <rect x="34" y="54" width="412" height="140" rx="10" fill="#FFF6E5"/>
-            <g id="slices"></g>
-            <path d="M20 64 H460" stroke="#C8A15A" stroke-width="0"/>
-            <rect x="164" y="20" width="152" height="38" rx="6" fill="#3B2420"/>
-            <text x="240" y="46" text-anchor="middle" font-family="Pinyon Script, cursive" font-size="22" fill="#E6CB8A">Layer &amp; Lace</text>
-          </svg>
-          <h3>The tasting box</h3>
-          <div class="price"><strong>Rs 3,500</strong><span>Credited in full to your cake order</span></div>
-          <ul id="tbox-list"></ul>
-          <p style="font-size:15px;color:var(--choc-2)">Collect from the studio on Saturday, or taste with us in a 30-minute design session (10:00&ndash;17:00).</p>
-          <a class="btn btn-primary" href="#inquire" style="justify-self:start" data-occasion="Tasting box">Reserve a tasting box</a>
+          <div class="tbox-photo reveal-media" data-media="tasting">
+            <!-- HEYGEN: still or 5 s clip, 16:9. Overhead of a cake tasting box with six small cake slices in different flavours (pistachio, chocolate fudge, rose, lotus, red velvet, vanilla strawberry) in a blush-pink box with a gold ribbon, porcelain table, soft daylight. No people, no text. -->
+            <div class="media-art" aria-hidden="true">
+              <svg viewBox="0 0 480 270" preserveAspectRatio="xMidYMid slice"><rect width="480" height="270" fill="#F2C4C0"/><rect x="30" y="34" width="420" height="202" fill="#E9A9A4"/><rect x="42" y="46" width="396" height="178" fill="#FFFDF9"/><g id="slices"></g><rect x="190" y="18" width="100" height="250" fill="#C6A15B" opacity=".85"/><rect x="30" y="126" width="420" height="16" fill="#C6A15B" opacity=".85"/><rect x="176" y="112" width="128" height="44" fill="#3B2420"/><text x="240" y="142" text-anchor="middle" font-family="Great Vibes, cursive" font-size="26" fill="#E6CB8A">Layer &amp; Lace</text></svg>
+            </div>
+          </div>
+          <div class="tbox-body">
+            <h3>The tasting box</h3>
+            <div class="price"><strong>Rs 3,500</strong><span>Credited in full to your cake order</span></div>
+            <ul id="tbox-list"></ul>
+            <p style="font-size:15px;color:var(--choc-2)">Collect from the studio on Saturday, or taste with us in a 30-minute design session (10:00&ndash;17:00).</p>
+            <a class="btn btn-primary" href="#inquire" style="justify-self:start" data-occasion="Tasting box">Reserve a tasting box</a>
+          </div>
         </article>
         <div>
           <div class="slots">
@@ -498,28 +566,36 @@ legend{padding:0;margin-bottom:12px;font:800 12px/1 var(--body);letter-spacing:.
   </section>
 
   <!-- 05 PROCESS -->
-  <section class="sec process scallop" id="process" aria-labelledby="process-title" style="--bg:var(--butter)">
+  <section class="sec" id="process" aria-labelledby="process-title">
     <div class="inner">
       <div class="sec-head">
-        <span class="eyebrow"><i>05</i> Process</span>
-        <h2 id="process-title">From first message <em>to the cake table</em></h2>
+        <span class="label"><em>N&ordm; 05</em> Process</span>
+        <h2 id="process-title" data-split>From first message <em>to the cake table</em></h2>
       </div>
-      <div class="steps">
-        <svg class="piping" viewBox="0 0 1000 30" preserveAspectRatio="none" aria-hidden="true"><path id="pipe" d="M30 15 C 120 0, 180 30, 270 15 S 420 0, 510 15 S 660 30, 750 15 S 900 0, 980 15" fill="none" stroke="#C8A15A" stroke-width="3" stroke-dasharray="1 12" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>
-        <div class="step"><span class="n">1</span><span class="meta">Day 1</span><h3>Inquiry</h3><p>Send your date, guest count and any inspiration. We reply on WhatsApp within 24 hours with availability.</p></div>
-        <div class="step"><span class="n">2</span><span class="meta">Any Saturday</span><h3>Tasting</h3><p>Six sponges and fillings, 30 minutes at the studio. The Rs 3,500 box is credited to your order.</p></div>
-        <div class="step"><span class="n">3</span><span class="meta">Same week</span><h3>Design</h3><p>A sketch, a final quote and a 40% deposit to lock the date. Changes are free until 7 days out.</p></div>
-        <div class="step"><span class="n">4</span><span class="meta">Your day</span><h3>Delivery</h3><p>Chilled van, stacked on site and finished at the venue, two hours before guests arrive.</p></div>
+      <div class="p-grid">
+        <figure class="p-photo reveal-media" data-media="piping" style="margin:0">
+          <!-- HEYGEN: 5 s clip, 4:5. Close-up of blush-pink buttercream being piped into soft ruffles around a cake tier, pistachio crumbs at the base, soft window light, porcelain background. No faces, no text. -->
+          <div class="media-art" aria-hidden="true">
+            <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice"><rect width="400" height="500" fill="#F8E3E0"/><g id="ruffles"></g><rect x="0" y="430" width="400" height="70" fill="#E8F0E4"/><path d="M0 430h400" stroke="#C6A15B" stroke-width="2"/></svg>
+          </div>
+        </figure>
+        <div class="steps">
+          <span class="piping" aria-hidden="true"></span>
+          <div class="step"><span class="n">01</span><span class="meta">Day 1</span><h3>Inquiry</h3><p>Send your date, guest count and any inspiration. We reply on WhatsApp within 24 hours with availability.</p></div>
+          <div class="step"><span class="n">02</span><span class="meta">Any Saturday</span><h3>Tasting</h3><p>Six sponges and fillings, 30 minutes at the studio. The Rs 3,500 box is credited to your order.</p></div>
+          <div class="step"><span class="n">03</span><span class="meta">Same week</span><h3>Design</h3><p>A sketch, a final quote and a 40% deposit to lock the date. Changes are free until 7 days out.</p></div>
+          <div class="step"><span class="n">04</span><span class="meta">Your day</span><h3>Delivery</h3><p>Chilled van, stacked on site and finished at the venue, two hours before guests arrive.</p></div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- 06 FAQ + INQUIRY -->
-  <section class="inquire sec scallop" id="inquire" aria-labelledby="inq-title">
+  <section class="inquire sec" id="inquire" aria-labelledby="inq-title">
     <div class="inner">
       <div class="sec-head">
-        <span class="eyebrow"><i>06</i> Questions &amp; inquiry</span>
-        <h2 id="inq-title">Tell us about <em>your day</em></h2>
+        <span class="label"><em>N&ordm; 06</em> Questions &amp; inquiry</span>
+        <h2 id="inq-title" data-split>Tell us about <em>your day</em></h2>
       </div>
       <div class="i-grid">
         <div class="faq">
@@ -535,12 +611,12 @@ legend{padding:0;margin-bottom:12px;font:800 12px/1 var(--body);letter-spacing:.
           <h3>Start your inquiry</h3>
           <p>We hold no date until the deposit is paid. Studio visits are by appointment.</p>
           <div class="row2">
-            <div class="f"><label for="i-name">Your name</label><input id="i-name" autocomplete="name" placeholder="Mahnoor Ali"></div>
-            <div class="f"><label for="i-phone">WhatsApp number</label><input id="i-phone" type="tel" autocomplete="tel" placeholder="0300 1234567"></div>
+            <div class="f"><label for="i-name">Your name *</label><input id="i-name" autocomplete="name" placeholder="Mahnoor Ali"></div>
+            <div class="f"><label for="i-phone">WhatsApp number *</label><input id="i-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="0300 1234567"></div>
           </div>
           <div class="row2">
             <div class="f"><label for="i-occasion">Occasion</label><select id="i-occasion"></select></div>
-            <div class="f"><label for="i-date">Event date</label><input id="i-date" type="date"><small id="i-date-hint">Earliest available: -</small></div>
+            <div class="f"><label for="i-date">Event date *</label><input id="i-date" type="date"><small id="i-date-hint">Earliest available: -</small></div>
           </div>
           <div class="row2">
             <div class="f"><label for="i-guests">Guests</label><select id="i-guests"><option>Up to 15</option><option>15&ndash;35</option><option selected>35&ndash;70</option><option>70&ndash;120</option><option>120+</option></select></div>
@@ -555,13 +631,71 @@ legend{padding:0;margin-bottom:12px;font:800 12px/1 var(--body);letter-spacing:.
       </div>
     </div>
   </section>
+
+  <!-- 07 STUDIO -->
+  <section class="studio sec" id="studio" aria-labelledby="studio-title">
+    <div class="inner">
+      <div class="sec-head">
+        <span class="label"><em>N&ordm; 07</em> The studio</span>
+        <h2 id="studio-title" data-split>First floor, <em>F-6 Supermarket</em></h2>
+      </div>
+      <div class="s-grid">
+        <div>
+          <div class="status" id="open-status" aria-live="polite"><i></i><span>Checking hours</span></div>
+          <table class="hours" id="hours" aria-label="Studio hours">
+            <tbody>
+              <tr data-d="2"><td>Tuesday</td><td>11:00 &ndash; 19:00</td></tr>
+              <tr data-d="3"><td>Wednesday</td><td>11:00 &ndash; 19:00</td></tr>
+              <tr data-d="4"><td>Thursday</td><td>11:00 &ndash; 19:00</td></tr>
+              <tr data-d="5"><td>Friday</td><td>11:00 &ndash; 19:00</td></tr>
+              <tr data-d="6"><td>Saturday</td><td>10:00 &ndash; 17:00 &middot; tastings</td></tr>
+              <tr data-d="0"><td>Sunday</td><td>Closed for deliveries</td></tr>
+              <tr data-d="1"><td>Monday</td><td>Closed</td></tr>
+            </tbody>
+          </table>
+          <div class="addr">
+            <p>Studio 3, First Floor, F-6 Supermarket, Islamabad</p>
+            <p>+92 300 555 0188 &middot; call or WhatsApp. Above the stationery shop; lift at the back stairwell. Visits by appointment.</p>
+          </div>
+          <div class="s-ctas">
+            <a class="btn btn-primary magnetic" href="https://www.google.com/maps/dir/?api=1&amp;destination=33.7280,73.0760" target="_blank" rel="noopener">Get directions</a>
+            <a class="btn btn-line" href="#inquire">Book a studio visit</a>
+          </div>
+        </div>
+        <div class="mapbox" id="mapbox">
+          <div class="map" id="map" data-lat="33.7280" data-lng="73.0760" data-zoom="16" data-tiles="light_all" role="region" aria-label="Map showing Layer &amp; Lace Cake Studio, Studio 3, F-6 Supermarket, Islamabad"></div>
+          <div class="map-fallback">
+            <span class="mf-k">Find the studio</span>
+            <span class="mf-a">Studio 3, First Floor<br><em>F-6 Supermarket</em>, Islamabad</span>
+            <span class="mf-c">33.7280&deg; N, 73.0760&deg; E<br>Tue&ndash;Fri 11:00&ndash;19:00 &middot; Sat 10:00&ndash;17:00 &middot; by appointment</span>
+            <a class="btn btn-primary" href="https://www.google.com/maps/dir/?api=1&amp;destination=33.7280,73.0760" target="_blank" rel="noopener">Open in Google Maps</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer class="foot">
   <div class="inner">
-    <div><span class="script">Layer &amp; Lace</span><p style="margin-top:10px">Custom celebration cakes, Islamabad. Est. 2017.</p></div>
-    <div><b>Studio</b><p>Studio 3, First Floor, F-6 Supermarket, Islamabad<br>Tue&ndash;Fri 11:00&ndash;19:00 &middot; Sat 10:00&ndash;17:00 (tastings)<br>Sun &amp; Mon closed for deliveries</p></div>
-    <div><b>Contact</b><p>+92 300 555 0188 (call or WhatsApp)<br><a href="https://wa.me/923005550188" target="_blank" rel="noopener">Message on WhatsApp</a> &middot; <a href="https://maps.google.com/?q=F-6+Supermarket+Islamabad" target="_blank" rel="noopener">Directions</a></p></div>
+    <p class="foot-mark" aria-hidden="true">Layer <em>&amp;</em> Lace</p>
+    <p class="foot-script" aria-hidden="true">cake studio</p>
+    <div class="foot-cols">
+      <div><h4>Studio</h4><p>Studio 3, First Floor<br>F-6 Supermarket, Islamabad<br>Est. 2017</p></div>
+      <div><h4>Hours</h4><p>Tue&ndash;Fri 11:00&ndash;19:00<br>Sat 10:00&ndash;17:00 (tastings)<br>Sun &amp; Mon closed for deliveries</p></div>
+      <div><h4>Contact</h4><ul><li>+92 300 555 0188</li><li><a href="https://wa.me/923005550188" target="_blank" rel="noopener">Message on WhatsApp</a></li><li>Instagram &middot; Pinterest</li></ul></div>
+      <div>
+        <h4>Seasonal flavour notes</h4>
+        <p>Four short emails a year, when new sponges arrive.</p>
+        <form class="notes-form" id="notes-form" novalidate>
+          <label class="vh" for="notes-email">Email address</label>
+          <input id="notes-email" type="email" autocomplete="email" placeholder="you@example.com">
+          <button class="btn" type="submit">Join</button>
+        </form>
+        <div class="notes-ok" id="notes-ok" aria-live="polite"></div>
+      </div>
+    </div>
+    <div class="legal"><span>Concept mockup &mdash; fictional business. &copy; 2026 Layer &amp; Lace Cake Studio, Islamabad.</span><span>Prices in PKR.</span></div>
   </div>
 </footer>
 
@@ -571,9 +705,19 @@ legend{padding:0;margin-bottom:12px;font:800 12px/1 var(--body);letter-spacing:.
   <a href="tel:+923005550188" aria-label="Call"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-3 2a11 11 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg>Call</a>
 </nav>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
+/* ---------- Media manifest: set a path and the photo/video replaces the illustration ---------- */
+const MEDIA = {
+  hero:   { mp4: null, poster: null, alt: 'A three-tier blush and pistachio wedding cake rotating on a turntable' },
+  photos: { tasting: null, piping: null },     // e.g. '../assets/bakery-layer-lace/tasting.webp'
+  alts:   { tasting: 'A tasting box of six cake slices', piping: 'Blush buttercream being piped into ruffles' }
+};
+
 /* ---------- Data (mirrors future Supabase tables: categories, variants, deals) ---------- */
 const TIERS = [
   {id:'t1', n:1, label:'One tier', serves:'12–15', kg:1.5, lead:5},
@@ -591,15 +735,15 @@ const FLAVOURS = [
   {id:'mango', label:'Mango malai', perKg:500, sponge:'#F7D27A', fill:'#F2A33A', season:['2026-05-01','2026-08-31']}
 ];
 const FINISHES = [
-  {id:'butter', label:'Buttercream', perKg:4200, note:'Smooth, piped beads'},
+  {id:'butter', label:'Buttercream', perKg:4200, note:'Smooth, piped rope border'},
   {id:'naked', label:'Semi-naked', perKg:3800, note:'Sponge shows through'},
   {id:'fondant', label:'Fondant', perKg:5600, note:'Crisp edges, +2 days'}
 ];
 const PALETTES = [
-  {id:'blush', label:'Blush & gold', tiers:['#F4C9C4','#FBE3DF'], accent:'#C8A15A', gold:true},
-  {id:'pista', label:'Pistachio & ivory', tiers:['#BFD8B8','#FFF6E5'], accent:'#8FB386', gold:false},
-  {id:'choc', label:'Chocolate & gold', tiers:['#5A3A2E','#7A5244'], accent:'#C8A15A', gold:true},
-  {id:'white', label:'All white & pearl', tiers:['#FFFDF8','#F7F1E6'], accent:'#E6DCCB', gold:false}
+  {id:'blush', label:'Blush & gold', tiers:['#F2C4C0','#F8E3E0'], accent:'#C6A15B', gold:true},
+  {id:'pista', label:'Pistachio & ivory', tiers:['#B9D3B0','#FFFDF9'], accent:'#8FB386', gold:false},
+  {id:'choc', label:'Chocolate & gold', tiers:['#5A3A2E','#7A5244'], accent:'#C6A15B', gold:true},
+  {id:'white', label:'All white', tiers:['#FFFDF8','#F7F1E6'], accent:'#E6DCCB', gold:false}
 ];
 const TOPPERS = [
   {id:'none', label:'None', price:0},
@@ -609,12 +753,12 @@ const TOPPERS = [
   {id:'sugar', label:'Sugar flowers', price:6000, note:'+2 days'}
 ];
 const OCCASIONS = [
-  {name:'Wedding', blurb:'Three to five tiers, sugar flowers, stacked at the venue.', from:38000, tiers:'3–5', lead:21, card:'#FBE6E2', cfg:{tiers:4, palette:'white', finish:'fondant', flavour:'vanilla', topper:'sugar'}},
-  {name:'Nikkah', blurb:'Soft palettes, gold leaf and a script topper.', from:22000, tiers:'2–3', lead:14, card:'#EAF2E6', cfg:{tiers:3, palette:'pista', finish:'butter', flavour:'pistachio', topper:'script'}},
-  {name:'Mehndi', blurb:'Marigold and pistachio, fun to cut, easy to share.', from:18000, tiers:'2–3', lead:10, card:'#FFEFD0', cfg:{tiers:2, palette:'pista', finish:'naked', flavour:'lotus', topper:'fresh'}},
-  {name:'Birthday', blurb:'One or two tiers with a name, an age or a character.', from:7500, tiers:'1–2', lead:5, card:'#FBE6E2', cfg:{tiers:2, palette:'blush', finish:'butter', flavour:'choc', topper:'acrylic'}},
-  {name:'Baby shower & aqiqah', blurb:'Pastels, small tiers and matching cupcakes.', from:9000, tiers:'1–2', lead:5, card:'#EAF2E6', cfg:{tiers:1, palette:'white', finish:'butter', flavour:'vanilla', topper:'script'}},
-  {name:'Corporate', blurb:'Logo cakes and cupcake towers for launches and Eid gifting.', from:15000, tiers:'1–3', lead:7, card:'#FFF1E9', cfg:{tiers:2, palette:'choc', finish:'fondant', flavour:'choc', topper:'acrylic'}}
+  {name:'Wedding', blurb:'Three to five tiers, sugar flowers, stacked at the venue.', from:38000, tiers:'3–5', lead:21, card:'#F8E3E0', cfg:{tiers:4, palette:'white', finish:'fondant', flavour:'vanilla', topper:'sugar'}},
+  {name:'Nikkah', blurb:'Soft palettes, gold leaf and a script topper.', from:22000, tiers:'2–3', lead:14, card:'#E8F0E4', cfg:{tiers:3, palette:'pista', finish:'butter', flavour:'pistachio', topper:'script'}},
+  {name:'Mehndi', blurb:'Marigold and pistachio, fun to cut, easy to share.', from:18000, tiers:'2–3', lead:10, card:'#FBEBD0', cfg:{tiers:2, palette:'pista', finish:'naked', flavour:'lotus', topper:'fresh'}},
+  {name:'Birthday', blurb:'One or two tiers with a name, an age or a character.', from:7500, tiers:'1–2', lead:5, card:'#F8E3E0', cfg:{tiers:2, palette:'blush', finish:'butter', flavour:'choc', topper:'acrylic'}},
+  {name:'Baby shower & aqiqah', blurb:'Pastels, small tiers and matching cupcakes.', from:9000, tiers:'1–2', lead:5, card:'#E8F0E4', cfg:{tiers:1, palette:'white', finish:'butter', flavour:'vanilla', topper:'script'}},
+  {name:'Corporate', blurb:'Logo cakes and cupcake towers for launches and Eid gifting.', from:15000, tiers:'1–3', lead:7, card:'#F3ECE4', cfg:{tiers:2, palette:'choc', finish:'fondant', flavour:'choc', topper:'acrylic'}}
 ];
 const SEASONS = [
   {name:'Kinnow & cardamom', note:'Sargodha kinnow curd, cardamom sponge', color:'#F6A93B', starts_at:'2026-11-01', ends_at:'2027-02-28'},
@@ -624,24 +768,29 @@ const SEASONS = [
 ];
 const TASTING = ['Vanilla bean & strawberry','Pistachio & rose','Chocolate fudge','Lotus Biscoff','Red velvet','Sponge of the season'];
 const SLOT_LEFT = [2, 6, 11];
+const HOURS = {0:[],1:[],2:[['11:00','19:00']],3:[['11:00','19:00']],4:[['11:00','19:00']],5:[['11:00','19:00']],6:[['10:00','17:00']]};
 
 /* ---------- Helpers ---------- */
 const rs = n => 'Rs ' + Math.round(n).toLocaleString('en-PK');
+const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const FINE = matchMedia('(pointer: fine)').matches;
 function today(){ try { return new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Karachi'})); } catch(e){ return new Date(); } }
 const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 const DOWS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const DAYS_LONG = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 const fmt = d => `${DOWS[d.getDay()]} ${d.getDate()} ${MONTHS[d.getMonth()].slice(0,3)}`;
 const iso = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 const addDays = (d, n) => { const x = new Date(d); x.setDate(x.getDate()+n); x.setHours(0,0,0,0); return x; };
 const inSeason = f => { if (!f.season) return true; const t = iso(today()); return t >= f.season[0] && t <= f.season[1]; };
+const minutesOf = t => { const [h,m] = t.split(':').map(Number); return h*60+m; };
 
-/* ---------- Cake drawing (shared by builder, occasions, lookbook) ---------- */
+/* ---------- Cake drawing (no dots: petals are long ellipses, borders are piped rope) ---------- */
 function flower(cx, cy, r, c, centre){
   let s = '';
-  for (let i = 0; i < 5; i++){ const a = (i/5)*Math.PI*2 - Math.PI/2; s += `<circle cx="${(cx+Math.cos(a)*r*.55).toFixed(1)}" cy="${(cy+Math.sin(a)*r*.55).toFixed(1)}" r="${(r*.52).toFixed(1)}" fill="${c}"/>`; }
-  return s + `<circle cx="${cx}" cy="${cy}" r="${(r*.32).toFixed(1)}" fill="${centre || '#E9C77E'}"/>`;
+  for (let i = 0; i < 5; i++) s += `<ellipse cx="${cx}" cy="${(cy - r*.48).toFixed(1)}" rx="${(r*.34).toFixed(1)}" ry="${(r*.56).toFixed(1)}" fill="${c}" stroke="rgba(59,36,32,.14)" stroke-width=".8" transform="rotate(${i*72} ${cx} ${cy})"/>`;
+  return s + `<ellipse cx="${cx}" cy="${cy}" rx="${(r*.2).toFixed(1)}" ry="${(r*.16).toFixed(1)}" fill="${centre || '#E3C27E'}"/>`;
 }
-function leaf(x, y, rot){ return `<ellipse cx="${x}" cy="${y}" rx="11" ry="5" fill="#8FB386" transform="rotate(${rot} ${x} ${y})"/>`; }
+function leaf(x, y, rot){ return `<path d="M${x-12} ${y}Q${x} ${y-8} ${x+12} ${y}Q${x} ${y+8} ${x-12} ${y}Z" fill="#8FB386" transform="rotate(${rot} ${x} ${y})"/>`; }
 function cakeSVG(cfg, opt = {}){
   const n = cfg.tiers, pal = PALETTES.find(p => p.id === cfg.palette), fin = cfg.finish;
   const fl = FLAVOURS.find(f => f.id === cfg.flavour) || FLAVOURS[0];
@@ -653,18 +802,16 @@ function cakeSVG(cfg, opt = {}){
     const w = widths[i], h = heights[i], x = (W - w)/2, top = y - h;
     const c = pal.tiers[i % 2];
     if (fin === 'naked'){
-      body += `<rect x="${x}" y="${top}" width="${w}" height="${h}" rx="5" fill="${fl.sponge}"/>`;
+      body += `<rect x="${x}" y="${top}" width="${w}" height="${h}" rx="3" fill="${fl.sponge}"/>`;
       for (let k = 1; k < 4; k++) body += `<rect x="${x}" y="${top + k*h/4 - 2.5}" width="${w}" height="5" fill="${fl.fill}" opacity=".85"/>`;
-      body += `<rect x="${x}" y="${top}" width="${w}" height="${h}" rx="5" fill="${c}" opacity=".55"/>`;
+      body += `<rect x="${x}" y="${top}" width="${w}" height="${h}" rx="3" fill="${c}" opacity=".55"/>`;
       body += `<path d="M${x} ${top+6} h${w}" stroke="${c}" stroke-width="12"/>`;
     } else {
-      body += `<rect x="${x}" y="${top}" width="${w}" height="${h}" rx="${fin === 'fondant' ? 3 : 8}" fill="${c}"/>`;
-      body += `<rect x="${x}" y="${top}" width="${w}" height="${h}" rx="${fin === 'fondant' ? 3 : 8}" fill="url(#side-${opt.id})"/>`;
-      if (fin === 'fondant'){
-        body += `<rect x="${x}" y="${y-12}" width="${w}" height="9" fill="${pal.accent}"/>`;
-      } else {
-        for (let bx = x + 7; bx < x + w - 3; bx += 11) body += `<circle cx="${bx}" cy="${y-4}" r="4" fill="#FFF6E5" stroke="${pal.id === 'white' ? '#E6DCCB' : 'none'}"/>`;
-      }
+      body += `<rect x="${x}" y="${top}" width="${w}" height="${h}" rx="${fin === 'fondant' ? 2 : 5}" fill="${c}"/>`;
+      body += `<rect x="${x}" y="${top}" width="${w}" height="${h}" rx="${fin === 'fondant' ? 2 : 5}" fill="url(#side-${opt.id})"/>`;
+      body += fin === 'fondant'
+        ? `<rect x="${x}" y="${y-12}" width="${w}" height="9" fill="${pal.accent}"/>`
+        : `<rect x="${x}" y="${y-10}" width="${w}" height="8" fill="url(#rope-${opt.id})"/>`;
     }
     if (pal.gold && i === n - 1) body += `<path d="M${x+w*.2} ${top+h*.35} l12 -4 l5 9 l-11 5Z M${x+w*.62} ${top+h*.55} l13 -2 l2 10 l-12 3Z" fill="#D4B06A"/>`;
     tops.push({x, w, top});
@@ -672,41 +819,46 @@ function cakeSVG(cfg, opt = {}){
   }
   const t = tops[tops.length-1];
   let topper = '';
-  if (cfg.topper === 'script') topper = `<path d="M${W/2-24} ${t.top} v-28 M${W/2+24} ${t.top} v-28" stroke="#B48C45" stroke-width="2"/><text x="${W/2}" y="${t.top-24}" text-anchor="middle" font-family="Pinyon Script, cursive" font-size="34" fill="#B48C45">Mubarak</text>`;
+  if (cfg.topper === 'script') topper = `<path d="M${W/2-24} ${t.top} v-28 M${W/2+24} ${t.top} v-28" stroke="#B48C45" stroke-width="2"/><text x="${W/2}" y="${t.top-24}" text-anchor="middle" font-family="Great Vibes, cursive" font-size="34" fill="#B48C45">Mubarak</text>`;
   if (cfg.topper === 'acrylic') topper = `<path d="M${W/2-20} ${t.top} v-22 M${W/2+20} ${t.top} v-22" stroke="#3B2420" stroke-width="2"/><text x="${W/2}" y="${t.top-22}" text-anchor="middle" font-family="Bodoni Moda, serif" font-style="italic" font-size="26" fill="#3B2420">Ayesha</text>`;
   if (cfg.topper === 'fresh' || cfg.topper === 'sugar'){
-    const cs = cfg.topper === 'fresh' ? ['#E46B7A','#FFFFFF','#F2A33A'] : ['#F4C9C4','#FFFFFF','#E8A9A2'];
+    const cs = cfg.topper === 'fresh' ? ['#E46B7A','#FFFFFF','#F2A33A'] : ['#F2C4C0','#FFFFFF','#E8A9A2'];
     const fx = t.x + t.w*.28, fy = t.top;
     topper = leaf(fx-16, fy-2, -20) + leaf(fx+30, fy+4, 25) + flower(fx, fy-6, 16, cs[0]) + flower(fx+20, fy+2, 11, cs[1]) + flower(fx-14, fy+10, 9, cs[2]);
-    if (n > 1) topper += flower(tops[0].x + tops[0].w*.82, tops[1].top + 10, 12, cs[0]) + leaf(tops[0].x + tops[0].w*.82 - 14, tops[1].top + 16, -30);
+    if (n > 1) topper += leaf(tops[0].x + tops[0].w*.82 - 14, tops[1].top + 16, -30) + flower(tops[0].x + tops[0].w*.82, tops[1].top + 10, 12, cs[0]);
   }
   const vbTop = Math.min(t.top - 60, 40);
   return `<svg viewBox="0 ${vbTop} ${W} ${352 - vbTop}" role="img" aria-label="${opt.label || 'Cake preview'}">
-    <defs><linearGradient id="side-${opt.id}" x1="0" x2="1"><stop offset="0" stop-color="#000" stop-opacity=".1"/><stop offset=".25" stop-color="#000" stop-opacity="0"/><stop offset=".8" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".12"/></linearGradient></defs>
-    <ellipse cx="${W/2}" cy="${base+6}" rx="${widths[0]/2+28}" ry="9" fill="#C8A15A"/><ellipse cx="${W/2}" cy="${base+3}" rx="${widths[0]/2+24}" ry="6" fill="#F3E3BC"/>
-    <path d="M${W/2-14} ${base+12} q-2 14 -16 24 h60 q-14 -10 -16 -24Z" fill="#C8A15A"/>
+    <defs><linearGradient id="side-${opt.id}" x1="0" x2="1"><stop offset="0" stop-color="#000" stop-opacity=".1"/><stop offset=".25" stop-color="#000" stop-opacity="0"/><stop offset=".8" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".12"/></linearGradient>
+    <pattern id="rope-${opt.id}" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(40)"><rect width="6" height="6" fill="#FFFDF9"/><rect width="2.6" height="6" fill="#EADBCD"/></pattern></defs>
+    <rect x="${W/2 - widths[0]/2 - 26}" y="${base}" width="${widths[0] + 52}" height="8" fill="#C6A15B"/><rect x="${W/2 - widths[0]/2 - 22}" y="${base - 2}" width="${widths[0] + 44}" height="4" fill="#F3E3BC"/>
+    <path d="M${W/2-14} ${base+8} q-2 14 -16 26 h60 q-14 -12 -16 -26Z" fill="#C6A15B"/>
     ${body}${topper}</svg>`;
 }
 
-/* ---------- Hero cake details (beads + flowers) ---------- */
-(function(){
-  const bead = (g, x0, x1, y, r) => { let s=''; for (let x = x0; x <= x1; x += r*2.4) s += `<circle cx="${x.toFixed(1)}" cy="${y}" r="${r}"/>`; document.getElementById(g).innerHTML = s; };
-  bead('beads1', 88, 434, 568, 5.5); bead('beads2', 138, 384, 432, 5); bead('beads3', 190, 332, 314, 4.5);
-  document.getElementById('flowers').innerHTML =
-    leaf(156, 330, -30) + leaf(214, 300, 20) + leaf(128, 446, -40) + leaf(360, 436, 30) + leaf(176, 226, -10) +
-    `<g class="fl">${flower(176, 318, 24, '#F4C9C4', '#E9C77E')}</g>` +
-    `<g class="fl">${flower(206, 302, 15, '#FFFFFF', '#E9C77E')}</g>` +
-    `<g class="fl">${flower(150, 344, 16, '#E8A9A2', '#FFF6E5')}</g>` +
-    `<g class="fl">${flower(134, 434, 18, '#FFFFFF', '#E9C77E')}</g>` +
-    `<g class="fl">${flower(380, 432, 16, '#F4C9C4', '#E9C77E')}</g>` +
-    `<g class="fl">${flower(196, 216, 13, '#E8A9A2', '#FFF6E5')}</g>`;
-})();
+/* ---------- Hero flowers ---------- */
+document.getElementById('flowers').innerHTML =
+  `<g class="lf">${leaf(156, 330, -30)}</g><g class="lf">${leaf(214, 300, 20)}</g><g class="lf">${leaf(128, 446, -40)}</g><g class="lf">${leaf(360, 436, 30)}</g><g class="lf">${leaf(176, 226, -10)}</g>` +
+  `<g class="fl">${flower(176, 318, 24, '#F2C4C0', '#E3C27E')}</g>` +
+  `<g class="fl">${flower(206, 302, 15, '#FFFFFF', '#E3C27E')}</g>` +
+  `<g class="fl">${flower(150, 344, 16, '#E8A9A2', '#FFFDF9')}</g>` +
+  `<g class="fl">${flower(134, 434, 18, '#FFFFFF', '#E3C27E')}</g>` +
+  `<g class="fl">${flower(380, 432, 16, '#F2C4C0', '#E3C27E')}</g>` +
+  `<g class="fl">${flower(196, 216, 13, '#E8A9A2', '#FFFDF9')}</g>`;
+
+/* ruffles for the piping slot */
+document.getElementById('ruffles').innerHTML = Array.from({length:7}, (_, i) => {
+  const y = 90 + i * 48;
+  let d = `M-20 ${y}`;
+  for (let x = -20; x < 420; x += 40) d += ` q20 ${i % 2 ? 26 : 20} 40 0`;
+  return `<path d="${d}" fill="none" stroke="${i % 2 ? '#E8A9A2' : '#F2C4C0'}" stroke-width="22" stroke-linecap="round"/><path d="${d}" fill="none" stroke="#FFFDF9" stroke-width="3" opacity=".55" transform="translate(0 -6)"/>`;
+}).join('');
 
 /* ---------- Occasions ---------- */
 document.getElementById('occ-row').innerHTML = OCCASIONS.map((o, i) => `
-  <article class="occ" style="--card:${o.card}">
-    ${cakeSVG(o.cfg, {id:'occ'+i, label:o.name + ' cake'})}
-    <div style="display:grid;gap:8px;align-content:start">
+  <article class="occ">
+    <div class="occ-art" style="--card:${o.card}">${cakeSVG(o.cfg, {id:'occ'+i, label:o.name + ' cake'})}</div>
+    <div class="occ-body">
       <h3>${o.name}</h3>
       <p>${o.blurb}</p>
       <dl><dt>From</dt><dd>${rs(o.from)}</dd><dt>Tiers</dt><dd>${o.tiers}</dd><dt>Book</dt><dd>${o.lead >= 14 ? o.lead/7 + ' weeks' : o.lead + ' days'} ahead</dd></dl>
@@ -720,8 +872,7 @@ function opt(group, id, checked, label, small, disabled){
 }
 document.getElementById('o-tiers').innerHTML = TIERS.map(t => opt('tiers', t.n, t.n === state.tiers, t.label, `Serves ${t.serves} &middot; ${t.kg} kg`)).join('');
 document.getElementById('o-flavour').innerHTML = FLAVOURS.map(f => {
-  const ok = inSeason(f);
-  const t = iso(today());
+  const ok = inSeason(f), t = iso(today());
   const note = !f.season ? (f.perKg ? `+${rs(f.perKg)}/kg` : 'House favourite')
     : ok ? 'Seasonal, until ' + MONTHS[Number(f.season[1].slice(5,7))-1].slice(0,3)
     : t < f.season[0] ? 'From ' + Number(f.season[0].slice(8,10)) + ' ' + MONTHS[Number(f.season[0].slice(5,7))-1].slice(0,3)
@@ -729,7 +880,7 @@ document.getElementById('o-flavour').innerHTML = FLAVOURS.map(f => {
   return opt('flavour', f.id, f.id === state.flavour, f.label, note, !ok);
 }).join('');
 document.getElementById('o-finish').innerHTML = FINISHES.map(f => opt('finish', f.id, f.id === state.finish, f.label, `${rs(f.perKg)}/kg &middot; ${f.note}`)).join('');
-document.getElementById('o-palette').innerHTML = PALETTES.map(p => `<span class="sw"><input type="radio" name="palette" id="palette-${p.id}" value="${p.id}" ${p.id === state.palette ? 'checked' : ''}><label for="palette-${p.id}"><span class="dots"><i style="background:${p.tiers[0]}"></i><i style="background:${p.tiers[1]}"></i><i style="background:${p.accent}"></i></span>${p.label}</label></span>`).join('');
+document.getElementById('o-palette').innerHTML = PALETTES.map(p => `<span class="sw"><input type="radio" name="palette" id="palette-${p.id}" value="${p.id}" ${p.id === state.palette ? 'checked' : ''}><label for="palette-${p.id}"><span class="chips" aria-hidden="true"><i style="background:${p.tiers[0]}"></i><i style="background:${p.tiers[1]}"></i><i style="background:${p.accent}"></i></span>${p.label}</label></span>`).join('');
 document.getElementById('o-topper').innerHTML = TOPPERS.map(t => opt('topper', t.id, t.id === state.topper, t.label, t.price ? `+${rs(t.price)}${t.note ? ' &middot; ' + t.note : ''}` : 'Clean top')).join('');
 
 function quote(cfg, occasionLead){
@@ -754,8 +905,8 @@ function renderBuilder(){
   document.getElementById('s-deposit').textContent = rs(q.price * .4);
   document.getElementById('s-date').textContent = fmt(addDays(today(), q.lead));
   document.getElementById('s-note').textContent = `${q.kg} kg. Needs ${q.lead} days' notice (weddings 21). Delivery and venue setup in Islamabad and Rawalpindi from Rs 2,500.`;
-  if (window.gsap && !matchMedia('(prefers-reduced-motion: reduce)').matches){
-    gsap.from('#preview svg > rect, #preview svg > circle, #preview svg > path, #preview svg > text, #preview svg > ellipse:not(:first-of-type)', {y:-14, opacity:0, duration:.5, stagger:.006, ease:'expo.out'});
+  if (window.gsap && !REDUCED){
+    gsap.from('#preview svg > rect, #preview svg > path, #preview svg > text, #preview svg > ellipse', {y:-14, opacity:0, duration:.5, stagger:.006, ease:'expo.out'});
   }
 }
 document.getElementById('builder').addEventListener('change', e => {
@@ -767,14 +918,14 @@ renderBuilder();
 
 /* ---------- Lookbook ---------- */
 const LOOKS = [
-  {cfg:{tiers:3, palette:'pista', finish:'butter', flavour:'pistachio', topper:'script'}, t:'Nikkah, three tiers', w:'F-7 lawn, October', tile:'#EAF2E6'},
-  {cfg:{tiers:1, palette:'blush', finish:'naked', flavour:'vanilla', topper:'fresh'}, t:'Semi-naked, roses', w:'Engagement, E-11', tile:'#FBE6E2'},
-  {cfg:{tiers:4, palette:'white', finish:'fondant', flavour:'vanilla', topper:'sugar'}, t:'Wedding, four tiers', w:'Marquee, Bani Gala', tile:'#F7F1E6'},
-  {cfg:{tiers:2, palette:'choc', finish:'fondant', flavour:'choc', topper:'acrylic'}, t:'Corporate launch', w:'Blue Area, September', tile:'#FFF1E9'},
-  {cfg:{tiers:2, palette:'blush', finish:'butter', flavour:'velvet', topper:'acrylic'}, t:'First birthday', w:'DHA II, August', tile:'#FBE6E2'},
-  {cfg:{tiers:1, palette:'pista', finish:'butter', flavour:'lotus', topper:'script'}, t:'Aqiqah', w:'G-13, July', tile:'#EAF2E6'},
-  {cfg:{tiers:3, palette:'blush', finish:'butter', flavour:'vanilla', topper:'sugar'}, t:'Walima, blush & gold', w:'Rawalpindi Club, June', tile:'#FFF6E5'},
-  {cfg:{tiers:2, palette:'pista', finish:'naked', flavour:'kinnow', topper:'fresh'}, t:'Mehndi, marigold', w:'Farmhouse, Chak Shahzad', tile:'#FFEFD0'}
+  {cfg:{tiers:3, palette:'pista', finish:'butter', flavour:'pistachio', topper:'script'}, t:'Nikkah, three tiers', w:'F-7 lawn, October', tile:'#E8F0E4'},
+  {cfg:{tiers:1, palette:'blush', finish:'naked', flavour:'vanilla', topper:'fresh'}, t:'Semi-naked, roses', w:'Engagement, E-11', tile:'#F8E3E0'},
+  {cfg:{tiers:4, palette:'white', finish:'fondant', flavour:'vanilla', topper:'sugar'}, t:'Wedding, four tiers', w:'Marquee, Bani Gala', tile:'#F3ECE4'},
+  {cfg:{tiers:2, palette:'choc', finish:'fondant', flavour:'choc', topper:'acrylic'}, t:'Corporate launch', w:'Blue Area, September', tile:'#F6EFE8'},
+  {cfg:{tiers:2, palette:'blush', finish:'butter', flavour:'velvet', topper:'acrylic'}, t:'First birthday', w:'DHA II, August', tile:'#F8E3E0'},
+  {cfg:{tiers:1, palette:'pista', finish:'butter', flavour:'lotus', topper:'script'}, t:'Aqiqah', w:'G-13, July', tile:'#E8F0E4'},
+  {cfg:{tiers:3, palette:'blush', finish:'butter', flavour:'vanilla', topper:'sugar'}, t:'Walima, blush & gold', w:'Rawalpindi Club, June', tile:'#FFFDF9'},
+  {cfg:{tiers:2, palette:'pista', finish:'naked', flavour:'kinnow', topper:'fresh'}, t:'Mehndi, marigold', w:'Farmhouse, Chak Shahzad', tile:'#FBEBD0'}
 ];
 document.getElementById('masonry').innerHTML = LOOKS.map((l, i) => `<figure class="look" style="--tile:${l.tile}">${cakeSVG(l.cfg, {id:'lk'+i, label:l.t})}<figcaption><b>${l.t}</b><span>${l.w}</span></figcaption></figure>`).join('');
 
@@ -784,10 +935,11 @@ document.getElementById('masonry').innerHTML = LOOKS.map((l, i) => `<figure clas
   const fills = ['#E46B7A','#F2B8C0','#2E1A16','#A8723A','#FFF6E5','#F59E3B'];
   let s = '';
   cols.forEach((c, i) => {
-    const x = 54 + i*66;
-    s += `<g><rect x="${x}" y="80" width="52" height="92" rx="6" fill="${c}"/>`;
-    for (let k = 1; k < 4; k++) s += `<rect x="${x}" y="${80 + k*23 - 2}" width="52" height="4" fill="${fills[i]}"/>`;
-    s += `<rect x="${x}" y="74" width="52" height="12" rx="6" fill="#FFF6E5"/><circle cx="${x+26}" cy="72" r="6" fill="#E46B7A"/></g>`;
+    const col = i % 3, row = Math.floor(i / 3);
+    const x = 60 + col * 130 + (col > 0 ? 18 : 0), y = 62 + row * 86;
+    s += `<g><rect x="${x}" y="${y}" width="96" height="62" fill="${c}"/>`;
+    for (let k = 1; k < 3; k++) s += `<rect x="${x}" y="${y + k*20 - 2}" width="96" height="4" fill="${fills[i]}"/>`;
+    s += `<rect x="${x}" y="${y}" width="96" height="9" fill="#FFFDF9"/><path d="M${x+42} ${y+2} l8 -4 l4 6 l-8 4Z" fill="#D4B06A"/></g>`;
   });
   document.getElementById('slices').innerHTML = s;
   document.getElementById('tbox-list').innerHTML = TASTING.map(t => `<li>${t}</li>`).join('');
@@ -800,9 +952,8 @@ document.getElementById('masonry').innerHTML = LOOKS.map((l, i) => `<figure clas
   }).join('');
   const t = iso(now);
   document.getElementById('seasons').innerHTML = SEASONS.filter(s => s.ends_at >= t).map(s => {
-    const live = s.starts_at <= t;
-    const d = new Date(s.starts_at + 'T00:00:00');
-    return `<div class="season"><i style="background:${s.color}"></i><div><b>${s.name}</b><small>${s.note}</small></div><em class="${live ? '' : 'soon'}">${live ? 'Available now' : 'From ' + d.getDate() + ' ' + MONTHS[d.getMonth()].slice(0,3)}</em></div>`;
+    const live = s.starts_at <= t, d = new Date(s.starts_at + 'T00:00:00');
+    return `<div class="season"><i style="--c:${s.color}"></i><div><b>${s.name}</b><small>${s.note}</small></div><em class="${live ? '' : 'soon'}">${live ? 'Available now' : 'From ' + d.getDate() + ' ' + MONTHS[d.getMonth()].slice(0,3)}</em></div>`;
   }).join('');
 })();
 
@@ -825,32 +976,162 @@ function updateDateHint(){
 occSel.addEventListener('change', updateDateHint);
 document.getElementById('builder').addEventListener('change', updateDateHint);
 updateDateHint();
-document.getElementById('send-design').addEventListener('click', () => {
-  document.getElementById('i-design').value = summary();
-});
+document.getElementById('send-design').addEventListener('click', () => { document.getElementById('i-design').value = summary(); });
 document.querySelectorAll('[data-occasion]').forEach(a => a.addEventListener('click', () => { occSel.value = a.dataset.occasion; updateDateHint(); }));
 document.getElementById('inq-form').addEventListener('submit', e => {
   e.preventDefault();
   const err = document.getElementById('i-err'), ok = document.getElementById('i-ok-msg');
-  const name = document.getElementById('i-name').value.trim();
-  const phone = document.getElementById('i-phone').value.replace(/\D/g, '');
+  const nameEl = document.getElementById('i-name'), phoneEl = document.getElementById('i-phone');
+  const name = nameEl.value.trim(), phone = phoneEl.value.replace(/\D/g, '');
   const m = minDate();
+  [nameEl, phoneEl, dateIn].forEach(el => el.removeAttribute('aria-invalid'));
   ok.classList.remove('show');
-  if (!name){ err.textContent = 'Add your name so we know who to reply to.'; document.getElementById('i-name').focus(); return; }
-  if (phone.length < 10){ err.textContent = 'Add a WhatsApp number with at least 10 digits.'; document.getElementById('i-phone').focus(); return; }
-  if (!dateIn.value){ err.textContent = 'Choose your event date.'; dateIn.focus(); return; }
-  if (dateIn.value < iso(m.d)){ err.textContent = `For a ${occSel.value.toLowerCase()} cake we need ${m.lead} days. The earliest date is ${fmt(m.d)}.`; dateIn.focus(); return; }
-  if (!document.getElementById('i-ok').checked){ err.textContent = 'Tick the deposit note to continue.'; document.getElementById('i-ok').focus(); return; }
+  const fail = (el, msg) => { err.textContent = msg; if (el){ el.setAttribute('aria-invalid','true'); el.focus(); } };
+  if (!name) return fail(nameEl, 'Add your name so we know who to reply to.');
+  if (phone.length < 10) return fail(phoneEl, 'Add a WhatsApp number with at least 10 digits.');
+  if (!dateIn.value) return fail(dateIn, 'Choose your event date.');
+  if (dateIn.value < iso(m.d)) return fail(dateIn, `For a ${occSel.value.toLowerCase()} cake we need ${m.lead} days. The earliest date is ${fmt(m.d)}.`);
+  if (!document.getElementById('i-ok').checked) return fail(document.getElementById('i-ok'), 'Tick the deposit note to continue.');
   err.textContent = '';
   const d = new Date(dateIn.value + 'T00:00:00');
-  ok.innerHTML = `<b>Thank you, ${name}.</b>Your ${occSel.value.toLowerCase()} inquiry for ${fmt(d)} is drafted as LL-${Math.floor(1000 + Math.random()*9000)}. This is a mockup, so nothing was sent.`;
+  ok.innerHTML = `<b>Thank you, ${name.replace(/</g,'&lt;')}.</b>Your ${occSel.value.toLowerCase()} inquiry for ${fmt(d)} is drafted as LL-${Math.floor(1000 + Math.random()*9000)}. This is a mockup, so nothing was sent.`;
   ok.classList.add('show');
 });
 
+/* ---------- Studio hours: today + open now ---------- */
+(function(){
+  const n = today(), d = n.getDay(), m = n.getHours()*60 + n.getMinutes();
+  const row = document.querySelector(`#hours tr[data-d="${d}"]`); if (row) row.classList.add('today');
+  const spans = HOURS[d].map(([a,b]) => [minutesOf(a), minutesOf(b)]);
+  const cur = spans.find(([a,b]) => m >= a && m < b);
+  const el = document.getElementById('open-status');
+  const hm = mm => `${Math.floor(mm/60)}:${String(mm%60).padStart(2,'0')}`;
+  let text;
+  if (cur) text = `Studio open · until ${hm(cur[1])}`;
+  else {
+    const later = spans.find(([a]) => m < a);
+    if (later) text = `Closed now · opens ${hm(later[0])} today`;
+    else for (let i = 1; i <= 7; i++){ const dd = (d+i)%7; if (HOURS[dd].length){ text = `Closed now · opens ${DAYS_LONG[dd]} ${HOURS[dd][0][0]}`; break; } }
+    el.classList.add('closed');
+  }
+  el.querySelector('span').textContent = text;
+})();
+
+document.getElementById('notes-form').addEventListener('submit', e => {
+  e.preventDefault();
+  const v = document.getElementById('notes-email').value.trim();
+  document.getElementById('notes-ok').textContent = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v) ? 'You are on the list. Mockup only: nothing was sent.' : 'Enter an email address like name@example.com.';
+});
+
+/* ---------- Media slots ---------- */
+document.querySelectorAll('[data-media]').forEach(slot => {
+  const key = slot.dataset.media;
+  const src = key === 'hero' ? MEDIA.hero.mp4 : MEDIA.photos[key];
+  if (!src) return;
+  let el;
+  if (key === 'hero'){
+    el = document.createElement('video');
+    el.muted = true; el.loop = true; el.playsInline = true; el.preload = 'metadata';
+    el.setAttribute('muted',''); el.setAttribute('playsinline',''); el.setAttribute('aria-hidden','true');
+    if (!REDUCED) el.autoplay = true;
+    if (MEDIA.hero.poster) el.poster = MEDIA.hero.poster;
+    el.addEventListener('loadeddata', () => slot.classList.add('has-media'), {once:true});
+  } else {
+    el = new Image(); el.alt = MEDIA.alts[key] || ''; el.loading = 'lazy'; el.decoding = 'async';
+    el.addEventListener('load', () => slot.classList.add('has-media'), {once:true});
+  }
+  el.className = 'media-layer';
+  el.addEventListener('error', () => el.remove(), {once:true});
+  el.src = src;
+  slot.appendChild(el);
+});
+
+/* ---------- Real map (Leaflet + CARTO), with a designed fallback card ---------- */
+(function(){
+  const el = document.getElementById('map'), box = document.getElementById('mapbox');
+  function cssReady(){
+    const p = document.createElement('div'); p.className = 'leaflet-container';
+    p.style.cssText = 'position:absolute;left:-9999px;top:0;width:1px;height:1px';
+    document.body.appendChild(p); const ok = getComputedStyle(p).overflow === 'hidden'; p.remove(); return ok;
+  }
+  function init(){
+    if (!window.L || !cssReady()) return false;
+    const lat = +el.dataset.lat, lng = +el.dataset.lng;
+    const map = L.map(el, {center:[lat,lng], zoom:+el.dataset.zoom || 16, scrollWheelZoom:false, dragging:!L.Browser.mobile, tap:false});
+    const layer = L.tileLayer('https://{s}.basemaps.cartocdn.com/' + el.dataset.tiles + '/{z}/{x}/{y}{r}.png', {subdomains:'abcd', maxZoom:20,
+      attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'}).addTo(map);
+    let loaded = false;
+    layer.on('tileload', () => { loaded = true; });
+    layer.once('tileerror', () => { if (!loaded) box.classList.remove('map-ready'); });
+    L.marker([lat,lng], {icon:L.divIcon({className:'brand-pin', html:'<span aria-hidden="true">L&amp;L</span>', iconSize:[46,54], iconAnchor:[23,54]}), title:'Layer & Lace Cake Studio', keyboard:true}).addTo(map);
+    box.classList.add('map-ready');
+    return true;
+  }
+  function attempt(){ if (!init()) window.addEventListener('load', init, {once:true}); }
+  if ('IntersectionObserver' in window){
+    const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)){ io.disconnect(); attempt(); } }, {rootMargin:'500px'});
+    io.observe(box);
+  } else attempt();
+})();
+
+/* ---------- Header: transparent over the hero, solid after, hides on scroll down ---------- */
+(function(){
+  const head = document.getElementById('site-head'), hero = document.getElementById('top');
+  const strip = document.querySelector('.tb-strip');
+  let lastY = scrollY;
+  function onScroll(){
+    const y = scrollY;
+    const stripH = strip && strip.offsetParent !== null ? strip.offsetHeight : 0;
+    head.style.top = Math.max(0, stripH - y) + 'px';
+    const past = hero.getBoundingClientRect().bottom <= head.offsetHeight + 1;
+    head.classList.toggle('solid', past);
+    if (past && y > lastY + 4) head.classList.add('hide');
+    else if (y < lastY - 4 || !past) head.classList.remove('hide');
+    lastY = y;
+  }
+  addEventListener('scroll', onScroll, {passive:true});
+  addEventListener('resize', onScroll);
+  onScroll();
+  head.addEventListener('focusin', () => head.classList.remove('hide'));
+})();
+
+/* ---------- Magnetic buttons ---------- */
+if (FINE && !REDUCED){
+  document.querySelectorAll('.magnetic').forEach(b => {
+    b.addEventListener('pointermove', e => {
+      const r = b.getBoundingClientRect();
+      b.style.transform = `translate(${((e.clientX - r.left)/r.width - .5)*16}px, ${((e.clientY - r.top)/r.height - .5)*12}px)`;
+    });
+    b.addEventListener('pointerleave', () => { b.style.transform = ''; });
+  });
+}
+
 /* ---------- Motion ---------- */
-window.addEventListener('load', () => {
+(function(){
+  let lenis = null;
+  if (window.Lenis && FINE && !REDUCED){
+    lenis = new Lenis({lerp:.1, smoothWheel:true});
+    if (window.gsap && window.ScrollTrigger){
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add(t => lenis.raf(t * 1000));
+      gsap.ticker.lagSmoothing(0);
+    } else {
+      const raf = t => { lenis.raf(t); requestAnimationFrame(raf); }; requestAnimationFrame(raf);
+    }
+  }
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href^="#"]'); if (!a) return;
+    const id = a.getAttribute('href'); if (id.length < 2) return;
+    const target = document.querySelector(id); if (!target) return;
+    e.preventDefault();
+    const off = id === '#top' ? 0 : -document.getElementById('site-head').offsetHeight;
+    if (lenis) lenis.scrollTo(target, {offset:off, duration:1.4});
+    else window.scrollTo({top:target.getBoundingClientRect().top + scrollY + off, behavior:REDUCED ? 'auto' : 'smooth'});
+  });
+
   if (!(window.gsap && window.ScrollTrigger)) return;
   gsap.registerPlugin(ScrollTrigger);
+  if (window.SplitText) gsap.registerPlugin(SplitText);
   const EASE = 'expo.out';
   const sheet = [...document.querySelectorAll('#sheet li')];
   const swag = document.getElementById('swag');
@@ -861,14 +1142,12 @@ window.addEventListener('load', () => {
     const tl = gsap.timeline({defaults:{ease:'power3.out'}});
     tl.fromTo('#t1', {y:260, opacity:0}, {y:0, opacity:1, duration:1.2}, 0)
       .fromTo(swag, {strokeDashoffset:len}, {strokeDashoffset:0, duration:1.2, ease:'none'}, 1.2)
-      .fromTo('#pearls circle', {scale:0, transformOrigin:'50% 50%'}, {scale:1, duration:.4, stagger:.12, ease:'back.out(3)'}, 1.5)
-      .fromTo('#drips path', {scaleY:0, transformOrigin:'50% 0%'}, {scaleY:1, duration:.6, stagger:.08}, 1.9)
+      .fromTo('#drips path', {scaleY:0, transformOrigin:'50% 0%'}, {scaleY:1, duration:.6, stagger:.08}, 1.7)
       .fromTo('#t2', {y:-340, opacity:0}, {y:0, opacity:1, duration:1, ease:'power2.in'}, 2.6)
       .fromTo('#t3', {y:-300, opacity:0}, {y:0, opacity:1, duration:1, ease:'power2.in'}, 3.7)
-      .fromTo('#flowers .fl, #flowers ellipse', {scale:0, transformOrigin:'50% 50%'}, {scale:1, duration:.6, stagger:.1, ease:'back.out(2.2)'}, 4.8)
+      .fromTo('#flowers .fl, #flowers .lf', {scale:0, transformOrigin:'50% 50%'}, {scale:1, duration:.6, stagger:.1, ease:'back.out(2.2)'}, 4.8)
       .fromTo('#topper', {y:-60, opacity:0}, {y:0, opacity:1, duration:.9}, 5.9)
-      .fromTo('#sparkle path', {scale:0, opacity:0, transformOrigin:'50% 50%'}, {scale:1, opacity:1, duration:.5, stagger:.15, ease:'back.out(3)'}, 6.5);
-    // build sheet follows the playhead (both scroll directions)
+      .fromTo('#goldleaf path', {opacity:0, scale:.4, transformOrigin:'50% 50%'}, {opacity:1, scale:1, duration:.5, stagger:.1}, 6.5);
     const marks = [0, 1.2, 2.6, 3.7, 4.8, 5.9];
     let last = -1;
     tl.eventCallback('onUpdate', () => {
@@ -884,32 +1163,51 @@ window.addEventListener('load', () => {
     desk:'(min-width: 768px) and (prefers-reduced-motion: no-preference)',
     phone:'(max-width: 767px) and (prefers-reduced-motion: no-preference)'
   }, ctx => {
-    gsap.from('.hero-copy > *', {y:26, opacity:0, duration:1, stagger:.08, ease:EASE});
+    gsap.from('.hero-copy > :not(h1)', {y:26, opacity:0, duration:1.1, stagger:.08, ease:EASE, delay:.25});
+    gsap.from('.vitrine', {y:40, opacity:0, duration:1.4, ease:EASE});
+    gsap.from('.sheet', {x:30, opacity:0, duration:1.2, ease:EASE, delay:.4});
     const tl = stackTimeline();
     if (ctx.conditions.desk){
-      // Pin 1 (only pin on this page): base tier + swags arrive on load, the rest stacks as you scroll
-      const START = 2.5;
-      let introDone = false;
+      /* The page's one pin: base tier + swags arrive on load, the rest stacks as you scroll */
+      const START = 2.5; let introDone = false;
       tl.pause(0);
       const scrubTo = p => gsap.to(tl, {time:START + p * (tl.duration() - START), duration:.7, ease:'power3.out', overwrite:true});
-      const st = ScrollTrigger.create({trigger:'#hero', start:'top top+=72', end:'+=150%', pin:true, onUpdate:self => { if (introDone) scrubTo(self.progress); }});
+      const st = ScrollTrigger.create({trigger:'#top', start:'top top', end:'+=150%', pin:true, onUpdate:self => { if (introDone) scrubTo(self.progress); }});
       gsap.to(tl, {time:START, duration:1.8, ease:'power2.out', delay:.2, onComplete:() => { introDone = true; scrubTo(st.progress); }});
     } else {
-      // phones: no pin; the cake stacks once when it scrolls into view
       tl.pause(0).timeScale(2.4);
-      ScrollTrigger.create({trigger:'.cake-stage', start:'top 75%', once:true, onEnter:() => tl.play(0)});
+      ScrollTrigger.create({trigger:'.vitrine', start:'top 75%', once:true, onEnter:() => tl.play(0)});
     }
   });
 
   mm.add('(prefers-reduced-motion: no-preference)', () => {
-    gsap.utils.toArray('.sec-head').forEach(h => gsap.from(h.children, {y:30, opacity:0, duration:1, stagger:.08, ease:EASE, scrollTrigger:{trigger:h, start:'top 82%'}}));
-    gsap.from('.occ', {y:50, opacity:0, duration:1, stagger:.08, ease:EASE, scrollTrigger:{trigger:'#occ-row', start:'top 85%'}});
-    gsap.utils.toArray('.look').forEach((l, i) => gsap.from(l, {y:40, opacity:0, duration:.9, ease:EASE, delay:(i%3)*.06, scrollTrigger:{trigger:l, start:'top 92%'}}));
+    gsap.utils.toArray('.label').forEach(l => gsap.from(l, {x:-24, opacity:0, duration:1, ease:EASE, scrollTrigger:{trigger:l, start:'top 88%'}}));
+    gsap.utils.toArray('.sec-head > p').forEach(p => gsap.from(p, {y:20, opacity:0, duration:1, ease:EASE, scrollTrigger:{trigger:p, start:'top 90%'}}));
+    gsap.from('.occ', {y:60, opacity:0, duration:1.1, stagger:.08, ease:EASE, scrollTrigger:{trigger:'#occ-row', start:'top 85%'}});
+    gsap.utils.toArray('.look').forEach((l, i) => gsap.from(l, {y:50, opacity:0, duration:1, ease:EASE, delay:(i%3)*.06, scrollTrigger:{trigger:l, start:'top 92%'}}));
     gsap.from('.mslot .bar i', {scaleX:0, duration:1.2, stagger:.12, ease:EASE, scrollTrigger:{trigger:'#slot-row', start:'top 85%'}});
-    gsap.fromTo('.piping', {clipPath:'inset(0 100% 0 0)'}, {clipPath:'inset(0 0% 0 0)', ease:'none', scrollTrigger:{trigger:'.steps', start:'top 80%', end:'top 30%', scrub:.5}});
-    gsap.from('.step', {y:30, opacity:0, duration:.9, stagger:.12, ease:EASE, scrollTrigger:{trigger:'.steps', start:'top 82%'}});
+    gsap.fromTo('.piping', {scaleY:0}, {scaleY:1, ease:'none', scrollTrigger:{trigger:'.steps', start:'top 75%', end:'bottom 60%', scrub:.5}});
+    gsap.utils.toArray('.step').forEach(s => gsap.from(s, {x:30, opacity:0, duration:1, ease:EASE, scrollTrigger:{trigger:s, start:'top 86%'}}));
+    gsap.utils.toArray('.reveal-media').forEach(m => {
+      gsap.from(m, {y:60, duration:1.2, ease:EASE, scrollTrigger:{trigger:m, start:'top 90%'}});
+      gsap.fromTo(m.querySelector('.media-art'), {scale:1.18}, {scale:1, duration:1.6, ease:EASE, scrollTrigger:{trigger:m, start:'top 90%'}});
+    });
+    gsap.from('.foot-mark', {yPercent:40, opacity:0, duration:1.4, ease:EASE, scrollTrigger:{trigger:'.foot', start:'top 85%'}});
+    if (window.SplitText){
+      const fontsReady = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+      fontsReady.then(() => {
+        document.querySelectorAll('[data-split]').forEach(h => {
+          const inHero = !!h.closest('#top');
+          SplitText.create(h, {type:'lines,words', mask:'lines', autoSplit:true, onSplit(self){
+            return gsap.from(self.lines, {yPercent:110, duration:1.15, stagger:.09, ease:EASE, delay:inHero ? .1 : 0,
+              scrollTrigger: inHero ? undefined : {trigger:h, start:'top 88%', once:true}});
+          }});
+        });
+        ScrollTrigger.refresh();
+      });
+    }
   });
-});
+})();
 </script>
 </body>
 </html>
