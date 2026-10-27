@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Martian+Mono:wght@400;600&family=Schibsted+Grotesk:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Newsreader&family=Rozha+One&family=Italiana&family=Anton&family=Dela+Gothic+One&family=Young+Serif&family=Bodoni+Moda&family=Yeseva+One&family=Shrikhand&text=%20%26.ABCDEHJKLMPQRSabcdeghiklmnorstuvwy&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Crimson+Pro&family=Rozha+One&family=Cormorant+Garamond&family=Teko&family=Dela+Gothic+One&family=Libre+Caslon+Display&family=Bodoni+Moda&family=Yeseva+One&family=Shrikhand&text=%20%26.ABCDEHJKLMPQRSabcdeghiklmnorstuvwy&display=swap">
 <style>
 /* Layout: a kitchen pass. Three ticket rails (cafés, restaurants, bakeries) hang mockups as order tickets;
    firing a ticket opens it in a full-screen viewer with desktop / tablet / phone frames. */
@@ -90,13 +90,13 @@ h1 { font: 900 clamp(56px, 9vw, 120px)/.86 var(--f-display); letter-spacing: -.0
 .filters .label { font: 600 10px/1 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-right: 4px; }
 .chip {
   appearance: none; border: 1px solid var(--rule); background: var(--paper); color: var(--ink);
-  font: 500 13px/1 var(--f-body); padding: 9px 13px; border-radius: 999px; cursor: pointer;
+  font: 500 13px/1 var(--f-body); padding: 10px 13px; border-radius: 3px; cursor: pointer; min-height: 40px;
   display: inline-flex; align-items: center; gap: 8px; transition: background .2s, border-color .2s;
 }
 .chip .n { font: 600 10px/1 var(--f-mono); color: var(--muted); }
 .chip[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 .chip[aria-pressed="true"] .n { color: inherit; opacity: .7; }
-.chip .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--c, var(--muted)); }
+.chip .dot { width: 9px; height: 9px; border-radius: 1px; background: var(--c, var(--muted)); }
 .filters .spacer { flex: 1; }
 .filters a.chip { text-decoration: none; }
 
@@ -184,7 +184,7 @@ main { padding-block: 26px 40px; }
 .spec h2 { font: 900 clamp(30px, 4vw, 42px)/1 var(--f-display); text-transform: uppercase; }
 .spec > p { color: var(--muted); max-width: 70ch; margin: 6px 0 16px; }
 .table-scroll { overflow-x: auto; background: var(--paper); box-shadow: var(--shadow); border-radius: 4px; }
-table { border-collapse: collapse; width: 100%; min-width: 980px; font-size: 13px; }
+table { border-collapse: collapse; width: 100%; min-width: 1100px; font-size: 13px; }
 th, td { text-align: left; padding: 11px 12px; border-bottom: 1px solid var(--rule); vertical-align: top; }
 th { font: 600 9.5px/1.3 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); background: var(--steel-deep); position: sticky; top: 0; }
 td.no { font: 600 12px/1.3 var(--f-mono); font-variant-numeric: tabular-nums; }
@@ -320,7 +320,7 @@ footer code { font: 500 12px/1 var(--f-mono); }
     <p>All ten side by side: what each site converts on, the signature motion, and the type and colour system it uses.</p>
     <div class="table-scroll">
       <table>
-        <thead><tr><th>No.</th><th>Business</th><th>City</th><th>Converts on</th><th>Signature motion</th><th>Type</th><th>Palette</th></tr></thead>
+        <thead><tr><th>No.</th><th>Business</th><th>City</th><th>Converts on</th><th>Signature motion</th><th>Type</th><th>Media</th><th>Palette</th></tr></thead>
         <tbody id="spec-body"></tbody>
       </table>
     </div>
@@ -329,7 +329,7 @@ footer code { font: 500 12px/1 var(--f-mono); }
 
 <footer>
   <div class="wrap">
-    <p>All businesses, prices and phone numbers are fictional. Food art is illustrated SVG and canvas for now; each mockup marks where real photography or video would go.</p>
+    <p>All businesses, prices and phone numbers are fictional. Aurelia's hero uses HeyGen footage; the other sites use illustrated art in the same slots until more footage is generated. Maps are live OpenStreetMap / CARTO maps of each neighbourhood.</p>
     <p>Source: <code>public/food-mockups/</code></p>
   </div>
 </footer>
@@ -365,6 +365,8 @@ footer code { font: 500 12px/1 var(--f-mono); }
       <ol id="v-story"></ol>
       <h4>Type</h4>
       <p id="v-type"></p>
+      <h4>Media &amp; map</h4>
+      <p id="v-media"></p>
       <h4>Palette</h4>
       <div class="v-pal" id="v-pal"></div>
       <h4>Keys</h4>
@@ -387,7 +389,7 @@ var MOCKUPS = [
   "area": "F-7 Markaz",
   "niche": "Specialty roastery café",
   "converts": "Whole-bean subscriptions and café visits; order-ahead pickup",
-  "signature": "Coffee drips into a cup that fills as you scroll the first screen",
+  "signature": "A V60 drips into a glass on a brew scale; the glass fills and the scale counts as you scroll",
   "story": [
    "The pour",
    "Origins",
@@ -398,31 +400,37 @@ var MOCKUPS = [
    "Visit & order"
   ],
   "fonts": [
-   "Gloock",
-   "Manrope",
-   "DM Mono"
+   "Instrument Serif",
+   "Geist",
+   "Geist Mono"
   ],
-  "nameFontFamily": "Gloock",
-  "nameFont": "\"Gloock\", Georgia, serif",
+  "nameFontFamily": "Instrument Serif",
+  "nameFont": "\"Instrument Serif\", Georgia, serif",
+  "media": "Illustrated hero and menu art; HeyGen footage slots ready.",
+  "mapNote": "dark green-tinted map of F-7 Markaz with directions.",
   "palette": [
    {
-    "name": "Espresso",
-    "hex": "#2B1B12"
+    "name": "Pine",
+    "hex": "#13291F"
    },
    {
-    "name": "Crema",
-    "hex": "#C8A27A"
+    "name": "Sage bean",
+    "hex": "#A9B79A"
    },
    {
-    "name": "Steamed milk",
-    "hex": "#F3E7D8"
+    "name": "Coffee cherry",
+    "hex": "#B8323F"
    },
    {
-    "name": "Copper",
-    "hex": "#C46A2B"
+    "name": "Brass",
+    "hex": "#C9A25A"
+   },
+   {
+    "name": "Limestone",
+    "hex": "#E5E6DE"
    }
   ],
-  "concept": "The page behaves like a pour-over. Coffee drips into the hero cup and the cup fills as you scroll the first screen, then the story follows the bean: four single origins with altitude and roast level, a menu of cards that flip to show cup sizes, pastry pairings, and a bean subscription priced live by bag size and grind. Espresso-to-crema browns with one copper accent; a sharp display serif over a clean sans."
+  "concept": "Cherry to cup, set against the green of the Margalla Hills. Pine green and coffee-cherry red replace the usual browns, with brass for the brewing gear. The hero brews a V60 on a scale that counts grams and seconds as you scroll. Below it: four single origins on a pinned bean shelf, menu cards that flip to show sizes, pairings with a saving badge, and a bean subscription priced live. Instrument Serif headlines sit over Geist, with Geist Mono for roast data."
  },
  {
   "n": "02",
@@ -430,26 +438,28 @@ var MOCKUPS = [
   "cat": "cafe",
   "name": "Margin",
   "city": "Lahore",
-  "area": "Main Boulevard, Gulberg",
+  "area": "Main Boulevard, Gulberg III",
   "niche": "Study & work café",
   "converts": "Desk bookings and day passes; coffee pre-orders",
-  "signature": "A top-down mug whose rim is a pomodoro timer that counts down as you scroll",
+  "signature": "A top-down mug whose rim is a pomodoro timer that runs 25:00 down to zero as you scroll",
   "story": [
    "Focus timer",
    "Live seats",
    "Passes",
    "Fuel menu",
-   "Room rules",
+   "House rules",
    "Book a desk",
-   "Hours & location"
+   "Hours & map"
   ],
   "fonts": [
-   "Newsreader",
-   "IBM Plex Sans",
+   "Crimson Pro",
+   "Atkinson Hyperlegible",
    "IBM Plex Mono"
   ],
-  "nameFontFamily": "Newsreader",
-  "nameFont": "\"Newsreader\", Georgia, serif",
+  "nameFontFamily": "Crimson Pro",
+  "nameFont": "\"Crimson Pro\", Georgia, serif",
+  "media": "Illustrated; HeyGen footage slots ready.",
+  "mapNote": "light map of Main Boulevard, Gulberg III.",
   "palette": [
    {
     "name": "Graph paper",
@@ -464,11 +474,15 @@ var MOCKUPS = [
     "hex": "#F4E04D"
    },
    {
-    "name": "Drip coffee",
-    "hex": "#6B4A35"
+    "name": "Margin pink",
+    "hex": "#D9767A"
+   },
+   {
+    "name": "Free seat",
+    "hex": "#2F7D5B"
    }
   ],
-  "concept": "Margin sells quiet hours, so the site is a study sheet: a graph-paper ground, ink navy and one highlighter yellow. The hero mug doubles as a pomodoro timer that runs 25:00 down to zero as you scroll. Below it, a live floor plan shows which seats are free by zone, passes are priced for students and freelancers, the menu lists caffeine in mg, and a desk booking form totals the price as you pick slots."
+  "concept": "Margin sells quiet hours, so the site reads like a well-kept study sheet: graph-paper green, ink navy, a highlighter and a pink margin line. The hero mug doubles as a pomodoro timer. A live floor plan shows free seats by zone with noise levels, the fuel menu totals caffeine in mg, and the desk booking form prices the slot as you pick it. Body text is set in Atkinson Hyperlegible, a face designed for legibility, under Crimson Pro headings."
  },
  {
   "n": "03",
@@ -476,10 +490,10 @@ var MOCKUPS = [
   "cat": "cafe",
   "name": "Doodh Patti & Co.",
   "city": "Karachi",
-  "area": "Khayaban-e-Ittehad, DHA",
+  "area": "Khayaban-e-Ittehad & Boat Basin",
   "niche": "Late-night chai café",
   "converts": "WhatsApp orders and Foodpanda delivery; walk-ins till 3 AM",
-  "signature": "Chai is pulled from height into a glass; the pour stretches as you scroll",
+  "signature": "Chai is pulled from height into a fluted glass; the pour lengthens as you scroll",
   "story": [
    "The pull",
    "Chai menu",
@@ -487,23 +501,29 @@ var MOCKUPS = [
    "Midnight deals",
    "Truck-art strip",
    "Order on WhatsApp",
-   "Branches & hours"
+   "Two branches"
   ],
   "fonts": [
    "Rozha One",
    "Mukta",
-   "Noto Nastaliq Urdu"
+   "Gulzar"
   ],
   "nameFontFamily": "Rozha One",
   "nameFont": "\"Rozha One\", Georgia, serif",
+  "media": "Illustrated; HeyGen footage slots ready.",
+  "mapNote": "one map with both Karachi branches and a branch switcher.",
   "palette": [
    {
-    "name": "Karak",
-    "hex": "#B5651D"
+    "name": "Night",
+    "hex": "#0B1622"
    },
    {
     "name": "Deep teal",
     "hex": "#0E4D4F"
+   },
+   {
+    "name": "Karak",
+    "hex": "#B5651D"
    },
    {
     "name": "Truck red",
@@ -518,7 +538,7 @@ var MOCKUPS = [
     "hex": "#FFF4E0"
    }
   ],
-  "concept": "A Karachi chai stop after midnight, dressed in truck-art panels and borders. The hero pulls chai from height into a glass and the stream lengthens as you scroll. Every chai shows a strength meter and a per-kettle price, the midnight bundles carry saving badges and countdowns, and the order section builds a ready-to-send WhatsApp message with a running total, with Foodpanda one tap away."
+  "concept": "A Karachi chai stop after midnight, painted like a truck. A night-blue base carries teal, karak, truck red and saffron, framed with hand-painted borders, with Urdu headlines set in Gulzar, a Nastaliq display face. The hero pulls chai from height into a glass. Every chai has a strength meter and a per-kettle price, the midnight bundles count down, and the order section writes a ready-to-send WhatsApp message with a running total."
  },
  {
   "n": "04",
@@ -529,7 +549,7 @@ var MOCKUPS = [
   "area": "Margalla Road, E-7",
   "niche": "Tasting-menu fine dining",
   "converts": "Reservations with a per-guest deposit; Chef's Counter and private salon",
-  "signature": "Candlelit full-bleed hero (video slot) with slow push-in and parallax type",
+  "signature": "HeyGen candlelit plate footage as a full-bleed hero, with type that parallaxes over it",
   "story": [
    "Candlelight",
    "Seven courses",
@@ -539,30 +559,36 @@ var MOCKUPS = [
    "Visit"
   ],
   "fonts": [
-   "Italiana",
+   "Cormorant Garamond",
    "Jost"
   ],
-  "nameFontFamily": "Italiana",
-  "nameFont": "\"Italiana\", Didot, \"Bodoni 72\", serif",
+  "nameFontFamily": "Cormorant Garamond",
+  "nameFont": "\"Cormorant Garamond\", Garamond, serif",
+  "media": "HeyGen hero video (candlelit plated course); other photo slots ready.",
+  "mapNote": "dark, desaturated map of Margalla Road, E-7.",
   "palette": [
    {
     "name": "Ink",
-    "hex": "#0F1115"
+    "hex": "#0E1113"
    },
    {
-    "name": "Oxblood",
-    "hex": "#5B1A24"
+    "name": "Porcelain",
+    "hex": "#F2F0EB"
    },
    {
-    "name": "Muted gold",
-    "hex": "#C9A45C"
+    "name": "Pomegranate",
+    "hex": "#7D1D2C"
    },
    {
-    "name": "Ivory",
-    "hex": "#EFE8DA"
+    "name": "Champagne",
+    "hex": "#CDB58A"
+   },
+   {
+    "name": "Olive smoke",
+    "hex": "#5D655E"
    }
   ],
-  "concept": "An evening at a seven-course counter. The hero is candlelight and drifting bokeh over a dark table, ready to swap for real footage, with the name floating above it. The courses reveal one by one with their tea or mocktail pairing, the experiences sit in sticky tabs, and the reservation widget shows seatings and the deposit per guest before anyone commits. Ink, oxblood, muted gold and ivory; a high-contrast display face with a geometric sans."
+  "concept": "An evening at a seven-course counter. The hero is HeyGen footage of a candlelit plate with a pomegranate reduction, with the name set large in light Cormorant above it. The courses reveal one at a time with their tea or mocktail pairing. The experiences sit in sticky tabs, and the reservation widget shows seatings and the deposit per guest before anyone commits. Ink, porcelain and pomegranate, with champagne for detail and Jost capitals in the style of a printed menu."
  },
  {
   "n": "05",
@@ -570,10 +596,10 @@ var MOCKUPS = [
   "cat": "rest",
   "name": "Koyla Karahi House",
   "city": "Lahore",
-  "area": "MM Alam Road, Gulberg",
+  "area": "MM Alam Road, Gulberg III",
   "niche": "Family desi BBQ & karahi",
   "converts": "Family platter and bucket deals for delivery; group bookings and catering",
-  "signature": "Embers rise off a charcoal grill; scrolling fans the coals",
+  "signature": "Spark streaks rise off a charcoal grill; scrolling fans the coals",
   "story": [
    "The grill",
    "Signature dishes",
@@ -582,14 +608,17 @@ var MOCKUPS = [
    "Menu",
    "Group booking",
    "Reviews",
-   "Location"
+   "Find us"
   ],
   "fonts": [
-   "Anton",
-   "Archivo"
+   "Teko",
+   "Barlow",
+   "Noto Nastaliq Urdu"
   ],
-  "nameFontFamily": "Anton",
-  "nameFont": "\"Anton\", Impact, \"Arial Narrow\", sans-serif",
+  "nameFontFamily": "Teko",
+  "nameFont": "\"Teko\", Impact, \"Arial Narrow\", sans-serif",
+  "media": "Illustrated grill; HeyGen footage slots ready.",
+  "mapNote": "warm-tinted dark map of MM Alam Road.",
   "palette": [
    {
     "name": "Charcoal",
@@ -608,11 +637,11 @@ var MOCKUPS = [
     "hex": "#FFC93C"
    },
    {
-    "name": "Smoke white",
-    "hex": "#F4EFE9"
+    "name": "Bone",
+    "hex": "#F3ECE2"
    }
   ],
-  "concept": "Loud, smoky and built for big tables. Sparks rise off the grill in the hero and speed up as you scroll. The money is in platters, so family deals list their contents, the per-item saving and one price, with a Friday countdown. Services (dine-in hall, delivery, catering, rooftop) sit in sticky tabs, the menu filters by category with half and full kg prices and chilli levels, and group booking takes parties of up to 40."
+  "concept": "Loud, smoky and built for big tables. Spark streaks rise off the grill in the hero and speed up as you scroll. The money is in platters, so family deals list their contents, the saving per head and one price, with a Friday countdown. Services sit in sticky tabs, the menu filters by category with half and full kg prices and chilli levels, and group booking takes parties of up to 40. Set in Teko, a condensed face from the Indian Type Foundry."
  },
  {
   "n": "06",
@@ -621,17 +650,17 @@ var MOCKUPS = [
   "name": "Kumo Ramen Bar",
   "city": "Karachi",
   "area": "Zamzama, Clifton",
-  "niche": "14-seat ramen counter",
+  "niche": "14-seat halal ramen counter",
   "converts": "Walk-in waitlist with a live wait estimate; pickup and delivery",
   "signature": "Noodle-lift hero, then a pinned build-the-bowl sequence layer by layer",
   "story": [
    "Noodle lift",
    "Build the bowl",
-   "The bowls",
+   "Ticket machine",
    "How to visit",
-   "Join the queue",
+   "The queue",
    "Reviews",
-   "Hours & location"
+   "Hours & map"
   ],
   "fonts": [
    "Dela Gothic One",
@@ -640,6 +669,8 @@ var MOCKUPS = [
   ],
   "nameFontFamily": "Dela Gothic One",
   "nameFont": "\"Dela Gothic One\", Impact, sans-serif",
+  "media": "Illustrated; HeyGen footage slots ready.",
+  "mapNote": "indigo-tinted night map of Zamzama.",
   "palette": [
    {
     "name": "Night ink",
@@ -654,7 +685,7 @@ var MOCKUPS = [
     "hex": "#E8B04A"
    },
    {
-    "name": "Noren beige",
+    "name": "Noren paper",
     "hex": "#EDE3CF"
    },
    {
@@ -666,7 +697,7 @@ var MOCKUPS = [
     "hex": "#4FE3E0"
    }
   ],
-  "concept": "A late-night counter under a flickering neon sign. Chopsticks lift noodles out of a steaming bowl in the hero, then a pinned section builds the bowl as you scroll: 18-hour broth, noodles, chashu, egg, nori, scallion, chilli oil. There are no reservations, so the main action is joining the queue: pick a party size and see your estimated wait and place in line."
+  "concept": "A late-night counter under a flickering neon sign. Chopsticks lift noodles in the hero, then a pinned section builds the bowl as you scroll: 18-hour beef-bone broth, noodles, chashu, egg, nori, scallion, chilli oil. Bowls are ordered from a ticket machine. There are no reservations, so the main action is joining the queue: pick a party size and watch your ticket join the line with an estimated wait."
  },
  {
   "n": "07",
@@ -674,49 +705,51 @@ var MOCKUPS = [
   "cat": "bake",
   "name": "Levain & Co.",
   "city": "Lahore",
-  "area": "Bukhari Commercial, DHA Phase 6",
+  "area": "Y Block Commercial, DHA Phase 3",
   "niche": "Sourdough boulangerie",
   "converts": "Pickup pre-orders before the bread sells out; weekend bread box",
   "signature": "A loaf proofs, scores and bakes as you scroll, then a pinned display counter",
   "story": [
    "The rise",
    "The counter",
-   "Bake schedule",
+   "Oven times",
    "Bundles",
    "Pre-order",
    "48-hour ferment",
-   "Hours & location"
+   "Hours & map"
   ],
   "fonts": [
-   "Young Serif",
-   "Karla",
+   "Libre Caslon Display",
+   "Libre Franklin",
    "Courier Prime"
   ],
-  "nameFontFamily": "Young Serif",
-  "nameFont": "\"Young Serif\", Georgia, serif",
+  "nameFontFamily": "Libre Caslon Display",
+  "nameFont": "\"Libre Caslon Display\", Georgia, serif",
+  "media": "Illustrated; HeyGen footage slots ready.",
+  "mapNote": "blue-tinted map of Y Block, DHA Phase 3.",
   "palette": [
    {
-    "name": "Stone-ground flour",
-    "hex": "#F1ECE2"
+    "name": "Workwear blue",
+    "hex": "#26446B"
+   },
+   {
+    "name": "Flour",
+    "hex": "#F5F4EF"
    },
    {
     "name": "Crust",
-    "hex": "#6B3E1F"
-   },
-   {
-    "name": "Rye",
-    "hex": "#2A1E17"
+    "hex": "#8B4A21"
    },
    {
     "name": "Wheat",
-    "hex": "#D9A441"
+    "hex": "#E0AE48"
    },
    {
-    "name": "Baker's linen",
-    "hex": "#8EA3B0"
+    "name": "Rye",
+    "hex": "#1B1A18"
    }
   ],
-  "concept": "Bread that sells out by noon needs a pre-order habit. The hero loaf rises, its score opens and the crust darkens as you scroll, then the shelves slide past like a shop window with a fresh-at time on every tag and sold-out loaves left visible. A bake schedule counts down to the next batch, bundles show their saving, and the pre-order form enforces the 8 pm cut-off for tomorrow."
+  "concept": "Bread that sells out by noon needs a pre-order habit. The brand colour is the blue of a baker's work jacket, set against flour white and crust, with Caslon signage type and Courier tickets. The hero loaf rises, its score opens and the crust darkens as you scroll, then the shelves slide past with a fresh-at time on every tag. Oven times count down to the next batch, and the pre-order form enforces the 8 pm cut-off."
  },
  {
   "n": "08",
@@ -739,23 +772,25 @@ var MOCKUPS = [
   ],
   "fonts": [
    "Bodoni Moda",
-   "Nunito Sans",
-   "Pinyon Script"
+   "Figtree",
+   "Great Vibes"
   ],
   "nameFontFamily": "Bodoni Moda",
   "nameFont": "\"Bodoni Moda\", Didot, serif",
+  "media": "Illustrated; HeyGen footage slots ready.",
+  "mapNote": "blush-tinted light map of F-6 Supermarket.",
   "palette": [
    {
+    "name": "Porcelain",
+    "hex": "#FBF8F4"
+   },
+   {
     "name": "Blush",
-    "hex": "#F4C9C4"
+    "hex": "#F2C4C0"
    },
    {
     "name": "Pistachio",
-    "hex": "#BFD8B8"
-   },
-   {
-    "name": "Buttercream",
-    "hex": "#FFF6E5"
+    "hex": "#B9D3B0"
    },
    {
     "name": "Chocolate",
@@ -763,10 +798,10 @@ var MOCKUPS = [
    },
    {
     "name": "Gold leaf",
-    "hex": "#C8A15A"
+    "hex": "#C6A15B"
    }
   ],
-  "concept": "Every sale here starts with a conversation, so the site is built to start one. The hero stacks a three-tier cake as you scroll: buttercream drapes, sugar flowers land, a gold topper goes on. The configurator then lets a client pick servings, sponge, finish, colours and topper on a live preview with a price range and lead time, before an inquiry form books the tasting. Blush, pistachio and buttercream with gold leaf."
+  "concept": "Every sale here starts with a conversation, so the site is built to start one. Couture Bodoni over porcelain, with blush and pistachio as the cake colours and Great Vibes kept for a few script words. The hero stacks a three-tier cake as you scroll. The configurator prices servings, sponge, finish and topper on a live preview with lead times, and the inquiry form enforces each occasion's minimum notice."
  },
  {
   "n": "09",
@@ -777,7 +812,7 @@ var MOCKUPS = [
   "area": "Bank Road, Saddar",
   "niche": "Traditional mithai & bakery",
   "converts": "Eid and shaadi box pre-orders; corporate bulk orders",
-  "signature": "A mithai box lid lifts and each compartment fills as you scroll",
+  "signature": "A mithai box lid swings open and each compartment fills as you scroll",
   "story": [
    "The box",
    "Counter by weight",
@@ -790,11 +825,13 @@ var MOCKUPS = [
   ],
   "fonts": [
    "Yeseva One",
-   "Mukta",
+   "Hind",
    "Noto Nastaliq Urdu"
   ],
   "nameFontFamily": "Yeseva One",
   "nameFont": "\"Yeseva One\", Georgia, serif",
+  "media": "Illustrated; HeyGen footage slots ready.",
+  "mapNote": "warm-tinted map of Bank Road, Saddar.",
   "palette": [
    {
     "name": "Maroon",
@@ -817,7 +854,7 @@ var MOCKUPS = [
     "hex": "#D4AF37"
    }
   ],
-  "concept": "A 1978 sweet shop that does most of its business at Eid and wedding season. The hero box opens and fills piece by piece with a varq shimmer. The counter prices by weight with a live 250 g to 1 kg selector, festive and shaadi boxes count down to Eid, and build-a-box lets customers fill compartments by hand. Corporate buyers get a bulk form with logo sleeves. Maroon, marigold, pistachio and gold foil, with Urdu headline accents."
+  "concept": "A 1978 sweet shop that does most of its business at Eid and wedding season. The hero box opens and fills piece by piece under a silver varq shimmer. The counter prices by weight with a live 250 g to 1 kg selector, festive and shaadi boxes count down to Eid, and build-a-box fills compartments by hand. Corporate buyers get a bulk form with logo sleeves. Maroon, marigold and pistachio with gold foil, Yeseva One headlines and Urdu accents."
  },
  {
   "n": "10",
@@ -828,9 +865,9 @@ var MOCKUPS = [
   "area": "Tariq Road, PECHS",
   "niche": "Donut & cookie drop bakery",
   "converts": "Boxes of 6 or 12 for delivery; daily drop pre-orders; party walls",
-  "signature": "Donuts ride a pinned conveyor through a glaze waterfall and sprinkle shower",
+  "signature": "Donuts ride a pinned conveyor through fryer, glaze waterfall and sprinkle shower",
   "story": [
-   "Sprinkle burst",
+   "Hero donut",
    "The line",
    "Today's drop",
    "Build a box",
@@ -840,34 +877,36 @@ var MOCKUPS = [
   ],
   "fonts": [
    "Shrikhand",
-   "Rubik",
-   "Space Mono"
+   "Lexend",
+   "JetBrains Mono"
   ],
   "nameFontFamily": "Shrikhand",
   "nameFont": "\"Shrikhand\", \"Cooper Black\", serif",
+  "media": "Illustrated; HeyGen footage slots ready.",
+  "mapNote": "bright map of Tariq Road, PECHS.",
   "palette": [
    {
-    "name": "Bubblegum",
-    "hex": "#FF7AB6"
+    "name": "Hot pink",
+    "hex": "#FF4F8B"
    },
    {
-    "name": "Sky",
-    "hex": "#6EC6FF"
+    "name": "Cobalt",
+    "hex": "#2741D6"
    },
    {
     "name": "Lemon",
-    "hex": "#FFE45C"
+    "hex": "#FFE14D"
    },
    {
-    "name": "Chocolate",
-    "hex": "#4A2C2A"
+    "name": "Cocoa",
+    "hex": "#3A221C"
    },
    {
-    "name": "Cream",
-    "hex": "#FFF8F0"
+    "name": "Sugar",
+    "hex": "#FFF9F2"
    }
   ],
-  "concept": "Loud, sugary and run on scarcity. A glazed donut bounces in under a sprinkle burst, then a pinned conveyor carries plain rings through a glaze waterfall and a sprinkle shower as you scroll. Today's drop shows how many are left and counts down to the 5 pm release. Build-a-box fills a 6 or 12 grid and shows the saving against singles, and the deals cover happy hour, student Tuesdays and party walls."
+  "concept": "Loud, graphic and run on scarcity, with no soft blobs: hard edges, cocoa outlines and flat offset shadows in hot pink, cobalt and lemon. A pinned conveyor carries plain rings through the fryer, a glaze waterfall and a sprinkle shower as you scroll. Today's drop shows stock left and counts down to the 5 pm release. Build-a-box fills a 6 or 12 grid and shows the saving against buying singles."
  }
 ];
 
@@ -899,6 +938,7 @@ function ticketHTML(m, i) {
       '<div><dt>Converts on</dt><dd>' + esc(m.converts) + '</dd></div>' +
       '<div><dt>Signature</dt><dd>' + esc(m.signature) + '</dd></div>' +
       '<div><dt>Type</dt><dd>' + esc(m.fonts.join(' / ')) + '</dd></div>' +
+      '<div><dt>Media</dt><dd>' + esc(m.media) + '</dd></div>' +
       '<div><dt>Palette</dt><dd><span class="swatches">' + sw + '</span></dd></div>' +
     '</dl>' +
     '<div class="t-actions"><button class="btn primary" type="button" data-open="' + m.slug + '">Preview</button>' +
@@ -917,7 +957,7 @@ function renderBoard() {
       '<td><button class="link" type="button" data-open="' + m.slug + '">' + esc(m.name) + '</button><br><span class="cat">' + CAT_LABEL[m.cat] + '</span> &middot; ' + esc(m.niche) + '</td>' +
       '<td>' + esc(m.city) + '<br><span style="color:var(--muted)">' + esc(m.area) + '</span></td>' +
       '<td>' + esc(m.converts) + '</td><td>' + esc(m.signature) + '</td>' +
-      '<td>' + esc(m.fonts.join(' / ')) + '</td><td><span class="swatches">' + sw + '</span></td></tr>';
+      '<td>' + esc(m.fonts.join(' / ')) + '</td><td>' + esc(m.media) + '</td><td><span class="swatches">' + sw + '</span></td></tr>';
   }).join('');
 }
 
@@ -980,6 +1020,7 @@ function openViewer(slug, fromHash) {
   document.getElementById('v-converts').textContent = m.converts;
   document.getElementById('v-signature').textContent = m.signature;
   document.getElementById('v-type').textContent = m.fonts.join(' / ');
+  document.getElementById('v-media').textContent = m.media + ' Live map: ' + m.mapNote;
   document.getElementById('v-story').innerHTML = m.story.map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('');
   document.getElementById('v-pal').innerHTML = m.palette.map(function (c) { return '<div><span style="--c:' + c.hex + '"></span><div>' + esc(c.name) + '<small>' + c.hex + '</small></div></div>'; }).join('');
   frame.src = BASE + 'mockups/' + m.slug + '.html';
