@@ -171,7 +171,8 @@ p{margin:0}
 @keyframes crown{0%{opacity:0;transform:scaleY(.2)}35%{opacity:1}100%{opacity:0;transform:scaleY(1)}}
 .art-caption{display:flex;justify-content:space-between;gap:12px;margin-top:16px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--mist)}
 .art-caption b{color:var(--saffron);font-weight:800}
-.cue{position:absolute;left:max(20px,env(safe-area-inset-left,0px));bottom:26px;display:flex;align-items:center;gap:14px;color:var(--mist);text-decoration:none;font-weight:700;font-size:12px;letter-spacing:.22em;text-transform:uppercase}
+.cue{position:absolute;right:max(18px,env(safe-area-inset-right,0px));bottom:40px;display:flex;align-items:center;gap:14px;color:var(--mist);text-decoration:none;font-weight:700;font-size:12px;letter-spacing:.22em;text-transform:uppercase;writing-mode:vertical-rl}
+@media (max-width:1240px){.cue{display:none}}
 .cue i{display:block;width:1px;height:46px;background:linear-gradient(var(--saffron),transparent);transform-origin:top;animation:cue 2s var(--ease) infinite}
 @keyframes cue{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
 @media (max-width:900px){
