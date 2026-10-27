@@ -1,0 +1,1105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Koyla Karahi House</title>
+<meta name="description" content="Family karahi and charcoal BBQ on MM Alam Road, Gulberg, Lahore. Family feast deals for delivery, group tables up to 40, and live BBQ catering for shaadi and office events.">
+<meta name="theme-color" content="#141210">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wdth,wght@62..125,400..900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@700&display=swap&text=%D8%A6%D8%A7%D8%A8%D8%AA%D8%AE%D8%B3%D9%84%D9%85%D9%86%D9%88%D9%B9%DA%86%DA%91%DA%A9%DB%81%DB%8C%20">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "Koyla Karahi House",
+  "servesCuisine": ["Pakistani", "Barbecue", "Karahi"],
+  "priceRange": "Rs 1,000 – Rs 3,000 per person",
+  "telephone": "+92 300 555 0188",
+  "acceptsReservations": "True",
+  "menu": "#menu",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Plot 22-C, MM Alam Road, Gulberg III",
+    "addressLocality": "Lahore",
+    "addressRegion": "Punjab",
+    "addressCountry": "PK"
+  },
+  "openingHoursSpecification": [
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday"], "opens": "18:00", "closes": "02:00"},
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Friday","Saturday"], "opens": "18:00", "closes": "03:00"},
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Sunday"], "opens": "13:00", "closes": "02:00"}
+  ]
+}
+</script>
+<style>
+/* Layout: smoke and coals. Full-bleed ember hero, heavy condensed type, charcoal sections split by glowing rules; one pinned services panel. */
+:root{
+  --char:#141210;
+  --char-2:#1C1916;
+  --char-3:#27211D;
+  --line:#3A322C;
+  --ember:#FF6B1A;
+  --chilli:#C1121F;
+  --turmeric:#FFC93C;
+  --bone:#F3ECE2;
+  --ash:#A89B8E;
+  --display:"Anton", "Impact", "Haettenschweiler", "Arial Narrow Bold", sans-serif;
+  --body:"Archivo", "Helvetica Neue", Arial, sans-serif;
+  --urdu:"Noto Nastaliq Urdu", "Jameel Noori Nastaleeq", "Urdu Typesetting", serif;
+  --ease:cubic-bezier(.22,1,.36,1);
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:80px}
+body{margin:0;background:var(--char);color:var(--bone);font:400 17px/1.6 var(--body);overflow-x:clip}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:70;background:var(--char)}
+svg{display:block;max-width:100%}
+a{color:inherit}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--turmeric);outline-offset:3px}
+h1,h2,h3{font-family:var(--display);font-weight:400;text-transform:uppercase;line-height:.92;letter-spacing:.01em;margin:0;text-wrap:balance}
+p{margin:0}
+.ur{font-family:var(--urdu);font-weight:700;direction:rtl;unicode-bidi:isolate;line-height:1.9;text-transform:none}
+.num{font-variant-numeric:tabular-nums}
+.wrap{width:100%;max-width:1280px;margin-inline:auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+
+/* shared Tasting Board strip */
+.tb-strip{display:flex;justify-content:space-between;gap:12px;padding:7px max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));background:#111;color:#cfcfcf;font:500 12px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.02em}
+.tb-strip a{color:#fff;text-decoration:none}.tb-strip a:hover{text-decoration:underline}
+.in-board .tb-strip{display:none}
+@media (max-width:480px){.tb-strip span{display:none}}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:50px;padding:12px 24px;border:0;border-radius:4px;font:800 15px/1 var(--body);font-stretch:85%;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:transform .3s var(--ease),background-color .3s,box-shadow .3s}
+.btn:hover{transform:translateY(-2px)}
+.btn-ember{background:var(--ember);color:var(--char);box-shadow:0 0 0 0 rgba(255,107,26,.5)}
+.btn-ember:hover{background:var(--turmeric);box-shadow:0 10px 40px -8px rgba(255,107,26,.7)}
+.btn-line{background:transparent;color:var(--bone);box-shadow:inset 0 0 0 2px var(--bone)}
+.btn-line:hover{box-shadow:inset 0 0 0 2px var(--turmeric);color:var(--turmeric)}
+.btn svg{width:18px;height:18px}
+
+/* header */
+.hdr{position:sticky;top:env(safe-area-inset-top,0px);z-index:60;background:rgba(20,18,16,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.hdr::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:linear-gradient(90deg,transparent,var(--ember) 30%,var(--turmeric) 50%,var(--ember) 70%,transparent)}
+.hdr .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:68px}
+.logo{display:flex;align-items:baseline;gap:10px;text-decoration:none;white-space:nowrap}
+.logo b{font-family:var(--display);font-weight:400;font-size:30px;letter-spacing:.02em;line-height:1;background:linear-gradient(180deg,var(--turmeric),var(--ember));-webkit-background-clip:text;background-clip:text;color:transparent}
+.logo span{font-weight:700;font-stretch:75%;font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--ash)}
+.nav{display:flex;gap:26px}
+.nav a{text-decoration:none;font-weight:700;font-stretch:80%;font-size:14px;letter-spacing:.16em;text-transform:uppercase;color:var(--ash)}
+.nav a:hover{color:var(--bone)}
+.hdr-ctas{display:flex;gap:10px}
+.hdr .btn{min-height:42px;padding:10px 18px;font-size:13px}
+@media (max-width:1060px){.nav{display:none}}
+@media (max-width:767.98px){.hdr-ctas{display:none}.logo span{display:none}}
+
+/* hero */
+.hero{position:relative;min-height:clamp(660px,90svh,940px);display:flex;flex-direction:column;justify-content:center;overflow:hidden;background:radial-gradient(130% 70% at 50% 112%,#6A2209 0%,#2E120A 34%,var(--char) 68%)}
+#embers{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+.haze{position:absolute;left:-10%;right:-10%;bottom:40px;height:300px;background:radial-gradient(50% 60% at 50% 100%,rgba(255,120,40,.26),transparent 70%);filter:blur(12px);animation:haze 3.6s ease-in-out infinite alternate;pointer-events:none;z-index:1}
+@keyframes haze{from{transform:translateY(0) scaleY(1)}to{transform:translateY(-14px) scaleY(1.08)}}
+.grill{position:absolute;left:0;right:0;bottom:0;width:100%;height:150px;pointer-events:none;z-index:2}
+.hero-inner{position:relative;z-index:3;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:48px;align-items:end;padding-block:64px 190px}
+.hero-kicker{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;font-weight:700;font-stretch:75%;font-size:14px;letter-spacing:.24em;text-transform:uppercase;color:var(--ash)}
+.hero-kicker i{width:46px;height:2px;background:var(--ember)}
+.hero-title{display:grid;margin-top:12px;line-height:.82}
+.ht-ur{font-size:clamp(30px,4vw,52px);color:var(--ember);line-height:1.6;justify-self:start}
+.ht-stack{display:grid}
+.ht-stack > span{grid-area:1/1;font-size:clamp(116px,22vw,330px);letter-spacing:.005em}
+.ht-glow{color:var(--ember);filter:blur(30px);opacity:.35;will-change:opacity}
+.ht-main{background:linear-gradient(180deg,#FFE7A6 0%,var(--turmeric) 22%,var(--ember) 58%,var(--chilli) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ht-sub{font-size:clamp(28px,4vw,58px);color:var(--bone);margin-top:.2em;letter-spacing:.04em}
+.lede{max-width:44ch;margin-top:26px;font-size:clamp(17px,1.5vw,20px);color:#D8CEC3}
+.ctas{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
+.fireboard{background:rgba(20,18,16,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid var(--line);border-top:3px solid var(--ember);padding:20px 22px;border-radius:4px}
+.fb-head{display:flex;align-items:center;gap:10px;font-weight:800;font-stretch:75%;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--turmeric)}
+.fb-head .dot{width:9px;height:9px;border-radius:50%;background:var(--ember);box-shadow:0 0 12px var(--ember);animation:flick 1.3s infinite}
+@keyframes flick{0%,100%{opacity:1}40%{opacity:.45}60%{opacity:.85}}
+.fireboard ul{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:10px}
+.fireboard li{display:flex;justify-content:space-between;gap:12px;border-bottom:1px dashed var(--line);padding-bottom:8px;font-size:15px}
+.fireboard b{font-family:var(--display);font-weight:400;font-size:20px;letter-spacing:.03em;color:var(--bone)}
+.fb-foot{margin-top:12px;font-size:13px;color:var(--ash)}
+.cue{position:absolute;z-index:3;left:50%;bottom:22px;transform:translateX(-50%);display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:800;font-stretch:75%;font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--turmeric);white-space:nowrap;text-shadow:0 2px 10px #000}
+.cue span{display:inline-block;animation:rise 1.6s var(--ease) infinite}
+@keyframes rise{0%{transform:translateY(4px);opacity:.4}50%{transform:translateY(-3px);opacity:1}100%{transform:translateY(4px);opacity:.4}}
+@media (max-width:900px){
+  .hero-inner{grid-template-columns:1fr;gap:30px;padding-block:44px 180px}
+  .fireboard{max-width:420px}
+}
+
+/* section system */
+.sec{position:relative;padding-block:112px}
+.sec + .sec::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,107,26,.6),transparent)}
+.kicker{display:flex;align-items:center;gap:14px;font:800 14px/1 var(--body);font-stretch:75%;letter-spacing:.26em;text-transform:uppercase;color:var(--ash)}
+.kicker b{font-family:var(--display);font-weight:400;font-size:22px;letter-spacing:.04em;color:var(--turmeric)}
+.kicker i{width:56px;height:2px;background:linear-gradient(90deg,var(--ember),transparent)}
+.sec-title{font-size:clamp(52px,8.4vw,128px);margin-top:20px}
+.sec-title em{font-style:normal;color:var(--ember)}
+.sec-intro{max-width:56ch;margin-top:22px;font-size:19px;color:#CFC4B8}
+.sec-head{max-width:980px}
+
+/* (01) signature dishes */
+.dishes{display:grid;gap:120px;margin-top:84px}
+.dish{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.dish:nth-child(even) .dish-art-wrap{order:2}
+.dish-art-wrap{position:relative;min-width:0}
+.dish-num{position:absolute;top:-70px;left:-12px;font-family:var(--display);font-size:clamp(140px,16vw,240px);line-height:1;color:transparent;-webkit-text-stroke:2px rgba(255,107,26,.55);z-index:0;pointer-events:none}
+.dish:nth-child(even) .dish-num{left:auto;right:-12px}
+.dish-art{position:relative;z-index:1;margin:0;aspect-ratio:1;max-width:520px;border-radius:50%;overflow:hidden;background:radial-gradient(circle at 50% 58%,#40190B,#1A1210 62%,var(--char) 72%);box-shadow:0 0 0 1px var(--line),0 0 90px -10px rgba(255,107,26,.35)}
+.dish:nth-child(even) .dish-art{margin-left:auto}
+.dish-art svg{width:100%;height:100%;transition:transform .8s var(--ease)}
+.dish-art:hover svg{transform:scale(1.07) rotate(-2deg)}
+.dish-copy{min-width:0}
+.dish-copy h3{font-size:clamp(46px,6vw,84px)}
+.dish-copy .ur{font-size:24px;color:var(--ember);margin-top:4px;text-align:left}
+.dish-copy > p:not(.ur){margin-top:14px;font-size:18px;color:#D8CEC3;max-width:46ch}
+.specs{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:12px 32px;margin:28px 0 0}
+.specs dt{font-weight:800;font-stretch:75%;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--ash)}
+.specs dd{margin:4px 0 0;font-family:var(--display);font-size:24px;letter-spacing:.03em}
+.dish-price{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.dish-price span{display:grid;gap:2px;padding:12px 18px;border:1px solid var(--line);border-left:3px solid var(--ember);background:var(--char-2)}
+.dish-price small{font-weight:800;font-stretch:75%;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--ash)}
+.dish-price b{font-family:var(--display);font-weight:400;font-size:28px;color:var(--turmeric);letter-spacing:.02em}
+@media (max-width:860px){
+  .dishes{gap:90px}
+  .dish{grid-template-columns:1fr;gap:36px}
+  .dish:nth-child(even) .dish-art-wrap{order:0}
+  .dish-art{max-width:400px;margin-inline:auto}
+  .dish:nth-child(even) .dish-art{margin-inline:auto}
+  .dish-num,.dish:nth-child(even) .dish-num{top:-40px;left:0;right:auto;font-size:120px}
+  .specs{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 16px}
+}
+
+/* (02) family deals */
+.deals{background:linear-gradient(180deg,var(--char) 0%,#1E120C 50%,var(--char) 100%)}
+.deal-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin-top:72px}
+.deal{position:relative;display:flex;flex-direction:column;background:var(--char-2);border:1px solid var(--line);border-top:4px solid var(--ember);padding:30px 26px 26px;min-width:0;transition:transform .5s var(--ease),box-shadow .5s}
+.deal:hover{transform:translateY(-6px);box-shadow:0 30px 60px -30px rgba(255,107,26,.45)}
+.deal.hot{border-top-color:var(--turmeric);background:linear-gradient(180deg,#2A1A10,var(--char-2) 40%)}
+.deal-tag{font-weight:800;font-stretch:75%;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--turmeric)}
+.deal h3{font-size:44px;margin-top:10px;padding-right:96px}
+.deal .serves{margin-top:8px;color:var(--ash);font-size:15px}
+.contents{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:8px;font-size:15px}
+.contents li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;border-bottom:1px dashed var(--line);padding-bottom:8px}
+.contents li span:last-child{color:var(--ash)}
+.contents .each{display:block;font-size:12px;color:var(--ash)}
+.deal-price{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;margin-top:22px}
+.deal-price strong{font-family:var(--display);font-weight:400;font-size:56px;line-height:1;color:var(--bone);letter-spacing:.01em}
+.deal-price s{color:var(--ash);font-size:17px}
+.per-head{margin-top:6px;font-size:15px;color:var(--turmeric);font-weight:700}
+.stamp{position:absolute;top:22px;right:20px;width:100px;height:100px;display:grid;place-items:center;text-align:center;border-radius:50%;background:radial-gradient(circle at 40% 35%,#FF8A3D,var(--ember) 45%,var(--chilli));color:var(--char);box-shadow:0 0 0 3px var(--char-2),0 0 0 5px var(--ember),0 12px 30px -6px rgba(255,107,26,.6);transform:rotate(-10deg)}
+.stamp span{display:grid;line-height:1;font-weight:900;font-stretch:70%;font-size:12px;letter-spacing:.18em;text-transform:uppercase}
+.stamp b{font-family:var(--display);font-weight:400;font-size:24px;letter-spacing:.01em;margin-top:4px}
+.countdown{display:flex;gap:8px;margin-top:18px}
+.countdown div{display:grid;place-items:center;min-width:58px;padding:8px 6px;background:var(--char);border:1px solid var(--line)}
+.countdown b{font-family:var(--display);font-weight:400;font-size:26px;line-height:1}
+.countdown small{font-size:10px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--ash);margin-top:4px}
+.cd-label{margin-top:14px;font-weight:800;font-stretch:75%;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--ember)}
+.deal-ctas{display:grid;gap:10px;margin-top:auto;padding-top:24px}
+.deal-ctas .btn{width:100%}
+.deal-ctas small{font-size:13px;color:var(--ash);text-align:center}
+@media (max-width:1060px){.deal-grid{grid-template-columns:1fr 1fr}.deal-grid .deal:last-child{grid-column:1/-1}}
+@media (max-width:700px){.deal-grid{grid-template-columns:1fr}.deal h3{font-size:38px}}
+
+/* (03) services: pinned tabs */
+.svc-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:center}
+.svc-grid > *{min-width:0}
+.svc-tabs{display:grid;gap:4px;margin-top:44px}
+.svc-tab{position:relative;display:grid;grid-template-columns:52px 1fr;align-items:center;gap:12px;padding:16px 18px;border:0;background:transparent;text-align:left;cursor:pointer;border-left:2px solid var(--line);color:var(--ash);transition:color .3s,background-color .3s}
+.svc-tab b{font-family:var(--display);font-weight:400;font-size:22px;color:inherit}
+.svc-tab span{font-family:var(--display);font-size:clamp(28px,3vw,40px);text-transform:uppercase;line-height:1}
+.svc-tab:hover{color:var(--bone)}
+.svc-tab[aria-selected="true"]{color:var(--bone);background:linear-gradient(90deg,rgba(255,107,26,.16),transparent);border-left-color:var(--ember)}
+.svc-tab[aria-selected="true"] b{color:var(--turmeric)}
+.svc-progress{height:2px;background:var(--line);margin-top:22px;overflow:hidden}
+.svc-progress i{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--ember),var(--turmeric));transform-origin:0 50%;transform:scaleX(.25)}
+.svc-panels{position:relative;display:grid}
+.svc-panel{background:var(--char-2);border:1px solid var(--line);padding:40px 36px;position:relative;overflow:hidden}
+.svc-panel::after{content:attr(data-word);position:absolute;right:-10px;bottom:-34px;font-family:var(--display);font-size:170px;line-height:1;text-transform:uppercase;color:rgba(255,107,26,.045);pointer-events:none}
+.svc-stat{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.svc-stat b{font-family:var(--display);font-weight:400;font-size:clamp(84px,9vw,132px);line-height:.9;color:var(--turmeric)}
+.svc-stat span{font-weight:800;font-stretch:75%;font-size:14px;letter-spacing:.2em;text-transform:uppercase;color:var(--ash);max-width:22ch}
+.svc-panel h3{font-size:40px;margin-top:24px}
+.svc-panel p{margin-top:12px;color:#D8CEC3;max-width:48ch}
+.svc-panel ul{margin:18px 0 0;padding:0;list-style:none;display:grid;gap:8px}
+.svc-panel li{position:relative;padding-left:22px}
+.svc-panel li::before{content:"";position:absolute;left:0;top:.62em;width:10px;height:2px;background:var(--ember)}
+.svc-panel .btn{margin-top:26px}
+.js-tabs .svc-panel{grid-area:1/1}
+.js-tabs .svc-panel:not(.is-active){visibility:hidden;opacity:0}
+.no-js-tabs .svc-panels{gap:20px}
+@media (max-width:860px){
+  .svc-grid{grid-template-columns:1fr;gap:28px}
+  .svc-tabs{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin-top:30px}
+  .svc-tab{grid-template-columns:auto 1fr;padding:12px;border-left:0;border-bottom:2px solid var(--line)}
+  .svc-tab[aria-selected="true"]{border-bottom-color:var(--ember)}
+  .svc-tab span{font-size:22px}
+  .svc-progress{display:none}
+  .svc-panel{padding:30px 22px}
+}
+
+/* (04) menu */
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:44px}
+.chip{min-height:44px;padding:10px 18px;border:1px solid var(--line);border-radius:999px;background:var(--char-2);color:var(--ash);font-weight:800;font-stretch:80%;font-size:14px;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:background-color .25s,color .25s,border-color .25s}
+.chip:hover{color:var(--bone);border-color:var(--ash)}
+.chip[aria-pressed="true"]{background:var(--ember);border-color:var(--ember);color:var(--char)}
+.chip .n{opacity:.7;margin-left:6px}
+.menu-list{list-style:none;margin:36px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 56px}
+.mi{display:grid;gap:6px;padding:22px 0;border-bottom:1px solid var(--line)}
+.mi-top{display:flex;align-items:baseline;gap:14px}
+.mi-top h3{font-family:var(--body);font-weight:800;font-stretch:90%;font-size:21px;text-transform:none;letter-spacing:0;line-height:1.2}
+.mi-top i{flex:1;min-width:16px;border-bottom:1px dotted var(--line);transform:translateY(-5px)}
+.mi-cat{font-weight:700;font-stretch:75%;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ash)}
+.chillies{display:inline-flex;gap:2px;flex:none}
+.chillies svg{width:16px;height:16px}
+.mi p{color:var(--ash);font-size:15px}
+.mi-price{display:flex;flex-wrap:wrap;gap:4px 18px;font-weight:700;color:var(--bone)}
+.mi-price span{white-space:nowrap}
+.mi-price em{font-style:normal;color:var(--ash);font-weight:600;font-size:13px;letter-spacing:.1em;text-transform:uppercase;margin-right:6px}
+.mi.is-out{opacity:.45}
+.mi.is-out h3{text-decoration:line-through;text-decoration-thickness:2px;text-decoration-color:var(--chilli)}
+.out{display:inline-block;margin-left:8px;font-family:var(--body);font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--char);background:var(--ash);padding:3px 8px;border-radius:2px;vertical-align:middle;text-decoration:none}
+@media (max-width:760px){.menu-list{grid-template-columns:1fr}}
+
+/* (05) reserve */
+.reserve{background:radial-gradient(90% 60% at 80% 0%,#2B140A,var(--char) 60%)}
+.res-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:44px;margin-top:64px;align-items:start}
+.res-grid > *{min-width:0}
+.res-form{display:grid;gap:22px;background:var(--char-2);border:1px solid var(--line);padding:32px}
+.field{display:grid;gap:8px}
+.field > span,.field legend{font-weight:800;font-stretch:75%;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--ash);padding:0}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+.field input,.field select{width:100%;min-height:50px;padding:10px 14px;background:var(--char);border:1px solid var(--line);border-radius:4px;color:var(--bone);font-size:16px}
+.field input:focus,.field select:focus{border-color:var(--ember);outline:none;box-shadow:0 0 0 3px rgba(255,107,26,.25)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.party{display:flex;align-items:center;gap:16px}
+.party button{width:52px;height:52px;border-radius:50%;border:1px solid var(--line);background:var(--char);font-size:24px;cursor:pointer;flex:none}
+.party button:hover{border-color:var(--ember);color:var(--ember)}
+.party output{font-family:var(--display);font-size:64px;line-height:1;min-width:2ch;text-align:center;color:var(--turmeric)}
+.party small{color:var(--ash);font-size:14px;line-height:1.4}
+.slots{display:flex;flex-wrap:wrap;gap:8px}
+.slots input{position:absolute;opacity:0;width:1px;height:1px;margin:0;pointer-events:none}
+.slots label{display:inline-flex;align-items:center;min-height:44px;padding:8px 16px;border:1px solid var(--line);border-radius:4px;font-weight:700;cursor:pointer;background:var(--char)}
+.slots input:checked + label{background:var(--ember);border-color:var(--ember);color:var(--char)}
+.slots input:focus-visible + label{outline:3px solid var(--turmeric);outline-offset:2px}
+.slots{position:relative}
+.res-summary{position:sticky;top:96px;background:var(--char-2);border:1px solid var(--line);border-top:4px solid var(--turmeric);padding:28px}
+.res-summary h3{font-size:56px;color:var(--turmeric)}
+.res-summary dl{display:grid;gap:12px;margin:20px 0 0}
+.res-summary dl div{display:flex;justify-content:space-between;gap:12px;border-bottom:1px dashed var(--line);padding-bottom:10px}
+.res-summary dt{color:var(--ash)}
+.res-summary dd{margin:0;font-weight:700;text-align:right}
+.res-note{margin-top:16px;font-size:14px;color:var(--ash)}
+.res-note b{color:var(--turmeric)}
+.confirm{margin-top:16px;padding:14px 16px;border-left:3px solid var(--turmeric);background:rgba(255,201,60,.08);font-size:15px}
+@media (max-width:900px){.res-grid{grid-template-columns:1fr}.res-summary{position:relative;top:0;order:-1}}
+@media (max-width:520px){.two{grid-template-columns:1fr}.res-form{padding:22px 18px}}
+
+/* (06) reviews marquee */
+.reviews{padding-block:100px;overflow:hidden}
+.rv-row{display:flex;gap:20px;width:max-content;animation:mq 60s linear infinite}
+.rv-row + .rv-row{margin-top:20px;animation-direction:reverse;animation-duration:70s}
+.reviews:hover .rv-row{animation-play-state:paused}
+@keyframes mq{to{transform:translateX(calc(-50% - 10px))}}
+.rv{width:380px;flex:none;background:var(--char-2);border:1px solid var(--line);padding:24px;display:grid;gap:14px;align-content:space-between}
+.rv q{font-size:18px;line-height:1.5;color:var(--bone);quotes:"\201C" "\201D"}
+.rv footer{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:14px;color:var(--ash)}
+.rv footer b{color:var(--bone)}
+.flames{display:inline-flex;gap:2px}
+.flames svg{width:15px;height:15px}
+.rv-head{margin-bottom:56px}
+@media (max-width:600px){.rv{width:300px}}
+
+/* (07) visit */
+.visit-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;margin-top:64px;align-items:stretch}
+.visit-grid > *{min-width:0}
+.map{border:1px solid var(--line);background:#191512;min-height:340px;overflow:hidden}
+.map svg{width:100%;height:100%}
+.info{display:grid;gap:26px;align-content:start}
+.info address{font-style:normal;font-size:20px;line-height:1.5}
+.hours{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.hours li{display:flex;justify-content:space-between;gap:16px;border-bottom:1px dashed var(--line);padding-bottom:8px}
+.hours li.today{color:var(--turmeric);font-weight:700}
+.open-now{display:inline-flex;align-items:center;gap:8px;font-weight:800;font-stretch:75%;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--ash)}
+.open-now i{width:9px;height:9px;border-radius:50%;background:var(--ash)}
+.open-now.on{color:var(--turmeric)}.open-now.on i{background:var(--ember);box-shadow:0 0 10px var(--ember)}
+.info .big{font-family:var(--display);font-size:34px;letter-spacing:.03em}
+.info .row{display:flex;flex-wrap:wrap;gap:12px}
+@media (max-width:860px){.visit-grid{grid-template-columns:1fr}}
+
+.foot{border-top:1px solid var(--line);padding-block:48px;color:var(--ash);font-size:14px}
+.foot .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px}
+.foot b{font-family:var(--display);font-weight:400;font-size:26px;color:var(--bone);letter-spacing:.03em}
+
+/* mobile action bar */
+.bar{display:none}
+@media (max-width:767.98px){
+  body{padding-bottom:calc(78px + env(safe-area-inset-bottom,0px))}
+  .bar{position:fixed;left:0;right:0;bottom:0;z-index:80;display:grid;grid-template-columns:1.25fr 1.25fr .8fr;gap:8px;padding:10px max(12px,env(safe-area-inset-left,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-right,0px));background:rgba(20,18,16,.96);border-top:1px solid var(--ember)}
+  .bar a{display:flex;align-items:center;justify-content:center;gap:6px;min-height:50px;border-radius:4px;text-decoration:none;font-weight:800;font-stretch:80%;font-size:13px;letter-spacing:.1em;text-transform:uppercase;background:var(--char-3);color:var(--bone)}
+  .bar a.main{background:var(--ember);color:var(--char)}
+  .bar svg{width:18px;height:18px}
+  .sec{padding-block:84px}
+  .cue{bottom:14px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .haze,.fb-head .dot,.cue span{animation:none}
+  .rv-row{animation:none;flex-wrap:wrap;width:auto;justify-content:center}
+  .rv-row [aria-hidden]{display:none}
+  .rv-row + .rv-row{display:none}
+  .dish-art svg,.deal,.btn{transition:none}
+}
+</style>
+</head>
+<body>
+<div class="tb-strip"><a href="../index.html">&larr; Tasting Board</a><span>Mockup 05 / 10 &middot; concept, not a live site</span></div>
+<script>try{if(window.parent!==window&&window.parent.__TASTING_BOARD__)document.documentElement.classList.add('in-board')}catch(e){}</script>
+
+<header class="hdr">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Koyla Karahi House home"><b>KOYLA</b><span>Karahi House</span></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#signature">Signature</a><a href="#deals">Family deals</a><a href="#services">Services</a><a href="#menu">Menu</a><a href="#visit">Visit</a>
+    </nav>
+    <div class="hdr-ctas">
+      <a class="btn btn-line" href="#reserve">Book a table</a>
+      <a class="btn btn-ember" href="#deals">Order a deal</a>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- HERO -->
+<!-- HEYGEN: 10s seamless loop, charcoal grill with seekh kebabs and chicken tikka skewers, sparks rising, heat haze, slow push-in, dark background, ember orange highlights, 16:9 (poster frame = first frame); replaces the canvas embers on capable devices -->
+<section class="hero" id="top" aria-labelledby="hero-title">
+  <div class="haze" aria-hidden="true"></div>
+  <canvas id="embers" aria-hidden="true"></canvas>
+  <svg class="grill" viewBox="0 0 1440 150" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <defs>
+      <linearGradient id="seekhG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#A55A27"/><stop offset=".55" stop-color="#7A3A17"/><stop offset="1" stop-color="#4A200C"/></linearGradient>
+      <linearGradient id="tikkaG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F0703A"/><stop offset=".6" stop-color="#C2401A"/><stop offset="1" stop-color="#7C220C"/></linearGradient>
+      <linearGradient id="railG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8A4A22"/><stop offset=".3" stop-color="#2E2621"/><stop offset="1" stop-color="#15110F"/></linearGradient>
+    </defs>
+    <g stroke="#1B1613" stroke-width="5">
+      <path d="M18 34V150M54 34V150M90 34V150M126 34V150M162 34V150M198 34V150M234 34V150M270 34V150M306 34V150M342 34V150M378 34V150M414 34V150M450 34V150M486 34V150M522 34V150M558 34V150M594 34V150M630 34V150M666 34V150M702 34V150M738 34V150M774 34V150M810 34V150M846 34V150M882 34V150M918 34V150M954 34V150M990 34V150M1026 34V150M1062 34V150M1098 34V150M1134 34V150M1170 34V150M1206 34V150M1242 34V150M1278 34V150M1314 34V150M1350 34V150M1386 34V150M1422 34V150"/>
+    </g>
+    <rect x="0" y="30" width="1440" height="9" fill="url(#railG)"/>
+    <rect x="0" y="30" width="1440" height="2" fill="#FF8A3D" opacity=".55"/>
+    <!-- seekh skewers -->
+    <g>
+      <path d="M60 58H600" stroke="#B9B4AE" stroke-width="4"/>
+      <circle cx="54" cy="58" r="9" fill="none" stroke="#B9B4AE" stroke-width="4"/>
+      <rect x="120" y="46" width="420" height="24" rx="12" fill="url(#seekhG)"/>
+      <path d="M150 48v20M182 48v20M214 48v20M246 48v20M278 48v20M310 48v20M342 48v20M374 48v20M406 48v20M438 48v20M470 48v20M502 48v20" stroke="#2A1206" stroke-width="3" opacity=".55"/>
+      <path d="M140 52H520" stroke="#D88C4E" stroke-width="2" opacity=".5" stroke-linecap="round"/>
+      <path d="M90 92H560" stroke="#B9B4AE" stroke-width="4"/>
+      <circle cx="84" cy="92" r="9" fill="none" stroke="#B9B4AE" stroke-width="4"/>
+      <rect x="150" y="80" width="380" height="24" rx="12" fill="url(#seekhG)"/>
+      <path d="M176 82v20M206 82v20M236 82v20M266 82v20M296 82v20M326 82v20M356 82v20M386 82v20M416 82v20M446 82v20M476 82v20M506 82v20" stroke="#2A1206" stroke-width="3" opacity=".55"/>
+    </g>
+    <!-- tikka skewer -->
+    <g>
+      <path d="M700 72H1080" stroke="#B9B4AE" stroke-width="4"/>
+      <circle cx="694" cy="72" r="9" fill="none" stroke="#B9B4AE" stroke-width="4"/>
+      <rect x="740" y="54" width="54" height="38" rx="9" fill="url(#tikkaG)" transform="rotate(-6 767 73)"/>
+      <rect x="810" y="52" width="58" height="40" rx="9" fill="url(#tikkaG)" transform="rotate(5 839 72)"/>
+      <rect x="884" y="54" width="54" height="38" rx="9" fill="url(#tikkaG)" transform="rotate(-4 911 73)"/>
+      <rect x="954" y="53" width="58" height="40" rx="9" fill="url(#tikkaG)" transform="rotate(7 983 73)"/>
+      <g fill="#2A1206" opacity=".7"><circle cx="760" cy="62" r="3"/><circle cx="780" cy="80" r="4"/><circle cx="828" cy="64" r="3.5"/><circle cx="850" cy="84" r="3"/><circle cx="900" cy="60" r="3"/><circle cx="922" cy="78" r="4"/><circle cx="972" cy="64" r="3"/><circle cx="996" cy="82" r="3.5"/></g>
+    </g>
+    <!-- seekh right -->
+    <g>
+      <path d="M1130 64H1440" stroke="#B9B4AE" stroke-width="4"/>
+      <rect x="1170" y="52" width="290" height="24" rx="12" fill="url(#seekhG)"/>
+      <path d="M1196 54v20M1226 54v20M1256 54v20M1286 54v20M1316 54v20M1346 54v20M1376 54v20M1406 54v20" stroke="#2A1206" stroke-width="3" opacity=".55"/>
+    </g>
+  </svg>
+
+  <div class="wrap hero-inner">
+    <div>
+      <p class="hero-kicker">MM Alam Road <i></i> Gulberg III <i></i> Lahore</p>
+      <h1 class="hero-title" id="hero-title">
+        <span class="ht-ur ur" lang="ur">کوئلہ</span>
+        <span class="ht-stack"><span class="ht-glow" id="htGlow" aria-hidden="true">Koyla</span><span class="ht-main">Koyla</span></span>
+        <span class="ht-sub">Karahi House</span>
+      </h1>
+      <p class="lede">Karahi cooked to order in iron over open flame, BBQ off kikar-wood charcoal, and family platters sized for tables of six to sixty.</p>
+      <div class="ctas">
+        <a class="btn btn-ember" href="#deals">Order a family deal</a>
+        <a class="btn btn-line" href="#reserve">Book a group table</a>
+      </div>
+    </div>
+    <aside class="fireboard" aria-label="Cook times tonight">
+      <p class="fb-head"><span class="dot" aria-hidden="true"></span>On the coals tonight</p>
+      <ul>
+        <li><span>Mutton Karahi</span><b class="num">25 min</b></li>
+        <li><span>Chicken Tikka</span><b class="num">14 min</b></li>
+        <li><span>Seekh Kebab</span><b class="num">8 min</b></li>
+        <li><span>Roghni Naan</span><b class="num">90 sec</b></li>
+      </ul>
+      <p class="fb-foot">Kikar charcoal, about 600&deg;C at the grate.</p>
+    </aside>
+  </div>
+  <a class="cue" href="#signature">Scroll to fan the coals <span aria-hidden="true">&uarr;</span></a>
+</section>
+
+<!-- (01) SIGNATURE -->
+<section class="sec" id="signature" aria-labelledby="sig-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="kicker"><b>01</b><i></i>Signature</p>
+      <h2 class="sec-title" id="sig-title">Three things we'd <em>bet the grill</em> on</h2>
+    </div>
+    <div class="dishes">
+      <article class="dish">
+        <div class="dish-art-wrap">
+          <span class="dish-num" aria-hidden="true">01</span>
+          <!-- HEYGEN: top-down photo of mutton karahi in a black iron karahi, green chillies and ginger julienne, oil sheen, dark wood table, ember side light, 1:1 -->
+          <figure class="dish-art" role="img" aria-label="Illustration: mutton karahi in an iron wok, seen from above">
+            <svg viewBox="0 0 400 400" aria-hidden="true">
+              <defs>
+                <radialGradient id="kCurry" cx="42%" cy="38%" r="65%"><stop offset="0" stop-color="#E8702E"/><stop offset=".55" stop-color="#B83A17"/><stop offset="1" stop-color="#6E1C0B"/></radialGradient>
+                <radialGradient id="kIron" cx="50%" cy="46%" r="52%"><stop offset=".8" stop-color="#2A2420"/><stop offset=".92" stop-color="#4B403A"/><stop offset="1" stop-color="#181412"/></radialGradient>
+              </defs>
+              <g fill="none" stroke="#3B332E" stroke-width="13" stroke-linecap="round"><path d="M44 168q-26 32 0 64"/><path d="M356 168q26 32 0 64"/></g>
+              <circle cx="200" cy="200" r="152" fill="url(#kIron)"/>
+              <circle cx="200" cy="200" r="124" fill="url(#kCurry)"/>
+              <ellipse cx="158" cy="146" rx="54" ry="20" fill="#FFB35C" opacity=".22" transform="rotate(-28 158 146)"/>
+              <g fill="#5B2614" stroke="#8C4220" stroke-width="3">
+                <path d="M128 182c8-22 40-26 52-8 10 14-2 34-24 36-20 2-36-10-28-28z"/>
+                <path d="M210 140c14-14 44-8 48 12 4 18-14 30-32 28-18-2-28-26-16-40z"/>
+                <path d="M222 220c16-8 42 2 42 22s-22 30-40 24-20-38-2-46z"/>
+                <path d="M150 246c12-12 36-8 40 8 4 18-12 28-28 26s-24-22-12-34z"/>
+                <path d="M268 182c8-6 24-2 26 10 2 12-8 20-18 18s-16-20-8-28z"/>
+              </g>
+              <g fill="#FFDCA0" opacity=".35"><circle cx="146" cy="186" r="5"/><circle cx="228" cy="150" r="5"/><circle cx="238" cy="232" r="5"/><circle cx="166" cy="252" r="4"/></g>
+              <g fill="none" stroke-linecap="round">
+                <path d="M110 268c30-6 62 4 84 22" stroke="#3E8E2F" stroke-width="10"/>
+                <path d="M196 112c24 14 40 40 42 66" stroke="#4FA23A" stroke-width="9"/>
+                <path d="M292 248c-10 20-30 32-52 34" stroke="#3E8E2F" stroke-width="9"/>
+              </g>
+              <g stroke="#F3D58C" stroke-width="3.5" stroke-linecap="round">
+                <path d="M188 188l22 8M196 204l20-2M176 214l18 10M206 176l14 16M240 196l16 6M130 222l16-6M262 214l10 14M176 160l18-4M226 260l18 2M150 206l12 12"/>
+              </g>
+              <g fill="#5DB54F"><circle cx="186" cy="192" r="5"/><circle cx="193" cy="186" r="4"/><circle cx="252" cy="206" r="5"/><circle cx="258" cy="212" r="4"/><circle cx="140" cy="240" r="4.5"/><circle cx="214" cy="270" r="5"/><circle cx="220" cy="264" r="4"/></g>
+            </svg>
+          </figure>
+        </div>
+        <div class="dish-copy">
+          <h3>Mutton Karahi</h3>
+          <p class="ur" lang="ur">مٹن کڑاہی</p>
+          <p>Cooked only when you order it, in a 14-inch iron karahi over open flame. Tomatoes cooked down until the oil separates, then green chilli, black pepper and a fistful of ginger julienne.</p>
+          <dl class="specs"><div><dt>Cook</dt><dd class="num">25&ndash;30 min</dd></div><div><dt>Heat</dt><dd>Medium</dd></div><div><dt>Feeds</dt><dd class="num">2&ndash;3 / half kg</dd></div></dl>
+          <p class="dish-price"><span><small>Half kg</small><b class="num">Rs 2,600</b></span><span><small>Full kg</small><b class="num">Rs 4,900</b></span></p>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-art-wrap">
+          <span class="dish-num" aria-hidden="true">02</span>
+          <figure class="dish-art" role="img" aria-label="Illustration: chicken tikka on a skewer with lemon, onion rings and mint chutney">
+            <svg viewBox="0 0 400 400" aria-hidden="true">
+              <defs>
+                <linearGradient id="tk" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F27A3E"/><stop offset=".6" stop-color="#C7421A"/><stop offset="1" stop-color="#7C220C"/></linearGradient>
+              </defs>
+              <circle cx="200" cy="200" r="150" fill="#221B17" stroke="#3A322C" stroke-width="4"/>
+              <circle cx="200" cy="200" r="132" fill="#2B231E"/>
+              <circle cx="128" cy="126" r="34" fill="#9A9A9A"/><circle cx="128" cy="126" r="27" fill="#3F9B4F"/><circle cx="120" cy="118" r="7" fill="#7FCB7F" opacity=".5"/>
+              <path d="M72 330L336 70" stroke="#C9C4BE" stroke-width="6" stroke-linecap="round"/>
+              <g transform="rotate(-45 200 200)">
+                <rect x="108" y="172" width="54" height="56" rx="12" fill="url(#tk)"/>
+                <rect x="170" y="170" width="58" height="60" rx="12" fill="url(#tk)"/>
+                <rect x="236" y="172" width="54" height="56" rx="12" fill="url(#tk)"/>
+                <g fill="#2A1206" opacity=".75"><circle cx="124" cy="186" r="5"/><circle cx="148" cy="214" r="6"/><circle cx="190" cy="184" r="5"/><circle cx="212" cy="216" r="7"/><circle cx="250" cy="190" r="6"/><circle cx="274" cy="214" r="5"/></g>
+                <g fill="#FFC6A0" opacity=".35"><ellipse cx="130" cy="180" rx="14" ry="4"/><ellipse cx="196" cy="178" rx="16" ry="4"/><ellipse cx="258" cy="180" rx="14" ry="4"/></g>
+              </g>
+              <path d="M262 300a44 44 0 0 1 76-30z" fill="#F5D33F"/><path d="M268 296a36 36 0 0 1 62-26" fill="none" stroke="#FFF2A8" stroke-width="3"/>
+              <g fill="none" stroke="#C77DA0" stroke-width="5"><ellipse cx="128" cy="276" rx="30" ry="22"/><ellipse cx="150" cy="300" rx="24" ry="18"/></g>
+              <g fill="#3E8E2F"><ellipse cx="300" cy="140" rx="10" ry="5" transform="rotate(30 300 140)"/><ellipse cx="312" cy="156" rx="9" ry="4.5" transform="rotate(-20 312 156)"/></g>
+            </svg>
+          </figure>
+        </div>
+        <div class="dish-copy">
+          <h3>Chicken Tikka</h3>
+          <p class="ur" lang="ur">چکن تکہ</p>
+          <p>Leg or breast quarters marinated overnight in yogurt, red chilli and mustard oil, then charred on the coals until the edges blacken. Served with mint chutney and raw onion.</p>
+          <dl class="specs"><div><dt>Cook</dt><dd class="num">14 min</dd></div><div><dt>Heat</dt><dd>Hot</dd></div><div><dt>Marinade</dt><dd class="num">12 hrs</dd></div></dl>
+          <p class="dish-price"><span><small>Quarter</small><b class="num">Rs 650</b></span><span><small>Boti, 10 pc</small><b class="num">Rs 1,150</b></span></p>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="dish-art-wrap">
+          <span class="dish-num" aria-hidden="true">03</span>
+          <figure class="dish-art" role="img" aria-label="Illustration: three seekh kebabs on a wooden board with onions and green chilli">
+            <svg viewBox="0 0 400 400" aria-hidden="true">
+              <defs>
+                <linearGradient id="sk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#AE6230"/><stop offset=".55" stop-color="#7A3A17"/><stop offset="1" stop-color="#46200C"/></linearGradient>
+              </defs>
+              <g transform="rotate(-12 200 200)">
+                <rect x="40" y="110" width="320" height="190" rx="18" fill="#7A4D2A"/>
+                <path d="M56 140h290M56 176h270M56 214h290M56 252h280M56 284h250" stroke="#6A4022" stroke-width="3" opacity=".7"/>
+                <circle cx="350" cy="205" r="9" fill="#5E3A1E"/>
+                <g>
+                  <path d="M26 150H354" stroke="#C9C4BE" stroke-width="5"/><circle cx="20" cy="150" r="9" fill="none" stroke="#C9C4BE" stroke-width="4"/>
+                  <rect x="70" y="136" width="250" height="28" rx="14" fill="url(#sk)"/>
+                  <path d="M96 138v24M122 138v24M148 138v24M174 138v24M200 138v24M226 138v24M252 138v24M278 138v24M304 138v24" stroke="#2A1206" stroke-width="3" opacity=".55"/>
+                </g>
+                <g>
+                  <path d="M26 202H354" stroke="#C9C4BE" stroke-width="5"/><circle cx="20" cy="202" r="9" fill="none" stroke="#C9C4BE" stroke-width="4"/>
+                  <rect x="80" y="188" width="240" height="28" rx="14" fill="url(#sk)"/>
+                  <path d="M104 190v24M130 190v24M156 190v24M182 190v24M208 190v24M234 190v24M260 190v24M286 190v24" stroke="#2A1206" stroke-width="3" opacity=".55"/>
+                </g>
+                <g>
+                  <path d="M26 254H354" stroke="#C9C4BE" stroke-width="5"/><circle cx="20" cy="254" r="9" fill="none" stroke="#C9C4BE" stroke-width="4"/>
+                  <rect x="66" y="240" width="256" height="28" rx="14" fill="url(#sk)"/>
+                  <path d="M92 242v24M118 242v24M144 242v24M170 242v24M196 242v24M222 242v24M248 242v24M274 242v24M300 242v24" stroke="#2A1206" stroke-width="3" opacity=".55"/>
+                </g>
+              </g>
+              <g fill="none" stroke="#E9E0F0" stroke-width="4"><ellipse cx="96" cy="318" rx="24" ry="16"/><ellipse cx="124" cy="334" rx="20" ry="13"/></g>
+              <path d="M260 324c26-10 56-8 78 6" stroke="#3E8E2F" stroke-width="10" stroke-linecap="round" fill="none"/>
+              <path d="M330 92c10 6 16 16 16 28" stroke="#4FA23A" stroke-width="8" stroke-linecap="round" fill="none"/>
+            </svg>
+          </figure>
+        </div>
+        <div class="dish-copy">
+          <h3>Seekh Kebab</h3>
+          <p class="ur" lang="ur">سیخ کباب</p>
+          <p>Beef mince with fat, green chilli and roasted cumin, hand-pressed onto three-foot skewers and turned every forty seconds so it stays juicy inside.</p>
+          <dl class="specs"><div><dt>Cook</dt><dd class="num">8 min</dd></div><div><dt>Heat</dt><dd>Medium</dd></div><div><dt>Skewer</dt><dd class="num">3 ft</dd></div></dl>
+          <p class="dish-price"><span><small>4 pieces</small><b class="num">Rs 1,100</b></span><span><small>Dozen</small><b class="num">Rs 3,150</b></span></p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- (02) FAMILY DEALS -->
+<section class="sec deals" id="deals" aria-labelledby="deals-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="kicker"><b>02</b><i></i>Family deals</p>
+      <h2 class="sec-title" id="deals-title">Platters for the <em>whole khandaan</em></h2>
+      <p class="sec-intro">Delivered hot by our own riders inside 6 km of Gulberg, or on Foodpanda across Lahore. Every deal lists exactly what's in the box and what you save.</p>
+    </div>
+    <div class="deal-grid" id="dealGrid"></div>
+  </div>
+</section>
+
+<!-- (03) SERVICES -->
+<section class="sec svc" id="services" aria-labelledby="svc-title">
+  <div class="wrap svc-grid">
+    <div>
+      <p class="kicker"><b>03</b><i></i>Services</p>
+      <h2 class="sec-title" id="svc-title">Four ways to feed a crowd</h2>
+      <div class="svc-tabs" role="tablist" aria-label="Services">
+        <button class="svc-tab" role="tab" id="tab-dine" aria-controls="panel-dine" aria-selected="true"><b>01</b><span>Dine-in</span></button>
+        <button class="svc-tab" role="tab" id="tab-delivery" aria-controls="panel-delivery" aria-selected="false" tabindex="-1"><b>02</b><span>Delivery</span></button>
+        <button class="svc-tab" role="tab" id="tab-catering" aria-controls="panel-catering" aria-selected="false" tabindex="-1"><b>03</b><span>Catering</span></button>
+        <button class="svc-tab" role="tab" id="tab-rooftop" aria-controls="panel-rooftop" aria-selected="false" tabindex="-1"><b>04</b><span>Rooftop</span></button>
+      </div>
+      <div class="svc-progress" aria-hidden="true"><i id="svcBar"></i></div>
+    </div>
+    <div class="svc-panels">
+      <article class="svc-panel is-active" role="tabpanel" id="panel-dine" aria-labelledby="tab-dine" data-word="Dine">
+        <div class="svc-stat"><b class="num">120</b><span>seats in the family hall</span></div>
+        <h3>Dine-in</h3>
+        <p>A family hall with partitioned booths, a kids' corner with a carrom table, and high chairs on request. The karahi comes to your table still on its stand.</p>
+        <ul><li>Booths for 4, 6, 8 and 12</li><li>Separate family seating, no smoking indoors</li><li>Valet parking after 8 PM</li></ul>
+        <a class="btn btn-ember" href="#reserve">Book a table</a>
+      </article>
+      <article class="svc-panel" role="tabpanel" id="panel-delivery" aria-labelledby="tab-delivery" data-word="Ride">
+        <div class="svc-stat"><b class="num">6 km</b><span>own-rider radius, about 40 min</span></div>
+        <h3>Delivery</h3>
+        <p>Karahi travels in sealed steel handis so it arrives the way it left the flame. Naan is packed separately in cloth to stay soft.</p>
+        <ul><li>Own riders: Gulberg, Model Town, Garden Town, Cantt</li><li>Rest of Lahore on Foodpanda</li><li>Free delivery on any family deal</li></ul>
+        <a class="btn btn-ember" href="https://www.foodpanda.pk/" target="_blank" rel="noopener">Order on Foodpanda</a>
+      </article>
+      <article class="svc-panel" role="tabpanel" id="panel-catering" aria-labelledby="tab-catering" data-word="Shaadi">
+        <div class="svc-stat"><b class="num">800</b><span>guests, our largest mehndi so far</span></div>
+        <h3>Catering</h3>
+        <p>Shaadi, mehndi, office iftar or a cricket-final party. We bring the grill, two cooks and a live seekh station, and serve from 50 to 800 guests.</p>
+        <ul><li>Per head from Rs 2,400 (karahi, BBQ, naan, raita, drink)</li><li>Live BBQ station with two cooks</li><li>Book at least 7 days ahead</li></ul>
+        <a class="btn btn-ember" href="#reserve">Ask for a quote</a>
+      </article>
+      <article class="svc-panel" role="tabpanel" id="panel-rooftop" aria-labelledby="tab-rooftop" data-word="Roof">
+        <div class="svc-stat"><b class="num">60</b><span>guests on the private rooftop</span></div>
+        <h3>Rooftop events</h3>
+        <p>Birthdays, dholki nights and team dinners under string lights, with your own grill and a view down MM Alam Road.</p>
+        <ul><li>Private hire from Rs 25,000 plus food</li><li>Sound system and projector included</li><li>Book 48 hours ahead</li></ul>
+        <a class="btn btn-ember" href="#reserve">Reserve the roof</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- (04) MENU -->
+<section class="sec" id="menu" aria-labelledby="menu-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="kicker"><b>04</b><i></i>Menu</p>
+      <h2 class="sec-title" id="menu-title">The full fire list</h2>
+      <p class="sec-intro">Karahi and handi are priced by the half or full kilo. Chillies show the heat, one to three.</p>
+    </div>
+    <div class="chips" id="chips" role="toolbar" aria-label="Filter the menu by category"></div>
+    <ul class="menu-list" id="menuList" aria-live="polite"></ul>
+    <noscript><p style="margin-top:24px">Chicken Karahi Rs 1,650 half / Rs 3,100 full &middot; Mutton Karahi Rs 2,600 / Rs 4,900 &middot; Chicken Tikka Rs 650 &middot; Seekh Kebab (4) Rs 1,100 &middot; Roghni Naan Rs 120</p></noscript>
+  </div>
+</section>
+
+<!-- (05) RESERVE -->
+<section class="sec reserve" id="reserve" aria-labelledby="res-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="kicker"><b>05</b><i></i>Reserve</p>
+      <h2 class="sec-title" id="res-title">Book for the whole group</h2>
+      <p class="sec-intro">Tables for 2 to 40. Tell us the occasion and we'll set the hall, the roof or a private room.</p>
+    </div>
+    <div class="res-grid">
+      <form class="res-form" id="resForm" novalidate>
+        <div class="field">
+          <span id="partyLabel">Party size</span>
+          <div class="party">
+            <button type="button" id="partyMinus" aria-label="One fewer guest">&minus;</button>
+            <output id="partyOut" class="num" aria-labelledby="partyLabel">8</output>
+            <button type="button" id="partyPlus" aria-label="One more guest">+</button>
+            <small id="partyHint">Booth for 8 in the family hall</small>
+          </div>
+        </div>
+        <div class="two">
+          <label class="field" for="resDate"><span>Date</span><input type="date" id="resDate" required></label>
+          <label class="field" for="resOccasion"><span>Occasion</span>
+            <select id="resOccasion">
+              <option>Family dinner</option><option>Birthday</option><option>Office dinner</option><option>Mehndi / dholki</option><option>Iftar group</option><option>Other</option>
+            </select>
+          </label>
+        </div>
+        <fieldset class="field">
+          <legend>Time</legend>
+          <div class="slots" id="slots"></div>
+        </fieldset>
+        <label class="field" for="resSeat"><span>Seating</span>
+          <select id="resSeat"><option value="hall">Family hall</option><option value="roof">Rooftop</option><option value="private">Private room (up to 24)</option></select>
+        </label>
+        <div class="two">
+          <label class="field" for="resName"><span>Name</span><input id="resName" autocomplete="name" placeholder="e.g. Ayesha Rana" required></label>
+          <label class="field" for="resPhone"><span>Mobile</span><input id="resPhone" type="tel" autocomplete="tel" placeholder="03xx xxxxxxx" required></label>
+        </div>
+        <button class="btn btn-ember" type="submit">Request this table</button>
+        <div id="resConfirm" class="confirm" hidden></div>
+      </form>
+      <aside class="res-summary" aria-live="polite">
+        <p class="kicker"><b>&rarr;</b>Your table</p>
+        <h3 id="sumTitle" class="num">Table for 8</h3>
+        <dl>
+          <div><dt>Date</dt><dd id="sumDate">&mdash;</dd></div>
+          <div><dt>Time</dt><dd id="sumTime">8:00 PM</dd></div>
+          <div><dt>Seating</dt><dd id="sumSeat">Family hall</dd></div>
+          <div><dt>Occasion</dt><dd id="sumOcc">Family dinner</dd></div>
+        </dl>
+        <p class="res-note" id="sumNote">No advance needed for groups up to 20.</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- (06) REVIEWS -->
+<section class="reviews" aria-labelledby="rv-title">
+  <div class="wrap rv-head">
+    <p class="kicker"><b>06</b><i></i>Guests</p>
+    <h2 class="sec-title" id="rv-title">Said with a full mouth</h2>
+  </div>
+  <div class="rv-row" id="rv1"></div>
+  <div class="rv-row" id="rv2"></div>
+</section>
+
+<!-- (07) VISIT -->
+<section class="sec" id="visit" aria-labelledby="visit-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="kicker"><b>07</b><i></i>Visit</p>
+      <h2 class="sec-title" id="visit-title">Follow the smoke on MM Alam</h2>
+    </div>
+    <div class="visit-grid">
+      <div class="map" role="img" aria-label="Map sketch of Gulberg III with Koyla Karahi House on MM Alam Road">
+        <svg viewBox="0 0 560 380" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <rect width="560" height="380" fill="#191512"/>
+          <g stroke="#2A231F" stroke-width="10"><path d="M0 80h560M0 200h560M0 310h560M90 0v380M230 0v380M380 0v380M500 0v380"/></g>
+          <path d="M-20 360L600 40" stroke="#FF6B1A" stroke-width="16" opacity=".85"/>
+          <path d="M-20 360L600 40" stroke="#FFC93C" stroke-width="2" stroke-dasharray="10 12"/>
+          <path d="M0 250C140 236 240 160 560 150" stroke="#3A322C" stroke-width="18" fill="none"/>
+          <text x="384" y="96" font-family="Archivo, sans-serif" font-weight="800" font-size="13" letter-spacing="2" fill="#FFC93C" transform="rotate(-27 384 96)">MM ALAM ROAD</text>
+          <text x="30" y="236" font-family="Archivo, sans-serif" font-weight="800" font-size="12" letter-spacing="2" fill="#A89B8E" transform="rotate(-6 30 236)">MAIN BOULEVARD</text>
+          <circle cx="430" cy="128" r="10" fill="#3A322C"/><text x="446" y="132" font-family="Archivo, sans-serif" font-size="12" fill="#A89B8E">Hussain Chowk</text>
+          <g transform="translate(300 200)">
+            <circle r="46" fill="#FF6B1A" opacity=".16"/><circle r="26" fill="#FF6B1A" opacity=".28"/>
+            <path d="M0 0c-16-18-16-40 0-40s16 22 0 40z" fill="#FF6B1A" stroke="#141210" stroke-width="3"/>
+            <circle cy="-26" r="6" fill="#141210"/>
+            <text x="22" y="-24" font-family="Anton, Impact, sans-serif" font-size="22" fill="#F3ECE2">KOYLA</text>
+          </g>
+        </svg>
+      </div>
+      <div class="info">
+        <span class="open-now" id="openNow"><i></i><span>Checking hours&hellip;</span></span>
+        <address>Plot 22-C, MM Alam Road<br>Gulberg III, Lahore</address>
+        <ul class="hours" id="hours">
+          <li data-days="Mon Tue Wed Thu"><span>Mon &ndash; Thu</span><span class="num">6 PM &ndash; 2 AM</span></li>
+          <li data-days="Fri Sat"><span>Fri &ndash; Sat</span><span class="num">6 PM &ndash; 3 AM</span></li>
+          <li data-days="Sun"><span>Sunday (lunch too)</span><span class="num">1 PM &ndash; 2 AM</span></li>
+        </ul>
+        <div><p class="big num">+92 300 555 0188</p><p style="color:var(--ash)">Parking for 40 cars, valet after 8 PM.</p></div>
+        <div class="row">
+          <a class="btn btn-ember" href="https://www.google.com/maps/search/?api=1&amp;query=MM+Alam+Road+Gulberg+III+Lahore" target="_blank" rel="noopener">Get directions</a>
+          <a class="btn btn-line" href="tel:+923005550188">Call the hall</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <b>KOYLA KARAHI HOUSE</b>
+    <span>Fictional restaurant concept for a website mockup. Prices, numbers and addresses are placeholders.</span>
+  </div>
+</footer>
+
+<nav class="bar" aria-label="Quick actions">
+  <a class="main" href="#deals"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2c1 4-3 5-3 9a3 3 0 0 0 6 0c0-1-.3-2-1-3 3 1 5 4 5 7a7 7 0 0 1-14 0c0-6 7-8 7-13z"/></svg>Order deal</a>
+  <a href="#reserve"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 2v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2V2h-2v2H9V2zM5 9h14v11H5z"/></svg>Book table</a>
+  <a href="tel:+923005550188"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.2 11.4 11.4 0 0 0 3.6.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.2.2 2.4.6 3.6a1 1 0 0 1-.3 1z"/></svg>Call</a>
+</nav>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+/* ---------- data (mirrors future Supabase tables: categories, items, deals) ---------- */
+const MENU = [
+  {cat:'Karahi', name:'Chicken Karahi', desc:'Tomato, green chilli, ginger. The everyday hero.', heat:2, half:1650, full:3100},
+  {cat:'Karahi', name:'Mutton Karahi', desc:'Bone-in mutton, cooked to order over open flame.', heat:2, half:2600, full:4900},
+  {cat:'Karahi', name:'Namak Mandi Karahi', desc:'Peshawari style: salt, black pepper, lamb fat. No tomato.', heat:1, half:2750, full:5200},
+  {cat:'Karahi', name:'White Karahi', desc:'Yogurt, cream and crushed black pepper.', heat:1, half:1850, full:3500},
+  {cat:'Karahi', name:'Shinwari Lamb Karahi', desc:'Whole lamb pieces, salt and tomato only.', heat:1, half:2900, full:5500, sold_out:true},
+  {cat:'BBQ', name:'Chicken Tikka', desc:'Leg or breast quarter, overnight marinade.', heat:2, price:650, unit:'Quarter'},
+  {cat:'BBQ', name:'Malai Boti', desc:'Cream and cheese marinade, 8 pieces.', heat:1, price:1050, unit:'8 pc'},
+  {cat:'BBQ', name:'Beef Seekh Kebab', desc:'Hand-pressed on 3 ft skewers.', heat:2, price:1100, unit:'4 pc'},
+  {cat:'BBQ', name:'Reshmi Kebab', desc:'Silky chicken mince with cream.', heat:1, price:980, unit:'4 pc'},
+  {cat:'BBQ', name:'Mutton Champ', desc:'Lamb chops, raw papaya marinade.', heat:2, price:2400, unit:'4 pc', sold_out:true},
+  {cat:'BBQ', name:'Fish Tikka', desc:'Rahu chunks, ajwain and red chilli.', heat:3, price:1450, unit:'8 pc'},
+  {cat:'Handi', name:'Chicken Makhni Handi', desc:'Boneless chicken, butter and tomato.', heat:1, half:1700, full:3200},
+  {cat:'Handi', name:'Achari Handi', desc:'Pickling spices, mustard oil and lemon.', heat:3, half:1750, full:3300},
+  {cat:'Handi', name:'Daal Mash Handi', desc:'White lentils with a garlic tarka.', heat:2, half:850, full:1550},
+  {cat:'Breads', name:'Roghni Naan', desc:'Brushed with milk and sesame.', price:120},
+  {cat:'Breads', name:'Garlic Naan', desc:'Garlic butter and coriander.', price:160},
+  {cat:'Breads', name:'Kalonji Naan', desc:'Nigella seeds, soft middle.', price:140},
+  {cat:'Breads', name:'Tandoori Roti', desc:'Whole wheat, straight from the tandoor.', price:40},
+  {cat:'Drinks', name:'Mint Margarita', desc:'Mint, lemon and soda, blended.', price:380},
+  {cat:'Drinks', name:'Lassi', desc:'Sweet or salted, served in a steel glass.', price:320},
+  {cat:'Drinks', name:'Doodh Soda', desc:'Milk and lemon-lime soda. Lahore classic.', price:280},
+  {cat:'Drinks', name:'Kashmiri Chai', desc:'Pink tea with pistachio, after dinner.', price:300}
+];
+const DEALS = [
+  {id:'family-feast', name:'Family Feast', serves:6, tag:'Most ordered', hot:true,
+   items:[['Chicken Karahi, full kg',1,3100],['Chicken Tikka, quarter',6,650],['Beef Seekh Kebab, 4 pc',3,1100],['Roghni Naan',12,120],['Raita + salad',2,250],['Soft drink, 1.5 L',2,350]], price:10490, ends_at:'2027-03-31T23:59:00+05:00'},
+  {id:'karahi-bbq', name:'Karahi + BBQ Combo', serves:4, tag:'For four',
+   items:[['Mutton Karahi, half kg',1,2600],['Malai Boti, 8 pc',1,1050],['Reshmi Kebab, 4 pc',1,980],['Garlic Naan',6,160],['Mint Margarita',4,380]], price:5990, ends_at:'2027-03-31T23:59:00+05:00'},
+  {id:'friday-bucket', name:'Friday Bucket', serves:5, tag:'Fridays only', friday:true,
+   items:[['Chicken Tikka, quarter',4,650],['Beef Seekh Kebab, 4 pc',2,1100],['Malai Boti, 8 pc',1,1050],['Tandoori Roti',12,40],['Raita + salad',2,250]], price:4999, ends_at:'2027-03-31T23:59:00+05:00'},
+  {id:'basant-bucket', name:'Basant Bucket', serves:8, tag:'Seasonal', items:[['Chicken Karahi, full kg',2,3100]], price:5500, ends_at:'2026-02-28T23:59:00+05:00'} // expired: filtered out
+];
+const REVIEWS = [
+  {q:'Fourteen of us, one Family Feast and a second karahi. It came out still sizzling and we left nothing.', n:'Ayesha R.', a:'Johar Town', f:5},
+  {q:'The namak mandi karahi is the real thing. Salt, pepper, fat, done.', n:'Bilal K.', a:'Model Town', f:5},
+  {q:'The kids’ corner kept the little ones busy while we finished our chai. Rare in Gulberg.', n:'Sana M.', a:'DHA Phase 5', f:4},
+  {q:'Booked the rooftop for my brother’s mehndi. 55 guests, and the live seekh station was the hit of the night.', n:'Usman T.', a:'Cantt', f:5},
+  {q:'Delivery reached in 38 minutes and the naan was still soft.', n:'Hira A.', a:'Faisal Town', f:4},
+  {q:'Order two plates of malai boti. You will fight over one otherwise.', n:'Omar F.', a:'Wapda Town', f:5}
+];
+
+/* ---------- helpers ---------- */
+const $ = (s, c = document) => c.querySelector(s);
+const $$ = (s, c = document) => [...c.querySelectorAll(s)];
+const rs = n => 'Rs ' + Math.round(n).toLocaleString('en-US');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+function lahoreNow(){
+  const parts = new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Karachi',hour:'2-digit',minute:'2-digit',second:'2-digit',weekday:'short',year:'numeric',month:'2-digit',day:'2-digit',hourCycle:'h23'}).formatToParts(new Date());
+  const g = t => (parts.find(p => p.type === t) || {}).value;
+  return {h: +g('hour') % 24, m: +g('minute'), s: +g('second'), wd: g('weekday'), ymd: `${g('year')}-${g('month')}-${g('day')}`};
+}
+const DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const chilli = on => `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M11.5 2.5c-.6 1-.4 1.6.4 2.1C14 6 13 11 7.5 13.6 4.4 15 1.6 14.2 1 13c3.2.4 6.5-2.4 7.6-5.6.5-1.4 1.3-2.2 2.4-2.4-.3-.8-.2-1.7.5-2.5z" fill="${on ? '#E2231A' : 'none'}" stroke="${on ? '#E2231A' : '#5A4F47'}" stroke-width="1.2"/></svg>`;
+const flame = on => `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1c.7 2.8-2 3.6-2 6.4a2 2 0 0 0 4 0c0-.6-.2-1.3-.6-2 2 .7 3.4 2.6 3.4 4.8A4.8 4.8 0 0 1 3.2 10C3.2 6 8 4.6 8 1z" fill="${on ? '#FF6B1A' : '#3A322C'}"/></svg>`;
+
+/* ---------- (02) deals ---------- */
+const activeDeals = DEALS.filter(d => !d.ends_at || new Date(d.ends_at) > new Date());
+$('#dealGrid').innerHTML = activeDeals.map(d => {
+  const full = d.items.reduce((t, [, q, p]) => t + q * p, 0);
+  const save = full - d.price;
+  const units = d.items.reduce((t, [, q]) => t + q, 0);
+  return `
+  <article class="deal${d.hot ? ' hot' : ''}">
+    <div class="stamp" aria-hidden="true"><span>Save<b class="num" data-save="${save}">${rs(save)}</b></span></div>
+    <span class="deal-tag">${d.tag}</span>
+    <h3>${d.name}</h3>
+    <p class="serves">Feeds ${d.serves} &middot; ${units} items in the box</p>
+    <ul class="contents">${d.items.map(([n, q, p]) => `<li><span>${q} &times; ${n}<span class="each num">${rs(p)} each</span></span><span class="num">${rs(q * p)}</span></li>`).join('')}</ul>
+    <div class="deal-price"><strong class="num">${rs(d.price)}</strong><s class="num">${rs(full)}</s></div>
+    <p class="per-head num">You save ${rs(save)}, about ${rs(save / d.serves)} a head (${rs(save / units)} per item)</p>
+    ${d.friday ? `<p class="cd-label" id="fridayLabel">Next Friday starts in</p><div class="countdown" id="fridayCd" aria-live="off"><div><b class="num" data-u="d">0</b><small>days</small></div><div><b class="num" data-u="h">00</b><small>hrs</small></div><div><b class="num" data-u="m">00</b><small>min</small></div><div><b class="num" data-u="s">00</b><small>sec</small></div></div>` : ''}
+    <div class="deal-ctas">
+      <a class="btn btn-ember" href="https://www.foodpanda.pk/" target="_blank" rel="noopener">Order this deal</a>
+      <small>Or call <span class="num">+92 300 555 0188</span> for our own riders</small>
+    </div>
+  </article>`;
+}).join('');
+
+function tickFriday(){
+  const cd = $('#fridayCd'); if (!cd) return;
+  const now = lahoreNow();
+  const dow = DAYS.indexOf(now.wd);
+  const secOfDay = now.h * 3600 + now.m * 60 + now.s;
+  let left, label;
+  if (dow === 5){ left = 86400 - secOfDay; label = 'Live today, ends in'; }
+  else { left = ((5 - dow + 7) % 7) * 86400 - secOfDay; label = 'Next Friday starts in'; }
+  $('#fridayLabel').textContent = label;
+  const v = {d: Math.floor(left / 86400), h: Math.floor(left % 86400 / 3600), m: Math.floor(left % 3600 / 60), s: left % 60};
+  $$('[data-u]', cd).forEach(b => { b.textContent = b.dataset.u === 'd' ? v.d : String(v[b.dataset.u]).padStart(2, '0'); });
+}
+tickFriday(); setInterval(tickFriday, 1000);
+
+/* ---------- (03) services tabs ---------- */
+const tabs = $$('.svc-tab'), panels = $$('.svc-panel');
+let svcIndex = 0;
+$('#services').classList.add('js-tabs');
+function setService(i, fromScroll){
+  if (i === svcIndex && fromScroll) return;
+  const prev = panels[svcIndex];
+  svcIndex = i;
+  tabs.forEach((t, j) => { t.setAttribute('aria-selected', j === i ? 'true' : 'false'); t.tabIndex = j === i ? 0 : -1; });
+  panels.forEach((p, j) => p.classList.toggle('is-active', j === i));
+  $('#svcBar').style.transform = `scaleX(${(i + 1) / panels.length})`;
+  if (window.gsap && !reduce && prev !== panels[i]){
+    gsap.fromTo(panels[i], {autoAlpha: 0, y: 30}, {autoAlpha: 1, y: 0, duration: .6, ease: 'expo.out', clearProps: 'transform'});
+    gsap.fromTo($$('.svc-stat b, h3, p, li, .btn', panels[i]), {y: 18, opacity: 0}, {y: 0, opacity: 1, stagger: .04, duration: .5, ease: 'expo.out'});
+  }
+}
+let svcTrigger = null;
+tabs.forEach((t, i) => {
+  t.addEventListener('click', () => {
+    if (svcTrigger){
+      const st = svcTrigger, y = st.start + (st.end - st.start) * ((i + .5) / tabs.length);
+      window.scrollTo({top: y, behavior: reduce ? 'auto' : 'smooth'});
+    } else setService(i);
+  });
+  t.addEventListener('keydown', e => {
+    if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft' && e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
+    e.preventDefault();
+    const n = (i + (e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : -1) + tabs.length) % tabs.length;
+    tabs[n].focus(); tabs[n].click();
+  });
+});
+
+/* ---------- (04) menu with filters ---------- */
+const CATS = ['All', 'Karahi', 'BBQ', 'Handi', 'Breads', 'Drinks'];
+let activeCat = 'All';
+$('#chips').innerHTML = CATS.map(c => `<button type="button" class="chip" data-cat="${c}" aria-pressed="${c === 'All'}">${c}<span class="n num">${c === 'All' ? MENU.length : MENU.filter(m => m.cat === c).length}</span></button>`).join('');
+function renderMenu(){
+  const list = MENU.filter(m => activeCat === 'All' || m.cat === activeCat);
+  $('#menuList').innerHTML = list.map(m => `
+    <li class="mi${m.sold_out ? ' is-out' : ''}">
+      <div class="mi-top"><h3>${m.name}${m.sold_out ? '<span class="out">Sold out today</span>' : ''}</h3><i aria-hidden="true"></i>${m.heat ? `<span class="chillies" role="img" aria-label="Heat ${m.heat} of 3">${[1,2,3].map(k => chilli(k <= m.heat)).join('')}</span>` : ''}</div>
+      <span class="mi-cat">${m.cat}</span>
+      <p>${m.desc}</p>
+      <p class="mi-price num">${m.half ? `<span><em>Half kg</em>${rs(m.half)}</span><span><em>Full kg</em>${rs(m.full)}</span>` : `<span>${m.unit ? `<em>${m.unit}</em>` : ''}${rs(m.price)}</span>`}</p>
+    </li>`).join('');
+  if (window.gsap && !reduce) gsap.from('#menuList .mi', {y: 16, opacity: 0, stagger: .03, duration: .45, ease: 'expo.out'});
+}
+$('#chips').addEventListener('click', e => {
+  const b = e.target.closest('.chip'); if (!b) return;
+  activeCat = b.dataset.cat;
+  $$('.chip').forEach(c => c.setAttribute('aria-pressed', c === b ? 'true' : 'false'));
+  renderMenu();
+});
+renderMenu();
+
+/* ---------- (05) reservation ---------- */
+const SLOTS = ['7:00 PM','8:00 PM','9:00 PM','10:00 PM','11:00 PM'];
+$('#slots').innerHTML = SLOTS.map((s, i) => `<input type="radio" name="slot" id="slot${i}" value="${s}"${i === 1 ? ' checked' : ''}><label for="slot${i}" class="num">${s}</label>`).join('');
+let party = 8;
+const dateEl = $('#resDate');
+(function initDate(){
+  const n = lahoreNow();
+  dateEl.min = n.ymd;
+  const d = new Date(n.ymd + 'T12:00:00'); d.setDate(d.getDate() + ((5 - d.getDay() + 7) % 7 || 7));
+  dateEl.value = d.toISOString().slice(0, 10);
+})();
+function renderRes(){
+  $('#partyOut').textContent = party;
+  const seat = $('#resSeat');
+  const hall = party <= 12 ? `Booth for ${party <= 4 ? 4 : party <= 6 ? 6 : party <= 8 ? 8 : 12} in the family hall` : party <= 24 ? 'Joined tables or the private room' : 'Half the family hall or the rooftop';
+  $('#partyHint').textContent = hall;
+  $('#sumTitle').textContent = 'Table for ' + party;
+  const dv = dateEl.value ? new Date(dateEl.value + 'T12:00:00') : null;
+  $('#sumDate').textContent = dv ? dv.toLocaleDateString('en-GB', {weekday:'short', day:'numeric', month:'short'}) : '—';
+  const slot = $('input[name="slot"]:checked');
+  $('#sumTime').textContent = slot ? slot.value : '—';
+  $('#sumSeat').textContent = seat.options[seat.selectedIndex].text;
+  $('#sumOcc').textContent = $('#resOccasion').value;
+  $('#sumNote').innerHTML = party > 30 ? 'Groups over 30 get a <b>set menu</b> and need a <b>Rs 5,000</b> advance.' : party > 20 ? 'Groups of 21+ need a <b>Rs 5,000</b> advance, adjusted in the bill.' : 'No advance needed for groups up to 20.';
+  $('#partyMinus').disabled = party <= 2; $('#partyPlus').disabled = party >= 40;
+}
+$('#partyMinus').addEventListener('click', () => { party = Math.max(2, party - 1); renderRes(); });
+$('#partyPlus').addEventListener('click', () => { party = Math.min(40, party + 1); renderRes(); });
+$('#resForm').addEventListener('input', renderRes);
+$('#resForm').addEventListener('change', renderRes);
+$('#resForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const c = $('#resConfirm'), name = $('#resName').value.trim(), phone = $('#resPhone').value.trim();
+  if (!name || !phone){ c.hidden = false; c.textContent = 'Add a name and mobile number so the hall manager can confirm your table.'; (name ? $('#resPhone') : $('#resName')).focus(); return; }
+  c.hidden = false;
+  c.textContent = `Request noted for ${party} guests on ${$('#sumDate').textContent} at ${$('#sumTime').textContent}. The hall manager would call ${phone} within 15 minutes to confirm. (Mockup: nothing was sent.)`;
+});
+renderRes();
+
+/* ---------- (06) reviews ---------- */
+const rvCard = r => `<figure class="rv"><q>${r.q}</q><footer><span><b>${r.n}</b>, ${r.a}</span><span class="flames" role="img" aria-label="${r.f} of 5 flames">${[1,2,3,4,5].map(k => flame(k <= r.f)).join('')}</span></footer></figure>`;
+function fillRv(el, list){ const html = list.map(rvCard).join(''); el.innerHTML = html + `<div style="display:contents" aria-hidden="true">${html}</div>`; }
+fillRv($('#rv1'), REVIEWS.slice(0, 3).concat(REVIEWS.slice(3, 4)));
+fillRv($('#rv2'), REVIEWS.slice(3).concat(REVIEWS.slice(0, 1)));
+
+/* ---------- (07) open now ---------- */
+(function openNow(){
+  const n = lahoreNow(), mins = n.h * 60 + n.m, dow = DAYS.indexOf(n.wd), prev = DAYS[(dow + 6) % 7];
+  const close = d => (d === 'Fri' || d === 'Sat') ? 180 : 120; // minutes after midnight
+  const open = d => d === 'Sun' ? 780 : 1080;
+  const isOpen = mins >= open(n.wd) || mins < close(prev);
+  const el = $('#openNow');
+  el.classList.toggle('on', isOpen);
+  $('span', el).textContent = isOpen ? 'Open now, Lahore time' : 'Closed now, opens ' + (n.wd === 'Sun' ? '1 PM' : '6 PM');
+  $$('#hours li').forEach(li => li.classList.toggle('today', li.dataset.days.split(' ').includes(n.wd)));
+})();
+
+/* ---------- hero: canvas embers ---------- */
+(function embers(){
+  const cv = $('#embers'), ctx = cv.getContext('2d'), hero = $('.hero'), glow = $('#htGlow');
+  let W = 0, H = 0, dpr = 1, parts = [], running = false, last = performance.now(), boost = 0, lastY = scrollY, lastT = performance.now();
+  function size(){
+    dpr = Math.min(2, window.devicePixelRatio || 1);
+    W = hero.clientWidth; H = hero.clientHeight;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  function spawn(){
+    const life = 1.6 + Math.random() * 3.2;
+    parts.push({x: Math.random() * W, y: H - 60 - Math.random() * 60, vx: (Math.random() - .5) * 20, vy: -(40 + Math.random() * 110) * (1 + boost * .35), r: .8 + Math.random() * 2.2, life, age: 0, sway: Math.random() * 6.28});
+  }
+  function drawCoals(t){
+    const base = H - 70;
+    const g = ctx.createLinearGradient(0, base - 40, 0, H);
+    g.addColorStop(0, 'rgba(255,107,26,0)'); g.addColorStop(.5, 'rgba(193,18,31,.35)'); g.addColorStop(1, 'rgba(255,107,26,.55)');
+    ctx.fillStyle = g; ctx.fillRect(0, base - 40, W, H - base + 40);
+    for (let i = 0; i < 14; i++){
+      const x = (i + .5) * W / 14, f = .55 + .45 * Math.sin(t * .003 + i * 1.7) * Math.sin(t * .0017 + i);
+      const rg = ctx.createRadialGradient(x, H - 20, 0, x, H - 20, 110);
+      rg.addColorStop(0, `rgba(255,170,60,${.35 * f + .15 * boost})`); rg.addColorStop(1, 'rgba(255,107,26,0)');
+      ctx.fillStyle = rg; ctx.fillRect(x - 110, H - 130, 220, 130);
+    }
+  }
+  function frame(t){
+    if (!running) return;
+    const dt = Math.min(.05, (t - last) / 1000); last = t;
+    boost = Math.max(0, boost - dt * 1.4);
+    ctx.clearRect(0, 0, W, H);
+    ctx.globalCompositeOperation = 'lighter';
+    drawCoals(t);
+    const rate = (W / 1440) * (55 + boost * 240) * dt;
+    for (let i = 0; i < rate; i++) if (Math.random() < rate - i) spawn();
+    parts = parts.filter(p => (p.age += dt) < p.life);
+    for (const p of parts){
+      p.sway += dt * 3; p.x += (p.vx + Math.sin(p.sway) * 18) * dt; p.y += p.vy * dt;
+      const k = p.age / p.life, a = (1 - k) * (k < .1 ? k * 10 : 1);
+      const col = k < .3 ? '255,214,120' : k < .65 ? '255,122,40' : '210,40,30';
+      ctx.fillStyle = `rgba(${col},${a.toFixed(3)})`;
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r * (1 - k * .4), 0, 6.283); ctx.fill();
+    }
+    ctx.globalCompositeOperation = 'source-over';
+    glow.style.opacity = (.32 + Math.min(.55, boost * .16)).toFixed(3);
+    requestAnimationFrame(frame);
+  }
+  function staticFrame(){
+    ctx.clearRect(0, 0, W, H); ctx.globalCompositeOperation = 'lighter'; drawCoals(0);
+    for (let i = 0; i < 90; i++){ const y = H - 60 - Math.random() * H * .8, k = 1 - y / H; ctx.fillStyle = `rgba(255,${120 + Math.round(k * 90)},40,${(.25 + Math.random() * .5).toFixed(2)})`; ctx.beginPath(); ctx.arc(Math.random() * W, y, .8 + Math.random() * 1.8, 0, 6.283); ctx.fill(); }
+    ctx.globalCompositeOperation = 'source-over';
+  }
+  size();
+  addEventListener('resize', () => { size(); if (reduce) staticFrame(); });
+  if (reduce){ staticFrame(); return; }
+  for (let i = 0; i < 60; i++){ spawn(); parts[i].age = Math.random() * parts[i].life; parts[i].y -= Math.random() * H * .6; }
+  // fanning the coals: scroll velocity feeds the fire
+  addEventListener('scroll', () => {
+    const now = performance.now(), v = Math.abs(scrollY - lastY) / Math.max(16, now - lastT) * 1000;
+    lastY = scrollY; lastT = now;
+    boost = Math.min(4, Math.max(boost, v / 600));
+  }, {passive: true});
+  const io = new IntersectionObserver(([e]) => {
+    if (e.isIntersecting && !document.hidden){ if (!running){ running = true; last = performance.now(); requestAnimationFrame(frame); } }
+    else running = false;
+  });
+  io.observe(hero);
+  document.addEventListener('visibilitychange', () => { if (document.hidden) running = false; else if (hero.getBoundingClientRect().bottom > 0){ running = true; last = performance.now(); requestAnimationFrame(frame); } });
+})();
+
+/* ---------- motion ---------- */
+if (window.gsap && window.ScrollTrigger && !reduce){
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.defaults({ease: 'expo.out', duration: 1});
+
+  // hero type rises out of the coals after load
+  gsap.from('.ht-stack', {yPercent: 18, opacity: 0, duration: 1.4, delay: .15});
+  gsap.from('.fireboard', {y: 30, opacity: 0, delay: .5});
+  // the title cools as you scroll away
+  gsap.to('.hero-inner', {yPercent: -12, ease: 'none', scrollTrigger: {trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true}});
+
+  // section heads
+  $$('.sec-head').forEach(h => gsap.from(h.children, {y: 40, opacity: 0, stagger: .08, scrollTrigger: {trigger: h, start: 'top 82%'}}));
+
+  // (01) numbered dishes: art wipes up, copy follows, number drifts
+  $$('.dish').forEach(d => {
+    const tl = gsap.timeline({scrollTrigger: {trigger: d, start: 'top 75%'}});
+    tl.fromTo($('.dish-art', d), {clipPath: 'circle(0% at 50% 100%)'}, {clipPath: 'circle(75% at 50% 50%)', duration: 1.4, ease: 'power3.inOut', clearProps: 'clipPath'})
+      .from($('.dish-copy', d).children, {y: 34, opacity: 0, stagger: .07}, '-=.7');
+    gsap.fromTo($('.dish-num', d), {yPercent: 30}, {yPercent: -30, ease: 'none', scrollTrigger: {trigger: d, start: 'top bottom', end: 'bottom top', scrub: true}});
+  });
+
+  // (02) deals rise, saving stamps count up
+  gsap.from('.deal', {y: 70, opacity: 0, stagger: .12, scrollTrigger: {trigger: '#dealGrid', start: 'top 80%'}});
+  $$('.stamp').forEach(s => {
+    const b = $('[data-save]', s), target = +b.dataset.save, o = {v: 0};
+    gsap.from(s, {scale: 0, rotate: -120, duration: .9, ease: 'back.out(2)', scrollTrigger: {trigger: s, start: 'top 85%'}});
+    gsap.to(o, {v: target, duration: 1.6, ease: 'power2.out', scrollTrigger: {trigger: s, start: 'top 85%'}, onUpdate: () => { b.textContent = rs(Math.round(o.v / 10) * 10); }, onComplete: () => { b.textContent = rs(target); }});
+  });
+
+  // (03) services: pinned on desktop, scroll walks through the four tabs
+  const mm = gsap.matchMedia();
+  mm.add('(min-width: 768px)', () => {
+    svcTrigger = ScrollTrigger.create({
+      trigger: '#services', start: 'top top+=68', end: () => '+=' + window.innerHeight * 1.8, pin: true, anticipatePin: 1,
+      onUpdate: self => setService(Math.min(panels.length - 1, Math.floor(self.progress * panels.length)), true)
+    });
+    return () => { svcTrigger = null; };
+  });
+
+  // (04) menu chips
+  gsap.from('.chip', {y: 14, opacity: 0, stagger: .05, scrollTrigger: {trigger: '#chips', start: 'top 85%'}});
+  // (05) + (07)
+  gsap.from('.res-form, .res-summary', {y: 50, opacity: 0, stagger: .12, scrollTrigger: {trigger: '.res-grid', start: 'top 80%'}});
+  gsap.from('.map, .info', {y: 50, opacity: 0, stagger: .12, scrollTrigger: {trigger: '.visit-grid', start: 'top 82%'}});
+}
+</script>
+</body>
+</html>

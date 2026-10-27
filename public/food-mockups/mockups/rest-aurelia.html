@@ -57,8 +57,8 @@
   color-scheme:dark;
 }
 *,*::before,*::after{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:calc(var(--header-h) + 12px)}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:calc(var(--header-h) + 12px)}
 body{margin:0;background:var(--ink);color:var(--ivory);font-family:var(--body);font-weight:300;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
 img,svg,canvas{display:block;max-width:100%}
 a{color:inherit}
@@ -163,7 +163,8 @@ button,input,select,textarea{font:inherit;color:inherit}
 
 /* Experiences */
 .exp-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:48px clamp(40px,7vw,110px);align-items:start}
-.exp-nav{position:sticky;top:calc(var(--header-h) + 48px)}
+.exp-nav{position:sticky;top:calc(var(--header-h) + 48px);min-width:0}
+.exp-panels{min-width:0}
 .exp-nav h2{font-size:clamp(2.6rem,5vw,4.6rem);margin:22px 0 28px}
 .exp-tabs{display:flex;flex-direction:column;border-top:1px solid var(--line)}
 .exp-tabs a{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:16px 0;border-bottom:1px solid var(--line);text-decoration:none;font-family:var(--display);font-size:1.5rem;color:var(--mute);transition:color .35s var(--ease),padding .35s var(--ease)}
@@ -183,7 +184,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 .link-arrow{display:inline-flex;gap:10px;align-items:center;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);text-decoration:none;border-bottom:1px solid var(--line-gold);padding-bottom:6px;background:none;border-top:0;border-left:0;border-right:0;cursor:pointer}
 .link-arrow:hover{border-bottom-color:var(--gold)}
 @media (max-width:899px){
-  .exp-grid{grid-template-columns:1fr;gap:28px}
+  .exp-grid{grid-template-columns:minmax(0,1fr);gap:28px}
   .exp-nav{position:static}
   .exp-tabs{position:sticky;top:var(--header-h);z-index:5;flex-direction:row;overflow-x:auto;gap:8px;padding:12px 0;background:var(--ink);border-top:0;border-bottom:1px solid var(--line);scrollbar-width:none;margin-inline:calc(var(--gl) * -1) calc(var(--gr) * -1);padding-inline:var(--gl) var(--gr)}
   .exp-tabs::-webkit-scrollbar{display:none}
@@ -238,7 +239,7 @@ textarea.input{min-height:96px;resize:vertical}
 .confirm h3{font-size:2.2rem;margin-bottom:12px}
 .confirm p{color:var(--ivory-2)}
 .confirm p + p{margin-top:10px}
-@media (max-width:899px){.res-grid{grid-template-columns:1fr}.res-summary{position:static}}
+@media (max-width:899px){.res-grid{grid-template-columns:minmax(0,1fr)}.res-summary{position:static}}
 @media (max-width:520px){.field-row,.choice-grid{grid-template-columns:1fr}}
 
 /* Visit */
@@ -693,6 +694,17 @@ const MAX_PARTY = 8;
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const rs = (n) => "Rs " + n.toLocaleString("en-US");
 
+/* In-page links glide (CSS smooth scrolling fights ScrollTrigger snapping, so it's done here) */
+document.addEventListener("click", (e) => {
+  const a = e.target.closest('a[href^="#"]');
+  if (!a || a.getAttribute("href").length < 2) return;
+  const target = document.querySelector(a.getAttribute("href"));
+  if (!target) return;
+  e.preventDefault();
+  target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+  history.replaceState(null, "", a.getAttribute("href"));
+});
+
 /* ---------- Hero: candlelit table on canvas ---------- */
 (function heroCanvas() {
   const canvas = document.getElementById("hero-canvas");
@@ -743,7 +755,7 @@ const rs = (n) => "Rs " + n.toLocaleString("en-US");
     ctx.fillStyle = g; ctx.fillRect(-40, ty, w + 80, h - ty + 40);
 
     const f = reduceMotion ? 0.92 : flicker(t);
-    const cx = w * (w < 700 ? 0.8 : 0.74);
+    const cx = w * (w < 520 ? 0.88 : w < 700 ? 0.8 : 0.74);
     const candleH = Math.max(70, h * 0.17), candleW = Math.max(16, Math.min(30, w * 0.022));
     const baseY = ty + (h - ty) * 0.18;
     const flameY = baseY - candleH;
@@ -1046,8 +1058,7 @@ if (window.gsap && window.ScrollTrigger) {
         end: () => "+=" + window.innerHeight * 0.85 * (items.length - 1),
         pin: true,
         scrub: 0.6,
-        snap: { snapTo: 1 / (items.length - 1), duration: { min: 0.2, max: 0.6 }, ease: "power1.inOut" },
-        invalidateOnRefresh: true,
+        snap: { snapTo: 1 / (items.length - 1), delay: 0.15, duration: { min: 0.2, max: 0.5 }, ease: "power1.inOut" },
         onUpdate: (self) => {
           const idx = Math.round(self.progress * (items.length - 1));
           rail.forEach((li, i) => li.classList.toggle("on", i === idx));

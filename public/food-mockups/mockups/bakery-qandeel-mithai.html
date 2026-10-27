@@ -1,0 +1,1142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Qandeel Sweets &amp; Bakers</title>
+<meta name="description" content="Qandeel Sweets & Bakers, Bank Road, Saddar, Rawalpindi. Mithai made at 6 am in pure desi ghee, sold by weight. Pre-order Eid, shaadi and corporate boxes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Mukta:wght@400;500;700;800&family=Noto+Nastaliq+Urdu:wght@500;700&display=swap">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Bakery",
+  "name": "Qandeel Sweets & Bakers",
+  "description": "Traditional mithai and bakery since 1978. Sweets sold by weight, festive and corporate boxes to pre-order.",
+  "foundingDate": "1978",
+  "telephone": "+92 51 555 0178",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Shop 14, Bank Road, Saddar",
+    "addressLocality": "Rawalpindi",
+    "addressRegion": "Punjab",
+    "addressCountry": "PK"
+  },
+  "openingHours": "Mo-Su 07:00-23:00",
+  "priceRange": "Rs 1,100 - Rs 3,400 per kg",
+  "servesCuisine": ["Pakistani", "Mithai", "Bakery"],
+  "acceptsReservations": false
+}
+</script>
+<style>
+/* Layout: jharokha arches + gold-ribbon gift box; ivory shop floor with maroon festive bands */
+:root{
+  color-scheme: light;
+  --maroon:#5A0F2E; --maroon-2:#470B24; --maroon-3:#2E0616;
+  --marigold:#F2A007; --marigold-2:#B87400;
+  --pista:#93C572; --pista-2:#4F7F31;
+  --ivory:#FFF8EC; --ivory-2:#F5E8CF; --paper:#FFFDF8;
+  --ink:#2A0716; --muted:#755560;
+  --gold-1:#B8862B; --gold-2:#F5D27A;
+  --f-display:"Yeseva One", "Playfair Display", Georgia, serif;
+  --f-body:"Mukta", "Segoe UI", system-ui, sans-serif;
+  --f-urdu:"Noto Nastaliq Urdu", "Jameel Noori Nastaleeq", "Urdu Typesetting", serif;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --gut-l:max(16px, env(safe-area-inset-left, 0px));
+  --gut-r:max(16px, env(safe-area-inset-right, 0px));
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ivory);color:var(--ink);font:400 1.0625rem/1.6 var(--f-body);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:70;background:var(--ivory)}
+img,svg{max-width:100%}
+a{color:inherit}
+h1,h2,h3{font-family:var(--f-display);font-weight:400;margin:0;line-height:1.06;text-wrap:balance}
+p{margin:0}
+.ur{font-family:var(--f-urdu);direction:rtl;unicode-bidi:isolate;line-height:2.1;font-weight:500}
+:focus-visible{outline:3px solid var(--marigold);outline-offset:3px;border-radius:6px}
+.page{overflow-x:clip}
+.wrap{width:100%;max-width:1240px;margin-inline:auto;padding-left:var(--gut-l);padding-right:var(--gut-r)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* shared Tasting Board strip */
+.tb-strip{display:flex;justify-content:space-between;gap:12px;padding:7px max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));background:#111;color:#cfcfcf;font:500 12px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.02em}
+.tb-strip a{color:#fff;text-decoration:none}.tb-strip a:hover{text-decoration:underline}
+.in-board .tb-strip{display:none}
+@media (max-width:480px){.tb-strip span{display:none}}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 24px;border-radius:999px;font:700 .98rem/1 var(--f-body);text-decoration:none;border:2px solid transparent;cursor:pointer;transition:transform .25s var(--ease),background-color .2s,color .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn-gold{background:var(--marigold);color:var(--maroon-3)}
+.btn-gold:hover{background:#FFB21F}
+.btn-line{border-color:var(--maroon);color:var(--maroon);background:transparent}
+.btn-line:hover{background:var(--maroon);color:var(--ivory)}
+.btn[disabled]{opacity:.45;cursor:not-allowed;transform:none}
+
+/* header */
+.site-head{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--ivory)}
+.site-head::after{content:"";position:absolute;left:0;right:0;bottom:-7px;height:7px;background:radial-gradient(circle at 7px 0,var(--gold-1) 0 3.2px,transparent 3.8px) 0 0/14px 7px repeat-x;pointer-events:none}
+.head-in{display:flex;align-items:center;gap:22px;height:70px;border-bottom:1px solid rgba(90,15,46,.18)}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--maroon);flex-shrink:0}
+.logo svg{width:24px;height:34px}
+.logo b{display:block;font-family:var(--f-display);font-weight:400;font-size:1.55rem;line-height:1}
+.logo small{display:block;font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-top:3px}
+.nav{display:flex;gap:22px;margin-left:auto}
+.nav a{text-decoration:none;font-weight:600;font-size:.95rem;color:var(--maroon);padding:6px 0;border-bottom:2px solid transparent}
+.nav a:hover{border-color:var(--marigold)}
+.bag-wrap{position:relative}
+.bag-btn{display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 14px;border-radius:999px;border:1.5px solid rgba(90,15,46,.3);background:var(--paper);font:700 .88rem var(--f-body);color:var(--maroon);cursor:pointer}
+.bag-btn .count{display:inline-grid;place-items:center;min-width:22px;height:22px;border-radius:99px;background:var(--maroon);color:var(--ivory);font-size:.75rem;padding:0 6px}
+.bag-panel{position:absolute;right:0;top:calc(100% + 12px);width:min(340px,calc(100vw - 32px));background:var(--paper);border:1px solid rgba(90,15,46,.2);border-radius:16px;padding:18px;box-shadow:0 24px 60px -24px rgba(46,6,22,.45);z-index:80}
+.bag-panel h3{font-size:1.25rem;color:var(--maroon);margin-bottom:8px}
+.bag-panel ul{list-style:none;margin:0 0 12px;padding:0;display:grid;gap:6px;max-height:220px;overflow:auto}
+.bag-panel li{display:flex;justify-content:space-between;gap:12px;font-size:.92rem;border-bottom:1px dashed rgba(90,15,46,.18);padding-bottom:6px}
+.bag-panel .tot{display:flex;justify-content:space-between;font-weight:800;color:var(--maroon);margin-bottom:12px}
+.bag-panel .note{font-size:.82rem;color:var(--muted);margin-top:10px}
+@media (max-width:1060px){.nav{display:none}.bag-wrap{margin-left:auto}}
+@media (max-width:767px){.head-cta{display:none}.head-in{height:62px}}
+
+/* hero */
+.hero{position:relative;background:
+  radial-gradient(60% 70% at 78% 55%, rgba(242,160,7,.16), transparent 70%),
+  var(--ivory)}
+.hero-in{display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center;min-height:min(calc(100svh - 70px), 860px);padding-block:40px 56px}
+.eyebrow{font-weight:800;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--marigold-2)}
+.hero-ur{font-family:var(--f-urdu);font-size:clamp(2.2rem,4.4vw,3.3rem);line-height:1.9;color:var(--marigold-2);direction:rtl;text-align:left;margin:4px 0 6px}
+.hero h1{font-size:clamp(2.4rem,4.5vw,4.1rem);color:var(--maroon);max-width:15ch}
+.hero-lede{margin-top:20px;max-width:52ch;color:#4b2a35;font-size:1.1rem}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.facts{display:flex;flex-wrap:wrap;gap:10px 28px;margin:30px 0 0;padding:16px 0 0;border-top:1px solid rgba(90,15,46,.18)}
+.facts div{display:grid}
+.facts dt{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--muted)}
+.facts dd{margin:0;font-weight:700;color:var(--maroon);font-variant-numeric:tabular-nums;user-select:all}
+.box-stage{position:relative;display:grid;justify-items:center;gap:14px}
+.box-stage .wm{position:absolute;inset:-6% 0 auto;text-align:center;font-family:var(--f-urdu);font-size:clamp(5rem,13vw,11rem);line-height:1.4;color:var(--maroon);opacity:.06;pointer-events:none;direction:rtl}
+.box-svg{position:relative;width:100%;max-width:560px;height:auto;display:block;overflow:visible}
+.piece-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;max-width:520px}
+.chip{font-size:.8rem;font-weight:700;padding:5px 11px;border-radius:999px;background:var(--paper);color:var(--maroon);border:1px solid rgba(90,15,46,.18)}
+.box-cap{font-size:.92rem;color:var(--muted);text-align:center}
+.box-cap b{color:var(--maroon)}
+.cue{display:inline-flex;align-items:center;gap:10px;margin-top:22px;font-size:.82rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.cue i{display:block;width:18px;height:28px;border:2px solid var(--muted);border-radius:12px;position:relative}
+.cue i::after{content:"";position:absolute;left:50%;top:5px;width:4px;height:6px;margin-left:-2px;border-radius:2px;background:var(--marigold-2);animation:cue 1.6s var(--ease) infinite}
+@keyframes cue{0%{transform:translateY(0);opacity:1}70%{transform:translateY(9px);opacity:0}100%{opacity:0}}
+@media (max-width:900px){
+  .hero-in{grid-template-columns:1fr;min-height:0;padding-block:28px 48px}
+  .hero h1{max-width:16ch}
+  .box-stage{order:2}
+}
+
+/* marquee */
+.marquee{background:var(--maroon);color:var(--gold-2);overflow:hidden;border-block:4px double var(--gold-1)}
+.marquee-track{display:flex;width:max-content;animation:mq 42s linear infinite}
+.marquee:hover .marquee-track{animation-play-state:paused}
+.marquee span{display:inline-flex;align-items:center;gap:26px;padding:12px 0 12px 26px;white-space:nowrap;font-family:var(--f-display);font-size:1.2rem}
+.marquee span .ur{font-size:1.05rem;line-height:1.6}
+.marquee span::after{content:"";width:9px;height:9px;transform:rotate(45deg);background:var(--marigold)}
+@keyframes mq{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion: reduce){.marquee-track{animation:none}}
+
+/* sections */
+.sec{padding-block:clamp(64px,9vw,118px)}
+.sec-head{display:grid;gap:14px;margin-bottom:clamp(30px,4vw,48px);max-width:780px}
+.label{display:inline-flex;flex-wrap:wrap;align-items:center;gap:10px;font:800 .76rem/1 var(--f-body);letter-spacing:.17em;text-transform:uppercase;color:var(--maroon)}
+.label .n{font-family:var(--f-display);font-weight:400;font-size:.95rem;letter-spacing:.02em;background:var(--marigold);color:var(--maroon-3);border-radius:999px;padding:6px 11px 5px}
+.label .ur{font-size:1rem;letter-spacing:0;text-transform:none;color:var(--marigold-2);line-height:1.6}
+.sec-head h2{font-size:clamp(2.1rem,4.4vw,3.5rem);color:var(--maroon)}
+.sec-head p{color:var(--muted);max-width:62ch}
+.band{background:var(--maroon);color:var(--ivory);position:relative;isolation:isolate}
+.band::before{content:"";position:absolute;inset:0;z-index:-1;opacity:.08;background:
+  repeating-linear-gradient(45deg,var(--gold-2) 0 1px,transparent 1px 22px),
+  repeating-linear-gradient(-45deg,var(--gold-2) 0 1px,transparent 1px 22px)}
+.band .label{color:var(--gold-2)}
+.band .sec-head h2{color:var(--ivory)}
+.band .sec-head p{color:rgba(255,248,236,.74)}
+
+/* (01) counter */
+.counter-top{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:16px;margin-bottom:28px}
+.fresh-banner{display:inline-flex;align-items:center;gap:10px;padding:8px 14px;border-radius:999px;background:rgba(147,197,114,.22);color:var(--pista-2);font-weight:800;font-size:.86rem}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--pista-2);box-shadow:0 0 0 0 rgba(79,127,49,.5);animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(79,127,49,.5)}70%{box-shadow:0 0 0 9px rgba(79,127,49,0)}100%{box-shadow:0 0 0 0 rgba(79,127,49,0)}}
+@media (prefers-reduced-motion: reduce){.dot{animation:none}.cue i::after{animation:none}}
+.counter-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:22px}
+.item{position:relative;display:flex;flex-direction:column;gap:10px;padding:22px 20px 20px;background:var(--paper);border:1px solid rgba(90,15,46,.16);border-radius:150px 150px 16px 16px}
+.item-art{display:grid;place-items:center;aspect-ratio:1.5;margin:4px 6px 0;border-radius:120px 120px 12px 12px;background:radial-gradient(70% 60% at 50% 62%,var(--ivory-2) 0 62%,transparent 63%)}
+.item-art svg{width:56%;height:auto;overflow:visible;transition:transform .5s var(--ease)}
+.item:hover .item-art svg{transform:translateY(-6px) scale(1.05)}
+.item-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.item h3{font-size:1.4rem;color:var(--maroon)}
+.item .ur{color:var(--marigold-2);font-size:.95rem;line-height:1.7}
+.item-desc{font-size:.93rem;color:#5d3f48;line-height:1.5}
+.kg{font-weight:800;color:var(--maroon);font-variant-numeric:tabular-nums}
+.kg small{font-weight:600;color:var(--muted)}
+.wsel{display:grid;grid-template-columns:repeat(3,1fr);border:1.5px solid var(--maroon);border-radius:999px;overflow:hidden}
+.wsel button{appearance:none;border:0;background:transparent;min-height:38px;font:700 .86rem var(--f-body);color:var(--maroon);cursor:pointer}
+.wsel button+button{border-left:1.5px solid rgba(90,15,46,.25)}
+.wsel button[aria-pressed="true"]{background:var(--maroon);color:var(--ivory)}
+.item-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto;padding-top:4px}
+.price{font-family:var(--f-display);font-size:1.55rem;color:var(--maroon);font-variant-numeric:tabular-nums}
+.add{min-height:40px;padding:0 16px;border-radius:999px;border:0;background:var(--marigold);color:var(--maroon-3);font:800 .86rem var(--f-body);cursor:pointer;transition:background-color .2s}
+.add:hover{background:#FFB21F}
+.add.done{background:var(--pista);color:#173106}
+.fresh{display:inline-flex;align-items:center;gap:7px;font-size:.8rem;font-weight:700;color:var(--pista-2)}
+.fresh::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.item.is-out{background:var(--ivory-2);border-style:dashed}
+@media (max-width:560px){.item{border-radius:110px 110px 16px 16px}.item-art{aspect-ratio:2.1}.item-art svg{width:38%}}
+.item.is-out .item-art svg,.item.is-out h3,.item.is-out .kg,.item.is-out .item-desc{opacity:.5;filter:grayscale(.7)}
+.out-tag{margin-top:auto;display:inline-block;align-self:flex-start;padding:6px 12px;border-radius:999px;background:var(--maroon);color:var(--ivory);font-weight:800;font-size:.82rem}
+
+/* (02) festive */
+.festive-top{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:32px;align-items:end;margin-bottom:46px}
+.eid-clock{justify-self:end;background:var(--maroon-3);border:1px solid rgba(245,210,122,.35);border-radius:22px;padding:20px 24px;display:grid;gap:10px}
+.eid-clock .t{font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:var(--gold-2)}
+.eid-clock .digits{display:flex;gap:16px}
+.eid-clock .digits div{display:grid;justify-items:center}
+.eid-clock b{font-family:var(--f-display);font-weight:400;font-size:clamp(2.2rem,4vw,3.2rem);line-height:1;color:var(--ivory);font-variant-numeric:tabular-nums}
+.eid-clock small{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,248,236,.6);font-weight:700}
+.eid-clock .note{font-size:.78rem;color:rgba(255,248,236,.6)}
+.deal-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:26px}
+.deal{position:relative;display:flex;flex-direction:column;gap:12px;padding:30px 24px 24px;background:var(--maroon-2);border:1px solid rgba(245,210,122,.32);border-radius:20px}
+.deal .kind{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:var(--marigold)}
+.deal h3{font-size:1.6rem;color:var(--ivory);padding-right:76px}
+.deal .ur{color:var(--gold-2);font-size:1rem;line-height:1.7}
+.deal ul{margin:0;padding:0 0 0 18px;display:grid;gap:3px;color:rgba(255,248,236,.82);font-size:.94rem}
+.deal ul li::marker{color:var(--marigold)}
+.deal .prices{display:flex;align-items:baseline;flex-wrap:wrap;gap:10px;margin-top:auto;padding-top:10px;border-top:1px dashed rgba(245,210,122,.3)}
+.deal .now{font-family:var(--f-display);font-size:2rem;color:var(--gold-2);font-variant-numeric:tabular-nums}
+.deal .was{text-decoration:line-through;color:rgba(255,248,236,.5);font-variant-numeric:tabular-nums}
+.deal .per{font-size:.86rem;color:rgba(255,248,236,.7)}
+.deal .ends{font-size:.8rem;color:rgba(255,248,236,.6)}
+.deal .btn{align-self:flex-start;margin-top:6px}
+.badge{position:absolute;top:-28px;right:-10px;width:114px;height:114px;display:grid;place-items:center;text-align:center;color:var(--maroon-3)}
+.badge svg{position:absolute;inset:0;width:100%;height:100%;animation:spin 24s linear infinite}
+.badge span{position:relative;font:800 .7rem/1.1 var(--f-body);letter-spacing:.06em;text-transform:uppercase}
+.badge b{display:block;font-family:var(--f-display);font-weight:400;font-size:1rem;letter-spacing:0;text-transform:none;font-variant-numeric:tabular-nums}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion: reduce){.badge svg{animation:none}}
+.live-note{margin-top:22px;font-size:.82rem;color:rgba(255,248,236,.6)}
+@media (max-width:860px){.festive-top{grid-template-columns:1fr}.eid-clock{justify-self:start}}
+
+/* (03) build a box */
+.builder{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(24px,4vw,56px);align-items:start}
+.builder-out{width:100%;max-width:470px;justify-self:center}
+.step{display:grid;gap:12px;margin-bottom:26px}
+.step h3{font-family:var(--f-body);font-weight:800;font-size:.8rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
+.sizes{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.size{display:grid;gap:2px;padding:12px;border-radius:14px;border:1.5px solid rgba(90,15,46,.22);background:var(--paper);text-align:left;cursor:pointer;font:inherit;color:var(--ink)}
+.size b{font-family:var(--f-display);font-weight:400;font-size:1.35rem;color:var(--maroon)}
+.size small{font-size:.8rem;color:var(--muted)}
+.size[aria-pressed="true"]{border-color:var(--maroon);background:var(--maroon);color:var(--ivory)}
+.size[aria-pressed="true"] b{color:var(--gold-2)}
+.size[aria-pressed="true"] small{color:rgba(255,248,236,.75)}
+.palette{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.pal .q{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;border:2px dashed var(--marigold-2);color:var(--marigold-2);font:400 1.6rem var(--f-display)}
+.pal{display:grid;justify-items:center;gap:2px;padding:10px 6px 10px;border-radius:14px;border:1.5px solid rgba(90,15,46,.18);background:var(--paper);cursor:pointer;font:inherit;color:var(--ink);transition:border-color .2s,transform .25s var(--ease)}
+.pal:hover{border-color:var(--marigold);transform:translateY(-2px)}
+.pal svg{width:52px;height:52px}
+.pal b{font-size:.86rem;font-weight:800;color:var(--maroon);text-align:center;line-height:1.2}
+.pal small{font-size:.76rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.box-viz{position:relative;background:linear-gradient(160deg,#6B1638,#47091F);border-radius:22px;padding:clamp(14px,2vw,22px);box-shadow:inset 0 0 0 2px var(--gold-1),inset 0 0 0 7px var(--maroon-2),inset 0 0 0 8px rgba(245,210,122,.5),0 30px 60px -30px rgba(46,6,22,.6)}
+.box-viz .lidtag{display:flex;justify-content:space-between;align-items:center;gap:10px;color:var(--gold-2);font-family:var(--f-display);font-size:1.1rem;margin:2px 4px 12px}
+.box-viz .lidtag .ur{font-size:1rem;line-height:1.5}
+.slots{display:grid;gap:8px;grid-template-columns:repeat(var(--cols,3),minmax(0,1fr))}
+.slot{position:relative;aspect-ratio:1;border-radius:12px;background:var(--maroon-3);border:1.5px dashed rgba(245,210,122,.45);display:grid;place-items:center;cursor:pointer;color:rgba(245,210,122,.6);font:700 1.4rem var(--f-body);padding:0}
+.slot.filled{border-style:solid;border-color:rgba(245,210,122,.6);background:radial-gradient(circle at 50% 52%,#FFF3DC 0 56%,#F2E0BD 57% 60%,var(--maroon-3) 61%)}
+.slot svg{width:74%;height:74%;overflow:visible}
+.slot.pop svg{animation:pop .45s var(--ease)}
+@keyframes pop{0%{transform:scale(.4) translateY(-20px);opacity:0}100%{transform:none;opacity:1}}
+.summary{margin-top:18px;display:grid;gap:8px;background:var(--paper);border:1px solid rgba(90,15,46,.16);border-radius:16px;padding:18px}
+.summary .row{display:flex;justify-content:space-between;gap:12px;font-variant-numeric:tabular-nums}
+.summary .row.total{font-weight:800;color:var(--maroon);font-size:1.15rem;border-top:1px dashed rgba(90,15,46,.25);padding-top:8px}
+.meter{height:10px;border-radius:99px;background:var(--ivory-2);overflow:hidden}
+.meter i{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--marigold),var(--gold-1));transform-origin:left;transform:scaleX(0);transition:transform .45s var(--ease)}
+.builder-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.confirm{margin-top:14px;padding:14px 16px;border-radius:14px;background:rgba(147,197,114,.25);color:#24480f;font-weight:600;font-size:.94rem}
+@media (max-width:900px){.builder{grid-template-columns:1fr}}
+@media (max-width:1100px) and (min-width:901px){.palette{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:420px){.palette{grid-template-columns:repeat(2,minmax(0,1fr))}.sizes{gap:6px}.size{padding:10px 8px}}
+
+/* (04) bakery corner */
+.bakery{background:var(--ivory-2)}
+.shelf{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(232px,1fr);gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 26px;scrollbar-color:var(--maroon) transparent}
+.shelf-wrap{position:relative}
+.shelf-wrap::after{content:"";position:absolute;left:0;right:0;bottom:8px;height:12px;border-radius:6px;background:linear-gradient(#9C6533,#6E4320);box-shadow:0 10px 18px -8px rgba(46,6,22,.45);pointer-events:none}
+.bk{scroll-snap-align:start;display:flex;flex-direction:column;gap:6px;padding:16px 16px 30px;background:var(--paper);border-radius:16px 16px 6px 6px;border:1px solid rgba(90,15,46,.12)}
+.bk svg{width:100%;height:auto;aspect-ratio:4/3;background:var(--ivory);border-radius:12px}
+.bk h3{font-size:1.25rem;color:var(--maroon);margin-top:6px}
+.bk p{font-size:.9rem;color:#5d3f48;line-height:1.45}
+.bk .bp{font-weight:800;color:var(--maroon);font-variant-numeric:tabular-nums}
+.bk .when{font-size:.8rem;font-weight:700;color:var(--pista-2)}
+.bk.is-out{background:transparent;border-style:dashed}
+.bk.is-out svg,.bk.is-out h3,.bk.is-out p{opacity:.5;filter:grayscale(.7)}
+.bk.is-out .when{color:var(--maroon)}
+
+/* (05) bulk */
+.bulk-grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:clamp(24px,4vw,48px);align-items:start}
+.form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 18px}
+.field{display:grid;gap:6px;min-width:0}
+.field.full{grid-column:1/-1}
+.field label,.field legend{font-weight:800;font-size:.84rem;color:var(--maroon)}
+.field input:not([type=radio]):not([type=checkbox]),.field select,.field textarea{width:100%;min-height:48px;border:1.5px solid rgba(90,15,46,.25);border-radius:12px;padding:10px 12px;font:inherit;font-size:1rem;background:var(--paper);color:var(--ink)}
+.field textarea{min-height:90px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--marigold);box-shadow:0 0 0 3px rgba(242,160,7,.25)}
+fieldset.field{border:0;padding:0;margin:0}
+.radios{display:flex;flex-wrap:wrap;gap:8px}
+.radios label{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border-radius:999px;border:1.5px solid rgba(90,15,46,.25);background:var(--paper);font-weight:700;cursor:pointer}
+.radios input{accent-color:var(--maroon)}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:.95rem}
+.check input{width:20px;height:20px;margin-top:3px;accent-color:var(--maroon)}
+.hint{font-size:.8rem;color:var(--muted)}
+.estimate{position:sticky;top:96px;background:var(--maroon);color:var(--ivory);border-radius:22px;padding:26px;display:grid;gap:10px}
+.estimate h3{font-size:1.5rem;color:var(--gold-2)}
+.estimate .row{display:flex;justify-content:space-between;gap:12px;font-variant-numeric:tabular-nums;font-size:.96rem}
+.estimate .row span:first-child{color:rgba(255,248,236,.75)}
+.estimate .row.total{border-top:1px dashed rgba(245,210,122,.4);padding-top:10px;font-weight:800;font-size:1.2rem}
+.estimate .row.total span:first-child{color:var(--ivory)}
+.estimate .perk{font-size:.84rem;color:var(--gold-2)}
+@media (max-width:900px){.bulk-grid{grid-template-columns:1fr}.estimate{position:static}}
+@media (max-width:560px){.form{grid-template-columns:1fr}}
+
+/* (06) story */
+.story{background:var(--maroon-3)}
+.story-in{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(28px,5vw,64px);align-items:center}
+.quote{font-family:var(--f-urdu);direction:rtl;text-align:left;font-size:clamp(1.6rem,3.2vw,2.5rem);line-height:2;color:var(--gold-2);margin:6px 0 4px}
+.quote-en{font-family:var(--f-display);font-size:clamp(1.5rem,2.6vw,2.1rem);color:var(--ivory);line-height:1.2;max-width:22ch}
+.timeline{list-style:none;margin:30px 0 0;padding:0;display:grid;gap:0}
+.timeline li{display:grid;grid-template-columns:86px minmax(0,1fr);gap:16px;padding:14px 0;border-top:1px solid rgba(245,210,122,.2)}
+.timeline b{font-family:var(--f-display);font-weight:400;font-size:1.45rem;color:var(--marigold);font-variant-numeric:tabular-nums}
+.timeline span{color:rgba(255,248,236,.82)}
+.tarazu{width:100%;max-width:420px;justify-self:center;overflow:visible}
+@media (max-width:860px){.story-in{grid-template-columns:1fr}.tarazu{max-width:320px}}
+
+/* (07) branches */
+.branch-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.branch{display:flex;flex-direction:column;gap:10px;padding:24px;border-radius:120px 120px 18px 18px;background:var(--paper);border:1px solid rgba(90,15,46,.16);padding-top:46px;text-align:center;align-items:center}
+.branch h3{font-size:1.5rem;color:var(--maroon)}
+.branch .addr{color:#5d3f48;font-size:.95rem;max-width:30ch}
+.branch .hrs{font-weight:700;color:var(--maroon);font-variant-numeric:tabular-nums}
+.branch .tel{font-weight:800;font-size:1.05rem;color:var(--maroon);user-select:all;font-variant-numeric:tabular-nums}
+.status{display:inline-flex;align-items:center;gap:7px;padding:4px 12px;border-radius:999px;font-size:.78rem;font-weight:800;background:rgba(147,197,114,.25);color:var(--pista-2)}
+.status.closed{background:rgba(90,15,46,.1);color:var(--maroon)}
+.branch .btn{margin-top:auto}
+
+/* footer */
+.foot{background:var(--maroon-3);color:rgba(255,248,236,.75);padding-block:48px 40px;font-size:.92rem}
+.foot-in{display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px;align-items:flex-start}
+.foot .logo{color:var(--ivory)}
+.foot .logo small{color:rgba(255,248,236,.6)}
+.foot a{color:var(--gold-2)}
+.foot .fine{width:100%;border-top:1px solid rgba(245,210,122,.2);padding-top:18px;font-size:.8rem;color:rgba(255,248,236,.5)}
+
+/* mobile action bar */
+.mbar{display:none}
+@media (max-width:767px){
+  body{padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))}
+  .mbar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:grid;grid-template-columns:1.7fr 1fr 1fr 1fr;gap:6px;padding:8px max(10px,env(safe-area-inset-right,0px)) calc(8px + env(safe-area-inset-bottom,0px)) max(10px,env(safe-area-inset-left,0px));background:var(--maroon-3);border-top:2px solid var(--gold-1)}
+  .mbar a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:54px;border-radius:14px;color:var(--ivory);font-size:.72rem;font-weight:700;text-decoration:none}
+  .mbar a svg{width:20px;height:20px}
+  .mbar a.primary{flex-direction:row;gap:8px;background:var(--marigold);color:var(--maroon-3);font-size:.92rem;font-weight:800}
+}
+</style>
+</head>
+<body>
+<div class="tb-strip"><a href="../index.html">&larr; Tasting Board</a><span>Mockup 09 / 10 &middot; concept, not a live site</span></div>
+<script>try{if(window.parent!==window&&window.parent.__TASTING_BOARD__)document.documentElement.classList.add('in-board')}catch(e){}</script>
+
+<!-- Sprite: mithai pieces + shared gradients -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <radialGradient id="g-gulab" cx=".38" cy=".34" r=".72"><stop offset="0" stop-color="#A9541F"/><stop offset=".55" stop-color="#6E270B"/><stop offset="1" stop-color="#3E1204"/></radialGradient>
+    <radialGradient id="g-syrup" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#E9A23B" stop-opacity=".85"/><stop offset="1" stop-color="#C7781A" stop-opacity=".15"/></radialGradient>
+    <linearGradient id="g-varq" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".42" stop-color="#C9CED4"/><stop offset=".68" stop-color="#F3F5F7"/><stop offset="1" stop-color="#B7BDC4"/></linearGradient>
+    <radialGradient id="g-sphere" cx=".34" cy=".3" r=".75"><stop offset="0" stop-color="#fff" stop-opacity=".5"/><stop offset=".32" stop-color="#fff" stop-opacity="0"/><stop offset=".7" stop-color="#7A2A00" stop-opacity="0"/><stop offset="1" stop-color="#7A2A00" stop-opacity=".4"/></radialGradient>
+    <radialGradient id="g-cham" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#FCD0DA"/><stop offset="1" stop-color="#E58AA2"/></radialGradient>
+    <linearGradient id="g-kalakand" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FBF2DE"/><stop offset="1" stop-color="#EBD6AC"/></linearGradient>
+    <linearGradient id="g-halwa" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#77401C"/><stop offset="1" stop-color="#3D1C0B"/></linearGradient>
+    <linearGradient id="g-box" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6E1739"/><stop offset="1" stop-color="#430920"/></linearGradient>
+    <linearGradient id="g-lid" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#741A3E"/><stop offset=".5" stop-color="#5A0F2E"/><stop offset="1" stop-color="#40081D"/></linearGradient>
+    <linearGradient id="g-gold" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#B8862B"/><stop offset=".45" stop-color="#F5D27A"/><stop offset=".7" stop-color="#C9962F"/><stop offset="1" stop-color="#F0C964"/></linearGradient>
+    <linearGradient id="g-shine" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".6"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+    <linearGradient id="g-brass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E7C164"/><stop offset=".5" stop-color="#B8862B"/><stop offset="1" stop-color="#8A6118"/></linearGradient>
+    <pattern id="pt-moti" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="2.5" cy="2.5" r="1.45" fill="#DD720C"/></pattern>
+    <pattern id="pt-grain" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r=".9" fill="#D3B783"/><circle cx="4" cy="3.6" r=".7" fill="#E0C995"/></pattern>
+    <pattern id="pt-jali" width="26" height="26" patternUnits="userSpaceOnUse"><path d="M13 2 L24 13 L13 24 L2 13Z" fill="none" stroke="#F5D27A" stroke-width="1" opacity=".28"/><circle cx="13" cy="13" r="2" fill="#F5D27A" opacity=".25"/></pattern>
+
+    <symbol id="pc-gulab" viewBox="0 0 100 100">
+      <ellipse cx="50" cy="73" rx="40" ry="13" fill="url(#g-syrup)"/>
+      <circle cx="50" cy="54" r="28" fill="url(#g-gulab)"/>
+      <ellipse cx="40" cy="42" rx="9" ry="5" fill="#fff" opacity=".35" transform="rotate(-35 40 42)"/>
+      <path d="M30 67 q20 9 40 0" stroke="#F2B35A" stroke-width="2" fill="none" opacity=".5"/>
+    </symbol>
+    <symbol id="pc-barfi" viewBox="0 0 100 100">
+      <polygon points="12,52 50,90 50,97 12,59" fill="#D8C19A"/>
+      <polygon points="88,52 50,90 50,97 88,59" fill="#C4AA7E"/>
+      <polygon points="50,14 88,52 50,90 12,52" fill="#F1E2C2"/>
+      <polygon points="50,22 80,52 50,82 20,52" fill="url(#g-varq)"/>
+      <path d="M50 22 L80 52 M34 38 L64 68 M27 46 L54 73" stroke="#fff" stroke-width="1.2" opacity=".75"/>
+    </symbol>
+    <symbol id="pc-ladoo" viewBox="0 0 100 100">
+      <ellipse cx="50" cy="85" rx="26" ry="5" fill="#2E0616" opacity=".14"/>
+      <circle cx="50" cy="52" r="31" fill="#F7A21E"/>
+      <circle cx="50" cy="52" r="31" fill="url(#pt-moti)"/>
+      <circle cx="50" cy="52" r="31" fill="url(#g-sphere)"/>
+      <rect x="43" y="25" width="10" height="3.4" rx="1.7" fill="#7FB05A" transform="rotate(-20 48 27)"/>
+      <rect x="56" y="33" width="8" height="3" rx="1.5" fill="#F7F1E1" transform="rotate(25 60 35)"/>
+    </symbol>
+    <symbol id="pc-cham" viewBox="0 0 100 100">
+      <ellipse cx="50" cy="80" rx="34" ry="6" fill="#2E0616" opacity=".12"/>
+      <ellipse cx="50" cy="54" rx="38" ry="23" fill="url(#g-cham)"/>
+      <g fill="#fff" opacity=".95">
+        <rect x="30" y="44" width="5" height="2" rx="1"/><rect x="42" y="38" width="6" height="2" rx="1" transform="rotate(30 45 39)"/>
+        <rect x="56" y="42" width="5" height="2" rx="1"/><rect x="66" y="50" width="6" height="2" rx="1" transform="rotate(-25 69 51)"/>
+        <rect x="36" y="58" width="5" height="2" rx="1" transform="rotate(15 38 59)"/><rect x="50" y="62" width="6" height="2" rx="1"/>
+        <rect x="24" y="54" width="4" height="2" rx="1"/><rect x="62" y="62" width="5" height="2" rx="1" transform="rotate(40 64 63)"/>
+        <rect x="47" y="50" width="4" height="2" rx="1"/>
+      </g>
+      <ellipse cx="38" cy="45" rx="10" ry="4" fill="#fff" opacity=".3"/>
+    </symbol>
+    <symbol id="pc-jalebi" viewBox="0 0 100 100">
+      <path d="M46 50 a4 4 0 1 1 8 0 a8 8 0 1 1 -16 0 a12 12 0 1 1 24 0 a16 16 0 1 1 -32 0 a20 20 0 1 1 40 0 a24 24 0 1 1 -48 0 a28 28 0 1 1 56 0" fill="none" stroke="#E57F0C" stroke-width="7" stroke-linecap="round"/>
+      <path d="M46 50 a4 4 0 1 1 8 0 a8 8 0 1 1 -16 0 a12 12 0 1 1 24 0 a16 16 0 1 1 -32 0 a20 20 0 1 1 40 0 a24 24 0 1 1 -48 0 a28 28 0 1 1 56 0" fill="none" stroke="#FFC766" stroke-width="2" stroke-linecap="round" opacity=".75" transform="translate(-.6 -1)"/>
+    </symbol>
+    <symbol id="pc-kalakand" viewBox="0 0 100 100">
+      <rect x="16" y="54" width="68" height="24" rx="6" fill="#D9BE8A"/>
+      <rect x="16" y="24" width="68" height="40" rx="7" fill="url(#g-kalakand)"/>
+      <rect x="16" y="24" width="68" height="40" rx="7" fill="url(#pt-grain)"/>
+      <rect x="34" y="34" width="9" height="3" rx="1.5" fill="#7FB05A" transform="rotate(-25 38 35)"/>
+      <rect x="54" y="40" width="9" height="3" rx="1.5" fill="#93C572" transform="rotate(20 58 41)"/>
+      <rect x="44" y="48" width="8" height="3" rx="1.5" fill="#7FB05A" transform="rotate(-8 48 49)"/>
+    </symbol>
+    <symbol id="pc-pista" viewBox="0 0 100 100">
+      <polygon points="12,52 50,90 50,97 12,59" fill="#8DB46A"/>
+      <polygon points="88,52 50,90 50,97 88,59" fill="#769C55"/>
+      <polygon points="50,14 88,52 50,90 12,52" fill="#BCD89B"/>
+      <polygon points="50,24 78,52 50,80 22,52" fill="url(#g-varq)" opacity=".55"/>
+      <rect x="42" y="40" width="10" height="3.4" rx="1.7" fill="#4F7F31" transform="rotate(-25 47 41)"/>
+      <rect x="52" y="54" width="9" height="3" rx="1.5" fill="#4F7F31" transform="rotate(20 56 55)"/>
+      <rect x="36" y="55" width="8" height="3" rx="1.5" fill="#4F7F31" transform="rotate(-5 40 56)"/>
+    </symbol>
+    <symbol id="pc-halwa" viewBox="0 0 100 100">
+      <rect x="16" y="54" width="68" height="24" rx="6" fill="#2E1407"/>
+      <rect x="16" y="24" width="68" height="40" rx="7" fill="url(#g-halwa)"/>
+      <ellipse cx="36" cy="38" rx="6" ry="3.5" fill="#E9CFA0" transform="rotate(-20 36 38)"/>
+      <ellipse cx="60" cy="44" rx="6" ry="3.5" fill="#E9CFA0" transform="rotate(15 60 44)"/>
+      <ellipse cx="48" cy="52" rx="5" ry="3" fill="#E9CFA0"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="page">
+<header class="site-head">
+  <div class="wrap head-in">
+    <a class="logo" href="#top" aria-label="Qandeel Sweets and Bakers, home">
+      <svg viewBox="0 0 24 34" aria-hidden="true"><path d="M12 1v5" stroke="#B8862B" stroke-width="1.6"/><path d="M7 6h10l-1.4 3.2H8.4z" fill="#B8862B"/><path d="M6.2 9.2h11.6c1.3 6.2 1.1 12.4-.9 17.6H7.1C5.1 21.6 4.9 15.4 6.2 9.2z" fill="#5A0F2E" stroke="#B8862B" stroke-width="1"/><path d="M12 12.6c2.3 3.1 2.3 6.4 0 9.6c-2.3-3.2-2.3-6.5 0-9.6z" fill="#F2A007"/><path d="M8 26.8h8l-1.3 3.4H9.3z" fill="#B8862B"/></svg>
+      <span><b>Qandeel</b><small>Sweets &amp; Bakers &middot; 1978</small></span>
+    </a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#counter">Counter</a>
+      <a href="#festive">Festive boxes</a>
+      <a href="#build">Build a box</a>
+      <a href="#bulk">Bulk orders</a>
+      <a href="#branches">Branches</a>
+    </nav>
+    <div class="bag-wrap">
+      <button type="button" class="bag-btn" id="bagBtn" aria-expanded="false" aria-controls="bagPanel">Counter bag <span class="count" id="bagCount">0</span></button>
+      <div class="bag-panel" id="bagPanel" hidden>
+        <h3>Your counter bag</h3>
+        <ul id="bagList"><li><span>Nothing yet. Pick a weight on the counter and press Add.</span></li></ul>
+        <div class="tot"><span>Total</span><span id="bagTotal">Rs 0</span></div>
+        <button type="button" class="btn btn-gold" id="bagReserve" style="width:100%" disabled>Reserve for pickup</button>
+        <p class="note" id="bagNote">Pay at the counter. We hold reserved sweets for 3 hours.</p>
+      </div>
+    </div>
+    <a class="btn btn-gold head-cta" href="#festive">Pre-order Eid box</a>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="heroTitle">
+    <div class="wrap hero-in">
+      <div class="hero-copy">
+        <p class="eyebrow">Bank Road, Saddar &middot; Rawalpindi &middot; Since 1978</p>
+        <p class="hero-ur" lang="ur" aria-hidden="true">مٹھائی</p>
+        <h1 id="heroTitle">Mithai made at 6&nbsp;am, boxed for every celebration.</h1>
+        <p class="hero-lede">Gulab jamun, kaju barfi and motichoor ladoo cooked in pure desi ghee. Buy by weight at the counter, or pre-order Eid, shaadi and office boxes for pickup or delivery across Rawalpindi and Islamabad.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-gold" href="#festive">Pre-order an Eid box</a>
+          <a class="btn btn-line" href="#counter">Today&rsquo;s counter</a>
+        </div>
+        <dl class="facts">
+          <div><dt>Counter</dt><dd>7 am &ndash; 11 pm daily</dd></div>
+          <div><dt>Same-day boxes</dt><dd>Order by 2 pm</dd></div>
+          <div><dt>Call</dt><dd>+92 51 555 0178</dd></div>
+        </dl>
+        <p class="cue"><i aria-hidden="true"></i>Scroll to open the box</p>
+      </div>
+
+      <div class="box-stage">
+        <div class="wm" aria-hidden="true">قندیل</div>
+        <!-- HEYGEN: overhead photo of an open maroon mithai box with gold ribbon, six compartments holding gulab jamun, silver-varq kaju barfi, motichoor ladoo, pink cham cham, jalebi and pistachio kalakand on white paper cups; warm ivory background, soft window light, 4:5 -->
+        <svg class="box-svg" id="boxSvg" viewBox="0 -150 520 580" role="img" aria-labelledby="boxTitle">
+          <title id="boxTitle">An open Qandeel mithai box with six sweets: gulab jamun, kaju barfi, motichoor ladoo, cham cham, jalebi and kalakand</title>
+          <ellipse cx="260" cy="408" rx="236" ry="18" fill="#2E0616" opacity=".16"/>
+          <!-- box base -->
+          <rect x="20" y="60" width="480" height="330" rx="16" fill="url(#g-box)"/>
+          <rect x="31" y="71" width="458" height="308" rx="11" fill="none" stroke="url(#g-gold)" stroke-width="2.5"/>
+          <g id="cells">
+            <g transform="translate(50 92)"><rect width="132" height="128" rx="12" fill="#2E0616" stroke="#F5D27A" stroke-opacity=".45"/><circle cx="66" cy="64" r="52" fill="#FFF3DC" stroke="#EAD3A6" stroke-width="3" stroke-dasharray="4 3"/></g>
+            <g transform="translate(194 92)"><rect width="132" height="128" rx="12" fill="#2E0616" stroke="#F5D27A" stroke-opacity=".45"/><circle cx="66" cy="64" r="52" fill="#FFF3DC" stroke="#EAD3A6" stroke-width="3" stroke-dasharray="4 3"/></g>
+            <g transform="translate(338 92)"><rect width="132" height="128" rx="12" fill="#2E0616" stroke="#F5D27A" stroke-opacity=".45"/><circle cx="66" cy="64" r="52" fill="#FFF3DC" stroke="#EAD3A6" stroke-width="3" stroke-dasharray="4 3"/></g>
+            <g transform="translate(50 232)"><rect width="132" height="128" rx="12" fill="#2E0616" stroke="#F5D27A" stroke-opacity=".45"/><circle cx="66" cy="64" r="52" fill="#FFF3DC" stroke="#EAD3A6" stroke-width="3" stroke-dasharray="4 3"/></g>
+            <g transform="translate(194 232)"><rect width="132" height="128" rx="12" fill="#2E0616" stroke="#F5D27A" stroke-opacity=".45"/><circle cx="66" cy="64" r="52" fill="#FFF3DC" stroke="#EAD3A6" stroke-width="3" stroke-dasharray="4 3"/></g>
+            <g transform="translate(338 232)"><rect width="132" height="128" rx="12" fill="#2E0616" stroke="#F5D27A" stroke-opacity=".45"/><circle cx="66" cy="64" r="52" fill="#FFF3DC" stroke="#EAD3A6" stroke-width="3" stroke-dasharray="4 3"/></g>
+          </g>
+          <g id="pieces">
+            <g class="hero-piece"><use href="#pc-gulab" x="66" y="106" width="100" height="100"/></g>
+            <g class="hero-piece"><use href="#pc-barfi" x="210" y="106" width="100" height="100"/></g>
+            <g class="hero-piece"><use href="#pc-ladoo" x="354" y="106" width="100" height="100"/></g>
+            <g class="hero-piece"><use href="#pc-cham" x="66" y="246" width="100" height="100"/></g>
+            <g class="hero-piece"><use href="#pc-jalebi" x="210" y="246" width="100" height="100"/></g>
+            <g class="hero-piece"><use href="#pc-kalakand" x="354" y="246" width="100" height="100"/></g>
+          </g>
+          <clipPath id="boxClip"><rect x="31" y="71" width="458" height="308" rx="11"/></clipPath>
+          <g clip-path="url(#boxClip)"><rect id="shine" x="-240" y="40" width="150" height="380" fill="url(#g-shine)" transform="skewX(-18)" opacity=".85"/></g>
+          <!-- lid: hinged on the top edge (y=60). Static state = open (scaled -0.42). -->
+          <g id="lid" transform="matrix(1 0 0 -0.42 0 85.2)">
+            <g id="lidTop" opacity="0">
+              <rect x="14" y="54" width="492" height="342" rx="18" fill="url(#g-lid)"/>
+              <rect x="14" y="54" width="492" height="342" rx="18" fill="url(#pt-jali)"/>
+              <rect x="26" y="66" width="468" height="318" rx="12" fill="none" stroke="url(#g-gold)" stroke-width="3"/>
+              <rect x="14" y="211" width="492" height="28" fill="url(#g-gold)"/>
+              <rect x="246" y="54" width="28" height="342" fill="url(#g-gold)"/>
+              <circle cx="260" cy="225" r="86" fill="#2E0616" stroke="url(#g-gold)" stroke-width="4"/>
+              <circle cx="260" cy="225" r="76" fill="none" stroke="#F5D27A" stroke-opacity=".4" stroke-dasharray="2 5"/>
+              <text x="260" y="200" text-anchor="middle" font-family="Noto Nastaliq Urdu, serif" font-size="26" fill="#F5D27A">قندیل</text>
+              <text x="260" y="240" text-anchor="middle" font-family="Yeseva One, Georgia, serif" font-size="34" fill="#FFF8EC">Qandeel</text>
+              <text x="260" y="266" text-anchor="middle" font-family="Mukta, sans-serif" font-weight="700" font-size="11" letter-spacing="3" fill="#F5D27A">SWEETS &amp; BAKERS · 1978</text>
+            </g>
+            <g id="lidIn">
+              <g transform="translate(0 450) scale(1 -1)">
+                <rect x="14" y="54" width="492" height="342" rx="18" fill="#F5E8CF" stroke="#B8862B" stroke-width="3"/>
+                <rect x="34" y="74" width="452" height="302" rx="10" fill="none" stroke="#5A0F2E" stroke-opacity=".25" stroke-dasharray="6 6"/>
+                <text x="260" y="215" text-anchor="middle" font-family="Noto Nastaliq Urdu, serif" font-size="58" fill="#5A0F2E">عید مبارک</text>
+                <text x="260" y="300" text-anchor="middle" font-family="Yeseva One, Georgia, serif" font-size="40" fill="#B87400">Eid Mubarak</text>
+              </g>
+            </g>
+          </g>
+        </svg>
+        <div class="piece-chips" aria-hidden="true">
+          <span class="chip">Gulab jamun</span><span class="chip">Kaju barfi</span><span class="chip">Motichoor ladoo</span><span class="chip">Cham cham</span><span class="chip">Jalebi</span><span class="chip">Kalakand</span>
+        </div>
+        <p class="box-cap"><b>1 kg Eid box</b> &middot; six sweets &middot; <b>Rs 3,400</b></p>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-label="Pure desi ghee. Made at 6 am daily. Eid boxes now booking. Since 1978.">
+    <div class="marquee-track" aria-hidden="true">
+      <span>Pure desi ghee</span><span><b class="ur" lang="ur">خالص دیسی گھی</b></span><span>Made at 6 am daily</span><span>Eid boxes now booking</span><span><b class="ur" lang="ur">عید مبارک</b></span><span>Weighed on our 1978 brass scale</span><span>Since 1978</span>
+      <span>Pure desi ghee</span><span><b class="ur" lang="ur">خالص دیسی گھی</b></span><span>Made at 6 am daily</span><span>Eid boxes now booking</span><span><b class="ur" lang="ur">عید مبارک</b></span><span>Weighed on our 1978 brass scale</span><span>Since 1978</span>
+    </div>
+  </div>
+
+  <!-- (01) COUNTER -->
+  <section class="sec" id="counter" aria-labelledby="counterTitle">
+    <div class="wrap">
+      <div class="counter-top">
+        <div class="sec-head" style="margin-bottom:0">
+          <p class="label"><span class="n">(01)</span>The counter <span class="ur" lang="ur">کاؤنٹر</span></p>
+          <h2 id="counterTitle">Sold by weight, made this morning.</h2>
+          <p>Prices are per kilo, exactly as on the board above our counter. Choose 250 g, 500 g or a full kilo and we&rsquo;ll have it boxed when you arrive.</p>
+        </div>
+        <p class="fresh-banner"><span class="dot" aria-hidden="true"></span>First batch out at 6:00 am &middot; jalebi every 2 hours</p>
+      </div>
+      <!-- HEYGEN: straight-on photo of a glass mithai counter with steel trays of sweets, brass scale on top, maroon and gold shop interior, 16:9 -->
+      <div class="counter-grid" id="counterGrid"></div>
+      <noscript><p>Today&rsquo;s counter (per kg): Gulab jamun Rs 1,600 &middot; Kaju barfi Rs 3,200 &middot; Motichoor ladoo Rs 1,400 &middot; Cham cham Rs 1,500 &middot; Jalebi Rs 1,100 &middot; Kalakand Rs 2,200 &middot; Pista barfi Rs 2,800 &middot; Habshi halwa sold out.</p></noscript>
+    </div>
+  </section>
+
+  <!-- (02) FESTIVE -->
+  <section class="sec band" id="festive" aria-labelledby="festiveTitle">
+    <div class="wrap">
+      <div class="festive-top">
+        <div class="sec-head" style="margin-bottom:0">
+          <p class="label"><span class="n">(02)</span>Festive boxes <span class="ur" lang="ur">تہوار</span></p>
+          <h2 id="festiveTitle">Eid, shaadi and office boxes, booked ahead.</h2>
+          <p>Boxes are packed on the morning of pickup, never the night before. Offers below switch off by themselves when they end.</p>
+        </div>
+        <div class="eid-clock" aria-live="off">
+          <p class="t" id="eidLabel">Eid ul Fitr expected in</p>
+          <div class="digits">
+            <div><b id="cdD">--</b><small>days</small></div>
+            <div><b id="cdH">--</b><small>hours</small></div>
+            <div><b id="cdM">--</b><small>min</small></div>
+          </div>
+          <p class="note">Date depends on moon sighting. Last Eid-week pickup slots fill 10 days before.</p>
+        </div>
+      </div>
+      <div class="deal-grid" id="dealGrid"></div>
+      <noscript><p>Eid ul Fitr gift box 1 kg Rs 3,400 (was Rs 3,950) &middot; Shaadi box of 100 at Rs 850 per box &middot; Corporate: 10% off 50+ boxes.</p></noscript>
+      <p class="live-note" id="liveNote"></p>
+    </div>
+  </section>
+
+  <!-- (03) BUILD A BOX -->
+  <section class="sec" id="build" aria-labelledby="buildTitle">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label"><span class="n">(03)</span>Build a box <span class="ur" lang="ur">اپنا ڈبہ</span></p>
+        <h2 id="buildTitle">Fill your own box, piece by piece.</h2>
+        <p>Every compartment is an equal share of the box weight. Tap a sweet to drop it in, tap a compartment to take it out.</p>
+      </div>
+      <div class="builder">
+        <div>
+          <div class="step">
+            <h3>1 &middot; Box size</h3>
+            <div class="sizes" id="sizes" role="group" aria-label="Box size"></div>
+          </div>
+          <div class="step">
+            <h3>2 &middot; Choose sweets</h3>
+            <div class="palette" id="palette"></div>
+          </div>
+        </div>
+        <div class="builder-out">
+          <div class="box-viz">
+            <div class="lidtag"><span>Qandeel &middot; <span id="boxName">1 kg</span></span><span class="ur" lang="ur">اپنا ڈبہ</span></div>
+            <div class="slots" id="slots"></div>
+          </div>
+          <div class="summary" aria-live="polite">
+            <div class="row"><span>Filled</span><span id="sumFill">0 of 9 compartments</span></div>
+            <div class="meter" aria-hidden="true"><i id="sumMeter"></i></div>
+            <div class="row"><span>Weight</span><span id="sumWeight">0 g of 1,000 g</span></div>
+            <div class="row"><span>Sweets</span><span id="sumSweets">Rs 0</span></div>
+            <div class="row"><span>Box, ribbon &amp; paper cups</span><span id="sumFee">Rs 150</span></div>
+            <div class="row total"><span>Total</span><span id="sumTotal">Rs 150</span></div>
+          </div>
+          <div class="builder-actions">
+            <button type="button" class="btn btn-gold" id="boxOrder" disabled>Fill 9 more to pre-order</button>
+            <button type="button" class="btn btn-line" id="boxAuto">Fill it for me</button>
+            <button type="button" class="btn btn-line" id="boxClear">Clear</button>
+          </div>
+          <p class="confirm" id="boxConfirm" hidden></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- (04) BAKERY CORNER -->
+  <section class="sec bakery" id="bakery" aria-labelledby="bakeryTitle">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label"><span class="n">(04)</span>Bakery corner <span class="ur" lang="ur">بیکری</span></p>
+        <h2 id="bakeryTitle">From the bakery oven, for chai time.</h2>
+        <p>Our second oven has run since 2004. Patties come out hot at 11 am and 5 pm; the rest is baked before the shutters go up.</p>
+      </div>
+      <div class="shelf-wrap">
+        <div class="shelf" id="shelf" tabindex="0" aria-label="Bakery items, scroll sideways"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- (05) BULK -->
+  <section class="sec" id="bulk" aria-labelledby="bulkTitle">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label"><span class="n">(05)</span>Bulk &amp; corporate <span class="ur" lang="ur">بڑے آرڈر</span></p>
+        <h2 id="bulkTitle">Ordering 50 boxes, or 500?</h2>
+        <p>Tell us the occasion and the date. We confirm on WhatsApp within an hour during shop hours and take a 30% advance to lock the slot.</p>
+      </div>
+      <div class="bulk-grid">
+        <form class="form" id="bulkForm" novalidate>
+          <div class="field"><label for="bName">Your name</label><input id="bName" name="name" autocomplete="name" required placeholder="Ayesha Khan"></div>
+          <div class="field"><label for="bCompany">Company or family <span class="hint">(optional)</span></label><input id="bCompany" name="company" placeholder="Margalla Textiles"></div>
+          <div class="field"><label for="bPhone">Mobile / WhatsApp</label><input id="bPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="03xx xxxxxxx"></div>
+          <div class="field"><label for="bOcc">Occasion</label>
+            <select id="bOcc" name="occasion"><option>Eid gifts</option><option>Shaadi / walima</option><option>Corporate gifting</option><option>Aqiqah</option><option>Other</option></select></div>
+          <div class="field"><label for="bType">Box</label>
+            <select id="bType" name="type">
+              <option value="eid">Eid gift box &middot; 1 kg &middot; Rs 3,400</option>
+              <option value="shaadi">Shaadi box &middot; 250 g &middot; Rs 1,000</option>
+              <option value="classic">Classic box &middot; 500 g &middot; Rs 1,700</option>
+            </select></div>
+          <div class="field"><label for="bQty">Number of boxes</label><input id="bQty" name="qty" type="number" min="10" step="1" value="60" inputmode="numeric" required></div>
+          <div class="field"><label for="bDate">Pickup or delivery date</label><input id="bDate" name="date" type="date" required></div>
+          <fieldset class="field"><legend>Collection</legend>
+            <div class="radios"><label><input type="radio" name="mode" value="delivery" checked> Delivery</label><label><input type="radio" name="mode" value="pickup"> Pickup, Saddar</label></div></fieldset>
+          <div class="field full"><label class="check" for="bSleeve"><input id="bSleeve" name="sleeve" type="checkbox"> <span>Add a printed logo or name sleeve to every box (+Rs 60 per box, needs 5 days)</span></label></div>
+          <div class="field full"><label for="bNotes">Notes</label><textarea id="bNotes" name="notes" placeholder="Sugar-free option for 10 boxes, deliver to F-8 office by 11 am"></textarea></div>
+          <div class="field full"><button class="btn btn-gold" type="submit">Send order request</button></div>
+          <p class="confirm field full" id="bulkConfirm" hidden></p>
+        </form>
+        <aside class="estimate" aria-live="polite" aria-labelledby="estTitle">
+          <h3 id="estTitle">Estimate</h3>
+          <div class="row"><span id="eLineLabel">60 &times; Eid gift box</span><span id="eLine">Rs 204,000</span></div>
+          <div class="row"><span>Bulk saving</span><span id="eDisc">&minus;Rs 20,400</span></div>
+          <div class="row"><span>Logo sleeves</span><span id="eSleeve">Rs 0</span></div>
+          <div class="row"><span>Delivery</span><span id="eDel">Free over 50 boxes</span></div>
+          <div class="row total"><span>Total</span><span id="eTotal">Rs 183,600</span></div>
+          <div class="row"><span>30% advance to confirm</span><span id="eAdv">Rs 55,080</span></div>
+          <p class="perk" id="ePerk">10% corporate rate applied for 50+ boxes.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- (06) STORY -->
+  <section class="sec band story" id="story" aria-labelledby="storyTitle">
+    <div class="wrap story-in">
+      <div>
+        <p class="label"><span class="n">(06)</span>Since 1978 <span class="ur" lang="ur">۱۹۷۸ سے</span></p>
+        <p class="quote" lang="ur">ذائقہ جو نسلوں سے چلا آ رہا ہے</p>
+        <h2 class="quote-en" id="storyTitle">A taste handed down, one kadhai at a time.</h2>
+        <ol class="timeline">
+          <li><b>1978</b><span>Haji Abdul Qadeer opens a nine-foot shop on Bank Road with one kadhai and a brass tarazu.</span></li>
+          <li><b>1991</b><span>The jalebi counter starts. Iftar queues reach the bank next door.</span></li>
+          <li><b>2004</b><span>A bakery oven arrives: cake rusk, nan khatai and chicken patties.</span></li>
+          <li><b>2019</b><span>Satellite Town opens and the third generation takes over the kitchen.</span></li>
+          <li><b>Today</b><span>Still cooked from 4 am, still weighed on the same scale.</span></li>
+        </ol>
+      </div>
+      <!-- HEYGEN: close-up of an old brass balance scale weighing ladoo against brass weights on a marble counter, warm tungsten light, 1:1 -->
+      <svg class="tarazu" viewBox="0 0 340 330" role="img" aria-labelledby="tzTitle">
+        <title id="tzTitle">The shop's original 1978 brass balance scale with ladoo on one pan and brass weights on the other</title>
+        <ellipse cx="170" cy="312" rx="120" ry="10" fill="#000" opacity=".3"/>
+        <rect x="100" y="290" width="140" height="18" rx="6" fill="url(#g-brass)"/>
+        <rect x="163" y="80" width="14" height="214" rx="5" fill="url(#g-brass)"/>
+        <circle cx="170" cy="74" r="12" fill="url(#g-brass)"/>
+        <path d="M170 40 l7 22 h-14z" fill="#F5D27A"/>
+        <g id="beam">
+          <rect x="40" y="70" width="260" height="9" rx="4.5" fill="url(#g-brass)"/>
+          <circle cx="44" cy="74" r="6" fill="#F5D27A"/><circle cx="296" cy="74" r="6" fill="#F5D27A"/>
+        </g>
+        <g id="panL">
+          <path d="M44 78 L14 200 M44 78 L74 200" stroke="#E7C164" stroke-width="1.6"/>
+          <path d="M6 200 h76 a38 16 0 0 1 -76 0z" fill="url(#g-brass)"/>
+          <use href="#pc-ladoo" x="16" y="160" width="44" height="44"/>
+          <use href="#pc-ladoo" x="36" y="164" width="40" height="40"/>
+        </g>
+        <g id="panR">
+          <path d="M296 78 L266 200 M296 78 L326 200" stroke="#E7C164" stroke-width="1.6"/>
+          <path d="M258 200 h76 a38 16 0 0 1 -76 0z" fill="url(#g-brass)"/>
+          <rect x="276" y="178" width="22" height="22" rx="3" fill="#8A6118"/><rect x="280" y="172" width="14" height="7" rx="2" fill="#B8862B"/>
+          <rect x="300" y="186" width="16" height="14" rx="3" fill="#8A6118"/>
+          <text x="287" y="194" text-anchor="middle" font-family="Mukta, sans-serif" font-size="8" font-weight="800" fill="#F5D27A">1kg</text>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- (07) BRANCHES -->
+  <section class="sec" id="branches" aria-labelledby="branchTitle">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label"><span class="n">(07)</span>Branches &amp; hours <span class="ur" lang="ur">شاخیں</span></p>
+        <h2 id="branchTitle">Three counters across Pindi.</h2>
+        <p>Eid week: all branches open from 6 am and close at 2 am on Chaand Raat.</p>
+      </div>
+      <div class="branch-grid" id="branchGrid"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <a class="logo" href="#top"><svg viewBox="0 0 24 34" aria-hidden="true"><path d="M12 1v5" stroke="#B8862B" stroke-width="1.6"/><path d="M7 6h10l-1.4 3.2H8.4z" fill="#B8862B"/><path d="M6.2 9.2h11.6c1.3 6.2 1.1 12.4-.9 17.6H7.1C5.1 21.6 4.9 15.4 6.2 9.2z" fill="#5A0F2E" stroke="#B8862B" stroke-width="1"/><path d="M12 12.6c2.3 3.1 2.3 6.4 0 9.6c-2.3-3.2-2.3-6.5 0-9.6z" fill="#F2A007"/><path d="M8 26.8h8l-1.3 3.4H9.3z" fill="#B8862B"/></svg><span><b>Qandeel</b><small>Sweets &amp; Bakers &middot; 1978</small></span></a>
+    <p>Halal &middot; pure desi ghee &middot; made in Rawalpindi<br>Orders &amp; WhatsApp: <span style="user-select:all">+92 300 555 0146</span></p>
+    <p><a href="https://wa.me/923005550146" target="_blank" rel="noopener">WhatsApp us</a> &middot; <a href="https://www.google.com/maps/search/?api=1&amp;query=Bank+Road+Saddar+Rawalpindi" target="_blank" rel="noopener">Directions</a></p>
+    <p class="fine">Mockup for Tasting Board. Qandeel Sweets &amp; Bakers is a fictional business; prices, numbers and addresses are illustrative.</p>
+  </div>
+</footer>
+</div>
+
+<nav class="mbar" aria-label="Quick actions">
+  <a class="primary" href="#festive"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M3 12h18M12 8v13M12 8c-2-4-6-4-6-1s6 1 6 1zm0 0c2-4 6-4 6-1s-6 1-6 1z"/></svg>Pre-order box</a>
+  <a href="tel:+92515550178"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 3h4l2 5-3 2a12 12 0 0 0 6 6l2-3 5 2v4a2 2 0 0 1-2 2A17 17 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg>Call</a>
+  <a href="https://wa.me/923005550146" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 20l1.3-4A8 8 0 1 1 8 19z"/><path d="M9 9.5c.5 2 2 3.5 4 4l1.2-1.2 2 1-.4 1.5c-3.5.3-7.4-3.6-7.1-7.1L10.2 7l1 2z"/></svg>WhatsApp</a>
+  <a href="https://www.google.com/maps/search/?api=1&amp;query=Bank+Road+Saddar+Rawalpindi" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>Directions</a>
+</nav>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function () {
+  'use strict';
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var fmt = function (n) { return 'Rs ' + Math.round(n).toLocaleString('en-US'); };
+  var grams = function (g) { return g >= 1000 ? (g / 1000).toLocaleString('en-US') + ' kg' : g + ' g'; };
+  // Pakistan Standard Time, UTC+5, no DST
+  var pkt = function () { var d = new Date(Date.now() + 5 * 3600e3); return { h: d.getUTCHours() + d.getUTCMinutes() / 60, day: d.getUTCDay() }; };
+
+  /* ---------- (01) counter + bag ---------- */
+  var bag = [];
+  function renderCounter() {
+    var grid = $('#counterGrid');
+    grid.innerHTML = COUNTER.map(function (it) {
+      var art = '<div class="item-art"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#pc-' + it.art + '"/></svg></div>';
+      var head = '<div class="item-head"><h3>' + it.name + '</h3><span class="ur" lang="ur">' + it.ur + '</span></div>';
+      var body = '<p class="item-desc">' + it.desc + '</p><p class="kg">' + fmt(it.perKg) + ' <small>/ kg</small></p>';
+      if (!it.available) {
+        return '<article class="item is-out" aria-label="' + it.name + ', sold out">' + art + head + body + '<p class="out-tag">' + it.fresh + '</p></article>';
+      }
+      return '<article class="item" data-id="' + it.id + '">' + art + head + body +
+        '<div class="wsel" role="group" aria-label="Weight for ' + it.name + '">' +
+        [250, 500, 1000].map(function (g, i) { return '<button type="button" data-g="' + g + '" aria-pressed="' + (i === 0) + '">' + grams(g) + '</button>'; }).join('') +
+        '</div><div class="item-row"><output class="price">' + fmt(it.perKg * 0.25) + '</output><button type="button" class="add">Add to bag</button></div>' +
+        '<span class="fresh">' + it.fresh + '</span></article>';
+    }).join('');
+
+    grid.addEventListener('click', function (e) {
+      var card = e.target.closest('.item[data-id]');
+      if (!card) return;
+      var it = COUNTER.filter(function (x) { return x.id === card.dataset.id; })[0];
+      var wb = e.target.closest('.wsel button');
+      if (wb) {
+        $$('.wsel button', card).forEach(function (b) { b.setAttribute('aria-pressed', String(b === wb)); });
+        $('.price', card).textContent = fmt(it.perKg * (+wb.dataset.g) / 1000);
+        return;
+      }
+      var add = e.target.closest('.add');
+      if (add) {
+        var g = +$('.wsel button[aria-pressed="true"]', card).dataset.g;
+        bag.push({ name: it.name, g: g, price: it.perKg * g / 1000 });
+        add.textContent = 'Added';
+        add.classList.add('done');
+        setTimeout(function () { add.textContent = 'Add to bag'; add.classList.remove('done'); }, 1400);
+        renderBag();
+        if (window.gsap) gsap.fromTo('#bagBtn', { scale: 1 }, { scale: 1.12, duration: 0.18, yoyo: true, repeat: 1, ease: 'power2.out' });
+      }
+    });
+  }
+  function renderBag() {
+    $('#bagCount').textContent = bag.length;
+    $('#bagList').innerHTML = bag.length ? bag.map(function (b) { return '<li><span>' + b.name + ' &middot; ' + grams(b.g) + '</span><span>' + fmt(b.price) + '</span></li>'; }).join('') :
+      '<li><span>Nothing yet. Pick a weight on the counter and press Add.</span></li>';
+    $('#bagTotal').textContent = fmt(bag.reduce(function (s, b) { return s + b.price; }, 0));
+    $('#bagReserve').disabled = !bag.length;
+  }
+  function bagUI() {
+    var btn = $('#bagBtn'), panel = $('#bagPanel');
+    btn.addEventListener('click', function () {
+      var open = panel.hidden;
+      panel.hidden = !open;
+      btn.setAttribute('aria-expanded', String(open));
+    });
+    document.addEventListener('click', function (e) {
+      if (!panel.hidden && !e.target.closest('.bag-wrap')) { panel.hidden = true; btn.setAttribute('aria-expanded', 'false'); }
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !panel.hidden) { panel.hidden = true; btn.setAttribute('aria-expanded', 'false'); btn.focus(); }
+    });
+    $('#bagReserve').addEventListener('click', function () {
+      $('#bagNote').textContent = 'Mockup: reservation saved. In the live site this sends your list to the Saddar counter and a WhatsApp confirmation.';
+    });
+  }
+
+  /* ---------- (02) deals + Eid countdown ---------- */
+  function renderDeals() {
+    var now = Date.now();
+    var live = DEALS.filter(function (d) { return now >= Date.parse(d.starts_at) && now < Date.parse(d.ends_at); });
+    var expired = DEALS.filter(function (d) { return now >= Date.parse(d.ends_at); }).length;
+    var upcoming = DEALS.length - live.length - expired;
+    $('#dealGrid').innerHTML = live.map(function (d) {
+      return '<article class="deal">' +
+        '<div class="badge" aria-hidden="true"><svg viewBox="0 0 100 100"><polygon fill="url(#g-gold)" points="' + star(50, 50, 49, 41, 18) + '"/><circle cx="50" cy="50" r="36" fill="none" stroke="#5A0F2E" stroke-opacity=".35" stroke-dasharray="2 3"/></svg>' +
+        '<span>' + d.badge_pre + '<b data-count="' + d.badge_value + '" data-fmt="' + d.badge_fmt + '">' + badgeText(d.badge_value, d.badge_fmt) + '</b></span></div>' +
+        '<p class="kind">' + d.kind + '</p><h3>' + d.title + '</h3><p class="ur" lang="ur">' + d.ur + '</p>' +
+        '<ul>' + d.contents.map(function (c) { return '<li>' + c + '</li>'; }).join('') + '</ul>' +
+        '<div class="prices"><span class="now">' + d.price_label + '</span>' + (d.was ? '<span class="was">' + d.was + '</span>' : '') + (d.per ? '<span class="per">' + d.per + '</span>' : '') + '</div>' +
+        '<p class="ends">Offer ends ' + new Date(d.ends_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) + '</p>' +
+        '<a class="btn btn-gold" href="' + d.href + '">' + d.cta + '</a></article>';
+    }).join('');
+    var bits = [live.length + ' live offer' + (live.length === 1 ? '' : 's')];
+    if (expired) bits.push(expired + ' expired offer hidden automatically');
+    if (upcoming) bits.push(upcoming + ' upcoming offer appears on its start date');
+    $('#liveNote').textContent = 'Showing ' + bits.join(' · ') + '.';
+  }
+  function badgeText(v, f) { return f === 'pct' ? '−' + Math.round(v) + '%' : fmt(v); }
+  function star(cx, cy, R, r, n) {
+    var pts = [];
+    for (var i = 0; i < n * 2; i++) {
+      var a = Math.PI * i / n - Math.PI / 2, rad = i % 2 ? r : R;
+      pts.push((cx + rad * Math.cos(a)).toFixed(1) + ',' + (cy + rad * Math.sin(a)).toFixed(1));
+    }
+    return pts.join(' ');
+  }
+  function eidClock() {
+    var target = Date.parse(EID_DATE);
+    var pad = function (n) { return String(n).padStart(2, '0'); };
+    function tick() {
+      var ms = target - Date.now();
+      if (ms <= 0) { $('#eidLabel').textContent = 'Eid Mubarak from all of us'; $('#cdD').textContent = '00'; $('#cdH').textContent = '00'; $('#cdM').textContent = '00'; return; }
+      var d = Math.floor(ms / 864e5), h = Math.floor(ms % 864e5 / 36e5), m = Math.floor(ms % 36e5 / 6e4);
+      $('#cdD').textContent = d; $('#cdH').textContent = pad(h); $('#cdM').textContent = pad(m);
+    }
+    tick(); setInterval(tick, 30000);
+  }
+
+  /* ---------- (03) build a box ---------- */
+  var boxState = { size: null, slots: [] };
+  function renderBuilder() {
+    boxState.size = BOXES[1];
+    $('#sizes').innerHTML = BOXES.map(function (b) {
+      return '<button type="button" class="size" data-id="' + b.id + '" aria-pressed="' + (b === boxState.size) + '"><b>' + b.label + '</b><small>' + b.slots + ' compartments</small><small>&asymp;' + Math.round(b.grams / b.slots) + ' g each</small></button>';
+    }).join('');
+    var sweets = COUNTER.filter(function (c) { return c.available; });
+    $('#palette').innerHTML = sweets.map(function (c) {
+      return '<button type="button" class="pal" data-id="' + c.id + '" aria-label="Add ' + c.name + '"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#pc-' + c.art + '"/></svg><b>' + c.name + '</b><small>' + fmt(c.perKg) + '/kg</small></button>';
+    }).join('') + '<button type="button" class="pal" data-id="random" aria-label="Add a surprise sweet"><span class="q" aria-hidden="true">?</span><b>Surprise me</b><small>chef&rsquo;s pick</small></button>';
+    $('#sizes').addEventListener('click', function (e) {
+      var b = e.target.closest('.size'); if (!b) return;
+      boxState.size = BOXES.filter(function (x) { return x.id === b.dataset.id; })[0];
+      boxState.slots = boxState.slots.slice(0, boxState.size.slots);
+      $$('.size').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+      drawSlots();
+    });
+    $('#palette').addEventListener('click', function (e) {
+      var p = e.target.closest('.pal'); if (!p) return;
+      if (boxState.slots.length >= boxState.size.slots) { flashFull(); return; }
+      boxState.slots.push(p.dataset.id === 'random' ? sweets[Math.floor(Math.random() * sweets.length)].id : p.dataset.id);
+      drawSlots(boxState.slots.length - 1);
+    });
+    $('#slots').addEventListener('click', function (e) {
+      var s = e.target.closest('.slot.filled'); if (!s) return;
+      boxState.slots.splice(+s.dataset.i, 1);
+      drawSlots();
+    });
+    $('#boxAuto').addEventListener('click', function () {
+      while (boxState.slots.length < boxState.size.slots) boxState.slots.push(sweets[Math.floor(Math.random() * sweets.length)].id);
+      drawSlots();
+    });
+    $('#boxClear').addEventListener('click', function () { boxState.slots = []; drawSlots(); });
+    $('#boxOrder').addEventListener('click', function () {
+      var c = $('#boxConfirm');
+      c.hidden = false;
+      c.textContent = 'Mockup: your ' + boxState.size.label + ' box is saved for pickup at Saddar. The live site would ask for a pickup time and confirm on WhatsApp.';
+    });
+    drawSlots();
+  }
+  function flashFull() {
+    var o = $('#boxOrder');
+    if (window.gsap) gsap.fromTo(o, { x: -6 }, { x: 0, duration: 0.4, ease: 'elastic.out(1,0.3)' });
+  }
+  function drawSlots(popIndex) {
+    var size = boxState.size, per = size.grams / size.slots;
+    var el = $('#slots');
+    el.style.setProperty('--cols', size.cols);
+    var html = '';
+    for (var i = 0; i < size.slots; i++) {
+      var id = boxState.slots[i];
+      if (id) {
+        var c = COUNTER.filter(function (x) { return x.id === id; })[0];
+        html += '<button type="button" class="slot filled' + (i === popIndex ? ' pop' : '') + '" data-i="' + i + '" aria-label="Remove ' + c.name + ' from compartment ' + (i + 1) + '"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#pc-' + c.art + '"/></svg></button>';
+      } else {
+        html += '<span class="slot" aria-hidden="true">+</span>';
+      }
+    }
+    el.innerHTML = html;
+    var filled = boxState.slots.length;
+    var sweetsCost = boxState.slots.reduce(function (s, id) { var c = COUNTER.filter(function (x) { return x.id === id; })[0]; return s + c.perKg * per / 1000; }, 0);
+    $('#boxName').textContent = size.label;
+    $('#sumFill').textContent = filled + ' of ' + size.slots + ' compartments';
+    $('#sumMeter').style.transform = 'scaleX(' + (filled / size.slots) + ')';
+    $('#sumWeight').textContent = Math.round(filled * per).toLocaleString('en-US') + ' g of ' + size.grams.toLocaleString('en-US') + ' g';
+    $('#sumSweets').textContent = fmt(sweetsCost);
+    $('#sumFee').textContent = fmt(size.fee);
+    $('#sumTotal').textContent = fmt(sweetsCost + size.fee);
+    var left = size.slots - filled, ob = $('#boxOrder');
+    ob.disabled = left > 0;
+    ob.textContent = left > 0 ? 'Fill ' + left + ' more to pre-order' : 'Pre-order this box';
+    $('#boxConfirm').hidden = true;
+  }
+
+  /* ---------- (04) bakery shelf ---------- */
+  function renderShelf() {
+    $('#shelf').innerHTML = BAKERY.map(function (b) {
+      return '<article class="bk' + (b.available ? '' : ' is-out') + '">' + BAKERY_ART[b.art] +
+        '<h3>' + b.name + '</h3><p>' + b.desc + '</p><p class="bp">' + b.price + '</p><p class="when">' + b.when + '</p></article>';
+    }).join('');
+  }
+
+  /* ---------- (05) bulk estimate ---------- */
+  function bulk() {
+    var form = $('#bulkForm');
+    var min = new Date(Date.now() + 3 * 864e5);
+    var iso = min.getFullYear() + '-' + String(min.getMonth() + 1).padStart(2, '0') + '-' + String(min.getDate()).padStart(2, '0');
+    $('#bDate').min = iso; $('#bDate').value = iso;
+    function calc() {
+      var type = BULK_TYPES[$('#bType').value];
+      var qty = Math.max(0, Math.floor(+$('#bQty').value || 0));
+      var sleeve = $('#bSleeve').checked;
+      var delivery = form.mode.value === 'delivery';
+      var base = qty * type.price, disc = 0, perk = 'Bulk rates start at 50 boxes.';
+      if (type.bulkPrice && qty >= type.bulkFrom) { disc = qty * (type.price - type.bulkPrice); perk = 'Shaadi rate applied: ' + fmt(type.bulkPrice) + ' per box for ' + type.bulkFrom + '+ boxes.'; }
+      else if (qty >= 50) { disc = base * 0.10; perk = '10% corporate rate applied for 50+ boxes.'; }
+      var sl = sleeve ? qty * 60 : 0;
+      var del = !delivery ? 0 : qty >= 50 ? 0 : 600;
+      var total = base - disc + sl + del;
+      $('#eLineLabel').textContent = qty + ' × ' + type.name;
+      $('#eLine').textContent = fmt(base);
+      $('#eDisc').textContent = disc ? '−' + fmt(disc) : 'Rs 0';
+      $('#eSleeve').textContent = fmt(sl);
+      $('#eDel').textContent = !delivery ? 'Pickup, Saddar' : del ? fmt(del) : 'Free over 50 boxes';
+      $('#eTotal').textContent = fmt(total);
+      $('#eAdv').textContent = fmt(total * 0.3);
+      $('#ePerk').textContent = perk;
+    }
+    form.addEventListener('input', calc);
+    form.addEventListener('change', calc);
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var c = $('#bulkConfirm');
+      var missing = ['bName', 'bPhone'].filter(function (id) { return !$('#' + id).value.trim(); });
+      c.hidden = false;
+      if (missing.length) { c.textContent = 'Add your name and a mobile number so we can confirm the order on WhatsApp.'; $('#' + missing[0]).focus(); return; }
+      c.textContent = 'Mockup: request received for ' + $('#bQty').value + ' boxes on ' + new Date($('#bDate').value).toLocaleDateString('en-GB', { day: 'numeric', month: 'long' }) + '. The live site would send this to the orders desk and WhatsApp you the advance details.';
+    });
+    calc();
+  }
+
+  /* ---------- (07) branches ---------- */
+  function renderBranches() {
+    var t = pkt().h;
+    $('#branchGrid').innerHTML = BRANCHES.map(function (b) {
+      var open = t >= b.open && t < b.close;
+      return '<article class="branch"><span class="status' + (open ? '' : ' closed') + '">' + (open ? 'Open now' : 'Closed now') + '</span><h3>' + b.name + '</h3>' +
+        '<p class="addr">' + b.addr + '</p><p class="hrs">' + b.hours + '</p><p class="tel">' + b.tel + '</p>' +
+        '<a class="btn btn-line" href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(b.maps) + '" target="_blank" rel="noopener">Directions</a></article>';
+    }).join('');
+  }
+
+  /* ---------- motion ---------- */
+  function motion() {
+    if (!(window.gsap && window.ScrollTrigger)) return;
+    gsap.registerPlugin(ScrollTrigger);
+    var EASE = 'expo.out';
+    var mm = gsap.matchMedia();
+    mm.add({
+      desk: '(min-width: 768px) and (prefers-reduced-motion: no-preference)',
+      phone: '(max-width: 767px) and (prefers-reduced-motion: no-preference)'
+    }, function (ctx) {
+      var desk = ctx.conditions.desk;
+      var lid = $('#lid'), saved = lid.getAttribute('transform');
+      lid.removeAttribute('transform');
+      gsap.set(lid, { svgOrigin: '260 60' });
+
+      // Signature: lid hinges open, sweets drop into their cups, varq shimmer sweeps across
+      var tl = gsap.timeline({ paused: true, defaults: { ease: 'none' } });
+      tl.fromTo(lid, { scaleY: 1 }, { scaleY: 0.02, duration: 1, ease: 'power1.in' })
+        .fromTo('#lidTop', { opacity: 1 }, { opacity: 0, duration: 0.01 })
+        .fromTo('#lidIn', { opacity: 0 }, { opacity: 1, duration: 0.01 }, '<')
+        .to(lid, { scaleY: -0.42, duration: 0.8, ease: 'power1.out' })
+        .fromTo('.hero-piece', { opacity: 0, y: -70, scale: 0.5, transformOrigin: '50% 50%' }, { opacity: 1, y: 0, scale: 1, duration: 0.6, stagger: 0.35, ease: 'back.out(1.7)' }, '-=0.3')
+        .fromTo('.piece-chips .chip', { opacity: 0.35 }, { opacity: 1, duration: 0.3, stagger: 0.35 }, '<')
+        .fromTo('#shine', { x: -40 }, { x: 900, duration: 1.2, ease: 'power2.inOut' });
+
+      if (desk) {
+        ScrollTrigger.create({
+          trigger: '.hero', start: function () { return 'top ' + $('.site-head').offsetHeight + 'px'; },
+          end: '+=140%', pin: true, scrub: 0.6, animation: tl, invalidateOnRefresh: true
+        });
+      } else {
+        gsap.delayedCall(0.6, function () { tl.timeScale(1.5).play(); });
+      }
+
+      $$('.sec-head').forEach(function (h) {
+        gsap.from(h.children, { y: 28, opacity: 0, duration: 0.9, ease: EASE, stagger: 0.08, scrollTrigger: { trigger: h, start: 'top 85%', once: true } });
+      });
+      [['#counterGrid .item', '#counterGrid'], ['.deal', '#dealGrid'], ['.pal', '#palette'], ['.bk', '#shelf'], ['.branch', '#branchGrid'], ['.timeline li', '.timeline']].forEach(function (p) {
+        if (!$$(p[0]).length) return;
+        gsap.from(p[0], { y: 40, opacity: 0, duration: 0.9, ease: EASE, stagger: desk ? 0.08 : 0.05, scrollTrigger: { trigger: p[1], start: 'top 85%', once: true } });
+      });
+      // price badges: count the saving up when the deal enters
+      $$('.badge b[data-count]').forEach(function (b) {
+        var o = { v: 0 }, target = +b.dataset.count, f = b.dataset.fmt;
+        gsap.to(o, { v: target, duration: 1.4, ease: 'power2.out', onUpdate: function () { b.textContent = badgeText(o.v, f); }, scrollTrigger: { trigger: b, start: 'top 90%', once: true } });
+        gsap.from(b.closest('.badge'), { scale: 0, rotation: -90, duration: 0.9, ease: 'back.out(2)', scrollTrigger: { trigger: b, start: 'top 90%', once: true } });
+      });
+      // the 1978 scale tips as you read the story
+      var tz = gsap.timeline({ scrollTrigger: { trigger: '#story', start: 'top 80%', end: 'bottom 30%', scrub: 0.8 } });
+      tz.fromTo('#beam', { rotation: -9, svgOrigin: '170 74' }, { rotation: 9, svgOrigin: '170 74', ease: 'sine.inOut' }, 0)
+        .fromTo('#panL', { y: 20 }, { y: -20, ease: 'sine.inOut' }, 0)
+        .fromTo('#panR', { y: -20 }, { y: 20, ease: 'sine.inOut' }, 0);
+
+      return function () { lid.setAttribute('transform', saved); };
+    });
+  }
+
+  function init() {
+    renderCounter(); bagUI(); renderBag();
+    renderDeals(); eidClock();
+    renderBuilder(); renderShelf(); bulk(); renderBranches();
+    if (document.readyState === 'complete') motion(); else window.addEventListener('load', motion);
+  }
+
+  /* ================= DATA (mirrors future Supabase tables) ================= */
+  var COUNTER = [
+    { id: 'gulab', art: 'gulab', name: 'Gulab Jamun', ur: 'گلاب جامن', perKg: 1600, available: true, fresh: 'Made today · 6:00 am', desc: 'Khoya dumplings fried slowly in desi ghee, rested overnight in cardamom-rose syrup.' },
+    { id: 'barfi', art: 'barfi', name: 'Kaju Barfi', ur: 'کاجو برفی', perKg: 3200, available: true, fresh: 'Made today · 6:00 am', desc: 'Cashew paste set on a marble slab and finished with edible silver varq.' },
+    { id: 'ladoo', art: 'ladoo', name: 'Motichoor Ladoo', ur: 'موتی چور لڈو', perKg: 1400, available: true, fresh: 'Made today · 6:30 am', desc: 'Pin-head boondi fried in ghee, bound with saffron syrup and melon seeds.' },
+    { id: 'cham', art: 'cham', name: 'Cham Cham', ur: 'چم چم', perKg: 1500, available: true, fresh: 'Made today · 7:00 am', desc: 'Soft chenna pillows in light syrup, rolled in fresh coconut.' },
+    { id: 'jalebi', art: 'jalebi', name: 'Jalebi', ur: 'جلیبی', perKg: 1100, available: true, fresh: 'Fresh batch every 2 hours', desc: 'Fermented batter piped straight into the kadhai, dipped hot into syrup.' },
+    { id: 'kalakand', art: 'kalakand', name: 'Kalakand', ur: 'قلاقند', perKg: 2200, available: true, fresh: 'Made today · 6:00 am', desc: 'Milk reduced for three hours until it grains, topped with pistachio.' },
+    { id: 'pista', art: 'pista', name: 'Pista Barfi', ur: 'پستہ برفی', perKg: 2800, available: true, fresh: 'Made today · 7:30 am', desc: 'Khoya and ground Peshawari pistachio, cut into diamonds and topped with varq.' },
+    { id: 'halwa', art: 'halwa', name: 'Habshi Halwa', ur: 'حبشی حلوہ', perKg: 2400, available: false, fresh: 'Sold out · back Friday 7 am', desc: 'Wheat-sprout halwa stirred for eight hours with walnuts and almonds.' }
+  ];
+
+  var EID_DATE = '2027-03-10T00:00:00+05:00';
+
+  var DEALS = [
+    { id: 'eid-box', kind: 'Eid ul Fitr', title: 'Eid gift box, 1 kg', ur: 'عید کا تحفہ', contents: ['250 g gulab jamun', '250 g kaju barfi with varq', '250 g motichoor ladoo', '250 g cham cham', 'Lantern-print box with brass clasp'], price_label: 'Rs 3,400', was: 'Rs 3,950', per: null, badge_pre: 'Save', badge_value: 550, badge_fmt: 'rs', starts_at: '2026-10-01T00:00:00+05:00', ends_at: '2027-03-12T23:59:00+05:00', cta: 'Pre-order Eid box', href: '#build' },
+    { id: 'shaadi-100', kind: 'Shaadi & walima', title: 'Shaadi box of 100', ur: 'شادی کے ڈبے', contents: ['100 boxes of 250 g', 'Two pieces each of four sweets', 'Satin ribbon and name card', 'Delivered to the hall on the day'], price_label: 'Rs 85,000', was: 'Rs 100,000', per: 'Rs 850 per box', badge_pre: 'Save', badge_value: 15000, badge_fmt: 'rs', starts_at: '2026-09-01T00:00:00+05:00', ends_at: '2027-12-31T23:59:00+05:00', cta: 'Plan shaadi boxes', href: '#bulk' },
+    { id: 'corp-50', kind: 'Corporate', title: '50+ boxes for the office', ur: 'دفتر کے لیے', contents: ['Any festive or classic box', 'Free delivery in Pindi & Islamabad', 'Printed logo sleeve available', 'One invoice, GST included'], price_label: '10% off', was: null, per: 'on 50 boxes or more', badge_pre: 'Flat', badge_value: 10, badge_fmt: 'pct', starts_at: '2026-10-15T00:00:00+05:00', ends_at: '2027-06-30T23:59:00+05:00', cta: 'Get a corporate quote', href: '#bulk' },
+    { id: 'azadi', kind: '14 August', title: 'Azadi sabz box', ur: 'آزادی', contents: ['Pista barfi and green cham cham'], price_label: 'Rs 1,450', was: 'Rs 1,700', per: null, badge_pre: 'Save', badge_value: 250, badge_fmt: 'rs', starts_at: '2026-08-01T00:00:00+05:00', ends_at: '2026-08-16T23:59:00+05:00', cta: 'Order', href: '#build' },
+    { id: 'iftar', kind: 'Ramadan', title: 'Iftar jalebi & pakora tray', ur: 'افطار', contents: ['1 kg jalebi, 1 kg pakora'], price_label: 'Rs 1,900', was: 'Rs 2,200', per: null, badge_pre: 'Save', badge_value: 300, badge_fmt: 'rs', starts_at: '2027-02-08T00:00:00+05:00', ends_at: '2027-03-09T23:59:00+05:00', cta: 'Order', href: '#bulk' }
+  ];
+
+  var BOXES = [
+    { id: 'half', label: '½ kg', grams: 500, slots: 4, cols: 2, fee: 100 },
+    { id: 'one', label: '1 kg', grams: 1000, slots: 9, cols: 3, fee: 150 },
+    { id: 'two', label: '2 kg', grams: 2000, slots: 16, cols: 4, fee: 250 }
+  ];
+
+  var BULK_TYPES = {
+    eid: { name: 'Eid gift box', price: 3400 },
+    shaadi: { name: 'Shaadi box', price: 1000, bulkPrice: 850, bulkFrom: 100 },
+    classic: { name: 'Classic box', price: 1700 }
+  };
+
+  var BAKERY = [
+    { art: 'rusk', name: 'Cake Rusk', desc: 'Double-baked sponge with a hint of elaichi. The chai dunker.', price: 'Rs 650 · 400 g tin', when: 'Baked today · 5:30 am', available: true },
+    { art: 'khatai', name: 'Nan Khatai', desc: 'Ghee shortbread with semolina and a pistachio on top.', price: 'Rs 1,300 / kg', when: 'Baked today · 6:00 am', available: true },
+    { art: 'patty', name: 'Chicken Patties', desc: '48 layers of puff pastry around peppery chicken filling.', price: 'Rs 140 each', when: 'Hot at 11 am & 5 pm', available: true },
+    { art: 'cake', name: 'Plum Fruit Cake', desc: 'Dense, buttery loaf with candied peel, raisins and tutti frutti.', price: 'Rs 1,450 · 1 lb', when: 'Baked yesterday · rests a day', available: true },
+    { art: 'bakar', name: 'Bakarkhani', desc: 'Flaky layered rounds with sesame, best with doodh patti.', price: 'Rs 60 each', when: 'Sold out · back tomorrow 7 am', available: false },
+    { art: 'zeera', name: 'Zeera Biscuits', desc: 'Salted cumin biscuits, crisp enough to survive a dunk.', price: 'Rs 1,100 / kg', when: 'Baked today · 6:30 am', available: true }
+  ];
+
+  var BAKERY_ART = {
+    rusk: '<svg viewBox="0 0 120 90" aria-hidden="true"><rect x="22" y="40" width="80" height="30" rx="11" fill="#C98A45" transform="rotate(-8 62 55)"/><rect x="18" y="30" width="80" height="30" rx="11" fill="#E0A85E" transform="rotate(6 58 45)"/><g fill="#B8732F" transform="rotate(6 58 45)"><circle cx="34" cy="44" r="1.6"/><circle cx="48" cy="40" r="1.4"/><circle cx="62" cy="46" r="1.6"/><circle cx="76" cy="41" r="1.4"/><circle cx="86" cy="47" r="1.5"/></g></svg>',
+    khatai: '<svg viewBox="0 0 120 90" aria-hidden="true"><circle cx="44" cy="50" r="24" fill="#E8C68A"/><circle cx="78" cy="42" r="24" fill="#F0D39C"/><path d="M68 32 l8 6 l-4 8 M84 48 l6 4" stroke="#C9A062" stroke-width="2" fill="none"/><ellipse cx="78" cy="42" rx="6" ry="3.5" fill="#7FB05A"/><ellipse cx="44" cy="50" rx="5" ry="3" fill="#7FB05A"/></svg>',
+    patty: '<svg viewBox="0 0 120 90" aria-hidden="true"><rect x="18" y="26" width="84" height="44" rx="10" fill="#E2A54A"/><rect x="18" y="56" width="84" height="14" rx="6" fill="#C98A2F"/><g stroke="#F6D08A" stroke-width="2"><path d="M24 60h72M24 64h72"/></g><g stroke="#9A5E15" stroke-width="2.5" stroke-linecap="round"><path d="M44 36l8 10M60 36l8 10M76 36l8 10"/></g></svg>',
+    cake: '<svg viewBox="0 0 120 90" aria-hidden="true"><rect x="14" y="30" width="78" height="40" rx="6" fill="#8B4A2B"/><rect x="14" y="28" width="78" height="8" rx="4" fill="#6E3820"/><path d="M92 30 l14 6 v34 l-14 0z" fill="#B97A4C"/><g><circle cx="98" cy="44" r="2.2" fill="#D7263D"/><circle cx="101" cy="54" r="2" fill="#4FA14B"/><circle cx="97" cy="62" r="2" fill="#F2A007"/></g><g fill="#5A2814"><circle cx="30" cy="46" r="2"/><circle cx="52" cy="54" r="2"/><circle cx="72" cy="44" r="2"/></g></svg>',
+    bakar: '<svg viewBox="0 0 120 90" aria-hidden="true"><circle cx="60" cy="46" r="32" fill="#E8C17F"/><circle cx="60" cy="46" r="22" fill="none" stroke="#C99A52" stroke-width="2"/><circle cx="60" cy="46" r="12" fill="none" stroke="#C99A52" stroke-width="2"/><g fill="#FFF3DC"><circle cx="44" cy="36" r="1.5"/><circle cx="72" cy="34" r="1.5"/><circle cx="78" cy="54" r="1.5"/><circle cx="50" cy="60" r="1.5"/><circle cx="62" cy="44" r="1.5"/></g></svg>',
+    zeera: '<svg viewBox="0 0 120 90" aria-hidden="true"><rect x="16" y="28" width="44" height="34" rx="8" fill="#EAC98D"/><rect x="58" y="36" width="44" height="34" rx="8" fill="#E2BC79"/><g fill="#6B4A20"><rect x="26" y="38" width="4" height="1.6" rx=".8"/><rect x="40" y="46" width="4" height="1.6" rx=".8"/><rect x="32" y="52" width="4" height="1.6" rx=".8"/><rect x="70" y="46" width="4" height="1.6" rx=".8"/><rect x="84" y="54" width="4" height="1.6" rx=".8"/><rect x="76" y="60" width="4" height="1.6" rx=".8"/></g></svg>'
+  };
+
+  var BRANCHES = [
+    { name: 'Saddar', addr: 'Shop 14, Bank Road, Saddar, Rawalpindi', hours: '7:00 am – 11:00 pm', open: 7, close: 23, tel: '+92 51 555 0178', maps: 'Bank Road Saddar Rawalpindi' },
+    { name: 'Satellite Town', addr: 'Shop 3, 6th Road Commercial Market, Satellite Town', hours: '8:00 am – 11:00 pm', open: 8, close: 23, tel: '+92 51 555 0193', maps: '6th Road Satellite Town Rawalpindi' },
+    { name: 'Bahria Town', addr: 'Unit 21, Spring North, Phase 7, Bahria Town', hours: '9:00 am – 12:00 am', open: 9, close: 24, tel: '+92 300 555 0146', maps: 'Spring North Bahria Town Phase 7' }
+  ];
+
+  init();
+})();
+</script>
+</body>
+</html>
