@@ -1,14 +1,13 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "framework": null,
-  "outputDirectory": "public",
-  "cleanUrls": true,
-  "rewrites": [
-    { "source": "/home", "destination": "/index.html" }
-  ],
-  "redirects": [
-    { "source": "/food-mockups", "destination": "/", "permanent": false },
-    { "source": "/food-mockups/:path*", "destination": "/:path*", "permanent": false },
-    { "source": "/(aboutus|service|contactus|getintouch)", "destination": "/", "permanent": false }
+  "builds": [{ "src": "public/**", "use": "@vercel/static" }],
+  "routes": [
+    { "src": "/food-mockups/?", "status": 307, "headers": { "Location": "/" } },
+    { "src": "/food-mockups/(.+)", "status": 307, "headers": { "Location": "/$1" } },
+    { "src": "/(?:aboutus|service|contactus|getintouch)/?", "status": 307, "headers": { "Location": "/" } },
+    { "src": "/(?:home/?|index\\.html)?", "dest": "/public/index.html" },
+    { "src": "/mockups/([^/.]+)/?", "dest": "/public/mockups/$1.html", "check": true },
+    { "src": "/(.+)", "dest": "/public/$1", "check": true },
+    { "src": "/.*", "status": 404, "dest": "/public/404.html" }
   ]
 }

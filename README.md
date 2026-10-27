@@ -31,9 +31,11 @@ The site is static, with no build step and no `package.json`.
   Every page still reads and works if those libraries fail to load.
 - `public/thumbs/`: hero screenshots used on the dashboard tickets.
 - `public/404.html`: the not-found page.
-- `vercel.json`: deploys `public/` as a static site with clean URLs.
-  - `/home` (the old homepage URL) shows the board.
+- `vercel.json`: deploys `public/` as plain static files through an explicit `@vercel/static` build. The explicit build takes precedence over the project's old "Next.js" framework preset. The routes:
+  - `/` and `/home` (the old homepage URL) show the board.
+  - `/mockups/<slug>` works without `.html`.
   - `/food-mockups/...` and the old HealthHub page URLs redirect to the new paths.
+  - Unknown paths get the 404 page.
 
 ## Photos and video
 
