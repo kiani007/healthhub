@@ -142,10 +142,10 @@ button,input,select,textarea{font:inherit;color:inherit}
 .hero-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:40px clamp(32px,5vw,80px);align-items:center;width:100%;padding-block:calc(var(--header-h) + 64px) 72px}
 .kicker{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;font-family:var(--mono);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan)}
 .kicker span + span::before{content:"";display:inline-block;width:6px;height:6px;margin-right:14px;background:var(--red);vertical-align:middle}
-.hero h1{font-size:clamp(4.4rem,11.5vw,11rem);line-height:.84;letter-spacing:-.015em;margin:26px 0 28px}
+.hero h1{font-size:clamp(4rem,8.2vw,8.8rem);line-height:.86;letter-spacing:-.015em;margin:26px 0 28px}
 .hero h1 .ln{display:block}
 .hero h1 .r{color:var(--broth)}
-.hero h1 .jp{display:block;margin-top:.18em;font-size:.26em;letter-spacing:.32em;color:var(--paper-2)}
+.hero h1 .jp{display:block;margin-top:1rem;font-size:max(1rem,.24em);line-height:1.2;letter-spacing:.32em;color:var(--paper-2)}
 .hero-lede{max-width:46ch;font-size:clamp(1.02rem,1.3vw,1.14rem);color:var(--paper-2)}
 .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
 .hero-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:40px;max-width:520px;border:1px solid var(--line);border-radius:3px}
@@ -174,7 +174,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 .scroll-cue i{display:block;width:12px;height:12px;border-right:2px solid var(--cyan);border-bottom:2px solid var(--cyan);transform:rotate(45deg);animation:nudge 1.6s ease-in-out infinite}
 @keyframes nudge{50%{transform:translateY(5px) rotate(45deg)}}
 @media (max-width:899px){.hero-grid{grid-template-columns:minmax(0,1fr)}.hero-art{max-width:440px}.scroll-cue{display:none}}
-@media (max-width:767px){.hero-grid{padding-block:calc(var(--header-h) + 40px) 48px}.hero-stats b{font-size:1.35rem}.hero-stats div{padding:12px}}
+@media (max-width:767px){.hero-grid{padding-block:calc(var(--header-h) + 40px) 48px}.hero-stats b{font-size:1.2rem;white-space:nowrap}.hero-stats div{padding:12px 10px}}
 
 /* Marquee strip */
 .strip{background:var(--cyan);color:var(--night);overflow:hidden;padding-block:14px;border-block:2px solid var(--night)}
@@ -368,7 +368,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 .info dd{margin:0;font-size:1.05rem}
 .visit-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
 .mapbox{position:relative;aspect-ratio:1/1;max-width:100%;border:1px solid var(--line);border-radius:3px;overflow:hidden;background:#0D0E1A}
-.map{position:absolute;inset:0;background:#0D0E1A}
+.map{position:absolute;inset:0;z-index:0;background:#0D0E1A}
 .map .leaflet-tile-pane{filter:sepia(.25) hue-rotate(195deg) saturate(1.6) brightness(.92) contrast(1.06)}
 .mapbox .leaflet-container{font-family:var(--mono);background:#0D0E1A}
 .mapbox .leaflet-bar{border:1px solid rgba(79,227,224,.4);border-radius:3px;box-shadow:none;overflow:hidden}
@@ -1324,7 +1324,7 @@ if (hasGsap) {
   if (!reduceMotion) {
     // Hero: each line of the sign slides up out of its own mask
     if (window.SplitText) {
-      const split = SplitText.create("#hero-title .ln", { type: "chars", mask: "chars" });
+      const split = SplitText.create("#hero-title .ln", { type: "words,chars", mask: "words" });
       gsap.from(split.chars, { yPercent: 110, duration: 1.2, ease: EASE, stagger: 0.04, delay: 0.1 });
     }
     gsap.from(".hero-copy > :not(h1), #hero-title .jp", { y: 30, opacity: 0, duration: 1.2, ease: EASE, stagger: 0.08, delay: 0.4 });

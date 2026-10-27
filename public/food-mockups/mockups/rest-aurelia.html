@@ -334,7 +334,7 @@ textarea.input{min-height:100px;resize:vertical}
 .hours li.today span:first-child::after{content:" · today";color:var(--champ)}
 .visit-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
 .mapbox{position:relative;aspect-ratio:4/5;max-width:100%;border:1px solid var(--line-champ);background:var(--ink-2);overflow:hidden}
-.map{position:absolute;inset:0;background:var(--ink-2)}
+.map{position:absolute;inset:0;z-index:0;background:var(--ink-2)}
 .map .leaflet-tile-pane{filter:grayscale(.45) sepia(.2) brightness(.86) contrast(1.08)}
 .mapbox .leaflet-container{font-family:var(--body);background:var(--ink-2)}
 .mapbox .leaflet-bar{border:1px solid var(--line-champ);border-radius:0;box-shadow:none}
