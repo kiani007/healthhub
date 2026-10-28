@@ -6,6 +6,9 @@
 <title>Ember &amp; Bean Roasters</title>
 <meta name="description" content="Ember & Bean Roasters, F-7 Markaz Islamabad: single-origin coffee roasted in 5 kg batches every Tuesday and Friday. Pour-over bar, order-ahead pickup and whole-bean subscriptions.">
 <meta name="theme-color" content="#13291F">
+<script>/* the hero entrance waits for the display font; the timer shows everything anyway if the scripts never arrive */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('intro');setTimeout(function(){document.documentElement.classList.remove('intro')},3000)}</script>
+<link rel="preload" as="image" href="../assets/cafe-ember-bean/hero-poster.jpg" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
@@ -60,6 +63,8 @@
   --f-body:"Geist","Segoe UI",system-ui,-apple-system,sans-serif;
   --f-mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
   --ease:cubic-bezier(.16,1,.3,1);
+  --ease-out:cubic-bezier(0.23,1,0.32,1);
+  --ease-in-out:cubic-bezier(0.77,0,0.175,1);
   --hdr:72px;
   --gut-l:max(16px,env(safe-area-inset-left,0px));
   --gut-r:max(16px,env(safe-area-inset-right,0px));
@@ -67,15 +72,19 @@
 }
 *,*::before,*::after{box-sizing:border-box}
 [hidden]{display:none!important}
-html{-webkit-text-size-adjust:100%;scroll-padding-top:calc(var(--hdr) + 12px)}
+html{-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent;scroll-padding-top:calc(var(--hdr) + 12px)}
+::selection{background:var(--brass);color:var(--ink)}
 body{margin:0;background:var(--pine);color:var(--on-dark);font:400 17px/1.6 var(--f-body);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opacity:.07;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 img,svg,video{max-width:100%}
 a{color:inherit}
 h1,h2,h3{font-family:var(--f-display);font-weight:400;line-height:.95;margin:0;text-wrap:balance;letter-spacing:-.015em}
-p{margin:0}
+p{margin:0;text-wrap:pretty}
 :focus-visible{outline:2px solid var(--brass);outline-offset:3px;border-radius:2px}
+/* brass is 1.9:1 on limestone; ink keeps the ring visible there (pine card backs stay brass) */
+.on-light :focus-visible{outline-color:var(--ink)}
+.on-light .mface--back :focus-visible{outline-color:var(--brass)}
 .skip{position:absolute;left:var(--gut-l);top:-60px;z-index:100;background:var(--cherry);color:#fff;padding:12px 16px;border-radius:4px;text-decoration:none;font-weight:600}
 .skip:focus{top:12px}
 .page{overflow-x:clip}
@@ -91,9 +100,10 @@ p{margin:0}
 @media (max-width:480px){.tb-strip span{display:none}}
 
 /* buttons: squared, hairline, one action colour */
-.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:52px;padding:0 24px;border-radius:3px;font:500 15px/1 var(--f-body);letter-spacing:.01em;text-decoration:none;border:1px solid transparent;cursor:pointer;transition:background-color .25s var(--ease),color .25s,border-color .25s;touch-action:manipulation;white-space:nowrap}
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:52px;padding:0 24px;border-radius:3px;font:500 15px/1 var(--f-body);letter-spacing:.01em;text-decoration:none;border:1px solid transparent;cursor:pointer;transition:background-color .25s var(--ease),color .25s,border-color .25s,scale .16s var(--ease-out);touch-action:manipulation;white-space:nowrap}
 .btn svg{transition:transform .3s var(--ease)}
-.btn:hover svg{transform:translateX(4px)}
+/* press feedback: the individual `scale` property composes with GSAP's magnetic transform */
+.btn:active{scale:.97}
 .btn--cherry{background:var(--cherry);color:#fff}
 .btn--cherry:hover{background:var(--cherry-hi)}
 .btn--line{border-color:rgba(238,240,232,.35);color:var(--on-dark)}
@@ -105,9 +115,9 @@ p{margin:0}
 
 /* header: transparent over the hero, solid after, hides on scroll down */
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:61;background:var(--pine)}
-.hdr{position:sticky;top:env(safe-area-inset-top,0px);z-index:60;margin-bottom:calc(-1 * var(--hdr));transition:transform .5s var(--ease),background-color .35s,border-color .35s;border-bottom:1px solid transparent}
-.hdr.is-solid{background:rgba(19,41,31,.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom-color:var(--hair)}
-.hdr.is-hidden{transform:translateY(-110%)}
+.hdr{position:sticky;top:env(safe-area-inset-top,0px);z-index:60;margin-bottom:calc(-1 * var(--hdr));transition:transform .22s var(--ease-out),background-color .35s,border-color .35s;border-bottom:1px solid transparent}
+.hdr.is-solid{background:var(--pine);border-bottom-color:var(--hair)}
+.hdr.is-hidden{transform:translateY(-110%);transition-duration:.28s,.35s,.35s}
 .hdr__in{height:var(--hdr);display:flex;align-items:center;gap:32px}
 .logo{display:flex;align-items:baseline;gap:10px;text-decoration:none;font-family:var(--f-display);font-size:27px;line-height:1;white-space:nowrap}
 .logo i{font-style:italic;color:var(--brass)}
@@ -116,7 +126,10 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .nav a{position:relative;text-decoration:none;font-size:14.5px;color:var(--dim);transition:color .2s;padding-block:6px}
 .nav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--brass);transform:scaleX(0);transform-origin:right;transition:transform .35s var(--ease)}
 .nav a:hover{color:var(--on-dark)}
-.nav a:hover::after{transform:scaleX(1);transform-origin:left}
+@media (hover:hover) and (pointer:fine){
+  .btn:hover svg{transform:translateX(4px)}
+  .nav a:hover::after{transform:scaleX(1);transform-origin:left}
+}
 .hdr .btn{min-height:42px;padding:0 18px;font-size:14px}
 @media (max-width:900px){.nav{display:none}.hdr .btn{margin-left:auto}.logo small{display:none}}
 @media (max-width:767px){.hdr .btn{display:none}}
@@ -136,12 +149,15 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .sec-head p{grid-column:9 / -1;color:var(--dim);max-width:44ch;font-size:16.5px}
 .on-light .sec-head p{color:var(--ink-2)}
 @media (max-width:900px){.sec-head h2,.sec-head p{grid-column:1 / -1}}
-.on-light{background:var(--lime);color:var(--ink)}
+.on-light{background:var(--lime);color:var(--ink);color-scheme:light}
 
 /* media slot (illustration fallback, photo/video fade in over it) */
 .media{position:relative;overflow:hidden;isolation:isolate}
 .media__video,.media__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s var(--ease);z-index:2}
-.media.has-media .media__video,.media.has-media .media__img{opacity:1}
+.media.has-media .media__img{opacity:1}
+/* the hero clip sits over its poster and only shows once it has seeked to the poster's frame */
+.media__video{transition-duration:.3s}
+.media__video.is-ready{opacity:1}
 .reveal-mask{overflow:hidden}
 [data-split] > div{padding-bottom:.14em;margin-bottom:-.14em}
 
@@ -170,7 +186,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   radial-gradient(80% 60% at 50% 40%,rgba(201,162,90,.12),transparent 70%),linear-gradient(180deg,var(--pine-2),var(--pine));perspective:1000px}
 .plate .media__art{position:absolute;inset:0;display:grid;place-items:center;padding:6% 10% 4%}
 .rig{display:block;width:100%;height:100%;transform-style:preserve-3d;will-change:transform}
-.plate__cap{position:absolute;left:0;right:0;bottom:-1px;display:flex;justify-content:space-between;gap:10px;padding:12px 14px;border-top:1px solid var(--hair);background:rgba(11,20,16,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);font-family:var(--f-mono);font-size:11.5px;letter-spacing:.06em;color:var(--dim);z-index:3}
+.plate__cap{position:absolute;left:0;right:0;bottom:-1px;display:flex;justify-content:space-between;gap:10px;padding:12px 14px;border-top:1px solid var(--hair);background:rgba(11,20,16,.74);font-family:var(--f-mono);font-size:11.5px;letter-spacing:.06em;color:var(--dim);z-index:3}
 .plate__cap b{font-weight:500;color:var(--on-dark)}
 .plate__tag{position:absolute;top:14px;left:14px;z-index:3;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--brass)}
 @media (max-width:900px){
@@ -190,6 +206,11 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .steam path{animation:steam 3.8s ease-in-out infinite;opacity:0}
 .steam path:nth-child(2){animation-delay:1.25s}.steam path:nth-child(3){animation-delay:2.5s}
 @keyframes steam{0%{transform:translateY(14px);opacity:0}35%{opacity:.7}100%{transform:translateY(-28px);opacity:0}}
+/* once the footage is up, the drawn rig underneath stops: its SVG keyframes cost a document layout every frame */
+.plate.has-media .media__art{visibility:hidden;transition:visibility 0s 1s}
+.plate.has-media .rig :is(.streak,.wave,.steam path){animation:none}
+/* hero entrance: held back until the display font is in, so the headline never paints in a fallback face first */
+.intro :is(.kicker,.hero h1,.lede,.hero__ctas,.facts,.cue,.plate){opacity:0}
 
 /* ---------- MARQUEE ---------- */
 .marquee{border-block:1px solid var(--hair);background:var(--ink);overflow:hidden;padding-block:22px}
@@ -210,7 +231,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .process small{color:var(--dim);font-size:14px}
 .process{padding:0;margin-top:0}
 @media (max-width:700px){.process{grid-template-columns:repeat(2,minmax(0,1fr))}.process li:nth-child(2){border-right:0}.process li:nth-child(3){padding-left:0}.process li{padding-bottom:16px}}
-.origins__viewport{overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:14px;scrollbar-width:thin;scrollbar-color:var(--pine-3) transparent}
+.origins__viewport{overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;padding-bottom:14px;scrollbar-width:thin;scrollbar-color:var(--pine-3) transparent}
 .origins__track{display:flex;gap:24px;width:max-content;padding-left:var(--gut-l);padding-right:var(--gut-r)}
 .is-pinned .origins__viewport{overflow:visible;scroll-snap-type:none}
 .origins.is-pinned{padding-bottom:24px}
@@ -258,7 +279,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 @media (max-width:1000px){.menu-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:620px){.menu-grid{grid-template-columns:minmax(0,1fr)}}
 .mcard{perspective:1400px;background:var(--lime);border-right:1px solid var(--hair-ink);border-bottom:1px solid var(--hair-ink)}
-.mcard__inner{display:grid;height:100%;transform-style:preserve-3d;transition:transform .9s var(--ease)}
+.mcard__inner{display:grid;height:100%;transform-style:preserve-3d;transition:transform .5s var(--ease-in-out)}
 .mcard.is-flipped .mcard__inner{transform:rotateY(180deg)}
 .mface{grid-area:1/1;display:flex;flex-direction:column;gap:14px;padding:30px 28px 26px;background:var(--lime);backface-visibility:hidden;-webkit-backface-visibility:hidden;min-width:0;transition:background-color .3s}
 .mcard:hover .mface--front{background:var(--lime-2)}
@@ -271,8 +292,9 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .mfoot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto;padding-top:8px}
 .mfoot .price{font-family:var(--f-display);font-size:28px;line-height:1}
 .mfoot .price small{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;color:var(--ink-2);margin-right:6px;text-transform:uppercase}
-.flip{appearance:none;display:inline-flex;align-items:center;gap:8px;min-height:44px;border:1px solid var(--hair-ink);background:transparent;color:inherit;border-radius:2px;padding:0 14px;font:500 13px/1 var(--f-body);cursor:pointer;transition:background-color .2s,border-color .2s,color .2s;text-decoration:none}
+.flip{appearance:none;display:inline-flex;align-items:center;gap:8px;min-height:44px;border:1px solid var(--hair-ink);background:transparent;color:inherit;border-radius:2px;padding:0 14px;font:500 13px/1 var(--f-body);cursor:pointer;transition:background-color .2s,border-color .2s,color .2s,scale .16s var(--ease-out);text-decoration:none;touch-action:manipulation}
 .flip:hover{border-color:var(--ink);background:var(--ink);color:var(--lime)}
+.flip:active{scale:.97}
 .mface--back .flip{border-color:var(--hair)}
 .mface--back .flip:hover{background:var(--brass);border-color:var(--brass);color:var(--ink)}
 .sizes{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
@@ -285,9 +307,14 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .mcard.is-sold .mface--front{background:#DCDDD4}
 .sold{align-self:flex-start;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--lime);padding:6px 9px;border-radius:2px}
 .mcard .steam-s path{opacity:0}
-.mcard.is-live .steam-s path,.mcard:hover .steam-s path{animation:steam 2.9s ease-in-out infinite}
-.mcard.is-live .steam-s path:nth-child(2),.mcard:hover .steam-s path:nth-child(2){animation-delay:.95s}
-.mcard.is-live .ice,.mcard:hover .ice{animation:bob 2.6s ease-in-out infinite}
+.mcard.is-live .steam-s path{animation:steam 2.9s ease-in-out infinite}
+.mcard.is-live .steam-s path:nth-child(2){animation-delay:.95s}
+.mcard.is-live .ice{animation:bob 2.6s ease-in-out infinite}
+@media (hover:hover) and (pointer:fine){
+  .mcard:hover .steam-s path{animation:steam 2.9s ease-in-out infinite}
+  .mcard:hover .steam-s path:nth-child(2){animation-delay:.95s}
+  .mcard:hover .ice{animation:bob 2.6s ease-in-out infinite}
+}
 .mcard .ice:nth-of-type(2){animation-delay:.5s}
 @keyframes bob{50%{transform:translateY(-4px) rotate(-6deg)}}
 
@@ -307,8 +334,6 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .pair__price s{color:var(--ink-2);font-size:14px}
 .pair__price strong{font-family:var(--f-display);font-weight:400;font-size:40px;line-height:1}
 .stamp{display:inline-block;padding:7px 10px;background:var(--cherry);color:#fff;font:500 11px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;border-radius:2px;transform-origin:50% 50%}
-.stamp.is-on{animation:stamp 3.2s var(--ease) infinite}
-@keyframes stamp{0%,78%,100%{transform:rotate(0)}84%{transform:rotate(-4deg) translateY(-2px)}92%{transform:rotate(2deg)}}
 @media (max-width:860px){
   .pair{grid-template-columns:minmax(0,1fr);gap:14px;padding:26px 0}
   .pair__n{display:none}
@@ -321,6 +346,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .scene{flex:none;width:clamp(290px,34vw,500px);display:grid;gap:14px;margin:0}
 .scene .media{aspect-ratio:11 / 8;border:1px solid var(--hair)}
 .scene .media__art{position:absolute;inset:-6% 0;display:block}
+.scene .media__img{top:-6%;height:112%} /* same overscan as the drawing, so the parallax never shows an edge */
 .scene .media__art svg{display:block;width:100%;height:100%}
 .scene figcaption{display:flex;justify-content:space-between;gap:12px;font-size:15px;color:var(--dim)}
 .scene figcaption b{color:var(--on-dark);font-weight:500}
@@ -341,7 +367,8 @@ legend,.flabel{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;tex
 .chips{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px}
 .chip{position:relative}
 .chip input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
-.chip span{display:grid;gap:4px;padding:14px 16px;border:1px solid var(--hair-ink);border-radius:2px;background:#fff;font-weight:500;font-size:15px;transition:border-color .2s,background-color .2s,color .2s;height:100%}
+.chip span{display:grid;gap:4px;padding:14px 16px;border:1px solid var(--hair-ink);border-radius:2px;background:#fff;font-weight:500;font-size:15px;transition:border-color .2s,background-color .2s,color .2s,scale .16s var(--ease-out);height:100%}
+.chip:active span{scale:.97}
 .chip span small{font-weight:400;font-family:var(--f-mono);font-size:11px;letter-spacing:.04em;color:var(--ink-2)}
 .chip:hover span{border-color:var(--ink)}
 .chip input:checked + span{background:var(--pine);color:var(--lime);border-color:var(--pine)}
@@ -350,10 +377,11 @@ legend,.flabel{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;tex
 .row2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .field{display:grid;gap:8px;min-width:0}
 .field label{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
-select,input[type=text],input[type=tel]{width:100%;min-height:50px;padding:0 14px;border-radius:2px;border:1px solid var(--hair-ink);background:#fff;color:var(--ink);font:500 15.5px var(--f-body);transition:border-color .2s}
+select,input[type=text],input[type=tel]{width:100%;min-height:50px;padding:0 14px;border-radius:2px;border:1px solid var(--hair-ink);background:#fff;color:var(--ink);font:500 16px var(--f-body);transition:border-color .2s}
 select:hover,input[type=text]:hover,input[type=tel]:hover{border-color:var(--ink-2)}
-.on-dark select,.on-dark input[type=text],.on-dark input[type=tel]{background:rgba(238,240,232,.05);color:var(--on-dark);border-color:var(--hair)}
-.on-dark select option{color:var(--ink)}
+.on-dark select,.on-dark input[type=text],.on-dark input[type=tel],.foot input[type=tel]{background:rgba(238,240,232,.05);color:var(--on-dark);border-color:var(--hair)}
+.on-dark select option{background:var(--pine);color:var(--on-dark)}
+.on-dark select option:disabled{color:var(--sage)}
 .summary{display:grid;gap:10px;padding:22px;background:var(--pine);color:var(--on-dark);font-variant-numeric:tabular-nums}
 .summary div{display:flex;justify-content:space-between;gap:12px;font-size:14.5px}
 .summary div span:first-child{color:var(--dim)}
@@ -361,6 +389,9 @@ select:hover,input[type=text]:hover,input[type=tel]:hover{border-color:var(--ink
 .summary .total span:first-child{font-family:var(--f-body);font-size:14.5px;align-self:center}
 .summary .total:first-child{border-top:0;padding-top:0}
 .confirm{padding:16px 18px;background:#DDE8D6;color:#1E3A26;border:1px solid #9FBC92;font-size:15px;border-radius:2px}
+/* confirmations arrive instead of appearing */
+.confirm,.news p.ok{transition:opacity .24s var(--ease-out),translate .24s var(--ease-out)}
+@starting-style{.confirm,.news p.ok{opacity:0;translate:0 6px}}
 .on-dark .field label{color:var(--dim)}
 .on-dark .confirm{background:rgba(201,162,90,.12);color:var(--on-dark);border-color:rgba(201,162,90,.5)}
 @media (max-width:960px){.beans__aside,.form{grid-column:1 / -1}.beans__aside{position:static}}
@@ -415,6 +446,8 @@ select:hover,input[type=text]:hover,input[type=tel]:hover{border-color:var(--ink
 .foot__cols h4{margin:0 0 6px;font-family:var(--f-mono);font-weight:500;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--brass)}
 .foot__cols a{text-decoration:none;color:var(--on-dark)}
 .foot__cols a:hover{color:var(--brass)}
+/* 44px touch targets without changing the column's rhythm (pitch stays 44px, so targets never overlap) */
+@media (pointer:coarse){.foot__cols a{padding-block:10px;margin-block:-4px}}
 .foot__cols b{color:var(--on-dark);font-weight:500;user-select:all}
 .news{grid-column:span 3}
 .news form{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;margin-top:6px}
@@ -428,19 +461,29 @@ select:hover,input[type=text]:hover,input[type=tel]:hover{border-color:var(--ink
 /* ---------- PHONE ACTION BAR ---------- */
 .abar{display:none}
 @media (max-width:767px){
-  .abar{position:fixed;left:0;right:0;bottom:0;z-index:70;display:grid;grid-template-columns:1.7fr 1fr 1fr 1fr;gap:6px;padding:10px var(--gut-r) calc(10px + env(safe-area-inset-bottom,0px)) var(--gut-l);background:rgba(11,20,16,.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--hair)}
-  .abar a{display:grid;place-items:center;min-height:48px;border-radius:2px;text-decoration:none;font-weight:500;font-size:13.5px;border:1px solid var(--hair);color:var(--on-dark)}
+  .abar{position:fixed;left:0;right:0;bottom:0;z-index:70;display:grid;grid-template-columns:1.7fr 1fr 1fr 1fr;gap:6px;padding:10px var(--gut-r) calc(10px + env(safe-area-inset-bottom,0px)) var(--gut-l);background:var(--ink);border-top:1px solid var(--hair)}
+  .abar a{display:grid;place-items:center;min-height:48px;border-radius:2px;text-decoration:none;font-weight:500;font-size:13.5px;border:1px solid var(--hair);color:var(--on-dark);transition:scale .16s var(--ease-out);touch-action:manipulation}
+  .abar a:active{scale:.97}
   .abar a.primary{background:var(--cherry);border-color:var(--cherry);color:#fff;font-size:15px}
-  body{padding-bottom:calc(78px + env(safe-area-inset-bottom,0px))}
+  .foot{padding-bottom:calc(32px + 78px + env(safe-area-inset-bottom,0px))} /* room for the bar, in the footer's own ink */
 }
 
+/* reduced motion: fewer and gentler, not none. Fades and colour changes stay; anything that travels goes. */
 @media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation:none!important;transition-duration:.01ms!important}
+  .cue i::after,.streak,.wave,.steam path,.marquee__row,.mcard .steam-s path,.mcard .ice{animation:none!important}
   .steam path{opacity:.5}
+  .btn:hover svg{transform:none}
+  .nav a::after{transform:none;opacity:0;transition:opacity .2s}
+  .nav a:hover::after{opacity:1}
+  .hdr{transition:opacity .2s,visibility .2s,background-color .35s,border-color .35s}
+  .hdr.is-hidden{transform:none;opacity:0;visibility:hidden;transition-duration:.2s,.2s,.35s,.35s}
+  .mcard__inner{transition:none}
   .mcard.is-flipped .mcard__inner{transform:none}
-  .mcard.is-flipped .mface--front{visibility:hidden}
-  .mface--back{transform:none;visibility:hidden}
-  .mcard.is-flipped .mface--back{visibility:visible}
+  .mface{transition:opacity .2s,visibility .2s,background-color .3s}
+  .mcard.is-flipped .mface--front{opacity:0;visibility:hidden}
+  .mface--back{transform:none;opacity:0;visibility:hidden}
+  .mcard.is-flipped .mface--back{opacity:1;visibility:visible}
+  .confirm,.news p.ok{transition:opacity .24s var(--ease-out)}
 }
 </style>
 </head>
@@ -819,7 +862,7 @@ select:hover,input[type=text]:hover,input[type=tel]:hover{border-color:var(--ink
         <span>One message on Tuesdays and Fridays when the new roast is out.</span>
         <form id="newsForm" novalidate>
           <label class="sr-only" for="newsPhone">WhatsApp number</label>
-          <input class="on-dark-input" type="tel" id="newsPhone" placeholder="03xx xxx xxxx" autocomplete="tel" style="background:rgba(238,240,232,.05);color:var(--on-dark);border-color:var(--hair)">
+          <input type="tel" id="newsPhone" placeholder="03xx xxx xxxx" autocomplete="tel">
           <button class="btn btn--cherry" type="submit">Join</button>
           <p class="ok" id="newsOk" role="status" hidden></p>
         </form>
@@ -989,6 +1032,16 @@ $('#pairs').innerHTML = PAIRINGS.filter(p => new Date(p.ends_at) > now).map((p,i
   </article>`;
 }).join('');
 
+/* totals settle in when they change, so a new price reads as a change rather than a flicker */
+let live = false;
+function tick(el, text){
+  if (el.textContent === text) return;
+  el.textContent = text;
+  if (!live || !el.animate) return;
+  el.animate(reduce ? [{opacity:.35},{opacity:1}] : [{opacity:.35, transform:'translateY(5px)'},{opacity:1, transform:'none'}],
+    {duration:220, easing:'cubic-bezier(0.23,1,0.32,1)'});
+}
+
 /* ---------- subscription ---------- */
 const SIZE_MULT = {250:1, 500:1.9, 1000:3.6};
 const subOrigin = $('#subOrigin');
@@ -1010,7 +1063,7 @@ function updateSub(){
   $('#sDisc').textContent = '− ' + rs(disc);
   $('#sDel').textContent = del ? rs(del) : 'Free';
   $('#sShip').textContent = nextRoast();
-  $('#sTotal').textContent = rs(bag - disc + del);
+  tick($('#sTotal'), rs(bag - disc + del));
 }
 $('#subForm').addEventListener('change', updateSub);
 $('#subForm').addEventListener('submit', e => {
@@ -1038,7 +1091,7 @@ function fillTimes(){
 }
 function updateOrder(){
   const m = MENU.find(x=>x.id===oDrink.value);
-  $('#oTotal').textContent = rs(m.sizes[oSize.value || 0][2]);
+  tick($('#oTotal'), rs(m.sizes[oSize.value || 0][2]));
 }
 oDrink.addEventListener('change', ()=>{ fillSizes(); updateOrder(); });
 oSize.addEventListener('change', updateOrder);
@@ -1050,6 +1103,7 @@ $('#order').addEventListener('submit', e => {
   c.textContent = `Mockup only: a ${m.sizes[oSize.value][0]} ${m.name} for ${name} would be on the pickup shelf at ${oTime.value.replace('ASAP · ','')}. No order was sent.`;
 });
 fillSizes(); fillTimes(); updateOrder();
+live = true;
 $('#newsForm').addEventListener('submit', e => {
   e.preventDefault();
   const ok = $('#newsOk'), v = $('#newsPhone').value.replace(/\D/g,'');
@@ -1072,54 +1126,74 @@ $('#newsForm').addEventListener('submit', e => {
 })();
 
 /* ---------- hero fill ---------- */
-let heroVideo = null, heroScrub = false, heroTarget = 0, heroLerp = 0;
-const liquid = $('#liquid'), scaleG = $('#scaleG'), scaleT = $('#scaleT'), yieldOut = $('#yieldOut');
+let heroVideo = null, heroScrub = false, heroTarget = 0, heroLerp = 0, scrubbing = false, fillP = 0;
+const plate = $('.plate'), liquid = $('#liquid'), scaleG = $('#scaleG'), scaleT = $('#scaleT'), yieldOut = $('#yieldOut');
 const EMPTY = 262;
+const clipTime = p => p * (heroVideo.duration - .05);
+/* text only changes when the shown value does: each write is a layout */
+const shown = {};
+function write(el, text){ if (shown[el.id] !== text) { el.textContent = text; shown[el.id] = text; } }
 function setFill(p){
-  p = Math.max(0, Math.min(1, p));
-  liquid.setAttribute('transform', `translate(0 ${(EMPTY*(1-p)).toFixed(1)})`);
+  p = fillP = Math.max(0, Math.min(1, p));
   const g = 300*p;
-  scaleG.textContent = g.toFixed(1) + ' g';
+  write(yieldOut, Math.round(g) + ' / 300 g');
+  if (heroVideo && heroScrub) { heroTarget = clipTime(p); kickScrub(); }
+  if (plate.classList.contains('has-media')) return; // the drawn rig is hidden under the footage
+  liquid.setAttribute('transform', `translate(0 ${(EMPTY*(1-p)).toFixed(1)})`);
+  write(scaleG, g.toFixed(1) + ' g');
   const secs = Math.round(30 + p*180);
-  scaleT.textContent = Math.floor(secs/60) + ':' + String(secs%60).padStart(2,'0');
-  yieldOut.textContent = Math.round(g) + ' / 300 g';
-  if (heroVideo && heroScrub && heroVideo.duration) heroTarget = p * (heroVideo.duration - .05);
+  write(scaleT, Math.floor(secs/60) + ':' + String(secs%60).padStart(2,'0'));
 }
 setFill(reduce ? .92 : .42);
 
 /* ---------- media slots ---------- */
-/* The hero clip shows a pour filling the mug. On desktop it is scrubbed by the same scroll that
-   drives the brew scale, so the cup fills as you scroll; on phones it plays once; with reduced
-   motion it rests on a nearly full frame. */
+/* The hero clip shows a pour filling the mug. Its poster is the frame that matches the starting fill, and the
+   clip only fades in once it has seeked to that same frame, so the swap from poster to video can't be seen.
+   On desktop the clip is then scrubbed by the scroll that drives the brew scale; on phones it plays on from
+   there once; with reduced motion it rests on a nearly full frame. */
 function scrubHero(){
-  if (!heroScrub || !heroVideo) return;
+  if (!heroScrub || !heroVideo) { scrubbing = false; return; }
   heroLerp += (heroTarget - heroLerp) * .18;
-  if (Math.abs(heroVideo.currentTime - heroLerp) > .02 && !heroVideo.seeking) heroVideo.currentTime = heroLerp;
-  requestAnimationFrame(scrubHero);
+  if (Math.abs(heroTarget - heroLerp) < .005) heroLerp = heroTarget;
+  const off = Math.abs(heroVideo.currentTime - heroLerp) > .02;
+  if (off && !heroVideo.seeking) heroVideo.currentTime = heroLerp;
+  scrubbing = off || heroLerp !== heroTarget; // the loop stops once the frame has caught up with the scroll
+  if (scrubbing) requestAnimationFrame(scrubHero);
 }
-function startHero(v){
+function kickScrub(){ if (!scrubbing) { scrubbing = true; requestAnimationFrame(scrubHero); } }
+function startHero(v, slot){
+  heroVideo = v;
   heroScrub = !reduce && window.matchMedia('(min-width: 768px)').matches;
-  if (reduce) { v.currentTime = v.duration * .92; return; }
-  if (heroScrub) { v.pause(); heroLerp = v.currentTime; requestAnimationFrame(scrubHero); return; }
+  const ready = () => { v.classList.add('is-ready'); slot.classList.add('has-media'); };
+  v.addEventListener('seeked', ready, {once:true});
+  v.addEventListener('playing', ready, {once:true}); // iOS can hold the seek until playback starts
+  heroTarget = heroLerp = clipTime(fillP);
+  v.currentTime = heroLerp;
+  if (heroScrub || reduce) return;
   const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { v.play().catch(()=>{}); io.disconnect(); } }), {threshold:.5});
   io.observe(v);
+}
+function mountHero(slot, m){
+  if (m.poster) {
+    const img = new Image();
+    img.className = 'media__img'; img.alt = m.alt; img.decoding = 'async'; img.fetchPriority = 'high';
+    img.addEventListener('load', () => slot.classList.add('has-media'));
+    img.addEventListener('error', () => img.remove());
+    img.src = m.poster; slot.appendChild(img);
+  }
+  if (!m.mp4) return;
+  const v = document.createElement('video');
+  v.className = 'media__video'; v.muted = true; v.loop = false; v.playsInline = true; v.preload = 'auto';
+  v.setAttribute('playsinline', ''); v.setAttribute('aria-hidden', 'true');
+  v.addEventListener('loadedmetadata', () => startHero(v, slot), {once:true});
+  v.addEventListener('error', () => v.remove());
+  v.src = m.mp4; slot.appendChild(v);
 }
 function mountMedia(){
   document.querySelectorAll('[data-media]').forEach(slot => {
     const key = slot.dataset.media;
     if (key === 'hero') {
-      const m = MEDIA.hero; if (!m.mp4) return;
-      const v = document.createElement('video');
-      v.className = 'media__video'; v.muted = true; v.loop = false; v.playsInline = true; v.preload = 'auto';
-      v.setAttribute('playsinline', ''); v.setAttribute('aria-hidden', 'true');
-      if (m.poster) v.poster = m.poster;
-      v.addEventListener('loadeddata', () => {
-        slot.classList.add('has-media');
-        $('#rig').setAttribute('aria-label', m.alt);
-        heroVideo = v; startHero(v);
-      }, {once:true});
-      v.addEventListener('error', () => v.remove());
-      v.src = m.mp4; slot.appendChild(v);
+      mountHero(slot, MEDIA.hero);
     } else {
       const src = MEDIA.photos[key]; if (!src) return;
       const img = new Image();
@@ -1134,6 +1208,7 @@ function mountMedia(){
     }
   });
 }
+mountMedia(); // straight away, not on DOMContentLoaded: the poster and clip should not wait for the CDN scripts
 
 /* ---------- real map (Leaflet + CARTO), initialised when near the viewport ---------- */
 function leafletCssReady(){
@@ -1162,8 +1237,6 @@ function initMap(el){
 
 /* ---------- boot: libraries load with defer ---------- */
 document.addEventListener('DOMContentLoaded', () => {
-  mountMedia();
-
   const mapEl = $('#map');
   if ('IntersectionObserver' in window) {
     const mio = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { initMap(mapEl); mio.disconnect(); } }), {rootMargin:'600px 0px'});
@@ -1218,7 +1291,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const io = new IntersectionObserver(es => es.forEach(en => en.target.classList.toggle('is-live', en.isIntersecting)), {threshold:.7});
   document.querySelectorAll('.mcard').forEach(c => io.observe(c));
 
-  if (!hasG) return;
+  if (!hasG) { document.documentElement.classList.remove('intro'); return; }
   const EASE = 'expo.out';
   const BASE = .42;
   const mm = gsap.matchMedia();
@@ -1232,7 +1305,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (desk) {
       ScrollTrigger.create({trigger:'.hero', start:'top top', end:'+=700', pin:true, scrub:true, onUpdate:self => setFill(BASE + (1-BASE)*self.progress)});
       gsap.to('.hero__copy', {yPercent:-6, ease:'none', scrollTrigger:{trigger:'.hero', start:'top top', end:'+=700', scrub:true}});
-      gsap.to('#rig', {yPercent:4, ease:'none', scrollTrigger:{trigger:'.hero', start:'top top', end:'+=700', scrub:true}});
+      if (!MEDIA.hero.poster) gsap.to('#rig', {yPercent:4, ease:'none', scrollTrigger:{trigger:'.hero', start:'top top', end:'+=700', scrub:true}});
     } else {
       ScrollTrigger.create({trigger:'#rig', start:'top 70%', end:'bottom 35%', scrub:true, onUpdate:self => setFill(BASE + (1-BASE)*self.progress)});
     }
@@ -1249,26 +1322,39 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   mm.add('(prefers-reduced-motion: no-preference)', () => {
-    /* headline line reveals */
-    const split = () => {
+    const root = document.documentElement;
+    /* the display font, capped so a slow font never holds the page back */
+    const fontsIn = document.fonts && document.fonts.ready ? Promise.race([document.fonts.ready, new Promise(r => setTimeout(r, 900))]) : Promise.resolve();
+
+    /* hero entrance: one sequence, top to bottom. The hero stays hidden (html.intro) until this starts, so
+       nothing paints, vanishes and comes back. Classes come off and the from-states go on in the same task. */
+    fontsIn.then(() => {
+      if (!root.classList.contains('intro')) return; // the safety timer already showed the hero as it is
+      if (window.SplitText) SplitText.create('#h1', {type:'lines', mask:'lines', autoSplit:true, onSplit(self){
+        return gsap.from(self.lines, {yPercent:110, duration:1.15, stagger:.09, ease:EASE, delay:.08});
+      }});
+      root.classList.remove('intro');
+      gsap.from('.kicker', {y:12, opacity:0, duration:.8, ease:EASE});
+      gsap.from('.plate', {y:60, opacity:0, duration:1.4, ease:EASE, delay:.15});
+      gsap.from(plate.querySelectorAll('.media__art, .media__img, .media__video'), {scale:1.12, duration:1.8, ease:EASE, delay:.15});
+      gsap.from('.lede, .hero__ctas, .facts, .cue', {y:28, opacity:0, duration:1, stagger:.08, ease:EASE, delay:.4});
+    });
+
+    /* headline line reveals further down */
+    fontsIn.then(() => {
       if (!window.SplitText) return;
       document.querySelectorAll('[data-split]').forEach(el => {
-        const inHero = !!el.closest('.hero');
+        if (el.closest('.hero')) return;
         SplitText.create(el, {type:'lines', mask:'lines', autoSplit:true, onSplit(self){
-          return gsap.from(self.lines, {yPercent:110, duration:1.15, stagger:.09, ease:EASE, delay:inHero ? .15 : 0,
-            scrollTrigger:inHero ? undefined : {trigger:el, start:'top 86%', once:true}});
+          return gsap.from(self.lines, {yPercent:110, duration:1.15, stagger:.09, ease:EASE, scrollTrigger:{trigger:el, start:'top 86%', once:true}});
         }});
       });
-    };
-    document.fonts && document.fonts.ready ? document.fonts.ready.then(split) : split();
+    });
 
     /* supporting copy */
-    gsap.utils.toArray('.sec-head p:not(.label), .lede, .hero__ctas, .facts, .process li').forEach(el => {
-      gsap.from(el, {y:28, opacity:0, duration:1, ease:EASE, delay:el.closest('.hero') ? .45 : 0, scrollTrigger:el.closest('.hero') ? undefined : {trigger:el, start:'top 90%', once:true}});
+    gsap.utils.toArray('.sec-head p:not(.label), .process li').forEach(el => {
+      gsap.from(el, {y:28, opacity:0, duration:1, ease:EASE, scrollTrigger:{trigger:el, start:'top 90%', once:true}});
     });
-    /* hero plate */
-    gsap.from('.plate', {y:60, opacity:0, duration:1.4, ease:EASE, delay:.25});
-    gsap.from('.plate .media__art', {scale:1.12, duration:1.8, ease:EASE, delay:.25});
     /* roast dial needles */
     gsap.utils.toArray('.needle').forEach(n => {
       gsap.fromTo(n, {rotation:-90, svgOrigin:'80 84'}, {rotation:+n.dataset.angle, svgOrigin:'80 84', duration:1.6, ease:'elastic.out(1,.6)', scrollTrigger:{trigger:'#origins', start:'top 60%', once:true}});
@@ -1279,14 +1365,14 @@ document.addEventListener('DOMContentLoaded', () => {
     ScrollTrigger.batch(cards, {start:'top 92%', once:true, onEnter:b => gsap.to(b, {y:0, opacity:1, duration:.9, stagger:.06, ease:EASE})});
     /* feature photo: mask reveal */
     gsap.from('.feature', {y:60, duration:1.2, ease:EASE, scrollTrigger:{trigger:'.feature', start:'top 88%', once:true}});
-    gsap.from('.feature .media__art', {scale:1.18, duration:1.6, ease:EASE, scrollTrigger:{trigger:'.feature', start:'top 88%', once:true}});
-    /* pairing rows + stamps */
+    gsap.from('.feature :is(.media__art, .media__img)', {scale:1.18, duration:1.6, ease:EASE, scrollTrigger:{trigger:'.feature', start:'top 88%', once:true}});
+    /* pairing rows + stamps: each stamp is pressed down once, after its row has arrived */
     gsap.utils.toArray('.pair').forEach(p => gsap.from(p, {y:30, opacity:0, duration:1, ease:EASE, scrollTrigger:{trigger:p, start:'top 90%', once:true}}));
-    gsap.utils.toArray('.stamp').forEach(b => gsap.from(b, {rotation:-14, y:-10, opacity:0, duration:.8, ease:'back.out(2)', onComplete:() => b.classList.add('is-on'), scrollTrigger:{trigger:b, start:'top 92%', once:true}}));
-    /* room strip: sideways drift + inner parallax */
+    gsap.utils.toArray('.stamp').forEach(b => gsap.from(b, {scale:1.25, rotation:-8, opacity:0, duration:.3, delay:.35, ease:'power4.out', scrollTrigger:{trigger:b, start:'top 92%', once:true}}));
+    /* room strip: sideways drift + inner parallax on whichever layer is showing (photo or drawing) */
     gsap.fromTo('#stripRow', {x:0}, {x:() => -Math.max(0, $('#stripRow').scrollWidth - window.innerWidth) * .9, ease:'none', scrollTrigger:{trigger:'#room', start:'top bottom', end:'bottom top', scrub:true, invalidateOnRefresh:true}});
-    gsap.utils.toArray('.scene .media__art').forEach((s,i) => {
-      gsap.fromTo(s, {yPercent:i%2 ? 4 : -4}, {yPercent:i%2 ? -4 : 4, ease:'none', scrollTrigger:{trigger:'#room', start:'top bottom', end:'bottom top', scrub:true}});
+    gsap.utils.toArray('.scene .media').forEach((s,i) => {
+      gsap.fromTo(s.querySelectorAll('.media__art, .media__img'), {yPercent:i%2 ? 4 : -4}, {yPercent:i%2 ? -4 : 4, ease:'none', scrollTrigger:{trigger:'#room', start:'top bottom', end:'bottom top', scrub:true}});
     });
     /* footer wordmark */
     gsap.from('.foot__mark', {yPercent:30, opacity:0, duration:1.4, ease:EASE, scrollTrigger:{trigger:'.foot', start:'top 85%', once:true}});
@@ -1295,15 +1381,17 @@ document.addEventListener('DOMContentLoaded', () => {
   /* pointer-only: rig tilt + magnetic buttons */
   if (fine && !reduce) {
     const art = $('#heroArt'), rig = $('#rig');
+    /* footage drifts against the pointer; the drawn rig tilts only while it is the thing showing */
+    const footage = () => plate.querySelectorAll('.media__img, .media__video');
     art.addEventListener('pointermove', e => {
       const r = art.getBoundingClientRect();
       const x = (e.clientX - r.left)/r.width - .5, y = (e.clientY - r.top)/r.height - .5;
-      gsap.to(rig, {rotateY:x*12, rotateX:-y*7, rotation:x*2.5, duration:.8, ease:'power3.out'});
-      if (heroVideo) gsap.to(heroVideo, {x:-x*14, y:-y*10, scale:1.06, duration:.8, ease:'power3.out'});
+      if (plate.classList.contains('has-media')) gsap.to(footage(), {x:-x*14, y:-y*10, scale:1.06, duration:.8, ease:'power3.out', overwrite:'auto'});
+      else gsap.to(rig, {rotateY:x*12, rotateX:-y*7, rotation:x*2.5, duration:.8, ease:'power3.out'});
     });
     art.addEventListener('pointerleave', () => {
-      gsap.to(rig, {rotateY:0, rotateX:0, rotation:0, duration:1, ease:EASE});
-      if (heroVideo) gsap.to(heroVideo, {x:0, y:0, scale:1, duration:1, ease:EASE});
+      if (plate.classList.contains('has-media')) gsap.to(footage(), {x:0, y:0, scale:1, duration:1, ease:EASE, overwrite:'auto'});
+      else gsap.to(rig, {rotateY:0, rotateX:0, rotation:0, duration:1, ease:EASE});
     });
     document.querySelectorAll('[data-magnetic]').forEach(b => {
       const xTo = gsap.quickTo(b, 'x', {duration:.45, ease:'power3'}), yTo = gsap.quickTo(b, 'y', {duration:.45, ease:'power3'});
