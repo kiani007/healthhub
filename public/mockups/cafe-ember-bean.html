@@ -166,7 +166,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .cue i::after{content:"";position:absolute;left:0;top:-40%;width:1px;height:40%;background:var(--brass);animation:cue 1.9s var(--ease) infinite}
 @keyframes cue{to{transform:translateY(350%)}}
 .hero__art{grid-column:8 / -1;position:relative;justify-self:stretch}
-.plate{position:relative;aspect-ratio:4 / 5;width:100%;max-width:520px;margin-left:auto;border:1px solid var(--hair);background:
+.plate{position:relative;aspect-ratio:1 / 1;width:100%;max-width:540px;margin-left:auto;border:1px solid var(--hair);background:
   radial-gradient(80% 60% at 50% 40%,rgba(201,162,90,.12),transparent 70%),linear-gradient(180deg,var(--pine-2),var(--pine));perspective:1000px}
 .plate .media__art{position:absolute;inset:0;display:grid;place-items:center;padding:6% 10% 4%}
 .rig{display:block;width:100%;height:100%;transform-style:preserve-3d;will-change:transform}
@@ -577,7 +577,7 @@ select:hover,input[type=text]:hover,input[type=tel]:hover{border-color:var(--ink
           <p>Every drink is weighed in and weighed out. Tap a card for sizes and prices. Caffeine is an estimate for the size shown.</p>
         </div>
         <!-- HEYGEN: 4:5 still — a cortado in a short ribbed glass on a pale limestone counter, layered espresso and microfoam, one brass spoon, soft window light, pine-green wall behind, no people, no text. -->
-        <figure class="feature media" data-media="cortado" data-alt="A cortado in a ribbed glass on a limestone counter">
+        <figure class="feature media" data-media="cortado" data-alt="A flat white in an Ember &amp; Bean mug on a travertine counter, with a brass spoon on a linen napkin">
           <div class="media__art" aria-hidden="true">
             <svg viewBox="0 0 400 500" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
               <rect width="400" height="500" fill="#CDD0C4"/>
@@ -593,7 +593,7 @@ select:hover,input[type=text]:hover,input[type=tel]:hover{border-color:var(--ink
               <rect x="70" y="330" width="260" height="10" fill="#0B1410" opacity=".08"/>
             </svg>
           </div>
-          <figcaption><span>Cortado &middot; 1 : 1</span><span class="num">Rs 650</span></figcaption>
+          <figcaption><span>Flat white &middot; 8 oz</span><span class="num">Rs 750</span></figcaption>
         </figure>
       </div>
       <ul class="menu-grid" id="menuGrid"></ul>
@@ -649,7 +649,7 @@ select:hover,input[type=text]:hover,input[type=tel]:hover{border-color:var(--ink
           <figcaption><b>Green bean room</b><span>~1,200 KG</span></figcaption>
         </figure>
         <figure class="scene">
-          <div class="media" data-media="cupping" data-alt="Score sheet from a public cupping session">
+          <div class="media" data-media="cupping" data-alt="Cupping bowls, spoons, water and a blank score sheet laid out for a public cupping">
             <div class="media__art" aria-hidden="true"><svg viewBox="0 0 440 320" preserveAspectRatio="xMidYMid slice"><rect width="440" height="320" fill="#13291F"/><rect x="60" y="52" width="320" height="216" rx="2" fill="#E5E6DE"/><g font-family="Geist Mono, monospace" fill="#0B1410"><text x="84" y="94" font-size="14">CUPPING &middot; THU 4 PM</text><text x="84" y="132" font-size="13" opacity=".7">Guji N . . . . . . 88.5</text><text x="84" y="160" font-size="13" opacity=".7">Huila W . . . . . 87.0</text><text x="84" y="188" font-size="13" opacity=".7">Gayo WH . . . . . 85.5</text><text x="84" y="216" font-size="13" opacity=".7">Cerrado PN . . . 84.0</text></g><rect x="296" y="78" width="62" height="28" fill="#B8323F" transform="rotate(-6 327 92)"/><text x="327" y="97" font-family="Geist Mono, monospace" font-size="12" fill="#fff" text-anchor="middle" transform="rotate(-6 327 92)">FREE</text></svg></div>
           </div>
           <figcaption><b>Public cupping</b><span>THURSDAYS</span></figcaption>
@@ -843,9 +843,11 @@ select:hover,input[type=text]:hover,input[type=tel]:hover{border-color:var(--ink
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
 <script>
 /* ---------- media manifest: drop HeyGen/photo files in ../assets/cafe-ember-bean/ and set the paths ---------- */
+const A = '../assets/cafe-ember-bean/';
 const MEDIA = {
-  hero:   { mp4: null, poster: null, alt: 'Slow-motion pour-over dripping into a glass server' }, // '../assets/cafe-ember-bean/hero.mp4'
-  photos: { cortado: null, roaster: null, bar: null, window: null, greens: null, cupping: null }   // '../assets/cafe-ember-bean/<key>.webp'
+  hero:   { mp4: A + 'hero.mp4', poster: A + 'hero-poster.jpg', alt: 'Pour-over coffee poured from a glass server into an Ember & Bean mug' },
+  /* each photo ships at 1200 px plus a -640 version for phones */
+  photos: { cortado: A + 'cortado.webp', roaster: A + 'roaster.webp', bar: A + 'bar.webp', window: A + 'window.webp', greens: A + 'greens.webp', cupping: A + 'cupping.webp' }
 };
 
 /* ---------- data (mirrors future Supabase tables: items, variants, deals) ---------- */
@@ -1070,6 +1072,7 @@ $('#newsForm').addEventListener('submit', e => {
 })();
 
 /* ---------- hero fill ---------- */
+let heroVideo = null, heroScrub = false, heroTarget = 0, heroLerp = 0;
 const liquid = $('#liquid'), scaleG = $('#scaleG'), scaleT = $('#scaleT'), yieldOut = $('#yieldOut');
 const EMPTY = 262;
 function setFill(p){
@@ -1080,26 +1083,51 @@ function setFill(p){
   const secs = Math.round(30 + p*180);
   scaleT.textContent = Math.floor(secs/60) + ':' + String(secs%60).padStart(2,'0');
   yieldOut.textContent = Math.round(g) + ' / 300 g';
+  if (heroVideo && heroScrub && heroVideo.duration) heroTarget = p * (heroVideo.duration - .05);
 }
 setFill(reduce ? .92 : .42);
 
 /* ---------- media slots ---------- */
+/* The hero clip shows a pour filling the mug. On desktop it is scrubbed by the same scroll that
+   drives the brew scale, so the cup fills as you scroll; on phones it plays once; with reduced
+   motion it rests on a nearly full frame. */
+function scrubHero(){
+  if (!heroScrub || !heroVideo) return;
+  heroLerp += (heroTarget - heroLerp) * .18;
+  if (Math.abs(heroVideo.currentTime - heroLerp) > .02 && !heroVideo.seeking) heroVideo.currentTime = heroLerp;
+  requestAnimationFrame(scrubHero);
+}
+function startHero(v){
+  heroScrub = !reduce && window.matchMedia('(min-width: 768px)').matches;
+  if (reduce) { v.currentTime = v.duration * .92; return; }
+  if (heroScrub) { v.pause(); heroLerp = v.currentTime; requestAnimationFrame(scrubHero); return; }
+  const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { v.play().catch(()=>{}); io.disconnect(); } }), {threshold:.5});
+  io.observe(v);
+}
 function mountMedia(){
   document.querySelectorAll('[data-media]').forEach(slot => {
     const key = slot.dataset.media;
     if (key === 'hero') {
       const m = MEDIA.hero; if (!m.mp4) return;
       const v = document.createElement('video');
-      v.className = 'media__video'; v.muted = true; v.loop = true; v.playsInline = true; v.preload = 'metadata';
+      v.className = 'media__video'; v.muted = true; v.loop = false; v.playsInline = true; v.preload = 'auto';
       v.setAttribute('playsinline', ''); v.setAttribute('aria-hidden', 'true');
       if (m.poster) v.poster = m.poster;
-      v.addEventListener('loadeddata', () => { slot.classList.add('has-media'); if (!reduce) v.play().catch(()=>{}); });
+      v.addEventListener('loadeddata', () => {
+        slot.classList.add('has-media');
+        $('#rig').setAttribute('aria-label', m.alt);
+        heroVideo = v; startHero(v);
+      }, {once:true});
       v.addEventListener('error', () => v.remove());
       v.src = m.mp4; slot.appendChild(v);
     } else {
       const src = MEDIA.photos[key]; if (!src) return;
       const img = new Image();
       img.className = 'media__img'; img.alt = slot.dataset.alt || ''; img.loading = 'lazy'; img.decoding = 'async';
+      if (src.endsWith('.webp')) {
+        img.srcset = src.replace(/\.webp$/, '-640.webp') + ' 640w, ' + src + ' 1200w';
+        img.sizes = slot.classList.contains('feature') ? '(max-width: 900px) 92vw, 34vw' : '(max-width: 900px) 80vw, 30vw';
+      }
       img.addEventListener('load', () => slot.classList.add('has-media'));
       img.addEventListener('error', () => img.remove());
       img.src = src; slot.appendChild(img);
@@ -1271,8 +1299,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const r = art.getBoundingClientRect();
       const x = (e.clientX - r.left)/r.width - .5, y = (e.clientY - r.top)/r.height - .5;
       gsap.to(rig, {rotateY:x*12, rotateX:-y*7, rotation:x*2.5, duration:.8, ease:'power3.out'});
+      if (heroVideo) gsap.to(heroVideo, {x:-x*14, y:-y*10, scale:1.06, duration:.8, ease:'power3.out'});
     });
-    art.addEventListener('pointerleave', () => gsap.to(rig, {rotateY:0, rotateX:0, rotation:0, duration:1, ease:EASE}));
+    art.addEventListener('pointerleave', () => {
+      gsap.to(rig, {rotateY:0, rotateX:0, rotation:0, duration:1, ease:EASE});
+      if (heroVideo) gsap.to(heroVideo, {x:0, y:0, scale:1, duration:1, ease:EASE});
+    });
     document.querySelectorAll('[data-magnetic]').forEach(b => {
       const xTo = gsap.quickTo(b, 'x', {duration:.45, ease:'power3'}), yTo = gsap.quickTo(b, 'y', {duration:.45, ease:'power3'});
       b.addEventListener('pointermove', e => { const r = b.getBoundingClientRect(); xTo(((e.clientX - r.left)/r.width - .5) * 16); yTo(((e.clientY - r.top)/r.height - .5) * 12); });
