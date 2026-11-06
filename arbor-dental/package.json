@@ -1,0 +1,26 @@
+{
+  "name": "arbor-dental-site",
+  "version": "1.0.0",
+  "description": "Arbor Dental Services one-page site (static HTML, Motion animations).",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/build.mjs --watch & node scripts/serve.mjs .",
+    "serve": "node scripts/serve.mjs .",
+    "images": "sh scripts/images.sh",
+    "test": "npm run build && playwright test",
+    "shots": "npm run build && node scripts/shots.mjs"
+  },
+  "license": "UNLICENSED",
+  "dependencies": {
+    "motion": "^14.9.0"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@fontsource-variable/newsreader": "^5.3.0",
+    "@fontsource-variable/plus-jakarta-sans": "^5.3.0",
+    "@playwright/test": "1.63.0",
+    "esbuild": "^0.28.2"
+  },
+  "private": true,
+  "type": "module"
+}
