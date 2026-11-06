@@ -11,8 +11,7 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentEle
 <link rel="preload" as="image" href="../assets/cafe-ember-bean/hero-poster.jpg" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@500..700&family=Funnel+Sans:wght@400..600&display=swap">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -39,8 +38,9 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentEle
 }
 </script>
 <style>
-/* Layout: "cherry to cup" — a pine-green roastery lab. Editorial 12-col grid, oversized Instrument Serif,
-   precise Geist Mono data. Dark pine chapters alternate with limestone chapters; cherry is the only action colour. */
+/* Layout: "cherry to cup" — a pine-green roastery lab. Editorial 12-col grid, Funnel Display headlines over
+   Funnel Sans, with gram/°C/price readouts in tabular figures. Dark pine chapters alternate with limestone
+   chapters; cherry is the only action colour. */
 :root{
   --pine:#13291F;
   --pine-2:#1B392C;
@@ -54,14 +54,35 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentEle
   --lime-2:#F0F1EB;
   --ink:#0B1410;
   --ink-2:#3F4A43;
+  --ink-3:#646E67; /* placeholders on white fields: 5.3:1, lighter than real values */
   --on-dark:#EEF0E8;
   --dim:rgba(238,240,232,.68);
   --hair:rgba(169,183,154,.22);
   --hair-ink:rgba(11,20,16,.14);
-  --coffee:#3A1E10;
-  --f-display:"Instrument Serif","Iowan Old Style","Palatino Linotype",Georgia,serif;
-  --f-body:"Geist","Segoe UI",system-ui,-apple-system,sans-serif;
-  --f-mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --lime-3:#DCDDD4;
+  --field:#fff;
+  --on-cherry:#fff;
+  --brass-glow:rgba(201,162,90,.11);
+  --shadow:rgba(0,0,0,.45);
+  --ok-bg:#DDE8D6;
+  --ok-ink:#1E3A26;
+  --ok-line:#9FBC92;
+  --f-display:"Funnel Display",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-body:"Funnel Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  /* type: one rem scale (respects the reader's font size), three tracking values */
+  --t-display:clamp(3rem,1.9rem + 4.4vw,6rem);
+  --t-h2:clamp(2.5rem,1.7rem + 3.5vw,5.25rem);
+  --t-h3-lg:clamp(2rem,1.5rem + 2.1vw,3.5rem);
+  --t-title:clamp(1.5rem,1.3rem + .8vw,2rem);
+  --t-figure:clamp(1.375rem,1.2rem + .6vw,1.75rem);
+  --t-lede:clamp(1.1875rem,1.1rem + .3vw,1.3125rem);
+  --t-body:1.0625rem;
+  --t-small:.9375rem;
+  --t-label:.8125rem;
+  --t-micro:.75rem;
+  --tr-display:-.035em;
+  --tr-heading:-.02em;
+  --tr-label:.01em;
   --ease:cubic-bezier(.16,1,.3,1);
   --ease-out:cubic-bezier(0.23,1,0.32,1);
   --ease-in-out:cubic-bezier(0.77,0,0.175,1);
@@ -72,44 +93,42 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentEle
 }
 *,*::before,*::after{box-sizing:border-box}
 [hidden]{display:none!important}
-html{-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent;scroll-padding-top:calc(var(--hdr) + 12px)}
+html{-webkit-text-size-adjust:100%;scrollbar-color:var(--pine-3) var(--pine);-webkit-tap-highlight-color:transparent;scroll-padding-top:calc(var(--hdr) + 12px)}
 ::selection{background:var(--brass);color:var(--ink)}
-body{margin:0;background:var(--pine);color:var(--on-dark);font:400 17px/1.6 var(--f-body);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{margin:0;background:var(--pine);color:var(--on-dark);font:400 var(--t-body)/1.65 var(--f-body);letter-spacing:.005em;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opacity:.07;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 img,svg,video{max-width:100%}
 a{color:inherit}
-h1,h2,h3{font-family:var(--f-display);font-weight:400;line-height:.95;margin:0;text-wrap:balance;letter-spacing:-.015em}
+h1,h2,h3{font-family:var(--f-display);font-weight:600;line-height:1;margin:0;text-wrap:balance;letter-spacing:var(--tr-heading);font-variant-numeric:proportional-nums}
 p{margin:0;text-wrap:pretty}
 :focus-visible{outline:2px solid var(--brass);outline-offset:3px;border-radius:2px}
 /* brass is 1.9:1 on limestone; ink keeps the ring visible there (pine card backs stay brass) */
 .on-light :focus-visible{outline-color:var(--ink)}
 .on-light .mface--back :focus-visible{outline-color:var(--brass)}
-.skip{position:absolute;left:var(--gut-l);top:-60px;z-index:100;background:var(--cherry);color:#fff;padding:12px 16px;border-radius:4px;text-decoration:none;font-weight:600}
+.skip{position:absolute;left:var(--gut-l);top:-60px;z-index:100;background:var(--cherry);color:var(--on-cherry);padding:12px 16px;border-radius:4px;text-decoration:none;font-weight:600}
 .skip:focus{top:12px}
 .page{overflow-x:clip}
 .wrap{max-width:1320px;margin-inline:auto;padding-left:var(--gut-l);padding-right:var(--gut-r)}
-.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-.mono{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+.mono{font-size:var(--t-label);font-weight:500;letter-spacing:var(--tr-label)}
+.nw{white-space:nowrap}
 .num{font-variant-numeric:tabular-nums}
 
 /* tasting board strip */
 .tb-strip{display:flex;justify-content:space-between;gap:12px;padding:7px max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));background:#111;color:#cfcfcf;font:500 12px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.02em}
-.tb-strip a{color:#fff;text-decoration:none}.tb-strip a:hover{text-decoration:underline}
+.tb-strip a{color:var(--on-cherry);text-decoration:none}.tb-strip a:hover{text-decoration:underline}
 .in-board .tb-strip{display:none}
 @media (max-width:480px){.tb-strip span{display:none}}
 
 /* buttons: squared, hairline, one action colour */
-.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:52px;padding:0 24px;border-radius:3px;font:500 15px/1 var(--f-body);letter-spacing:.01em;text-decoration:none;border:1px solid transparent;cursor:pointer;transition:background-color .25s var(--ease),color .25s,border-color .25s,scale .16s var(--ease-out);touch-action:manipulation;white-space:nowrap}
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:52px;padding:10px 24px;border-radius:3px;font:500 var(--t-small)/1.2 var(--f-body);letter-spacing:.005em;text-align:center;text-decoration:none;border:1px solid transparent;cursor:pointer;transition:background-color .25s var(--ease),color .25s,border-color .25s,scale .16s var(--ease-out);touch-action:manipulation}
 .btn svg{transition:transform .3s var(--ease)}
 /* press feedback: the individual `scale` property composes with GSAP's magnetic transform */
 .btn:active{scale:.97}
-.btn--cherry{background:var(--cherry);color:#fff}
+.btn--cherry{background:var(--cherry);color:var(--on-cherry)}
 .btn--cherry:hover{background:var(--cherry-hi)}
 .btn--line{border-color:rgba(238,240,232,.35);color:var(--on-dark)}
 .btn--line:hover{border-color:var(--brass);color:var(--brass)}
-.btn--ink{background:var(--ink);color:var(--lime)}
-.btn--ink:hover{background:var(--pine-3)}
 .on-light .btn--line{border-color:var(--hair-ink);color:var(--ink)}
 .on-light .btn--line:hover{border-color:var(--ink)}
 
@@ -119,37 +138,28 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .hdr.is-solid{background:var(--pine);border-bottom-color:var(--hair)}
 .hdr.is-hidden{transform:translateY(-110%);transition-duration:.28s,.35s,.35s}
 .hdr__in{height:var(--hdr);display:flex;align-items:center;gap:32px}
-.logo{display:flex;align-items:baseline;gap:10px;text-decoration:none;font-family:var(--f-display);font-size:27px;line-height:1;white-space:nowrap}
-.logo i{font-style:italic;color:var(--brass)}
-.logo small{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.16em;color:var(--sage);text-transform:uppercase}
+.logo{display:flex;align-items:baseline;gap:10px;text-decoration:none;font-family:var(--f-display);font-weight:600;font-size:1.625rem;letter-spacing:var(--tr-heading);line-height:1;white-space:nowrap}
+.logo i{font-style:normal;color:var(--brass)}
+.logo small{font-family:var(--f-body);font-weight:500;font-size:var(--t-micro);letter-spacing:var(--tr-label);color:var(--sage)}
 .nav{display:flex;gap:28px;margin-left:auto}
-.nav a{position:relative;text-decoration:none;font-size:14.5px;color:var(--dim);transition:color .2s;padding-block:6px}
+.nav a{position:relative;text-decoration:none;font-size:var(--t-small);color:var(--dim);transition:color .2s;padding-block:6px}
 .nav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--brass);transform:scaleX(0);transform-origin:right;transition:transform .35s var(--ease)}
 .nav a:hover{color:var(--on-dark)}
 @media (hover:hover) and (pointer:fine){
   .btn:hover svg{transform:translateX(4px)}
   .nav a:hover::after{transform:scaleX(1);transform-origin:left}
 }
-.hdr .btn{min-height:42px;padding:0 18px;font-size:14px}
+.hdr .btn{min-height:42px;padding:0 18px;font-size:.875rem}
 @media (max-width:900px){.nav{display:none}.hdr .btn{margin-left:auto}.logo small{display:none}}
 @media (max-width:767px){.hdr .btn{display:none}}
 
-/* section label system: (01) — Origins */
-.label{display:flex;align-items:center;gap:14px;font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--brass)}
-.label b{font-weight:500;color:var(--on-dark)}
-.label::after{content:"";height:1px;flex:0 0 56px;background:currentColor;opacity:.5}
-.on-light .label{color:var(--brass-ink)}
-.on-light .label b{color:var(--ink)}
 .sec{position:relative;padding-block:clamp(88px,11vw,168px)}
 .sec-head{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:28px 24px;margin-bottom:clamp(48px,6vw,88px);align-items:end}
-.sec-head .label{grid-column:1 / -1}
-.sec-head h2{grid-column:1 / span 8;font-size:clamp(46px,6.6vw,104px)}
-.sec-head h2 em{font-style:italic;color:var(--brass)}
-.on-light .sec-head h2 em{color:var(--cherry)}
-.sec-head p{grid-column:9 / -1;color:var(--dim);max-width:44ch;font-size:16.5px}
+.sec-head h2{grid-column:1 / span 8;font-size:var(--t-h2);letter-spacing:var(--tr-display)}
+.sec-head p{grid-column:9 / -1;color:var(--dim);max-width:32rem}
 .on-light .sec-head p{color:var(--ink-2)}
 @media (max-width:900px){.sec-head h2,.sec-head p{grid-column:1 / -1}}
-.on-light{background:var(--lime);color:var(--ink);color-scheme:light}
+.on-light{background:var(--lime);color:var(--ink);color-scheme:light;letter-spacing:0}
 
 /* media slot (illustration fallback, photo/video fade in over it) */
 .media{position:relative;overflow:hidden;isolation:isolate}
@@ -158,44 +168,42 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 /* the hero clip sits over its poster and only shows once it has seeked to the poster's frame */
 .media__video{transition-duration:.3s}
 .media__video.is-ready{opacity:1}
-.reveal-mask{overflow:hidden}
 [data-split] > div{padding-bottom:.14em;margin-bottom:-.14em}
 
 /* ---------- HERO ---------- */
 .hero{position:relative;padding-top:var(--hdr);background:
-  radial-gradient(70% 60% at 78% 42%,rgba(201,162,90,.10),transparent 70%),
+  radial-gradient(70% 60% at 78% 42%,var(--brass-glow),transparent 70%),
   linear-gradient(180deg,var(--pine) 0%,var(--pine) 70%,var(--pine-2) 100%)}
 .hero__grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px;align-items:center;min-height:min(900px,calc(100svh - 30px));padding-block:24px 64px}
 .hero__copy{grid-column:1 / span 7;position:relative;z-index:2}
-.kicker{display:flex;align-items:center;gap:12px;margin-bottom:28px;font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--sage)}
-.kicker i{display:block;width:8px;height:8px;background:var(--cherry);transform:rotate(45deg)}
-.hero h1{font-size:clamp(56px,8.6vw,138px);line-height:.9;letter-spacing:-.025em}
-.hero h1 em{font-style:italic;color:var(--brass)}
-.lede{margin-top:30px;font-size:clamp(17px,1.35vw,19.5px);color:var(--dim);max-width:46ch}
+.hero h1{font-size:var(--t-display);line-height:.95;letter-spacing:var(--tr-display)}
+.hero h1 em{font-style:normal;color:var(--brass)}
+.lede{margin-top:28px;font-size:var(--t-lede);line-height:1.55;color:var(--dim);max-width:34rem}
 .hero__ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:38px}
 .facts{display:grid;grid-template-columns:repeat(3,minmax(0,max-content));gap:12px 48px;margin:52px 0 0;padding-top:24px;border-top:1px solid var(--hair)}
 .facts div{display:grid;gap:6px}
-.facts dt{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--sage)}
-.facts dd{margin:0;font-family:var(--f-display);font-size:30px;line-height:1}
-.cue{display:flex;align-items:center;gap:14px;margin-top:40px;font-family:var(--f-mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.facts dt{font-size:var(--t-label);font-weight:500;letter-spacing:var(--tr-label);color:var(--sage)}
+.facts dd{margin:0;font-family:var(--f-display);font-weight:600;font-size:var(--t-figure);line-height:1;letter-spacing:var(--tr-heading);white-space:nowrap}
+.cue{display:flex;align-items:center;gap:14px;margin-top:40px;font-size:var(--t-label);font-weight:500;letter-spacing:var(--tr-label);color:var(--dim)}
 .cue i{position:relative;display:block;width:1px;height:44px;background:var(--hair);overflow:hidden}
 .cue i::after{content:"";position:absolute;left:0;top:-40%;width:1px;height:40%;background:var(--brass);animation:cue 1.9s var(--ease) infinite}
 @keyframes cue{to{transform:translateY(350%)}}
 .hero__art{grid-column:8 / -1;position:relative;justify-self:stretch}
 .plate{position:relative;aspect-ratio:1 / 1;width:100%;max-width:540px;margin-left:auto;border:1px solid var(--hair);background:
-  radial-gradient(80% 60% at 50% 40%,rgba(201,162,90,.12),transparent 70%),linear-gradient(180deg,var(--pine-2),var(--pine));perspective:1000px}
+  radial-gradient(80% 60% at 50% 40%,var(--brass-glow),transparent 70%),linear-gradient(180deg,var(--pine-2),var(--pine));perspective:1000px}
 .plate .media__art{position:absolute;inset:0;display:grid;place-items:center;padding:6% 10% 4%}
 .rig{display:block;width:100%;height:100%;transform-style:preserve-3d;will-change:transform}
-.plate__cap{position:absolute;left:0;right:0;bottom:-1px;display:flex;justify-content:space-between;gap:10px;padding:12px 14px;border-top:1px solid var(--hair);background:rgba(11,20,16,.74);font-family:var(--f-mono);font-size:11.5px;letter-spacing:.06em;color:var(--dim);z-index:3}
+.plate__cap{position:absolute;left:0;right:0;bottom:-1px;display:flex;justify-content:space-between;gap:10px;padding:12px 14px;border-top:1px solid var(--hair);background:rgba(11,20,16,.74);font-size:var(--t-label);letter-spacing:var(--tr-label);font-variant-numeric:tabular-nums;color:var(--dim);z-index:3;flex-wrap:wrap;row-gap:4px}
 .plate__cap b{font-weight:500;color:var(--on-dark)}
-.plate__tag{position:absolute;top:14px;left:14px;z-index:3;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--brass)}
+.plate__tag{position:absolute;top:14px;left:14px;z-index:3;font-size:var(--t-label);font-weight:500;letter-spacing:var(--tr-label);color:var(--brass)}
+/* a soft shade under the tag, so it reads on any frame of the footage */
+.plate::before{content:"";position:absolute;inset:0 0 auto;height:76px;z-index:3;pointer-events:none;background:linear-gradient(180deg,rgba(11,20,16,.62),rgba(11,20,16,0))}
 @media (max-width:900px){
   .hero__grid{grid-template-columns:minmax(0,1fr);min-height:0;padding-block:28px 56px;gap:40px}
   .hero__copy,.hero__art{grid-column:1 / -1}
   .plate{max-width:440px;margin-inline:auto}
-  .facts{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 18px}
-  .facts dd{font-size:23px}
-  .plate__cap{font-size:10.5px;gap:6px}
+  .facts{grid-template-columns:repeat(auto-fit,minmax(min(100%,6.5rem),1fr));gap:12px 18px} /* three across at normal size, fewer when text is enlarged */
+  .plate__cap{font-size:var(--t-micro);gap:6px}
 }
 /* rig micro animation */
 .streak{animation:streak 1.15s cubic-bezier(.55,0,1,.45) infinite}
@@ -210,15 +218,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .plate.has-media .media__art{visibility:hidden;transition:visibility 0s 1s}
 .plate.has-media .rig :is(.streak,.wave,.steam path){animation:none}
 /* hero entrance: held back until the display font is in, so the headline never paints in a fallback face first */
-.intro :is(.kicker,.hero h1,.lede,.hero__ctas,.facts,.cue,.plate){opacity:0}
+.intro :is(.hero h1,.lede,.hero__ctas,.facts,.cue,.plate){opacity:0}
 
-/* ---------- MARQUEE ---------- */
-.marquee{border-block:1px solid var(--hair);background:var(--ink);overflow:hidden;padding-block:22px}
-.marquee__row{display:flex;width:max-content;animation:marq 42s linear infinite}
-.marquee:hover .marquee__row{animation-play-state:paused}
-.marquee__row span{display:flex;align-items:center;gap:34px;padding-right:34px;font-family:var(--f-display);font-style:italic;font-size:clamp(28px,3.6vw,48px);white-space:nowrap;color:var(--lime)}
-.marquee__row span i{display:block;width:9px;height:9px;background:var(--brass);transform:rotate(45deg)}
-@keyframes marq{to{transform:translateX(-50%)}}
 
 /* ---------- 01 ORIGINS ---------- */
 .origins{background:var(--pine-2)}
@@ -226,9 +227,9 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .process li{list-style:none;padding:18px 18px 0 0;display:grid;gap:6px;border-right:1px solid var(--hair);padding-left:18px}
 .process li:first-child{padding-left:0}
 .process li:last-child{border-right:0}
-.process b{font-family:var(--f-mono);font-weight:500;font-size:11px;letter-spacing:.14em;color:var(--brass)}
-.process span{font-family:var(--f-display);font-size:28px;line-height:1}
-.process small{color:var(--dim);font-size:14px}
+.process b{font-weight:600;font-size:var(--t-label);letter-spacing:var(--tr-label);color:var(--brass);font-variant-numeric:tabular-nums}
+.process span{font-family:var(--f-display);font-weight:600;font-size:var(--t-title);letter-spacing:var(--tr-heading);line-height:1.05}
+.process small{color:var(--dim);font-size:var(--t-small);line-height:1.5}
 .process{padding:0;margin-top:0}
 @media (max-width:700px){.process{grid-template-columns:repeat(2,minmax(0,1fr))}.process li:nth-child(2){border-right:0}.process li:nth-child(3){padding-left:0}.process li{padding-bottom:16px}}
 .origins__viewport{overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;padding-bottom:14px;scrollbar-width:thin;scrollbar-color:var(--pine-3) transparent}
@@ -236,27 +237,27 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .is-pinned .origins__viewport{overflow:visible;scroll-snap-type:none}
 .origins.is-pinned{padding-bottom:24px}
 .origin{scroll-snap-align:center;flex:none;width:min(86vw,1060px);display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);gap:44px;align-items:center;padding:44px;border:1px solid var(--hair);background:linear-gradient(160deg,rgba(238,240,232,.045),rgba(238,240,232,.01))}
-.origin__bag{display:grid;place-items:center;aspect-ratio:4 / 5;background:radial-gradient(60% 50% at 50% 55%,rgba(201,162,90,.10),transparent 70%)}
-.origin__bag svg{width:min(100%,250px);height:auto;filter:drop-shadow(0 34px 40px rgba(0,0,0,.45))}
+.origin__bag{display:grid;place-items:center;aspect-ratio:4 / 5;background:radial-gradient(60% 50% at 50% 55%,var(--brass-glow),transparent 70%)}
+.origin__bag svg{width:min(100%,250px);height:auto;filter:drop-shadow(0 34px 40px var(--shadow))}
 .origin__info{display:grid;gap:20px;min-width:0}
-.origin__meta{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--sage)}
-.origin h3{font-size:clamp(40px,4.8vw,72px)}
-.origin h3 em{font-style:italic;color:var(--brass)}
+.origin h3{font-size:var(--t-h3-lg);letter-spacing:var(--tr-display)}
+.origin h3 em{font-style:normal;color:var(--brass)}
+.origin__meta{margin-top:-8px;font-size:var(--t-label);font-weight:500;letter-spacing:var(--tr-label);color:var(--sage)}
 .specs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 28px;margin:0}
 .specs div{display:grid;gap:3px;padding-top:12px;border-top:1px solid var(--hair)}
-.specs dt{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--sage)}
-.specs dd{margin:0;font-weight:500;font-size:15.5px}
+.specs dt{font-size:var(--t-label);font-weight:500;letter-spacing:var(--tr-label);color:var(--sage)}
+.specs dd{margin:0;font-weight:500;font-size:var(--t-small);font-variant-numeric:tabular-nums}
 .dial{display:flex;align-items:center;gap:18px}
 .dial svg{width:150px;height:auto;flex:none}
-.dial p{font-size:14px;color:var(--dim)}
-.dial strong{display:block;color:var(--on-dark);font-family:var(--f-display);font-weight:400;font-size:26px;line-height:1.1}
+.dial p{font-size:var(--t-small);color:var(--dim);font-variant-numeric:tabular-nums}
+.dial strong{display:block;color:var(--on-dark);font-family:var(--f-display);font-weight:600;font-size:var(--t-figure);letter-spacing:var(--tr-heading);line-height:1.1}
 .notes{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
-.notes li{padding:7px 12px;border:1px solid var(--hair);border-radius:2px;font-size:13.5px;color:var(--on-dark);background:rgba(11,20,16,.25)}
+.notes li{padding:7px 12px;border:1px solid var(--hair);border-radius:2px;font-size:.875rem;color:var(--on-dark);background:rgba(11,20,16,.25)}
 .buy{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:8px}
-.buy p{font-family:var(--f-display);font-size:36px;line-height:1}
-.buy p small{font-family:var(--f-mono);font-size:11px;color:var(--sage);letter-spacing:.12em;margin-left:8px}
+.buy p{font-family:var(--f-display);font-weight:600;font-size:var(--t-title);letter-spacing:var(--tr-heading);line-height:1}
+.buy p small{font-family:var(--f-body);font-weight:500;font-size:var(--t-label);letter-spacing:var(--tr-label);color:var(--sage);margin-left:8px}
 .origins__foot{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:26px}
-.origins__hint{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.origins__hint{font-size:var(--t-label);font-weight:500;letter-spacing:var(--tr-label);color:var(--dim)}
 .origins__bar{flex:0 0 min(320px,40vw);height:1px;background:var(--hair);position:relative;overflow:hidden}
 .origins__bar i{position:absolute;inset:0;background:var(--brass);transform:scaleX(0);transform-origin:left}
 @media (max-width:767px){
@@ -273,7 +274,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .menu-top .sec-head h2,.menu-top .sec-head p{grid-column:auto}
 .feature{grid-column:9 / -1;aspect-ratio:4 / 5;border:1px solid var(--hair-ink);background:linear-gradient(180deg,#D8DACF,#C9CCBF)}
 .feature .media__art{position:absolute;inset:0;display:grid;place-items:center}
-.feature figcaption{position:absolute;left:0;right:0;bottom:0;z-index:3;display:flex;justify-content:space-between;gap:10px;padding:12px 14px;font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);background:rgba(240,241,235,.86);border-top:1px solid var(--hair-ink)}
+.feature figcaption{position:absolute;left:0;right:0;bottom:0;z-index:3;display:flex;justify-content:space-between;gap:10px;padding:12px 14px;font-size:var(--t-label);font-weight:500;letter-spacing:var(--tr-label);font-variant-numeric:tabular-nums;color:var(--ink);background:rgba(240,241,235,.86);border-top:1px solid var(--hair-ink)}
 @media (max-width:900px){.menu-top .sec-head,.feature{grid-column:1 / -1}.feature{aspect-ratio:16 / 10}}
 .menu-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin:0;padding:0;list-style:none;border-top:1px solid var(--hair-ink);border-left:1px solid var(--hair-ink)}
 @media (max-width:1000px){.menu-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -286,26 +287,28 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .mface--back{transform:rotateY(180deg);background:var(--pine);color:var(--on-dark)}
 .micon{height:104px;display:flex;align-items:flex-end}
 .micon svg{height:104px;width:auto;overflow:visible}
-.mface h3{font-size:36px}
-.mface p.desc{color:var(--ink-2);font-size:15px}
-.mface .detail{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.04em;color:var(--brass-ink);padding-top:12px;border-top:1px solid var(--hair-ink)}
+.mface h3{font-size:var(--t-title)}
+.mface p.desc{color:var(--ink-2);font-size:var(--t-small);line-height:1.55;max-width:34ch}
+.mface .detail{font-size:var(--t-label);font-weight:500;letter-spacing:var(--tr-label);font-variant-numeric:tabular-nums;color:var(--brass-ink);padding-top:12px;border-top:1px solid var(--hair-ink)}
 .mfoot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto;padding-top:8px}
-.mfoot .price{font-family:var(--f-display);font-size:28px;line-height:1}
-.mfoot .price small{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;color:var(--ink-2);margin-right:6px;text-transform:uppercase}
-.flip{appearance:none;display:inline-flex;align-items:center;gap:8px;min-height:44px;border:1px solid var(--hair-ink);background:transparent;color:inherit;border-radius:2px;padding:0 14px;font:500 13px/1 var(--f-body);cursor:pointer;transition:background-color .2s,border-color .2s,color .2s,scale .16s var(--ease-out);text-decoration:none;touch-action:manipulation}
+.mfoot .price{font-family:var(--f-display);font-weight:600;font-size:var(--t-figure);letter-spacing:var(--tr-heading);line-height:1}
+.mfoot .price small{font-family:var(--f-body);font-weight:500;font-size:var(--t-label);letter-spacing:var(--tr-label);color:var(--ink-2);margin-right:6px}
+.flip{appearance:none;display:inline-flex;align-items:center;gap:8px;min-height:44px;border:1px solid var(--hair-ink);background:transparent;color:inherit;border-radius:2px;padding:0 14px;font:500 .875rem/1 var(--f-body);cursor:pointer;transition:background-color .2s,border-color .2s,color .2s,scale .16s var(--ease-out);text-decoration:none;touch-action:manipulation}
 .flip:hover{border-color:var(--ink);background:var(--ink);color:var(--lime)}
 .flip:active{scale:.97}
 .mface--back .flip{border-color:var(--hair)}
 .mface--back .flip:hover{background:var(--brass);border-color:var(--brass);color:var(--ink)}
 .sizes{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
 .sizes th,.sizes td{padding:13px 0;border-bottom:1px solid var(--hair);text-align:left;font-weight:500}
-.sizes td{text-align:right;font-family:var(--f-display);font-size:26px;font-weight:400}
-.sizes th small{display:block;font-family:var(--f-mono);font-size:10.5px;color:var(--sage);letter-spacing:.08em;text-transform:uppercase}
-.mface--back h3{font-size:30px}
-.mface--back .note{font-size:13px;color:var(--dim)}
-.mcard.is-sold .mface--front > *:not(.sold){opacity:.45}
-.mcard.is-sold .mface--front{background:#DCDDD4}
-.sold{align-self:flex-start;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--lime);padding:6px 9px;border-radius:2px}
+.sizes td{text-align:right;font-family:var(--f-display);font-size:var(--t-figure);font-weight:600;letter-spacing:var(--tr-heading)}
+.sizes th small{display:block;font-size:var(--t-label);font-weight:500;color:var(--sage);letter-spacing:var(--tr-label)}
+.mface--back h3{font-size:var(--t-title)}
+.mface--back .note{font-size:var(--t-label);color:var(--dim)}
+/* sold out: the badge and the faded drawing carry the state; the text keeps full contrast */
+.mcard.is-sold .micon{opacity:.45}
+.mcard.is-sold .mface--front :is(h3,.desc,.price){color:var(--ink-2)}
+.mcard.is-sold .mface--front{background:var(--lime-3)}
+.sold{align-self:flex-start;font-size:var(--t-micro);font-weight:600;letter-spacing:.02em;background:var(--ink);color:var(--lime);padding:6px 9px;border-radius:2px}
 .mcard .steam-s path{opacity:0}
 .mcard.is-live .steam-s path{animation:steam 2.9s ease-in-out infinite}
 .mcard.is-live .steam-s path:nth-child(2){animation-delay:.95s}
@@ -321,22 +324,20 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 /* ---------- 03 PAIRINGS ---------- */
 .pairings{background:var(--lime);padding-top:0}
 .pairs{display:grid;border-top:1px solid var(--ink)}
-.pair{display:grid;grid-template-columns:64px 200px minmax(0,1fr) auto;gap:32px;align-items:center;padding:30px 0;border-bottom:1px solid var(--hair-ink);transition:background-color .3s}
+.pair{display:grid;grid-template-columns:200px minmax(0,1fr) auto;gap:32px;align-items:center;padding:30px 0;border-bottom:1px solid var(--hair-ink);transition:background-color .3s}
 .pair:hover{background:var(--lime-2)}
-.pair__n{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;color:var(--brass-ink)}
 .pair__art{display:flex;align-items:center;gap:8px}
 .pair__art svg{width:80px;height:80px}
-.pair__art b{font-family:var(--f-display);font-style:italic;font-weight:400;font-size:30px;color:var(--cherry)}
-.pair h3{font-size:clamp(28px,2.8vw,40px)}
-.pair p{color:var(--ink-2);margin-top:8px;max-width:54ch;font-size:15.5px}
-.pair__parts{font-family:var(--f-mono);font-size:11.5px;color:var(--ink-2);margin-top:12px;letter-spacing:.02em}
+.pair__art b{font-weight:400;font-size:1.75rem;color:var(--cherry)}
+.pair h3{font-size:var(--t-title)}
+.pair p{color:var(--ink-2);margin-top:8px;max-width:30rem;font-size:var(--t-small);line-height:1.55}
+.pair__parts{font-size:var(--t-label);font-weight:500;letter-spacing:var(--tr-label);font-variant-numeric:tabular-nums;color:var(--ink-2);margin-top:12px}
 .pair__price{display:grid;justify-items:end;gap:8px;text-align:right}
-.pair__price s{color:var(--ink-2);font-size:14px}
-.pair__price strong{font-family:var(--f-display);font-weight:400;font-size:40px;line-height:1}
-.stamp{display:inline-block;padding:7px 10px;background:var(--cherry);color:#fff;font:500 11px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;border-radius:2px;transform-origin:50% 50%}
+.pair__price s{color:var(--ink-2);font-size:.875rem}
+.pair__price strong{font-family:var(--f-display);font-weight:600;font-size:var(--t-figure);letter-spacing:var(--tr-heading);line-height:1}
+.stamp{display:inline-block;padding:7px 10px;background:var(--cherry);color:var(--on-cherry);font:600 var(--t-micro)/1 var(--f-body);letter-spacing:.02em;border-radius:2px;transform-origin:50% 50%}
 @media (max-width:860px){
   .pair{grid-template-columns:minmax(0,1fr);gap:14px;padding:26px 0}
-  .pair__n{display:none}
   .pair__price{justify-items:start;text-align:left}
 }
 
@@ -348,52 +349,54 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .scene .media__art{position:absolute;inset:-6% 0;display:block}
 .scene .media__img{top:-6%;height:112%} /* same overscan as the drawing, so the parallax never shows an edge */
 .scene .media__art svg{display:block;width:100%;height:100%}
-.scene figcaption{display:flex;justify-content:space-between;gap:12px;font-size:15px;color:var(--dim)}
+.scene figcaption{display:flex;justify-content:space-between;gap:12px;font-size:var(--t-small);color:var(--dim)}
 .scene figcaption b{color:var(--on-dark);font-weight:500}
-.scene figcaption span{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;white-space:nowrap;color:var(--brass)}
+.scene figcaption span{font-size:var(--t-label);font-weight:500;letter-spacing:var(--tr-label);white-space:nowrap;color:var(--brass)}
 
 /* ---------- 05 SUBSCRIPTION ---------- */
 .beans__grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px;align-items:start}
 .beans__aside{grid-column:1 / span 5;display:grid;gap:24px;position:sticky;top:calc(var(--hdr) + 32px)}
-.beans__aside h2{font-size:clamp(46px,5.6vw,88px)}
-.beans__aside h2 em{font-style:italic;color:var(--cherry)}
-.beans__aside > p{color:var(--ink-2);font-size:16.5px;max-width:44ch}
+.beans__aside h2{font-size:var(--t-h2);letter-spacing:var(--tr-display)}
+.beans__aside > p{color:var(--ink-2);max-width:32rem}
 .beans__aside ol{margin:0;padding:0;list-style:none;display:grid;border-top:1px solid var(--hair-ink)}
-.beans__aside li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:8px;padding:14px 0;border-bottom:1px solid var(--hair-ink);color:var(--ink-2);font-size:15.5px}
-.beans__aside li b{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.1em;color:var(--brass-ink);font-weight:500;padding-top:3px}
+.beans__aside li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:8px;padding:14px 0;border-bottom:1px solid var(--hair-ink);color:var(--ink-2);font-size:var(--t-small)}
+.beans__aside li b{font-size:var(--t-label);font-weight:600;letter-spacing:var(--tr-label);font-variant-numeric:tabular-nums;color:var(--brass-ink);padding-top:2px}
 .form{grid-column:7 / -1;display:grid;gap:26px;padding:clamp(22px,3vw,40px);background:var(--lime-2);border:1px solid var(--hair-ink)}
 fieldset{border:0;margin:0;padding:0;display:grid;gap:10px;min-width:0}
-legend,.flabel{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);padding:0;margin-bottom:12px}
+legend{font-size:var(--t-label);font-weight:500;letter-spacing:var(--tr-label);color:var(--ink-2);padding:0;margin-bottom:12px}
 .chips{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px}
 .chip{position:relative}
 .chip input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
-.chip span{display:grid;gap:4px;padding:14px 16px;border:1px solid var(--hair-ink);border-radius:2px;background:#fff;font-weight:500;font-size:15px;transition:border-color .2s,background-color .2s,color .2s,scale .16s var(--ease-out);height:100%}
+.chip span{display:grid;gap:4px;padding:14px 16px;border:1px solid var(--hair-ink);border-radius:2px;background:var(--field);font-weight:500;font-size:var(--t-small);transition:border-color .2s,background-color .2s,color .2s,scale .16s var(--ease-out);height:100%}
 .chip:active span{scale:.97}
-.chip span small{font-weight:400;font-family:var(--f-mono);font-size:11px;letter-spacing:.04em;color:var(--ink-2)}
+.chip span small{font-weight:400;font-size:var(--t-label);letter-spacing:var(--tr-label);color:var(--ink-2)}
 .chip:hover span{border-color:var(--ink)}
 .chip input:checked + span{background:var(--pine);color:var(--lime);border-color:var(--pine)}
 .chip input:checked + span small{color:var(--sage)}
 .chip input:focus-visible + span{outline:2px solid var(--cherry);outline-offset:2px}
 .row2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .field{display:grid;gap:8px;min-width:0}
-.field label{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
-select,input[type=text],input[type=tel]{width:100%;min-height:50px;padding:0 14px;border-radius:2px;border:1px solid var(--hair-ink);background:#fff;color:var(--ink);font:500 16px var(--f-body);transition:border-color .2s}
+.field label{font-size:var(--t-label);font-weight:500;letter-spacing:var(--tr-label);color:var(--ink-2)}
+select,input[type=text],input[type=tel]{width:100%;min-height:50px;padding:0 14px;border-radius:2px;border:1px solid var(--hair-ink);background:var(--field);color:var(--ink);font:500 1rem var(--f-body);caret-color:var(--cherry);transition:border-color .2s}
 select:hover,input[type=text]:hover,input[type=tel]:hover{border-color:var(--ink-2)}
 .on-dark select,.on-dark input[type=text],.on-dark input[type=tel],.foot input[type=tel]{background:rgba(238,240,232,.05);color:var(--on-dark);border-color:var(--hair)}
 .on-dark select option{background:var(--pine);color:var(--on-dark)}
 .on-dark select option:disabled{color:var(--sage)}
+.on-dark input,.foot input{caret-color:var(--brass)}
+::placeholder{color:var(--ink-3);opacity:1}
+.on-dark ::placeholder,.foot ::placeholder{color:var(--dim)}
 .summary{display:grid;gap:10px;padding:22px;background:var(--pine);color:var(--on-dark);font-variant-numeric:tabular-nums}
-.summary div{display:flex;justify-content:space-between;gap:12px;font-size:14.5px}
+.summary div{display:flex;justify-content:space-between;gap:12px;font-size:var(--t-small)}
 .summary div span:first-child{color:var(--dim)}
-.summary .total{padding-top:14px;border-top:1px solid var(--hair);font-family:var(--f-display);font-size:34px;line-height:1}
-.summary .total span:first-child{font-family:var(--f-body);font-size:14.5px;align-self:center}
+.summary .total{padding-top:14px;border-top:1px solid var(--hair);font-family:var(--f-display);font-weight:600;font-size:var(--t-title);letter-spacing:var(--tr-heading);line-height:1}
+.summary .total span:first-child{font-family:var(--f-body);font-weight:400;font-size:var(--t-small);letter-spacing:.005em;align-self:center}
 .summary .total:first-child{border-top:0;padding-top:0}
-.confirm{padding:16px 18px;background:#DDE8D6;color:#1E3A26;border:1px solid #9FBC92;font-size:15px;border-radius:2px}
+.confirm{padding:16px 18px;background:var(--ok-bg);color:var(--ok-ink);border:1px solid var(--ok-line);font-size:var(--t-small);border-radius:2px}
 /* confirmations arrive instead of appearing */
 .confirm,.news p.ok{transition:opacity .24s var(--ease-out),translate .24s var(--ease-out)}
 @starting-style{.confirm,.news p.ok{opacity:0;translate:0 6px}}
 .on-dark .field label{color:var(--dim)}
-.on-dark .confirm{background:rgba(201,162,90,.12);color:var(--on-dark);border-color:rgba(201,162,90,.5)}
+.on-dark .confirm{background:var(--brass-glow);color:var(--on-dark);border-color:rgba(201,162,90,.5)}
 @media (max-width:960px){.beans__aside,.form{grid-column:1 / -1}.beans__aside{position:static}}
 @media (max-width:520px){.row2{grid-template-columns:minmax(0,1fr)}}
 
@@ -403,47 +406,54 @@ select:hover,input[type=text]:hover,input[type=tel]:hover{border-color:var(--ink
 .mapbox{grid-column:1 / span 7;position:relative;min-height:560px;border:1px solid var(--hair);background:var(--ink);overflow:hidden}
 .map{position:absolute;inset:0;z-index:1;background:#0E1A15}
 .map .leaflet-tile-pane{filter:sepia(.35) hue-rotate(58deg) saturate(1.25) brightness(1.08) contrast(1.02)}
-.map .leaflet-control-attribution{background:rgba(11,20,16,.78);color:var(--dim);font:11px/1.4 var(--f-body)}
+.map .leaflet-control-attribution{background:rgba(11,20,16,.78);color:var(--dim);font:var(--t-micro)/1.4 var(--f-body)}
 .map .leaflet-control-attribution a{color:var(--brass)}
 .map .leaflet-bar a{background:var(--pine);color:var(--on-dark);border-color:var(--hair)!important;border-radius:0!important}
 .map .leaflet-bar a:hover{background:var(--pine-3)}
 .map .leaflet-bar{border:1px solid var(--hair);border-radius:2px;box-shadow:none}
 .brand-pin{background:none;border:0}
-.brand-pin span{position:relative;display:grid;place-items:center;width:46px;height:46px;background:var(--cherry);color:#fff;font:400 19px/1 var(--f-display);border:2px solid var(--brass);box-shadow:0 10px 24px rgba(0,0,0,.45)}
+.brand-pin span{position:relative;display:grid;place-items:center;width:46px;height:46px;background:var(--cherry);color:var(--on-cherry);font:600 1.125rem/1 var(--f-display);border:2px solid var(--brass);box-shadow:0 10px 24px var(--shadow)}
 .brand-pin span::after{content:"";position:absolute;left:50%;bottom:-10px;width:2px;height:10px;background:var(--brass);transform:translateX(-50%)}
 .map-fallback{position:absolute;inset:0;z-index:2;display:grid;align-content:center;justify-items:start;gap:14px;padding:clamp(24px,4vw,48px);background:
-  linear-gradient(115deg,transparent 0 58%,rgba(201,162,90,.10) 58% 58.4%,transparent 58.4%),linear-gradient(28deg,transparent 0 40%,rgba(169,183,154,.12) 40% 41%,transparent 41%),
+  linear-gradient(115deg,transparent 0 58%,var(--brass-glow) 58% 58.4%,transparent 58.4%),linear-gradient(28deg,transparent 0 40%,rgba(169,183,154,.12) 40% 41%,transparent 41%),
   repeating-linear-gradient(90deg,transparent 0 63px,rgba(169,183,154,.08) 63px 64px),repeating-linear-gradient(0deg,transparent 0 63px,rgba(169,183,154,.08) 63px 64px),var(--ink)}
-.map-fallback p{font-family:var(--f-display);font-size:clamp(32px,3.4vw,46px);line-height:1;max-width:14ch}
-.map-fallback .fb-hours{font-size:15px;color:var(--dim)}
-.map-fallback .fb-pin{display:grid;place-items:center;width:46px;height:46px;background:var(--cherry);border:2px solid var(--brass);font:400 19px/1 var(--f-display);color:#fff}
+.map-fallback p{font-family:var(--f-display);font-weight:600;font-size:var(--t-h3-lg);letter-spacing:var(--tr-display);line-height:1;max-width:14ch}
+.map-fallback .fb-hours{font-size:var(--t-small);color:var(--dim)}
+.map-fallback .fb-pin{display:grid;place-items:center;width:46px;height:46px;background:var(--cherry);border:2px solid var(--brass);font:600 1.125rem/1 var(--f-display);color:var(--on-cherry)}
 .mapbox.map-ready .map-fallback{visibility:hidden}
-.map-card{position:absolute;left:16px;bottom:16px;z-index:500;display:flex;gap:10px;align-items:center;padding:10px 12px;background:rgba(11,20,16,.86);border:1px solid var(--hair);font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);max-width:calc(100% - 32px)}
+.map-card{position:absolute;left:16px;bottom:16px;z-index:500;display:flex;gap:10px;align-items:center;padding:10px 12px;background:rgba(11,20,16,.86);border:1px solid var(--hair);font-size:var(--t-micro);font-weight:500;letter-spacing:var(--tr-label);font-variant-numeric:tabular-nums;color:var(--dim);max-width:calc(100% - 32px)}
 .map-card b{color:var(--on-dark);font-weight:500}
 .mapbox:not(.map-ready) .map-card{display:none}
 .visit__side{grid-column:8 / -1;display:grid;gap:24px;align-content:start;min-width:0}
 .panel{padding:clamp(22px,2.6vw,32px);border:1px solid var(--hair);background:rgba(11,20,16,.28);display:grid;gap:18px;align-content:start;min-width:0}
-.panel h3{font-size:34px}
-.status{display:inline-flex;align-items:center;gap:10px;font-family:var(--f-mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--on-dark)}
+.panel h3{font-size:var(--t-title)}
+.status{display:inline-flex;align-items:center;gap:10px;font-size:var(--t-label);font-weight:600;letter-spacing:var(--tr-label);color:var(--on-dark)}
 .status i{display:block;width:8px;height:8px;transform:rotate(45deg);background:var(--sage)}
 .status.closed i{background:var(--cherry)}
-.hours{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:15px}
+.hours{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:var(--t-small)}
 .hours td{padding:11px 0;border-bottom:1px solid var(--hair);vertical-align:top}
 .hours td:last-child{text-align:right;color:var(--on-dark)}
 .hours tr.today td{color:var(--brass)}
-.hours tr.today td:first-child::after{content:" · today";font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase}
-.contact{display:grid;gap:6px;color:var(--dim);font-size:15px}
+.hours tr.today td:first-child::after{content:" · today";font-size:var(--t-micro);font-weight:600;letter-spacing:var(--tr-label)}
+.contact{display:grid;gap:6px;color:var(--dim);font-size:var(--t-small)}
 .contact b{color:var(--on-dark);font-weight:500;user-select:all;font-variant-numeric:tabular-nums}
+/* numbers dial or open WhatsApp on a phone; underlined so they read as links on a desktop too */
+a.tel{color:var(--on-dark);font-weight:500;font-variant-numeric:tabular-nums;text-decoration:underline;text-decoration-color:var(--hair);text-underline-offset:3px;transition:color .2s,text-decoration-color .2s}
+a.tel:hover{color:var(--brass);text-decoration-color:currentColor}
+/* the map's zoom buttons grow to 44px on touch screens */
+@media (pointer:coarse){.map.leaflet-touch .leaflet-bar a{width:44px;height:44px;line-height:44px;font-size:20px}}
+/* on touch screens each number gets a 44px tap area and the rows a 44px pitch, so neighbouring targets never overlap */
+@media (pointer:coarse){.tel-rows,.foot__cols > .tel-rows{row-gap:20px}.tel-rows a.tel{display:inline-block;padding-block:10px;margin-block:-10px}}
 .links{display:flex;flex-wrap:wrap;gap:10px}
 @media (max-width:960px){.mapbox,.visit__side{grid-column:1 / -1}.mapbox{min-height:380px}}
 
 /* ---------- FOOTER ---------- */
 .foot{background:var(--ink);color:var(--dim);padding-block:clamp(72px,9vw,120px) 32px;border-top:1px solid var(--hair)}
-.foot__mark{font-family:var(--f-display);font-size:clamp(64px,15.5vw,250px);line-height:.82;letter-spacing:-.035em;color:var(--lime);margin:0 0 clamp(48px,6vw,80px)}
-.foot__mark em{font-style:italic;color:var(--brass)}
+.foot__mark{font-family:var(--f-display);font-weight:600;font-size:clamp(3.5rem,2rem + 6vw,6rem);line-height:.9;letter-spacing:var(--tr-display);color:var(--lime);margin:0 0 clamp(40px,5vw,64px)}
+.foot__mark em{font-style:normal;color:var(--brass)}
 .foot__cols{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px 24px;padding-top:32px;border-top:1px solid var(--hair)}
-.foot__cols > div{grid-column:span 3;display:grid;gap:8px;align-content:start;font-size:15px}
-.foot__cols h4{margin:0 0 6px;font-family:var(--f-mono);font-weight:500;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--brass)}
+.foot__cols > div{grid-column:span 3;display:grid;gap:8px;align-content:start;font-size:var(--t-small)}
+.foot__cols h4{margin:0 0 6px;font-weight:600;font-size:var(--t-label);letter-spacing:var(--tr-label);color:var(--brass)}
 .foot__cols a{text-decoration:none;color:var(--on-dark)}
 .foot__cols a:hover{color:var(--brass)}
 /* 44px touch targets without changing the column's rhythm (pitch stays 44px, so targets never overlap) */
@@ -453,8 +463,11 @@ select:hover,input[type=text]:hover,input[type=tel]:hover{border-color:var(--ink
 .news form{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;margin-top:6px}
 .news input{min-height:46px}
 .news .btn{min-height:46px;padding:0 16px}
-.news p.ok{grid-column:1 / -1;font-size:13.5px;color:var(--sage)}
-.legal{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:56px;padding-top:20px;border-top:1px solid var(--hair);font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.news__label{grid-column:1 / -1;font-size:var(--t-label);font-weight:500;letter-spacing:var(--tr-label);color:var(--dim)}
+.news p.ok{grid-column:1 / -1;font-size:var(--t-label);color:var(--sage)}
+.news p.ok.is-error{color:var(--on-dark)}
+.foot input[aria-invalid="true"]{border-color:var(--cherry-hi)}
+.legal{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:56px;padding-top:20px;border-top:1px solid var(--hair);font-size:var(--t-micro);letter-spacing:var(--tr-label)}
 @media (max-width:960px){.foot__cols > div,.news{grid-column:span 6}}
 @media (max-width:560px){.foot__cols > div,.news{grid-column:1 / -1}}
 
@@ -462,15 +475,15 @@ select:hover,input[type=text]:hover,input[type=tel]:hover{border-color:var(--ink
 .abar{display:none}
 @media (max-width:767px){
   .abar{position:fixed;left:0;right:0;bottom:0;z-index:70;display:grid;grid-template-columns:1.7fr 1fr 1fr 1fr;gap:6px;padding:10px var(--gut-r) calc(10px + env(safe-area-inset-bottom,0px)) var(--gut-l);background:var(--ink);border-top:1px solid var(--hair)}
-  .abar a{display:grid;place-items:center;min-height:48px;border-radius:2px;text-decoration:none;font-weight:500;font-size:13.5px;border:1px solid var(--hair);color:var(--on-dark);transition:scale .16s var(--ease-out);touch-action:manipulation}
+  .abar a{display:grid;place-items:center;min-height:48px;border-radius:2px;text-decoration:none;font-weight:500;font-size:.875rem;border:1px solid var(--hair);color:var(--on-dark);transition:scale .16s var(--ease-out);touch-action:manipulation}
   .abar a:active{scale:.97}
-  .abar a.primary{background:var(--cherry);border-color:var(--cherry);color:#fff;font-size:15px}
+  .abar a.primary{background:var(--cherry);border-color:var(--cherry);color:var(--on-cherry);font-size:var(--t-small)}
   .foot{padding-bottom:calc(32px + 78px + env(safe-area-inset-bottom,0px))} /* room for the bar, in the footer's own ink */
 }
 
 /* reduced motion: fewer and gentler, not none. Fades and colour changes stay; anything that travels goes. */
 @media (prefers-reduced-motion:reduce){
-  .cue i::after,.streak,.wave,.steam path,.marquee__row,.mcard .steam-s path,.mcard .ice{animation:none!important}
+  .cue i::after,.streak,.wave,.steam path,.mcard .steam-s path,.mcard .ice{animation:none!important}
   .steam path{opacity:.5}
   .btn:hover svg{transform:none}
   .nav a::after{transform:none;opacity:0;transition:opacity .2s}
@@ -507,9 +520,8 @@ select:hover,input[type=text]:hover,input[type=tel]:hover{border-color:var(--ink
   <section class="hero" id="top" aria-labelledby="h1">
     <div class="wrap hero__grid">
       <div class="hero__copy">
-        <p class="kicker"><i aria-hidden="true"></i>Specialty roastery &middot; F-7 Markaz, Islamabad</p>
         <h1 id="h1" data-split>Roasted on Tuesday. <em>Poured for you</em> today.</h1>
-        <p class="lede">Four single origins, roasted in 5&nbsp;kg batches behind the bar and brewed by the gram. Sit by the Margalla window, order ahead for pickup, or take a fresh bag home.</p>
+        <p class="lede">A specialty roastery in <span class="nw">F-7</span> Markaz, Islamabad. Four single origins, roasted in 5&nbsp;kg batches behind the bar and brewed by the gram. Sit by the Margalla window, order ahead for pickup, or take a fresh bag home.</p>
         <div class="hero__ctas">
           <a class="btn btn--cherry" href="#order" data-magnetic>Order ahead &middot; ready in 8 min <svg width="16" height="10" viewBox="0 0 16 10" aria-hidden="true"><path d="M0 5h14M10 1l4 4-4 4" stroke="currentColor" stroke-width="1.5" fill="none"/></svg></a>
           <a class="btn btn--line" href="#beans">Subscribe to whole beans</a>
@@ -517,7 +529,7 @@ select:hover,input[type=text]:hover,input[type=tel]:hover{border-color:var(--ink
         <dl class="facts">
           <div><dt>Roast days</dt><dd>Tue &amp; Fri</dd></div>
           <div><dt>On the shelf</dt><dd>4 origins</dd></div>
-          <div><dt>Pour-over ratio</dt><dd class="num">1&thinsp;:&thinsp;16.7</dd></div>
+          <div><dt>Pour-over ratio</dt><dd class="num">1 : 16.7</dd></div>
         </dl>
         <p class="cue"><i aria-hidden="true"></i>Scroll to finish the pour</p>
       </div>
@@ -525,7 +537,7 @@ select:hover,input[type=text]:hover,input[type=tel]:hover{border-color:var(--ink
       <div class="hero__art" id="heroArt">
         <!-- HEYGEN: 4:5 (or 16:9 cropped) hero loop, 6-8 s seamless — slow-motion macro of a pour-over: a thin spiral of water onto dark ground coffee in a clear glass V60, the bed blooms, coffee drips into a glass server on a black brew scale. Deep pine-green background, warm brass side light, shallow depth of field, no people, no hands, no text. -->
         <div class="plate media" data-media="hero">
-          <span class="plate__tag">Live brew &middot; Ethiopia Guji</span>
+          <span class="plate__tag">Pour-over &middot; Ethiopia Guji</span>
           <div class="media__art">
             <svg class="rig" id="rig" viewBox="0 0 420 580" role="img" aria-label="A V60 pour-over dripping coffee into a glass server that sits on a brew scale">
               <defs>
@@ -565,34 +577,27 @@ select:hover,input[type=text]:hover,input[type=tel]:hover{border-color:var(--ink
               <g fill="none" stroke="#EEF0E8" stroke-opacity=".3" stroke-width="1"><path d="M282 300 h10 M285 350 h10 M288 400 h10 M290 450 h10"/></g>
               <rect x="70" y="522" width="280" height="40" rx="3" fill="#0B1410" stroke="#C9A25A" stroke-opacity=".6"/>
               <rect x="94" y="530" width="104" height="24" rx="2" fill="#050A08"/>
-              <text id="scaleG" x="188" y="547.5" text-anchor="end" font-family="Geist Mono, monospace" font-size="15" fill="#C9A25A">126.0 g</text>
+              <text id="scaleG" x="188" y="547.5" text-anchor="end" font-family="Funnel Sans, sans-serif" font-size="15" fill="#C9A25A">126.0 g</text>
               <rect x="222" y="530" width="104" height="24" rx="2" fill="#050A08"/>
-              <text id="scaleT" x="316" y="547.5" text-anchor="end" font-family="Geist Mono, monospace" font-size="15" fill="#A9B79A">1:46</text>
+              <text id="scaleT" x="316" y="547.5" text-anchor="end" font-family="Funnel Sans, sans-serif" font-size="15" fill="#A9B79A">1:46</text>
             </svg>
           </div>
           <div class="plate__cap" aria-hidden="true">
-            <span>DOSE <b>18.0 g</b></span>
-            <span>YIELD <b id="yieldOut">126 / 300 g</b></span>
-            <span>WATER <b>94 &deg;C</b></span>
+            <span>Dose <b>18.0 g</b></span>
+            <span>Yield <b id="yieldOut">126 / 300 g</b></span>
+            <span>Water <b>94 &deg;C</b></span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee__row">
-      <span>Roasted this week <i></i> Ethiopia Guji <i></i> Colombia Huila <i></i> Sumatra Gayo <i></i> Brazil Cerrado <i></i> Brewed by the gram <i></i></span>
-      <span>Roasted this week <i></i> Ethiopia Guji <i></i> Colombia Huila <i></i> Sumatra Gayo <i></i> Brazil Cerrado <i></i> Brewed by the gram <i></i></span>
-    </div>
-  </div>
 
   <!-- 01 ORIGINS -->
   <section class="origins sec" id="origins" aria-labelledby="h-origins">
     <div class="wrap">
       <div class="sec-head">
-        <p class="label"><b>(01)</b> Origins</p>
-        <h2 id="h-origins" data-split>Four farms on the shelf <em>this week.</em></h2>
+        <h2 id="h-origins">Four farms on the shelf this week.</h2>
         <p>Each lot is roasted for how it grew. High, slow-ripened Ethiopian coffee stays light; the Sumatran goes darker to bring out cedar and cacao.</p>
       </div>
       <ol class="process" aria-label="From cherry to cup">
@@ -606,7 +611,7 @@ select:hover,input[type=text]:hover,input[type=tel]:hover{border-color:var(--ink
       <div class="origins__viewport" id="originsViewport">
         <div class="origins__track" id="originsTrack"></div>
       </div>
-      <div class="wrap origins__foot"><p class="origins__hint" id="originsHint">Swipe the shelf &rarr;</p><span class="origins__bar" aria-hidden="true"><i id="originsBar"></i></span></div>
+      <div class="wrap origins__foot"><p class="origins__hint" id="originsHint">Swipe along the shelf</p><span class="origins__bar" aria-hidden="true"><i id="originsBar"></i></span></div>
     </div>
   </section>
 
@@ -615,8 +620,7 @@ select:hover,input[type=text]:hover,input[type=tel]:hover{border-color:var(--ink
     <div class="wrap">
       <div class="menu-top">
         <div class="sec-head">
-          <p class="label"><b>(02)</b> Menu</p>
-          <h2 id="h-menu" data-split>The bar, <em>measured.</em></h2>
+          <h2 id="h-menu">The bar, measured.</h2>
           <p>Every drink is weighed in and weighed out. Tap a card for sizes and prices. Caffeine is an estimate for the size shown.</p>
         </div>
         <!-- HEYGEN: 4:5 still — a cortado in a short ribbed glass on a pale limestone counter, layered espresso and microfoam, one brass spoon, soft window light, pine-green wall behind, no people, no text. -->
@@ -647,8 +651,7 @@ select:hover,input[type=text]:hover,input[type=tel]:hover{border-color:var(--ink
   <section class="pairings on-light sec" id="pairings" aria-labelledby="h-pairs">
     <div class="wrap">
       <div class="sec-head">
-        <p class="label"><b>(03)</b> Pairings</p>
-        <h2 id="h-pairs" data-split>Baked down the road, <em>matched at the bar.</em></h2>
+        <h2 id="h-pairs">Baked down the road, matched at the bar.</h2>
         <p>Pastries arrive from a bakery two streets away at 7 every morning. Order them as a pair and the saving is already taken off.</p>
       </div>
       <div class="pairs" id="pairs"></div>
@@ -659,8 +662,7 @@ select:hover,input[type=text]:hover,input[type=tel]:hover{border-color:var(--ink
   <section class="room sec" id="room" aria-labelledby="h-room">
     <div class="wrap">
       <div class="sec-head">
-        <p class="label"><b>(04)</b> The roastery</p>
-        <h2 id="h-room" data-split>Roaster in the corner, <em>hills in the window.</em></h2>
+        <h2 id="h-room">Roaster in the corner, hills in the window.</h2>
         <p>Thirty-two seats, a six-seat pour-over bar and a view of the Margallas. On roast days the whole block smells of it.</p>
       </div>
     </div>
@@ -669,7 +671,7 @@ select:hover,input[type=text]:hover,input[type=tel]:hover{border-color:var(--ink
       <div class="strip__row" id="stripRow">
         <figure class="scene">
           <div class="media" data-media="roaster" data-alt="Drum roaster with beans in the cooling tray">
-            <div class="media__art" aria-hidden="true"><svg viewBox="0 0 440 320" preserveAspectRatio="xMidYMid slice"><rect width="440" height="320" fill="#1B392C"/><rect y="250" width="440" height="70" fill="#13291F"/><rect x="262" y="20" width="16" height="104" fill="#0B1410" stroke="#C9A25A" stroke-opacity=".6"/><g stroke="#A9B79A" stroke-width="2.4" fill="none" stroke-linecap="round" opacity=".5"><path d="M270 16 C258 4 280 -4 268 -18"/></g><rect x="96" y="112" width="200" height="120" rx="6" fill="#0B1410" stroke="#C9A25A" stroke-width="2"/><rect x="118" y="138" width="64" height="64" rx="4" fill="#13291F" stroke="#C9A25A" stroke-width="4"/><rect x="138" y="158" width="24" height="24" fill="#B8323F"/><path d="M200 112 L184 64 L262 64 L246 112 Z" fill="#13291F" stroke="#C9A25A" stroke-width="2"/><rect x="210" y="230" width="20" height="24" fill="#0B1410"/><rect x="246" y="232" width="176" height="26" rx="3" fill="#0B1410" stroke="#C9A25A" stroke-width="2"/><g fill="#6B3A1C"><rect x="262" y="238" width="10" height="6" rx="3"/><rect x="282" y="242" width="10" height="6" rx="3"/><rect x="304" y="237" width="10" height="6" rx="3"/><rect x="326" y="243" width="10" height="6" rx="3"/><rect x="348" y="238" width="10" height="6" rx="3"/><rect x="372" y="242" width="10" height="6" rx="3"/><rect x="394" y="238" width="10" height="6" rx="3"/></g><text x="200" y="168" font-family="Geist Mono, monospace" font-size="13" fill="#C9A25A">203&deg;C</text><text x="200" y="188" font-family="Geist Mono, monospace" font-size="10" fill="#A9B79A">FIRST CRACK 9:42</text></svg></div>
+            <div class="media__art" aria-hidden="true"><svg viewBox="0 0 440 320" preserveAspectRatio="xMidYMid slice"><rect width="440" height="320" fill="#1B392C"/><rect y="250" width="440" height="70" fill="#13291F"/><rect x="262" y="20" width="16" height="104" fill="#0B1410" stroke="#C9A25A" stroke-opacity=".6"/><g stroke="#A9B79A" stroke-width="2.4" fill="none" stroke-linecap="round" opacity=".5"><path d="M270 16 C258 4 280 -4 268 -18"/></g><rect x="96" y="112" width="200" height="120" rx="6" fill="#0B1410" stroke="#C9A25A" stroke-width="2"/><rect x="118" y="138" width="64" height="64" rx="4" fill="#13291F" stroke="#C9A25A" stroke-width="4"/><rect x="138" y="158" width="24" height="24" fill="#B8323F"/><path d="M200 112 L184 64 L262 64 L246 112 Z" fill="#13291F" stroke="#C9A25A" stroke-width="2"/><rect x="210" y="230" width="20" height="24" fill="#0B1410"/><rect x="246" y="232" width="176" height="26" rx="3" fill="#0B1410" stroke="#C9A25A" stroke-width="2"/><g fill="#6B3A1C"><rect x="262" y="238" width="10" height="6" rx="3"/><rect x="282" y="242" width="10" height="6" rx="3"/><rect x="304" y="237" width="10" height="6" rx="3"/><rect x="326" y="243" width="10" height="6" rx="3"/><rect x="348" y="238" width="10" height="6" rx="3"/><rect x="372" y="242" width="10" height="6" rx="3"/><rect x="394" y="238" width="10" height="6" rx="3"/></g><text x="200" y="168" font-family="Funnel Sans, sans-serif" font-size="13" fill="#C9A25A">203&deg;C</text><text x="200" y="188" font-family="Funnel Sans, sans-serif" font-size="10" fill="#A9B79A">FIRST CRACK 9:42</text></svg></div>
           </div>
           <figcaption><b>5 kg drum roaster</b><span>TUE &middot; FRI</span></figcaption>
         </figure>
@@ -677,23 +679,23 @@ select:hover,input[type=text]:hover,input[type=tel]:hover{border-color:var(--ink
           <div class="media" data-media="bar" data-alt="Pour-over bar with three glass drippers under brass pendant lights">
             <div class="media__art" aria-hidden="true"><svg viewBox="0 0 440 320" preserveAspectRatio="xMidYMid slice"><rect width="440" height="320" fill="#13291F"/><g stroke="#C9A25A" stroke-opacity=".5"><path d="M100 0 V64 M220 0 V50 M340 0 V64"/></g><g fill="#C9A25A"><path d="M84 64 h32 l-6 16 h-20z"/><path d="M204 50 h32 l-6 16 h-20z"/><path d="M324 64 h32 l-6 16 h-20z"/></g><g fill="#C9A25A" opacity=".08"><path d="M90 80 h20 l50 156 h-120z"/><path d="M210 66 h20 l50 170 h-120z"/><path d="M330 80 h20 l50 156 h-120z"/></g><rect y="236" width="440" height="84" fill="#22463A"/><rect y="230" width="440" height="8" fill="#C9A25A"/><g><path d="M70 150 h60 l-18 40 h-24z" fill="#E5E6DE"/><rect x="74" y="192" width="52" height="38" rx="2" fill="#EEF0E8" fill-opacity=".16" stroke="#EEF0E8" stroke-opacity=".5"/><rect x="74" y="212" width="52" height="18" fill="#3A1E10"/><path d="M190 150 h60 l-18 40 h-24z" fill="#E5E6DE"/><rect x="194" y="192" width="52" height="38" rx="2" fill="#EEF0E8" fill-opacity=".16" stroke="#EEF0E8" stroke-opacity=".5"/><rect x="194" y="206" width="52" height="24" fill="#3A1E10"/><path d="M310 150 h60 l-18 40 h-24z" fill="#E5E6DE"/><rect x="314" y="192" width="52" height="38" rx="2" fill="#EEF0E8" fill-opacity=".16" stroke="#EEF0E8" stroke-opacity=".5"/><rect x="314" y="218" width="52" height="12" fill="#3A1E10"/></g><rect x="40" y="140" width="360" height="5" fill="#0B1410"/></svg></div>
           </div>
-          <figcaption><b>Pour-over bar</b><span>6 SEATS</span></figcaption>
+          <figcaption><b>Pour-over bar</b><span>6 seats</span></figcaption>
         </figure>
         <figure class="scene">
           <div class="media" data-media="window" data-alt="Window seat facing the Margalla Hills at dusk">
             <div class="media__art" aria-hidden="true"><svg viewBox="0 0 440 320" preserveAspectRatio="xMidYMid slice"><rect width="440" height="320" fill="#13291F"/><rect x="40" y="30" width="360" height="200" fill="#D9C08A"/><rect x="40" y="30" width="360" height="90" fill="#E7D7AE"/><path d="M40 150 L110 104 L170 132 L240 84 L310 124 L400 96 L400 230 L40 230Z" fill="#6E8460"/><path d="M40 184 L120 146 L200 170 L280 136 L400 166 L400 230 L40 230Z" fill="#3E5A40"/><path d="M220 30 V230 M40 130 H400" stroke="#0B1410" stroke-width="9"/><rect x="40" y="30" width="360" height="200" fill="none" stroke="#0B1410" stroke-width="14"/><rect y="244" width="440" height="76" fill="#22463A"/><rect x="0" y="238" width="440" height="8" fill="#C9A25A"/><path d="M180 206 h40 v26 a6 6 0 0 1 -6 6 h-28 a6 6 0 0 1 -6 -6z" fill="#E5E6DE"/><path d="M220 212 c12 0 12 16 0 16" stroke="#E5E6DE" stroke-width="4" fill="none"/><path d="M70 238 c-6 -30 10 -40 20 -60 c6 22 18 30 10 60z" fill="#7E9A6B"/></svg></div>
           </div>
-          <figcaption><b>Margalla window</b><span>14 SEATS</span></figcaption>
+          <figcaption><b>Margalla window</b><span>14 seats</span></figcaption>
         </figure>
         <figure class="scene">
           <div class="media" data-media="greens" data-alt="Jute sacks of green coffee in the bean room">
-            <div class="media__art" aria-hidden="true"><svg viewBox="0 0 440 320" preserveAspectRatio="xMidYMid slice"><rect width="440" height="320" fill="#1B392C"/><rect y="262" width="440" height="58" fill="#13291F"/><g fill="#A99A6E" stroke="#7A6A42" stroke-width="2"><path d="M40 262 q-6 -80 20 -110 h80 q26 30 20 110z"/><path d="M170 262 q-6 -80 20 -110 h80 q26 30 20 110z"/><path d="M300 262 q-6 -80 20 -110 h80 q26 30 20 110z"/><path d="M105 152 q-6 -70 20 -96 h80 q26 26 20 96z"/></g><g font-family="Geist Mono, monospace" font-size="18" fill="#0B1410" text-anchor="middle"><text x="100" y="216">ETH</text><text x="230" y="216">COL</text><text x="360" y="216">IDN</text><text x="165" y="114">BRA</text></g><g stroke="#0B1410" stroke-width="3"><path d="M64 156 h72"/><path d="M194 156 h72"/><path d="M324 156 h72"/><path d="M129 60 h72"/></g></svg></div>
+            <div class="media__art" aria-hidden="true"><svg viewBox="0 0 440 320" preserveAspectRatio="xMidYMid slice"><rect width="440" height="320" fill="#1B392C"/><rect y="262" width="440" height="58" fill="#13291F"/><g fill="#A99A6E" stroke="#7A6A42" stroke-width="2"><path d="M40 262 q-6 -80 20 -110 h80 q26 30 20 110z"/><path d="M170 262 q-6 -80 20 -110 h80 q26 30 20 110z"/><path d="M300 262 q-6 -80 20 -110 h80 q26 30 20 110z"/><path d="M105 152 q-6 -70 20 -96 h80 q26 26 20 96z"/></g><g font-family="Funnel Sans, sans-serif" font-size="18" fill="#0B1410" text-anchor="middle"><text x="100" y="216">ETH</text><text x="230" y="216">COL</text><text x="360" y="216">IDN</text><text x="165" y="114">BRA</text></g><g stroke="#0B1410" stroke-width="3"><path d="M64 156 h72"/><path d="M194 156 h72"/><path d="M324 156 h72"/><path d="M129 60 h72"/></g></svg></div>
           </div>
           <figcaption><b>Green bean room</b><span>~1,200 KG</span></figcaption>
         </figure>
         <figure class="scene">
           <div class="media" data-media="cupping" data-alt="Cupping bowls, spoons, water and a blank score sheet laid out for a public cupping">
-            <div class="media__art" aria-hidden="true"><svg viewBox="0 0 440 320" preserveAspectRatio="xMidYMid slice"><rect width="440" height="320" fill="#13291F"/><rect x="60" y="52" width="320" height="216" rx="2" fill="#E5E6DE"/><g font-family="Geist Mono, monospace" fill="#0B1410"><text x="84" y="94" font-size="14">CUPPING &middot; THU 4 PM</text><text x="84" y="132" font-size="13" opacity=".7">Guji N . . . . . . 88.5</text><text x="84" y="160" font-size="13" opacity=".7">Huila W . . . . . 87.0</text><text x="84" y="188" font-size="13" opacity=".7">Gayo WH . . . . . 85.5</text><text x="84" y="216" font-size="13" opacity=".7">Cerrado PN . . . 84.0</text></g><rect x="296" y="78" width="62" height="28" fill="#B8323F" transform="rotate(-6 327 92)"/><text x="327" y="97" font-family="Geist Mono, monospace" font-size="12" fill="#fff" text-anchor="middle" transform="rotate(-6 327 92)">FREE</text></svg></div>
+            <div class="media__art" aria-hidden="true"><svg viewBox="0 0 440 320" preserveAspectRatio="xMidYMid slice"><rect width="440" height="320" fill="#13291F"/><rect x="60" y="52" width="320" height="216" rx="2" fill="#E5E6DE"/><g font-family="Funnel Sans, sans-serif" fill="#0B1410"><text x="84" y="94" font-size="14">CUPPING &middot; THU 4 PM</text><text x="84" y="132" font-size="13" opacity=".7">Guji N . . . . . . 88.5</text><text x="84" y="160" font-size="13" opacity=".7">Huila W . . . . . 87.0</text><text x="84" y="188" font-size="13" opacity=".7">Gayo WH . . . . . 85.5</text><text x="84" y="216" font-size="13" opacity=".7">Cerrado PN . . . 84.0</text></g><rect x="296" y="78" width="62" height="28" fill="#B8323F" transform="rotate(-6 327 92)"/><text x="327" y="97" font-family="Funnel Sans, sans-serif" font-size="12" fill="#fff" text-anchor="middle" transform="rotate(-6 327 92)">FREE</text></svg></div>
           </div>
           <figcaption><b>Public cupping</b><span>THURSDAYS</span></figcaption>
         </figure>
@@ -705,8 +707,7 @@ select:hover,input[type=text]:hover,input[type=tel]:hover{border-color:var(--ink
   <section class="beans on-light sec" id="beans" aria-labelledby="h-beans">
     <div class="wrap beans__grid">
       <div class="beans__aside">
-        <p class="label"><b>(05)</b> Bean subscription</p>
-        <h2 id="h-beans" data-split>Fresh roast at your door, <em>every two or four weeks.</em></h2>
+        <h2 id="h-beans">Fresh roast at your door, every two or four weeks.</h2>
         <p>Bags ship the morning after roasting, so they arrive inside the 5 to 21 day window when beans taste their best.</p>
         <ol>
           <li><b>01</b>Pick an origin, or let the roaster choose each time.</li>
@@ -765,8 +766,7 @@ select:hover,input[type=text]:hover,input[type=tel]:hover{border-color:var(--ink
   <section class="visit on-dark sec" id="visit" aria-labelledby="h-visit">
     <div class="wrap">
       <div class="sec-head">
-        <p class="label"><b>(06)</b> Visit &amp; order</p>
-        <h2 id="h-visit" data-split>Corner of Block 9-B, <em>F-7 Markaz.</em></h2>
+        <h2 id="h-visit">Corner of Block <span class="nw">9-B</span>, <span class="nw">F-7</span> Markaz.</h2>
         <p>Order ahead and your drink waits on the pickup shelf by the door. Parking is easiest behind the block after 6 pm.</p>
       </div>
       <div class="visit__grid">
@@ -775,7 +775,7 @@ select:hover,input[type=text]:hover,input[type=tel]:hover{border-color:var(--ink
           <div class="map-fallback">
             <span class="fb-pin" aria-hidden="true">E&amp;B</span>
             <span class="mono" style="color:var(--brass)">F-7 Markaz &middot; Islamabad</span>
-            <p>Shop 14, Block&nbsp;9&#8209;B, Jinnah Super.</p>
+            <p>Shop 14, Block <span class="nw">9-B</span>, Jinnah Super.</p>
             <span class="fb-hours">Open daily from 8 am &middot; Friday to Sunday until midnight</span>
             <div class="links">
               <a class="btn btn--cherry" href="https://www.google.com/maps/dir/?api=1&amp;destination=33.7212,73.0570" target="_blank" rel="noopener">Get directions</a>
@@ -792,10 +792,10 @@ select:hover,input[type=text]:hover,input[type=tel]:hover{border-color:var(--ink
               <tr data-days="5"><td>Friday</td><td>8:00 am &ndash; 12:30 pm<br>2:00 pm &ndash; midnight</td></tr>
               <tr data-days="6,0"><td>Sat &ndash; Sun</td><td>9:00 am &ndash; midnight</td></tr>
             </table>
-            <div class="contact">
+            <div class="contact tel-rows">
               <span>Shop 14, Block 9-B, F-7 Markaz, Islamabad</span>
-              <span>Phone <b>+92 51 555 0142</b></span>
-              <span>WhatsApp <b>+92 300 555 0142</b></span>
+              <span>Phone <a class="tel" href="tel:+92515550142">+92 51 555 0142</a></span>
+              <span>WhatsApp <a class="tel" href="https://wa.me/923005550142">+92 300 555 0142</a></span>
             </div>
             <div class="links">
               <a class="btn btn--line" href="https://www.google.com/maps/dir/?api=1&amp;destination=33.7212,73.0570" target="_blank" rel="noopener">Get directions</a>
@@ -821,7 +821,7 @@ select:hover,input[type=text]:hover,input[type=tel]:hover{border-color:var(--ink
             </div>
             <div class="field">
               <label for="oName">Name for the cup</label>
-              <input type="text" id="oName" placeholder="e.g. Hira" autocomplete="given-name">
+              <input type="text" id="oName" placeholder="e.g. Hira" autocomplete="given-name" maxlength="24" dir="auto">
             </div>
             <div class="summary" style="background:rgba(11,20,16,.5)">
               <div class="total"><span>To pay at pickup</span><span id="oTotal">Rs 0</span></div>
@@ -845,24 +845,24 @@ select:hover,input[type=text]:hover,input[type=tel]:hover{border-color:var(--ink
         <span>F-7 Markaz, Islamabad</span>
         <span>Mon&ndash;Thu 8 am&ndash;11 pm &middot; Fri&ndash;Sun till midnight</span>
       </div>
-      <div>
+      <div class="tel-rows">
         <h4>Talk to us</h4>
-        <span>Phone <b>+92 51 555 0142</b></span>
-        <span>WhatsApp <b>+92 300 555 0142</b></span>
+        <span>Phone <a class="tel" href="tel:+92515550142">+92 51 555 0142</a></span>
+        <span>WhatsApp <a class="tel" href="https://wa.me/923005550142">+92 300 555 0142</a></span>
         <span>Wholesale: <b>trade@emberbean.pk</b></span>
       </div>
       <div>
         <h4>Follow</h4>
-        <a href="#top">Instagram &middot; @emberandbean</a>
-        <a href="#top">Roast log on WhatsApp Channel</a>
+        <span>Instagram <b>@emberandbean</b></span>
+        <span>WhatsApp Channel <b>Ember &amp; Bean roast log</b></span>
         <a href="#beans">Bean subscription</a>
       </div>
       <div class="news">
         <h4>Roast-day alerts</h4>
         <span>One message on Tuesdays and Fridays when the new roast is out.</span>
         <form id="newsForm" novalidate>
-          <label class="sr-only" for="newsPhone">WhatsApp number</label>
-          <input type="tel" id="newsPhone" placeholder="03xx xxx xxxx" autocomplete="tel">
+          <label class="news__label" for="newsPhone">WhatsApp number</label>
+          <input type="tel" id="newsPhone" placeholder="03xx xxx xxxx" autocomplete="tel" aria-describedby="newsOk">
           <button class="btn btn--cherry" type="submit">Join</button>
           <p class="ok" id="newsOk" role="status" hidden></p>
         </form>
@@ -883,7 +883,6 @@ select:hover,input[type=text]:hover,input[type=tel]:hover{border-color:var(--ink
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js" defer></script>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
 <script>
 /* ---------- media manifest: drop HeyGen/photo files in ../assets/cafe-ember-bean/ and set the paths ---------- */
 const A = '../assets/cafe-ember-bean/';
@@ -933,10 +932,10 @@ function bagSVG(o){
     <path d="M24 20 l12 -10 l12 10 l12 -10 l12 10 l12 -10 l12 10 l12 -10 l12 10 l12 -10 l12 10 l12 -10 l12 10 l12 -10 l12 10" fill="#C9A25A"/>
     <rect x="40" y="128" width="140" height="132" rx="2" fill="${o.tag}"/>
     <rect x="48" y="136" width="124" height="116" rx="1" fill="none" stroke="#EEF0E8" stroke-opacity=".55"/>
-    <text x="110" y="180" text-anchor="middle" font-family="Instrument Serif, Georgia, serif" font-size="30" fill="#EEF0E8">${o.region}</text>
-    <text x="110" y="200" text-anchor="middle" font-family="Geist Mono, monospace" font-size="9.5" letter-spacing="2" fill="#EEF0E8" opacity=".85">${o.country.toUpperCase()}</text>
-    <text x="110" y="232" text-anchor="middle" font-family="Geist Mono, monospace" font-size="8" letter-spacing=".8" fill="#EEF0E8" opacity=".85">${o.process.toUpperCase()}</text>
-    <text x="110" y="246" text-anchor="middle" font-family="Geist Mono, monospace" font-size="8" letter-spacing=".8" fill="#EEF0E8" opacity=".85">250 G · WHOLE BEAN</text>
+    <text x="110" y="180" text-anchor="middle" font-family="Funnel Display, sans-serif" font-weight="600" font-size="30" fill="#EEF0E8">${o.region}</text>
+    <text x="110" y="200" text-anchor="middle" font-family="Funnel Sans, sans-serif" font-size="9.5" letter-spacing="2" fill="#EEF0E8" opacity=".85">${o.country.toUpperCase()}</text>
+    <text x="110" y="232" text-anchor="middle" font-family="Funnel Sans, sans-serif" font-size="8" letter-spacing=".8" fill="#EEF0E8" opacity=".85">${o.process.toUpperCase()}</text>
+    <text x="110" y="246" text-anchor="middle" font-family="Funnel Sans, sans-serif" font-size="8" letter-spacing=".8" fill="#EEF0E8" opacity=".85">250 G · WHOLE BEAN</text>
     <rect x="102" y="70" width="16" height="16" rx="3" fill="#0B1410" stroke="#C9A25A" stroke-opacity=".5"/>
   </svg>`;
 }
@@ -947,7 +946,7 @@ function dialSVG(level){
     <path d="M14 84 A66 66 0 0 1 146 84" fill="none" stroke="url(#${id})" stroke-width="10"/>
     <g class="needle" data-angle="${ang}" transform="rotate(${ang} 80 84)"><path d="M80 84 L80 28" stroke="#EEF0E8" stroke-width="2.5"/></g>
     <rect x="75" y="79" width="10" height="10" fill="#B8323F" transform="rotate(45 80 84)"/>
-    <text x="10" y="96" font-family="Geist Mono, monospace" font-size="8.5" fill="#A9B79A">LIGHT</text><text x="150" y="96" text-anchor="end" font-family="Geist Mono, monospace" font-size="8.5" fill="#A9B79A">DARK</text>
+    <text x="10" y="96" font-family="Funnel Sans, sans-serif" font-size="8.5" fill="#A9B79A">Light</text><text x="150" y="96" text-anchor="end" font-family="Funnel Sans, sans-serif" font-size="8.5" fill="#A9B79A">Dark</text>
   </svg>`;
 }
 const ICONS = {
@@ -966,8 +965,8 @@ track.innerHTML = ORIGINS.map((o,i) => `
   <article class="origin" aria-label="${o.country} ${o.region}">
     <div class="origin__bag">${bagSVG(o)}</div>
     <div class="origin__info">
-      <p class="origin__meta"><span>Origin ${String(i+1).padStart(2,'0')} / ${String(ORIGINS.length).padStart(2,'0')}</span><span>Roasted ${o.roasted}</span></p>
       <h3>${o.country} <em>${o.region}</em></h3>
+      <p class="origin__meta">Roasted ${o.roasted}</p>
       <dl class="specs">
         <div><dt>Grown</dt><dd>${o.zone}</dd></div>
         <div><dt>Altitude</dt><dd>${o.altitude}</dd></div>
@@ -976,7 +975,7 @@ track.innerHTML = ORIGINS.map((o,i) => `
       </dl>
       <div class="dial">${dialSVG(o.roast)}<p><strong>${o.roastName}</strong>Out of the drum at ${Math.round(196 + o.roast*28)}&nbsp;&deg;C</p></div>
       <ul class="notes" aria-label="Tasting notes">${o.notes.map(n=>`<li>${n}</li>`).join('')}</ul>
-      <div class="buy"><p class="num">${rs(o.price)}<small>/ 250 G</small></p><a class="btn btn--cherry" href="#beans" data-origin="${o.id}">Subscribe to ${o.region}</a></div>
+      <div class="buy"><p class="num">${rs(o.price)}<small>/ 250 g</small></p><a class="btn btn--cherry" href="#beans" data-origin="${o.id}">Subscribe to ${o.region}</a></div>
     </div>
   </article>`).join('');
 track.addEventListener('click', e => {
@@ -1025,7 +1024,6 @@ const now = new Date();
 $('#pairs').innerHTML = PAIRINGS.filter(p => new Date(p.ends_at) > now).map((p,i) => {
   const sum = p.parts.reduce((a,b)=>a+b[1],0);
   return `<article class="pair">
-    <span class="pair__n">P / ${String(i+1).padStart(2,'0')}</span>
     <div class="pair__art">${ICONS[p.art[0]]}<b>&times;</b>${ICONS[p.art[1]]}</div>
     <div><h3>${p.title}</h3><p>${p.why}</p><p class="pair__parts">${p.parts.map(x=>`${x[0]} ${rs(x[1])}`).join(' + ')}</p></div>
     <div class="pair__price num"><s>${rs(sum)}</s><strong>${rs(p.price)}</strong><span class="stamp">Save ${rs(sum-p.price)}</span></div>
@@ -1098,17 +1096,23 @@ oSize.addEventListener('change', updateOrder);
 $('#order').addEventListener('submit', e => {
   e.preventDefault();
   const m = MENU.find(x=>x.id===oDrink.value);
-  const name = $('#oName').value.trim() || 'you';
+  const name = $('#oName').value.trim();
   const c = $('#orderConfirm'); c.hidden = false;
-  c.textContent = `Mockup only: a ${m.sizes[oSize.value][0]} ${m.name} for ${name} would be on the pickup shelf at ${oTime.value.replace('ASAP · ','')}. No order was sent.`;
+  /* the name sits in <bdi> so an Urdu (right-to-left) name doesn't reorder the English sentence around it */
+  const forWhom = name ? [' for ', Object.assign(document.createElement('bdi'), {textContent:name})] : [];
+  c.replaceChildren(`Mockup only: your ${m.sizes[oSize.value][0]} ${m.name}`, ...forWhom,
+    ` would be on the pickup shelf at ${oTime.value.replace('ASAP · ','')}. No order was sent.`);
 });
 fillSizes(); fillTimes(); updateOrder();
 live = true;
 $('#newsForm').addEventListener('submit', e => {
   e.preventDefault();
-  const ok = $('#newsOk'), v = $('#newsPhone').value.replace(/\D/g,'');
+  const ok = $('#newsOk'), field = $('#newsPhone'), v = field.value.replace(/\D/g,''), valid = v.length >= 10;
   ok.hidden = false;
-  ok.textContent = v.length >= 10 ? 'Mockup only: you would get a message on the next roast day. Nothing was sent.' : 'Enter an 11-digit mobile number, for example 0300 555 0142.';
+  ok.classList.toggle('is-error', !valid);
+  field.setAttribute('aria-invalid', String(!valid));
+  ok.textContent = valid ? 'Mockup only: you would get a message on the next roast day. Nothing was sent.' : 'Enter an 11-digit mobile number, for example 0300 555 0142.';
+  if (!valid) field.focus();
 });
 
 /* ---------- hours: today + live open/closed (Islamabad time) ---------- */
@@ -1187,7 +1191,11 @@ function mountHero(slot, m){
   v.setAttribute('playsinline', ''); v.setAttribute('aria-hidden', 'true');
   v.addEventListener('loadedmetadata', () => startHero(v, slot), {once:true});
   v.addEventListener('error', () => v.remove());
-  v.src = m.mp4; slot.appendChild(v);
+  const attach = () => { v.src = m.mp4; slot.appendChild(v); };
+  /* phones: the plate starts below the fold, so the clip only loads as it scrolls into view (the poster covers until then) */
+  if (window.matchMedia('(min-width: 768px)').matches || !('IntersectionObserver' in window)) return attach();
+  const near = new IntersectionObserver(es => { if (es.some(en => en.isIntersecting)) { near.disconnect(); attach(); } }, {rootMargin:'0px 0px 80px 0px'});
+  near.observe(slot);
 }
 function mountMedia(){
   document.querySelectorAll('[data-media]').forEach(slot => {
@@ -1210,7 +1218,12 @@ function mountMedia(){
 }
 mountMedia(); // straight away, not on DOMContentLoaded: the poster and clip should not wait for the CDN scripts
 
-/* ---------- real map (Leaflet + CARTO), initialised when near the viewport ---------- */
+/* ---------- real map (Leaflet + CARTO): library and styles load only as the map comes near ---------- */
+const LEAFLET = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet';
+function loadLeaflet(){
+  const add = (tag, attrs) => new Promise(done => { const e = Object.assign(document.createElement(tag), attrs); e.onload = e.onerror = done; document.head.appendChild(e); });
+  return Promise.all([window.L ? null : add('script', {src:LEAFLET + '.js'}), leafletCssReady() ? null : add('link', {rel:'stylesheet', href:LEAFLET + '.css'})]);
+}
 function leafletCssReady(){
   const probe = document.createElement('div');
   probe.className = 'leaflet-container';
@@ -1239,9 +1252,9 @@ function initMap(el){
 document.addEventListener('DOMContentLoaded', () => {
   const mapEl = $('#map');
   if ('IntersectionObserver' in window) {
-    const mio = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { initMap(mapEl); mio.disconnect(); } }), {rootMargin:'600px 0px'});
+    const mio = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { mio.disconnect(); loadLeaflet().then(() => initMap(mapEl)); } }), {rootMargin:'600px 0px'});
     mio.observe(mapEl);
-  } else initMap(mapEl);
+  } else loadLeaflet().then(() => initMap(mapEl));
 
   const hdr = $('#hdr');
   const hasG = !!(window.gsap && window.ScrollTrigger);
@@ -1315,9 +1328,20 @@ document.addEventListener('DOMContentLoaded', () => {
       sec.classList.add('is-pinned');
       $('#originsHint').textContent = 'Keep scrolling to move along the shelf';
       const dist = () => Math.max(0, track.scrollWidth - window.innerWidth);
-      gsap.to(track, {x:() => -dist(), ease:'none', scrollTrigger:{trigger:'#originsPin', start:'center center', end:() => '+=' + dist(), pin:true, scrub:.6,
+      const shelf = gsap.to(track, {x:() => -dist(), ease:'none', scrollTrigger:{trigger:'#originsPin', start:'center center', end:() => '+=' + dist(), pin:true, scrub:.6,
         onUpdate:s => gsap.set('#originsBar', {scaleX:s.progress})}});
-      return () => { sec.classList.remove('is-pinned'); $('#originsHint').textContent = 'Swipe the shelf →'; };
+      /* keyboard: the shelf only moves with the page, so a focused card scrolls the page to where that card is in view */
+      const showFocused = e => {
+        const card = e.target.closest('.origin'), st = shelf.scrollTrigger, d = dist();
+        if (!card || !st || !d) return;
+        const x = card.getBoundingClientRect().left - track.getBoundingClientRect().left + card.offsetWidth / 2 - window.innerWidth / 2;
+        const y = st.start + (st.end - st.start) * Math.min(1, Math.max(0, x / d));
+        if (lenis) lenis.scrollTo(y, {immediate:true}); else window.scrollTo(0, y);
+        ScrollTrigger.update();
+        const lag = st.getTween && st.getTween(); if (lag) lag.progress(1); // skip the scrub's easing so the focused card is on screen at once
+      };
+      track.addEventListener('focusin', showFocused);
+      return () => { track.removeEventListener('focusin', showFocused); sec.classList.remove('is-pinned'); $('#originsHint').textContent = 'Swipe along the shelf'; };
     }
   });
 
@@ -1334,48 +1358,24 @@ document.addEventListener('DOMContentLoaded', () => {
         return gsap.from(self.lines, {yPercent:110, duration:1.15, stagger:.09, ease:EASE, delay:.08});
       }});
       root.classList.remove('intro');
-      gsap.from('.kicker', {y:12, opacity:0, duration:.8, ease:EASE});
       gsap.from('.plate', {y:60, opacity:0, duration:1.4, ease:EASE, delay:.15});
       gsap.from(plate.querySelectorAll('.media__art, .media__img, .media__video'), {scale:1.12, duration:1.8, ease:EASE, delay:.15});
       gsap.from('.lede, .hero__ctas, .facts, .cue', {y:28, opacity:0, duration:1, stagger:.08, ease:EASE, delay:.4});
     });
 
-    /* headline line reveals further down */
-    fontsIn.then(() => {
-      if (!window.SplitText) return;
-      document.querySelectorAll('[data-split]').forEach(el => {
-        if (el.closest('.hero')) return;
-        SplitText.create(el, {type:'lines', mask:'lines', autoSplit:true, onSplit(self){
-          return gsap.from(self.lines, {yPercent:110, duration:1.15, stagger:.09, ease:EASE, scrollTrigger:{trigger:el, start:'top 86%', once:true}});
-        }});
-      });
-    });
-
-    /* supporting copy */
-    gsap.utils.toArray('.sec-head p:not(.label), .process li').forEach(el => {
-      gsap.from(el, {y:28, opacity:0, duration:1, ease:EASE, scrollTrigger:{trigger:el, start:'top 90%', once:true}});
-    });
+    /* below the hero there is no entrance choreography: content is simply there. Motion is kept for the moments
+       that carry meaning: the pour, the shelf, the roast needles, the stamps and the room strip. */
     /* roast dial needles */
     gsap.utils.toArray('.needle').forEach(n => {
       gsap.fromTo(n, {rotation:-90, svgOrigin:'80 84'}, {rotation:+n.dataset.angle, svgOrigin:'80 84', duration:1.6, ease:'elastic.out(1,.6)', scrollTrigger:{trigger:'#origins', start:'top 60%', once:true}});
     });
-    /* menu cards stagger */
-    const cards = gsap.utils.toArray('.mcard');
-    gsap.set(cards, {y:40, opacity:0});
-    ScrollTrigger.batch(cards, {start:'top 92%', once:true, onEnter:b => gsap.to(b, {y:0, opacity:1, duration:.9, stagger:.06, ease:EASE})});
-    /* feature photo: mask reveal */
-    gsap.from('.feature', {y:60, duration:1.2, ease:EASE, scrollTrigger:{trigger:'.feature', start:'top 88%', once:true}});
-    gsap.from('.feature :is(.media__art, .media__img)', {scale:1.18, duration:1.6, ease:EASE, scrollTrigger:{trigger:'.feature', start:'top 88%', once:true}});
-    /* pairing rows + stamps: each stamp is pressed down once, after its row has arrived */
-    gsap.utils.toArray('.pair').forEach(p => gsap.from(p, {y:30, opacity:0, duration:1, ease:EASE, scrollTrigger:{trigger:p, start:'top 90%', once:true}}));
-    gsap.utils.toArray('.stamp').forEach(b => gsap.from(b, {scale:1.25, rotation:-8, opacity:0, duration:.3, delay:.35, ease:'power4.out', scrollTrigger:{trigger:b, start:'top 92%', once:true}}));
+    /* pairing stamps: each saving is pressed down once as it comes into view */
+    gsap.utils.toArray('.stamp').forEach(b => gsap.from(b, {scale:1.25, rotation:-8, opacity:0, duration:.3, delay:.15, ease:'power4.out', scrollTrigger:{trigger:b, start:'top 92%', once:true}}));
     /* room strip: sideways drift + inner parallax on whichever layer is showing (photo or drawing) */
     gsap.fromTo('#stripRow', {x:0}, {x:() => -Math.max(0, $('#stripRow').scrollWidth - window.innerWidth) * .9, ease:'none', scrollTrigger:{trigger:'#room', start:'top bottom', end:'bottom top', scrub:true, invalidateOnRefresh:true}});
     gsap.utils.toArray('.scene .media').forEach((s,i) => {
       gsap.fromTo(s.querySelectorAll('.media__art, .media__img'), {yPercent:i%2 ? 4 : -4}, {yPercent:i%2 ? -4 : 4, ease:'none', scrollTrigger:{trigger:'#room', start:'top bottom', end:'bottom top', scrub:true}});
     });
-    /* footer wordmark */
-    gsap.from('.foot__mark', {yPercent:30, opacity:0, duration:1.4, ease:EASE, scrollTrigger:{trigger:'.foot', start:'top 85%', once:true}});
   });
 
   /* pointer-only: rig tilt + magnetic buttons */
